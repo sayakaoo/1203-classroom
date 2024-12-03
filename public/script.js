@@ -23,6 +23,7 @@ form.addEventListener('submit', async (e) => {
       console.log("レスポンスに「正解」も「不正解」も含まれていません");
     }
 
+
   } catch (error) {
     console.error('エラー:', error);
     document.getElementById('response').textContent = 'サーバーエラーが発生しました';
