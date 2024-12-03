@@ -14,10 +14,11 @@ form.addEventListener('submit', async (e) => {
     const textResponse = await response.text(); // レスポンスをテキストとして取得
     console.log(textResponse); // レスポンスの内容を表示
     // レスポンス内容を判定
-    if (textResponse.includes("正解")) {
-      console.log("1"); // 「正解」が含まれていた場合
-    } else if (textResponse.includes("不正解")) {
-      console.log("2"); // 「不正解」が含まれていた場合
+    if (textResponse.includes("不正解")) {
+      split_chars = ['<', 's', 'k', 'i', 'p', ' ', '2', '>'];
+      console.log(split_chars); // 「不正解」が含まれていた場合
+    } else if (textResponse.includes("正解")) {
+      console.log("2"); // 「正解」が含まれていた場合
     } else {
       console.log("レスポンスに「正解」も「不正解」も含まれていません");
     }
