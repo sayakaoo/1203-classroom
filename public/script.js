@@ -11,9 +11,11 @@ form.addEventListener('submit', async (e) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userAnswer }),
     });
-
+    //ChatGPTからの返信
     const result = await response.json();
+    //受け取った内容を表示
     document.getElementById('response').textContent = result.reply;
+    console.log(result.reply); // AIからのレスポンスをコンソールに表示
   } catch (error) {
     console.error('エラー:', error);
     document.getElementById('response').textContent = 'サーバーエラーが発生しました';
