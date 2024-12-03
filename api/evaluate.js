@@ -9,6 +9,11 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' }); // POST以外は拒否
   }
+  console.log('Received request:', req.body);
+  if (!process.env.OPENAI_API_KEY) {
+    console.error('APIキーが設定されていません');
+  }
+
 
   const { userAnswer } = req.body;
 
@@ -29,7 +34,7 @@ module.exports = async (req, res) => {
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: prompt }],
-      max_tokens: 50,
+      max_tokens: 150,
     });
 
     res.status(200).json({ reply: response.choices[0].message.content });
