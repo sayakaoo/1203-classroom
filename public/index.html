@@ -1,13 +1,56 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>解答評価アプリ</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://docs.opencv.org/master/opencv.js" type="text/javascript"></script>
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="/favicon.ico" />
+  <title>数学授業</title>
 </head>
+
 <body>
+  <div id="screen">
+    <div class="selectBox">
+      <div class="select" id="select1">
+        <p class="selectText" id="selectText1"></p>
+      </div>
+      <div class="select" id="select2">
+        <p class="selectText" id="selectText2"></p>
+      </div>
+      <div class="select" id="select3">
+        <p class="selectText" id="selectText3"></p>
+      </div>
+    </div>
+
+
+    <div class="classroom">
+
+      <img src="img/bgb.png" alt="" id="bgbimg">
+      <!--<img src="img/bgc.png" alt="" id="bgcimg">-->
+      <div class="cbox"></div>
+      <!--<img src="img/bgi.png" alt="" id="bgiimg">-->
+      <!--<img src="img/bgs.png" alt="" id="bgsimg">-->
+    </div>
+
+    <div class="charabox">
+      <div class="itembox"><img src="" alt="" id="item"></div>
+      <div class="charaposition" id="charaposition1"><img src="" alt="" id="chara1"></div><!--一人、三人表示-->
+      <div class="charaposition" id="charaposition2"><img src="" alt="" id="chara2"></div><!--二人表示-->
+      <div class="charaposition" id="charaposition3"><img src="" alt="" id="chara3"></div><!--二人表示-->
+      <div class="charaposition" id="charaposition4"><img src="" alt="" id="chara4"></div><!--三人表示-->
+      <div class="charaposition" id="charaposition5"><img src="" alt="" id="chara5"></div><!--三人表示-->
+    </div>
+    <div id="messbox">
+      <div id="textbox">
+        <p id="text"></p>
+      </div>
+    </div>
+  </div>
   <h1>解答評価アプリ</h1>
   <form id="answer-form">
     <label for="userAnswer">解答を入力してください!:</label><br>
@@ -17,6 +60,29 @@
   <button id="start-voice">🎤 音声入力</button>
   <div id="response"></div>
 
+<!--キャンバス，黒板の要素の順番変えるとうまくいかないよ-->
+<button id="show-canvas-button">ノートを表示する</button>
+<button id="save-button">保存</button>
+<div class="wrapper none">
+    <div class="canvasbutton">
+        <!-- 色選択 -->
+        <!-- <label for="color-picker"></label> -->
+        <select id="color-picker">
+            <option value="black">黒</option>
+            <option value="red">赤</option>
+            <option value="blue">青</option>
+        </select>
+        <!-- 消去ボタン -->
+        <button id="clear-button">消す</button>
+    </div>
+    <canvas class="canvas" id="drawing-area" width="1000" height="1050"></canvas>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
   <script src="script.js"></script>
 </body>
+
 </html>
