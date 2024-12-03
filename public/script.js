@@ -15,7 +15,6 @@ form.addEventListener('submit', async (e) => {
     const result = await response.json();
     //受け取った内容を表示
     document.getElementById('response').textContent = result.reply;
-    console.log(result.reply); // AIからのレスポンスをコンソールに表示
   } catch (error) {
     console.error('エラー:', error);
     document.getElementById('response').textContent = 'サーバーエラーが発生しました';
