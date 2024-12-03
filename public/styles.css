@@ -1,69 +1,225 @@
-/* 全体の基本スタイル */
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: #f9f9f9;
-  color: #333;
+@charset "UTF-8";
+html{
+    overflow: auto;
+}
+body{
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: serif;
+    background-color: #fff;
+}
+#screen{
+    position: relative;
+    width: 1366px;
+    height: 768px;
+    margin: 10px auto;
+    overflow: hidden;
+    border: solid 5px #000;
+}
+#bgbimg{
+    position: absolute;
+    width: 1000px;
+    height: auto;
+    z-index: 1;
+    object-fit: cover;
+    margin: 16px 10px;
+}
+#bgcimg{
+  position: absolute;
+  width: 1000px;
+  height: auto;
+  bottom: 10px;
+  z-index: 3;
+  object-fit: cover;
+  margin:0 0 0 10px;
+  opacity: 0.7;
+  border: solid 5px #000;
+}
+.cbox {
+    position: absolute;
+    width: 1300px;
+    height: 188px;
+    top: 550px;
+    left: 0px;
+    right: 0px;
+    margin-left: 20px;
+    background   : #fff;
+    opacity: 0.7;
+    border: solid 5px #000;
+    z-index: 3;
+  }
+
+#bgiimg{
+  position: absolute;
+  width: 330px;
+  height: auto;
+  bottom: 15px;
+  right: 15px;
+  z-index: 1;
+  object-fit: cover;
+}
+#bgsimg{
+  position: absolute;
+  height: 200px;
+  width: auto;
+  top: 15px;
+  right: 15px;
+  z-index: 1;
+  object-fit: cover;
 }
 
-/* ヘッダー */
-h1 {
-  text-align: center;
-  color: #4CAF50;
+.itembox{
+   position: absolute;
+   width: 250px;
+   height: 250px;
+   object-fit: cover;/*指定サイズに合わせて縮小ができない*/
+   top: 30px;
+   left: 30px;
+   z-index: 2;
+}
+.charaposition{
+    position: absolute;
+    width: 948px;
+    height: 948px;
+    top: 20px;
+    text-align: center;
+    overflow: hidden;
+    z-index: 2;
+    /*background-color: #555;/*後で消す*/
+    /*opacity: .5;/*後で消す*/
+}
+#charaposition1{/*一人、三人表示*/
+    left: 260px;
+}
+#charaposition2{/*二人表示*/
+    left: 140px;
+}
+#charaposition3{/*二人表示*/
+    left: 460px;
+}
+#charaposition4{/*三人表示*/
+    left: -180px;
+}
+#charaposition5{/*三人表示*/
+    left: 700px;
+}
+#messbox{
+    position: absolute;
+    opacity: 0.9;
+    position: absolute;
+    width: 1300px;
+    height: 188px;
+    top: 550px;
+    left: 0px;
+    right: 0px;
+    margin-left: 20px;
+    z-index: 4;
+}
+#textbox{
+    width: 1280px;
+    height: 188px;
+    margin: -10px 20px;
+}
+#text{
+    color: #000;
+    font-size: 1.8rem;
+    font-family: serif;
+}
+.selectBox{
+    position: absolute;
+    width: 330px;
+    height: auto;
+    top: 15px;
+    right: 15px;
+    z-index: 4;
+    background-color: #fff;
+    display: none;
+}
+.select{
+    position: absolute;
+    width: 300px;
+    height: 60px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: #fff;
+    border: solid 5px #000;
+    box-shadow:0px 0px 4px 4px rgba(0,0,0,.5);
+}
+#select1{
+    top: 40px;
+}
+#select2{
+    top: 165px;
+}
+#select3{
+    top: 290px;
+}
+.selectText{
+    margin: 15px auto;
+    text-align: center;
+    color: #000;
+    font-size: 1.3rem;
+}
+.show{
+    display: block;
+    z-index: 10;
+}
+.none{
+    display: none;
 }
 
-/* フォーム */
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
+#boardbox{
+    position: absolute;
+    opacity: 0.8;
+    width: 850px;
+    height: 160px;
+    top: 60px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    background-color: #fff;
+    border: double 10px #000;
+    z-index: 3;
 }
 
-input[type="text"] {
-  width: 80%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 16px;
+#boardtextbox{
+    width: 80px;
+    height: 140px;
+    margin: -10px auto;
+}
+#boardtext{
+    color: #fff;
+    font-size: 1.5rem;
+    font-family: serif;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+/*上の3つは途中黒板の文字を書きたかったんだけど難しかった*/
 
-button:hover {
-  background-color: #45a049;
-}
 
-/* 音声入力ボタン */
-#start-voice {
-  background-color: #2196F3;
-  margin-top: 10px;
-}
-
-#start-voice:hover {
-  background-color: #1976D2;
-}
-
-/* レスポンス表示 */
-#response {
-  margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  border-radius: 4px;
-  width: 80%;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-  text-align: center;
-}
+/*これはキャンバス(お絵かき用のCSS)*/
+.wrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+  }
+  
+  .canvas{
+    position: relative;
+    display: flex;
+    margin: auto;
+    background-color: rgba(255, 255, 255 );
+    border: 4px solid;
+    z-index: 20;
+  }
+  
+  .canvasbutton{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    z-index: 20;
+  }
+  
