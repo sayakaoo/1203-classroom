@@ -11,8 +11,9 @@ form.addEventListener('submit', async (e) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userAnswer }),
     });
-    const result = await response.json();
-    document.getElementById('response').textContent = result.reply;
+    const textResponse = await response.text(); // レスポンスをテキストとして取得
+    console.log(textResponse); // レスポンスの内容を表示
+    
   } catch (error) {
     console.error('エラー:', error);
     document.getElementById('response').textContent = 'サーバーエラーが発生しました';

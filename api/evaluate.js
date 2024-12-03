@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: prompt }],
-      max_tokens: 150,
+      max_tokens: 50,
     });
 
     res.status(200).json({ reply: response.choices[0].message.content });
