@@ -450,6 +450,7 @@ window.addEventListener('load', function () {
   const form = document.getElementById('answer-form');
   form.addEventListener('submit', async (e) => {
     console.log("chatgpt認識中");
+    $('.answerform').addClass('formshow');
     e.preventDefault(); // ページのリロードを防止
 
     const userAnswer = document.getElementById('userAnswer').value;
