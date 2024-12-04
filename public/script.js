@@ -72,10 +72,10 @@ window.addEventListener('load', function () {
         case 'saveButtonremove':
           $('.saveButton').removeClass('Buttonshow');
           break;
-          case 'AIform':
-            $('.answerform').addClass('formshow');
-            console.log('フォーム表示');
-            break;
+        case 'AIform':
+          $('.answerform').addClass('formshow');
+          console.log('フォーム表示');
+          break;
 
         case 'selectBox':
           $('.selectBox').addClass('show');
@@ -451,7 +451,11 @@ window.addEventListener('load', function () {
   form.addEventListener('submit', async (e) => {
     console.log("chatgpt認識中");
     $('.answerform').removeClass('formshow');
-    e.preventDefault(); // ページのリロードを防止
+    e.preventDefault(); // 
+
+    const clickedButton = e.submitter; // クリックされたボタンを取得
+    const prompt = clickedButton.getAttribute('data-prompt'); // ボタンのプロンプトを取得
+    console.log("使用するプロンプト:", prompt);
 
     const userAnswer = document.getElementById('userAnswer').value;
 
@@ -459,7 +463,7 @@ window.addEventListener('load', function () {
       const response = await fetch('/api/evaluate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userAnswer }),
+        body: JSON.stringify({ userAnswer, prompt }),
       });
       const textResponse = await response.text(); // レスポンスをテキストとして取得
       console.log(textResponse); // レスポンスの内容を表示
