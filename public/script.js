@@ -380,6 +380,7 @@ window.addEventListener('load', function () {
     const canvas = document.getElementById("drawing-area");
     canvas.willReadFrequently = true; // パフォーマンス向上のため
     const context = canvas.getContext("2d");
+    console.log("画像予測中 ");
 
     // キャンバスを画像に変換
     const imageElement = new Image();
