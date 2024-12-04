@@ -444,6 +444,7 @@ window.addEventListener('load', function () {
   // 解答送信の処理
   const form = document.getElementById('answer-form');
   form.addEventListener('submit', async (e) => {
+    console.log("chatgpt認識中");
     e.preventDefault(); // ページのリロードを防止
 
     const userAnswer = document.getElementById('userAnswer').value;
