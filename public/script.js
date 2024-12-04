@@ -29,7 +29,7 @@ window.addEventListener('load', function () {
     ],
     1: [
       "そうですね、数えてみると10本ですね",
-      "今回は数えることでマッチ棒の数が分かりました",
+      "今回は数えることでマッチ棒の数が分かりました<skip3>",
     ],
     2: [
       "本当ですか？数えてみましょう",
@@ -562,7 +562,7 @@ window.addEventListener('load', function () {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
     const userAnswer = document.querySelector('#userAnswer').value; // ユーザーの回答を取得
-    $('.form').removeClass('visible');
+    $('.formQ1').removeClass('visible');
 
     if (userAnswer === '10') {
       input = "<skip 1>";
@@ -575,6 +575,7 @@ window.addEventListener('load', function () {
       console.log(split_chars);
     }
     main();
+    mess_box.click();
     document.querySelector('#userAnswer').value = '';
 
 
@@ -586,7 +587,7 @@ window.addEventListener('load', function () {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
     const userAnswer = document.querySelector('#userAnswer').value; // ユーザーの回答を取得
-    $('.form').removeClass('visible');
+    $('.formQ2').removeClass('visible');
     //正規表現らしいこれ便利、i フラグを使うことで大文字と小文字を区別しない
     if (/(もじ|文字|x)/i.test(userAnswer)) {
       input = "<skip 4>";
@@ -598,7 +599,9 @@ window.addEventListener('load', function () {
       split_chars = splitStr(input);
       console.log(split_chars);
     }
+
     main();
+    mess_box.click();
     document.querySelector('#userAnswer').value = '';
 
 
