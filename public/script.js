@@ -470,7 +470,7 @@ window.addEventListener('load', function () {
       // ボタンの数だけ作らなきゃいけないよ
       if (buttonId === 'button1') {
         if (textResponse.includes("不正解")) {
-          split_chars = ['<', 's', 'k', 'i', 'p', ' ', '3', '>'];
+          split_chars = ['<', 's', 'k', 'i', 'p', ' ', '2', '>'];
           console.log(split_chars); // 「不正解」が含まれていた場合（button1の場合）
         } else if (textResponse.includes("正解")) {
           console.log("ボタン1の正解");
