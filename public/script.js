@@ -80,7 +80,10 @@ window.addEventListener('load', function () {
             $('.submit-button1').addClass('visible');
             console.log('フォーム表示');
             break;
-          
+            case 'AIformbutton2':
+              $('.submit-button2').addClass('visible');
+              console.log('フォーム表示');
+              break;
 
         case 'selectBox':
           $('.selectBox').addClass('show');
@@ -455,7 +458,7 @@ window.addEventListener('load', function () {
   const form = document.getElementById('answer-form');
   form.addEventListener('submit', async (e) => {
     console.log("chatgpt認識中");
-    $('.answerform').removeClass('formshow');
+    $('.answerform').removeClass('visible');
     e.preventDefault(); // 
 
     const buttonId = document.querySelector('button[type="submit"]:focus').value; // フォーカスされたボタンのvalueを取得
