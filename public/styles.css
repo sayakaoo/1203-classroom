@@ -163,6 +163,11 @@ body{
     font-size: 1.3rem;
 }
 
+/*1204編集中*/
+#save-button
+{
+  display: none;
+}
 
 .show{
     display: block;

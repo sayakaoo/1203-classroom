@@ -22,7 +22,7 @@ window.addEventListener('load', function () {
   text[0] = [
     "",
     "<fadeIn_chara 1 1>おはよございます。今日の授業を始めていきたいと思います。",
-    "<item 1><chara 1 0><fadeIn_chara 5 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
+    "<item 1><chara 1 0><fadeIn_chara 5 1><save-button>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
     "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
   ];
   text[1] = [
@@ -64,6 +64,9 @@ window.addEventListener('load', function () {
       switch (tagget_str[0]) {
         case 'stop':
           stop_flg = true;
+          break;
+        case 'save-button':
+          $('#save-button').addClass('show');
           break;
         case 'selectBox':
           $('.selectBox').addClass('show');
