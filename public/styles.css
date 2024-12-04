@@ -166,7 +166,7 @@ body{
 /*1204編集中*/
 .saveButton,
 .submit-button,
-.answerform
+.answerform,
 .form{
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
   pointer-events: none;/* これを設定しておくことでhiddenのとき下の要素が押せる */
