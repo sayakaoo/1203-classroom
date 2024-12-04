@@ -164,7 +164,7 @@ body{
 }
 
 /*1204編集中*/
-#save-button
+.savebutton
 {
   position: absolute;
   display: none;
