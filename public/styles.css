@@ -166,6 +166,7 @@ body{
 /*1204編集中*/
 #save-button
 {
+  position: absolute;
   display: none;
 }
 
