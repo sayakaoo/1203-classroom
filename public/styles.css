@@ -170,6 +170,13 @@ body{
   display: none;
 }
 
+.Buttonshow
+{
+  display: block;
+  z-index: 10;
+  pointer-events: auto; /* クリックを有効にする */
+}
+
 .show{
     display: block;
     z-index: 10;
