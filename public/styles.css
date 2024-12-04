@@ -166,12 +166,12 @@ body{
 /*1204編集中*/
 .saveButton
 {
-  display: none;
+  visibility: hidden;
 }
 
 .Buttonshow
 {
-  display: block;
+  visibility: visible; 
   z-index: 10;
   pointer-events: auto; /* クリックを有効にする */
 }
