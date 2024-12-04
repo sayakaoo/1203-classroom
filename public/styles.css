@@ -164,16 +164,10 @@ body{
 }
 
 /*1204編集中*/
-.saveButton{
-  visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
-  pointer-events: none;/* これを設定しておくことでhiddenのとき下の要素が押せる */
-}
-.answerform{
-  visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
-  pointer-events: none;
-}
-
-.submit-button{
+.saveButton,
+.submit-button,
+.answerform
+.form{
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
   pointer-events: none;/* これを設定しておくことでhiddenのとき下の要素が押せる */
 }
@@ -183,6 +177,7 @@ body{
   z-index: 10;
   pointer-events: auto; /* クリックを有効にする */
 }
+
 
 
 

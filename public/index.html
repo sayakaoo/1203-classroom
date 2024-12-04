@@ -52,8 +52,14 @@
     </div>
   </div>
 
+  <form id="Q1form" class="form">
+    <label for="userAnswer">マッチ棒は何本必要でしょうか？:</label><br>
+    <input type="text" id="userAnswer" placeholder="解答を入力してください" required>
+    <button id="Q1sbmitbutton" >答えを送信</button>
+  </form>
+
   <form id="answer-form" class="answerform">
-    <label for="userAnswer">解答を入力してください!:</label><br>
+    <label for="userAnswer">解答を入力してください:</label><br>
     <input type="text" id="userAnswer" placeholder="解答を入力または音声で入力" required>
     <button id="start-voice">🎤 音声入力</button>
     <div id="response"></div>

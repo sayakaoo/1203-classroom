@@ -21,22 +21,22 @@ window.addEventListener('load', function () {
 
   text[0] = [
     "",
-    "<fadeIn_chara 1 1>おはよございます。今日の授業を始めていきたいと思います。",
-    "<item 1><fadeIn_chara 5 1><AIform><AIformbutton1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
+    "<fadeIn_chara 1 1>おはようございます。今日の授業を始めていきたいと思います。",
+    "<item 1><fadeIn_chara 5 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
     "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
   ];
   text[1] = [
     "",
-    "テキスト１",
-    "図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
-    "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
+    "そうですね、数えてみると10本ですね",
   ];
   text[2] = [
     "",
-    "テキスト２",
+    "数えてみましょう",
     "図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
     "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
   ];
+
+  
 
   console.log("main関数呼び出し前のsplit_chars:", split_chars);
 
@@ -76,14 +76,18 @@ window.addEventListener('load', function () {
           $('.answerform').addClass('visible');
           console.log('フォーム表示');
           break;
-          case 'AIformbutton1':
-            $('.submit-button1').addClass('visible');
-            console.log('フォーム表示');
-            break;
-            case 'AIformbutton2':
-              $('.submit-button2').addClass('visible');
-              console.log('フォーム表示');
-              break;
+        case 'AIformbutton1':
+          $('.submit-button1').addClass('visible');
+          console.log('フォーム表示');
+          break;
+        case 'AIformbutton2':
+          $('.submit-button2').addClass('visible');
+          console.log('フォーム表示');
+          break;
+        case 'Q1form':
+          $('.form').addClass('visible');
+          console.log('フォーム表示');
+          break;
 
         case 'selectBox':
           $('.selectBox').addClass('show');
@@ -525,6 +529,33 @@ window.addEventListener('load', function () {
       alert('音声入力エラー: ' + event.error);
     };
   });
+
+  //Q1の回答の分岐
+
+  document.querySelector('#Q1form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const userAnswer = document.querySelector('#userAnswer').value; // ユーザーの回答を取得
+    $('.form').removeClass('visible');
+
+    if (userAnswer === '10') {
+      const input = "<skip 2>";
+      split_chars = convertToCharArray(input);
+      console.log(split_chars);
+
+    } else {
+      console.log(2); // その他の回答の場合
+    }
+    main();
+
+
+  });
+
+  //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
+  function convertToCharArray(str) {
+    return str.split('');
+  }
+
 
 
 })
