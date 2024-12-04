@@ -23,7 +23,7 @@ window.addEventListener('load', function () {
     "",
     "<fadeIn_chara 1 1>おはようございます。今日の授業を始めていきたいと思います。",
     "<item 1><fadeIn_chara 5 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
-    "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
+    "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
   ];
   text[1] = [
     "",
