@@ -29,7 +29,7 @@ window.addEventListener('load', function () {
     ],
     1: [
       "そうですね、数えてみると10本ですね",
-      "今回は数えることでマッチ棒の数が分かりました<skip3>",
+      "今回は数えることでマッチ棒の数が分かりました<skip 3>",
     ],
     2: [
       "本当ですか？数えてみましょう",
@@ -108,11 +108,11 @@ window.addEventListener('load', function () {
           console.log('フォーム表示');
           break;
         case 'Q1form':
-          $('.form').addClass('visible');
+          $('.formQ1').addClass('visible');
           console.log('フォーム表示');
           break;
         case 'Q2form':
-          $('.form').addClass('visible');
+          $('.formQ2').addClass('visible');
           console.log('フォーム表示');
           break;
 
