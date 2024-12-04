@@ -167,6 +167,7 @@ body{
 .saveButton
 {
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
+  pointer-events: none;/* これを設定しておくことでhiddenのとき下の要素が押せる */
 }
 .Buttonshow
 {
@@ -174,9 +175,10 @@ body{
   z-index: 10;
   pointer-events: auto; /* クリックを有効にする */
 }
-#answer-form
+.answerform
 {
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
+  pointer-events: none;
 }
 .formshow
 {
