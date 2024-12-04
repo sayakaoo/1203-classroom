@@ -465,7 +465,9 @@ window.addEventListener('load', function () {
       });
       const textResponse = await response.text(); // レスポンスをテキストとして取得
       console.log(textResponse); // レスポンスの内容を表示
+
       // レスポンス内容を判定
+      // ボタンの数だけ作らなきゃいけないよ
       if (buttonId === 'button1') {
         if (textResponse.includes("不正解")) {
           split_chars = ['<', 's', 'k', 'i', 'p', ' ', '3', '>'];
@@ -494,6 +496,8 @@ window.addEventListener('load', function () {
       console.error('エラー:', error);
       document.getElementById('response').textContent = 'サーバーエラーが発生しました';
     }
+
+    main();
   });
 
   // 音声入力の処理
