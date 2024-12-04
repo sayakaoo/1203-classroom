@@ -175,6 +175,12 @@ body{
   z-index: 10;
   pointer-events: auto; /* クリックを有効にする */
 }
+#answer-form
+{
+  display: none;
+}
+
+
 
 .show{
     display: block;
