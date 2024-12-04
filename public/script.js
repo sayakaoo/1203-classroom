@@ -70,7 +70,7 @@ window.addEventListener('load', function () {
           console.log('ボタン表示');
           break;
         case 'saveButtonremove':
-          $('.saveButton').removeClassClass('Buttonshow');
+          $('.saveButton').removeClass('Buttonshow');
           console.log('ボタン表示');
           break;
         case 'selectBox':
