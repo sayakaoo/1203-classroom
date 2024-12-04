@@ -18,6 +18,7 @@ window.addEventListener('load', function () {
   var select_text3 = document.getElementById('selectText3');
   let split_chars; //よくわからないけどいるみたい
   var text = [];
+  let input = "";
 
   text[0] = [
     "",
@@ -32,8 +33,7 @@ window.addEventListener('load', function () {
   text[2] = [
     "",
     "数えてみましょう",
-    "図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
-    "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
+    "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
   ];
 
   
@@ -44,7 +44,7 @@ window.addEventListener('load', function () {
   function main() {
     // split_charsが無効または空の場合のエラーハンドリング
     if (!Array.isArray(split_chars) || split_chars.length === 0) {
-      console.error("split_charsが無効または空です:", split_chars);
+      
       mess_text.innerHTML += '<span class="blink-text"></span>';
     }
 
@@ -539,12 +539,14 @@ window.addEventListener('load', function () {
     $('.form').removeClass('visible');
 
     if (userAnswer === '10') {
-      const input = "<skip 2>";
-      split_chars = convertToCharArray(input);
+      input = "<skip 1>";
+      split_chars = splitStr(input);
       console.log(split_chars);
 
     } else {
-      console.log(2); // その他の回答の場合
+      input = "<skip 2>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
     }
     main();
 
@@ -552,7 +554,7 @@ window.addEventListener('load', function () {
   });
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
-  function convertToCharArray(str) {
+  function splitStr(str) {
     return str.split('');
   }
 
