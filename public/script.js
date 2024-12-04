@@ -67,6 +67,7 @@ window.addEventListener('load', function () {
           break;
         case 'save-button':
           $('#save-button').addClass('show');
+          console.log('ボタン表示');
           break;
         case 'selectBox':
           $('.selectBox').addClass('show');
