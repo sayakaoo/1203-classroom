@@ -17,7 +17,7 @@ window.addEventListener('load', function () {
   var select_text2 = document.getElementById('selectText2');
   var select_text3 = document.getElementById('selectText3');
   let split_chars; //よくわからないけどいるみたい
-  var text = [];
+  
   let input = "";
 
   const text = {
