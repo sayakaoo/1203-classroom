@@ -164,29 +164,25 @@ body{
 }
 
 /*1204編集中*/
-.saveButton
-{
+.saveButton{
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
   pointer-events: none;/* これを設定しておくことでhiddenのとき下の要素が押せる */
 }
-.Buttonshow
-{
-  visibility: visible; 
-  z-index: 10;
-  pointer-events: auto; /* クリックを有効にする */
-}
-.answerform
-{
+.answerform{
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
   pointer-events: none;
 }
-.formshow
-{
+
+.submit-button{
+  visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
+  pointer-events: none;/* これを設定しておくことでhiddenのとき下の要素が押せる */
+}
+
+.visible{
   visibility: visible; 
   z-index: 10;
   pointer-events: auto; /* クリックを有効にする */
 }
-
 
 
 

@@ -22,7 +22,7 @@ window.addEventListener('load', function () {
   text[0] = [
     "",
     "<fadeIn_chara 1 1>おはよございます。今日の授業を始めていきたいと思います。",
-    "<item 1><fadeIn_chara 5 1><AIform>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
+    "<item 1><fadeIn_chara 5 1><AIform><AIformbutton1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
     "<select1 1><select2 2><select3 none><text1 10本><text2 わからない><selectBox>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
   ];
   text[1] = [
@@ -66,16 +66,21 @@ window.addEventListener('load', function () {
           stop_flg = true;
           break;
         case 'saveButton':
-          $('.saveButton').addClass('Buttonshow');
+          $('.saveButton').addClass('visible');
           console.log('ボタン表示');
           break;
         case 'saveButtonremove':
           $('.saveButton').removeClass('Buttonshow');
           break;
         case 'AIform':
-          $('.answerform').addClass('formshow');
+          $('.answerform').addClass('visible');
           console.log('フォーム表示');
           break;
+          case 'AIformbutton1':
+            $('.submit-button1').addClass('visible');
+            console.log('フォーム表示');
+            break;
+          
 
         case 'selectBox':
           $('.selectBox').addClass('show');
