@@ -168,7 +168,6 @@ body{
 {
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
 }
-
 .Buttonshow
 {
   visibility: visible; 
@@ -177,8 +176,16 @@ body{
 }
 #answer-form
 {
-  display: none;
+  visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
 }
+.formshow
+{
+  visibility: visible; 
+  z-index: 10;
+  pointer-events: auto; /* クリックを有効にする */
+}
+
+
 
 
 

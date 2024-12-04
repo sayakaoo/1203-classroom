@@ -73,7 +73,7 @@ window.addEventListener('load', function () {
           $('.saveButton').removeClass('Buttonshow');
           break;
           case 'AIform':
-            $('#answer-form').addClass('show');
+            $('#answer-form').addClass('formshow');
             console.log('フォーム表示');
             break;
 
