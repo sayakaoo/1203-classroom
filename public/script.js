@@ -453,9 +453,7 @@ window.addEventListener('load', function () {
     $('.answerform').removeClass('formshow');
     e.preventDefault(); // 
 
-    const clickedButton = e.submitter; // クリックされたボタンを取得
-    const prompt = clickedButton.getAttribute('data-prompt'); // ボタンのプロンプトを取得
-    console.log("使用するプロンプト:", prompt);
+    const buttonId = document.querySelector('button[type="submit"]:focus').value; // フォーカスされたボタンのvalueを取得
 
     const userAnswer = document.getElementById('userAnswer').value;
 
@@ -463,7 +461,7 @@ window.addEventListener('load', function () {
       const response = await fetch('/api/evaluate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userAnswer, prompt }),
+        body: JSON.stringify({ userAnswer, buttonId }),
       });
       const textResponse = await response.text(); // レスポンスをテキストとして取得
       console.log(textResponse); // レスポンスの内容を表示
