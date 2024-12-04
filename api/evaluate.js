@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
   }
 
 
-  const { userAnswer } = req.body;
+  const { userAnswer, buttonId } = req.body;
 
   let prompt = ""; // 初期化
 
