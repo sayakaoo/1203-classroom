@@ -27,11 +27,9 @@ window.addEventListener('load', function () {
     "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
   ];
   text[1] = [
-    "",
     "そうですね、数えてみると10本ですね",
   ];
   text[2] = [
-    "",
     "数えてみましょう",
     "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
   ];
@@ -549,6 +547,8 @@ window.addEventListener('load', function () {
       console.log(split_chars);
     }
     main();
+    document.querySelector('#userAnswer').value = ''; 
+
 
 
   });
