@@ -17,7 +17,7 @@ window.addEventListener('load', function () {
   var select_text2 = document.getElementById('selectText2');
   var select_text3 = document.getElementById('selectText3');
   let split_chars; //よくわからないけどいるみたい
-  
+
   let input = "";
 
   const text = {
@@ -37,14 +37,29 @@ window.addEventListener('load', function () {
     ],
     3: [
       "では正方形の数を増やしてみましょう",
-      "正方形が50個のとき",
+      "正方形が50個のとき、マッチ棒は何本必要でしょうか？",
+      "描くのにも時間かかっちゃうよ、、",//誰かに言わせる
+      "正方形の数が多い時数えるのは大変ですね",
+      "どのようにしたら考えられるでしょうか<Q2form>",
+    ],
+    4: [
+      "文字を使ってみるのはいい方法ですね！",
+      "",
       "",
       ""
-    ]
-  };
-  
+    ],
+    5: [
+      "文字を使ってみるとかどうかな？？",
+      "",
+      "",
+      ""
+    ],
 
-  
+
+  };
+
+
+
 
   console.log("main関数呼び出し前のsplit_chars:", split_chars);
 
@@ -52,7 +67,7 @@ window.addEventListener('load', function () {
   function main() {
     // split_charsが無効または空の場合のエラーハンドリング
     if (!Array.isArray(split_chars) || split_chars.length === 0) {
-      
+
       mess_text.innerHTML += '<span class="blink-text"></span>';
     }
 
@@ -93,6 +108,10 @@ window.addEventListener('load', function () {
           console.log('フォーム表示');
           break;
         case 'Q1form':
+          $('.form').addClass('visible');
+          console.log('フォーム表示');
+          break;
+        case 'Q2form':
           $('.form').addClass('visible');
           console.log('フォーム表示');
           break;
@@ -539,7 +558,6 @@ window.addEventListener('load', function () {
   });
 
   //Q1の回答の分岐
-
   document.querySelector('#Q1form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
@@ -557,11 +575,36 @@ window.addEventListener('load', function () {
       console.log(split_chars);
     }
     main();
-    document.querySelector('#userAnswer').value = ''; 
+    document.querySelector('#userAnswer').value = '';
 
 
 
   });
+
+  //Q2の回答の分岐
+  document.querySelector('#Q2form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const userAnswer = document.querySelector('#userAnswer').value; // ユーザーの回答を取得
+    $('.form').removeClass('visible');
+    //正規表現らしいこれ便利、i フラグを使うことで大文字と小文字を区別しない
+    if (/(もじ|文字|x)/i.test(userAnswer)) {
+      input = "<skip 4>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+
+    } else {
+      input = "<skip 5>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    }
+    main();
+    document.querySelector('#userAnswer').value = '';
+
+
+
+  });
+
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
   function splitStr(str) {
