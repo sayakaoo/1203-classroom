@@ -282,10 +282,10 @@ window.addEventListener('load', function () {
   showBtn.addEventListener('click', () => {
     //wrapper.style.display = 'block';
     wrapper.classList.toggle('none');
-    if (showBtn.innerHTML === 'ノートを表示') {
-      showBtn.innerHTML = 'ノートを非表示';
-    } else {
+    if (showBtn.innerHTML === 'ノートを非表示') {
       showBtn.innerHTML = 'ノートを表示';
+    } else {
+      showBtn.innerHTML = 'ノートを非表示';
     }
 
     console.log("おしたよ");
