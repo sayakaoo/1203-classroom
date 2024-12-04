@@ -466,13 +466,27 @@ window.addEventListener('load', function () {
       const textResponse = await response.text(); // レスポンスをテキストとして取得
       console.log(textResponse); // レスポンスの内容を表示
       // レスポンス内容を判定
-      if (textResponse.includes("不正解")) {
-        split_chars = ['<', 's', 'k', 'i', 'p', ' ', '3', '>'];
-        console.log(split_chars); // 「不正解」が含まれていた場合
-      } else if (textResponse.includes("正解")) {
-        console.log("2"); // 「正解」が含まれていた場合
+      if (buttonId === 'button1') {
+        if (textResponse.includes("不正解")) {
+          split_chars = ['<', 's', 'k', 'i', 'p', ' ', '3', '>'];
+          console.log(split_chars); // 「不正解」が含まれていた場合（button1の場合）
+        } else if (textResponse.includes("正解")) {
+          console.log("ボタン1の正解");
+        } else {
+          console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
+        }
+
+      } else if (buttonId === 'button2') {
+        if (textResponse.includes("不正解")) {
+          split_chars = ['<', 's', 'k', 'i', 'p', ' ', '4', '>'];
+          console.log(split_chars); // 「不正解」が含まれていた場合（button2の場合）
+        } else if (textResponse.includes("正解")) {
+          console.log("ボタン2の正解");
+        } else {
+          console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
+        }
       } else {
-        console.log("レスポンスに「正解」も「不正解」も含まれていません");
+        console.log("未知のボタンID");
       }
 
 
