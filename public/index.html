@@ -55,31 +55,31 @@
   <form id="answer-form">
     <label for="userAnswer">解答を入力してください!:</label><br>
     <input type="text" id="userAnswer" placeholder="解答を入力または音声で入力" required>
-    <button type="submit">送信</button>
+    <button id="start-voice">🎤 音声入力</button>
+    <div id="response"></div>
   </form>
-  <button id="start-voice">🎤 音声入力</button>
-  <div id="response"></div>
+  <button type="submit">送信</button>
 
-<!--キャンバス，黒板の要素の順番変えるとうまくいかないよ-->
-<button id="show-canvas-button">ノートを表示する</button>
-<button id="save-button" class="saveButton">答えを送信する</button>
-<div class="wrapper none">
+  <!--キャンバス，黒板の要素の順番変えるとうまくいかないよ-->
+  <button id="show-canvas-button">ノートを表示する</button>
+  <button id="save-button" class="saveButton">答えを送信する</button>
+  <div class="wrapper none">
     <div class="canvasbutton">
-        <!-- 色選択 -->
-        <!-- <label for="color-picker"></label> -->
-        <select id="color-picker">
-            <option value="black">黒</option>
-            <option value="red">赤</option>
-            <option value="blue">青</option>
-        </select>
-        <!-- 消去ボタン -->
-        <button id="clear-button">消す</button>
+      <!-- 色選択 -->
+      <!-- <label for="color-picker"></label> -->
+      <select id="color-picker">
+        <option value="black">黒</option>
+        <option value="red">赤</option>
+        <option value="blue">青</option>
+      </select>
+      <!-- 消去ボタン -->
+      <button id="clear-button">消す</button>
     </div>
     <canvas class="canvas" id="drawing-area" width="1000" height="1050"></canvas>
 
-</div>
+  </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
   <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
   <script src="script.js"></script>

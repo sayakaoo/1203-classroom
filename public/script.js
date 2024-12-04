@@ -71,7 +71,6 @@ window.addEventListener('load', function () {
           break;
         case 'saveButtonremove':
           $('.saveButton').removeClass('Buttonshow');
-          console.log('ボタン表示');
           break;
         case 'selectBox':
           $('.selectBox').addClass('show');
