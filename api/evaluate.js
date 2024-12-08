@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
   }
 
 
-  const { userAnswer, buttonId } = req.body;
+  const { apiUserAnswer, buttonId } = req.body;
 
   let prompt = ""; // 初期化
 
@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
 - 青色で囲んでいる一本が最初にあり、そのあとはコの字型の繰り返しになる。コの字型は3本のマッチ棒からなっているので、式は「1 + 3n」になる。
 
 以下の解答に基づいて評価を行ってください：
-ユーザーの解答：${userAnswer}
+ユーザーの解答：${apiUserAnswer}
 ユーザーの解答における「3n + 1」などの言及に対して適切な評価を行ってください。`;
   } else if (buttonId === "button2") {
    prompt = `あなたは教師です。以下のルールで正答判定をしてください：
@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
 - 青色で囲んでいる一本が最初にあり、そのあとはコの字型の繰り返しになる。コの字型は4本のマッチ棒からなっているので、式は「1 + 4n」になる。
 
 以下の解答に基づいて評価を行ってください：
-ユーザーの解答：${userAnswer}
+ユーザーの解答：${apiUserAnswer}
 ユーザーの解答における「4n + 1」などの言及に対して適切な評価を行ってください。`;
   } else {
     res.send("プロンプトが指定されていません");

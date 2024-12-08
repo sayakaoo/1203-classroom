@@ -75,9 +75,6 @@ window.addEventListener('load', function () {
 
   };
 
-
-
-
   console.log("main関数呼び出し前のsplit_chars:", split_chars);
 
 
@@ -143,6 +140,7 @@ window.addEventListener('load', function () {
         case 'showCanvas':
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
+          $('.hint1').addClass('visible');
           console.log('フォーム表示');
           break;
           
@@ -363,14 +361,11 @@ window.addEventListener('load', function () {
       ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
     }
   
-  
   // クリアボタンの処理
   clearBtn.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);  // キャンバスをクリア
   });
   
-
-
   // 色を選択する
   colorPicker.addEventListener('change', (e) => {
     selectedColor = e.target.value;
@@ -507,7 +502,7 @@ window.addEventListener('load', function () {
   // 初期化
   loadModel();
 
-  // 解答送信の処理
+  // chatgptapi解答送信の処理
   const form = document.getElementById('answer-form');
   form.addEventListener('submit', async (e) => {
     console.log("chatgpt認識中");
@@ -563,32 +558,60 @@ window.addEventListener('load', function () {
 
   // 音声入力の処理
   // 音声入力の処理を共通関数で管理
-  function enableVoiceInput(inputId, buttonId) {
-    const startVoiceButton = document.getElementById(buttonId);
-    startVoiceButton.addEventListener('click', () => {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = 'ja-JP';
-      recognition.start();
+  // 音声入力の処理
+let recognition;  // 音声認識インスタンスを保持
 
-      recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById(inputId).value = transcript;
-      };
+// 音声入力を有効にする共通関数
+function enableVoiceInput(inputId, startButtonId, stopButtonId) {
+  const startVoiceButton = document.getElementById(startButtonId);
+  const stopVoiceButton = document.getElementById(stopButtonId);
+  
+  // 音声認識インスタンスを初期化
+  recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = 'ja-JP';
 
-      recognition.onerror = (event) => {
-        console.error('音声認識エラー:', event.error);
-        alert('音声入力エラー: ' + event.error);
-      };
+  startVoiceButton.addEventListener('click', () => {
+    recognition.start();
+    startVoiceButton.disabled = true;  // 発言するボタンを無効化
+    if (stopVoiceButton) {
+      stopVoiceButton.disabled = false;  // 発言を終了するボタンを有効化
+    }
+  });
+
+  // 発言を終了するボタンで音声認識を停止
+  if (stopVoiceButton) {
+    stopVoiceButton.addEventListener('click', () => {
+      recognition.stop();
+      startVoiceButton.disabled = false;  // 発言するボタンを再度有効化
+      stopVoiceButton.disabled = true;    // 発言を終了するボタンを無効化
     });
   }
 
-  enableVoiceInput('userAnswer1', 'start-voice1');
-  enableVoiceInput('userAnswer2', 'start-voice2');
-  enableVoiceInput('userAnswer4', 'start-voice4');
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    document.getElementById(inputId).value = transcript;
+  };
 
-  // 各フォームで音声入力を有効にする
-  enableVoiceInput('userAnswer1', 'start-voice1');
-  enableVoiceInput('userAnswer2', 'start-voice2');
+  recognition.onerror = (event) => {
+    console.error('音声認識エラー:', event.error);
+    alert('音声入力エラー: ' + event.error);
+  };
+
+  // 音声認識終了時の処理（終了ボタンがない場合も自動で停止）
+  recognition.onend = () => {
+    startVoiceButton.disabled = false;  // 発言するボタンを再度有効化
+    if (stopVoiceButton) {
+      stopVoiceButton.disabled = true;  // 発言を終了するボタンを無効化
+    }
+  };
+}
+
+// 各フォームで音声入力を有効にする
+enableVoiceInput('userAnswer1', 'start-voice1');
+enableVoiceInput('userAnswer2', 'start-voice2');
+enableVoiceInput('userAnswer4', 'start-voice4');
+enableVoiceInput('apiuserAnswer1', 'apistart-voice1', 'apistop-voice1');
+
 
 
   //Q1の回答の分岐

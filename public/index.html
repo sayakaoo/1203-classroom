@@ -56,14 +56,14 @@
     <label for="userAnswer1">マッチ棒は何本必要でしょうか？:</label><br>
     <input type="text" id="userAnswer1" placeholder="解答を入力してください" required>
     <button type="button" id="start-voice1">🎤 音声入力</button>
-    <button id="Q1sbmitbutton" >答えを送信</button>
+    <button id="Q1sbmitbutton">答えを送信</button>
   </form>
 
   <form id="Q2form" class="formQ2 form">
     <label for="userAnswer2">どのように考えたらいいだろうか？:</label><br>
     <input type="text" id="userAnswer2" placeholder="解答を入力してください" required>
     <button type="button" id="start-voice2">🎤 音声入力</button>
-    <button id="Q1sbmitbutton" >送信</button>
+    <button id="Q1sbmitbutton">送信</button>
   </form>
 
   <form id="Q3form" class="formQ3 form">
@@ -71,7 +71,8 @@
     <input type="text" id="userAnswer3" placeholder="解答を入力してください" required><br>
     <p>の数を文字:
       <input type="text" id="userVariable" placeholder="例: n" maxlength="1" required>
-    を使って表す</p>
+      を使って表す
+    </p>
     <button type="submit" id="Q3submitbutton">送信</button>
   </form>
 
@@ -79,18 +80,25 @@
     <label for="userAnswer4">立てた式をおしえてください:</label><br>
     <input type="text" id="userAnswer4" placeholder="解答を入力してください" required>
     <button type="button" id="start-voice4">🎤 音声入力</button>
-    <button id="Q4sbmitbutton" >送信</button>
+    <button id="Q4sbmitbutton">送信</button>
   </form>
-  
 
-  <form id="answer-form" class="answerform">
-    <label for="userAnswer">解答を入力してください:</label><br>
-    <input type="text" id="userAnswer" placeholder="解答を入力または音声で入力" required>
-    <button id="start-voice">🎤 音声入力</button>
+
+  <!--chatgptapi用の-->
+  <form id="answer-form" class="answerform formapi1">
+    <label for="apiUserAnswer1">解答を入力してください:</label><br>
+    <input type="text" id="apiUserAnswer" placeholder="解答を入力または音声で入力" required>
+    <button id="apistart-voice1">発言する</button>
+    <button id="apistop-voice1" type="button" disabled>発言を終了する</button>
     <div id="response"></div>
     <button type="submit" class="submit-button submit-button1" value="button1">送信1</button>
     <button type="submit" class="submit-button submit-button2" value="button2">送信2</button>
   </form>
+
+
+  <div class="hint1">
+    <p>図と文字を使って説明してみよう！！</p>
+  </div>
 
   <!--キャンバス，黒板の要素の順番変えるとうまくいかないよ-->
   <button id="show-canvas-button" class="showCanvasButton">ノートを表示する</button>
