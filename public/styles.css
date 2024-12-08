@@ -170,7 +170,8 @@ body{
 .form,
 .showCanvasButton,
 .wrapper,
-.hint1{
+.hint1,
+.formapi1{
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
   pointer-events: none;/* これを設定しておくことでhiddenのとき下の要素が押せる */
 }

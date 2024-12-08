@@ -109,18 +109,6 @@ window.addEventListener('load', function () {
         case 'saveButtonremove':
           $('.saveButton').removeClass('Buttonshow');
           break;
-        case 'AIform':
-          $('.answerform').addClass('visible');
-          console.log('フォーム表示');
-          break;
-        case 'AIformbutton1':
-          $('.submit-button1').addClass('visible');
-          console.log('フォーム表示');
-          break;
-        case 'AIformbutton2':
-          $('.submit-button2').addClass('visible');
-          console.log('フォーム表示');
-          break;
         case 'Q1form':
           $('.formQ1').addClass('visible');
           console.log('フォーム表示');
@@ -145,8 +133,10 @@ window.addEventListener('load', function () {
           break;
         case 'apiform1':
           $('formapi1').addClass('visible');
+          $('.submit-button1').addClass('visible');
           console.log('フォーム表示');
           break;
+        
         case 'selectBox':
           $('.selectBox').addClass('show');
           break;
