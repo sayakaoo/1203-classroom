@@ -346,26 +346,14 @@ window.addEventListener('load', function () {
   const ctx = canvas.getContext('2d');
   const clearBtn = document.querySelector('#clear-button');
   const colorPicker = document.querySelector('#color-picker'); // 色選択用
-  const showBtn = document.querySelector('#show-canvas-button');
   const wrapper = document.querySelector('.wrapper');
-
+  
   let x;
   let y;
   let mousePressed = false;
   let selectedColor = 'black'; // デフォルトの色を黒に設定
-
-
-  showBtn.addEventListener('click', () => {
-    //wrapper.style.display = 'block';
-    wrapper.classList.toggle('none');
-    if (showBtn.innerHTML === 'ノートを非表示') {
-      showBtn.innerHTML = 'ノートを表示';
-    } else {
-      showBtn.innerHTML = 'ノートを非表示';
-    }
-
-    console.log("おしたよ");
-
+  
+  // 初期状態で画像を表示する
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const chara = new Image();
     chara.src = "./img/item3.png";  // 画像のURLを指定
@@ -374,8 +362,13 @@ window.addEventListener('load', function () {
       const scaleHeight = 800; // 画像の高さを200pxに設定
       ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
     }
-
+  
+  
+  // クリアボタンの処理
+  clearBtn.addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  // キャンバスをクリア
   });
+  
 
 
   // 色を選択する
