@@ -622,7 +622,7 @@ window.addEventListener('load', function () {
   
     // ユーザーの回答と文字を取得
     const userAnswer = document.querySelector('#userAnswer3').value.trim();
-    const userChar = document.querySelector('#userVariable').value.trim();
+    userChar = document.querySelector('#userVariable').value.trim();
   
     // 入力が1文字でない場合のチェック
     if (userChar.length !== 1) {
