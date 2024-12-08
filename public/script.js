@@ -565,7 +565,7 @@ window.addEventListener('load', function () {
   document.querySelector('#Q1form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
-    const userAnswer = document.querySelector('#userAnswer').value; // ユーザーの回答を取得
+    const userAnswer = document.querySelector('#userAnswer1').value; // ユーザーの回答を取得
     $('.formQ1').removeClass('visible');
 
     if (userAnswer === '10') {
@@ -590,7 +590,7 @@ window.addEventListener('load', function () {
   document.querySelector('#Q2form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
   
-    const userAnswer = document.querySelector('#userAnswer').value.trim(); // 空白を除去
+    const userAnswer = document.querySelector('#userAnswer2').value.trim(); // 空白を除去
     console.log(`ユーザーの入力: ${userAnswer}`); // 入力値を確認
   
     $('.formQ2').removeClass('visible');
@@ -616,7 +616,7 @@ window.addEventListener('load', function () {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
   
     // ユーザーの回答と文字を取得
-    const userAnswer = document.querySelector('#userAnswer').value.trim();
+    const userAnswer = document.querySelector('#userAnswer3').value.trim();
     const userChar = document.querySelector('#userVariable').value.trim();
   
     // 入力が1文字でない場合のチェック
