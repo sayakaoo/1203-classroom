@@ -20,6 +20,7 @@ window.addEventListener('load', function () {
 
   let input = "";
   let userChar = "";
+  let highestPrediction = "";
 
 
 
@@ -473,11 +474,8 @@ window.addEventListener('load', function () {
 
     try {
       const predictions = await model.predict(imageElement);
-      const highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
+      highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
       console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
-
-      // 予測結果に基づいてシナリオを変更
-      changeScenarioBasedOnPrediction(highestPrediction);
     } catch (error) {
       console.error("予測中にエラーが発生しました: ", error);
     }
