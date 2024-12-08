@@ -66,10 +66,9 @@ window.addEventListener('load', function () {
       ""
     ],
     8: [
-      "1+3nですね",
-      "",
-      "",
-      ""
+      "(1+3n)ありがとうございます。",
+      "(学習者)さんどのように求めたか説明してください。<wrapper>",
+
     ],
 
 
@@ -137,10 +136,15 @@ window.addEventListener('load', function () {
           $('.formQ3').addClass('visible');
           console.log('フォーム表示');
           break;
-          case 'Q4form':
-            $('.formQ4').addClass('visible');
-            console.log('フォーム表示');
-            break;
+        case 'Q4form':
+          $('.formQ4').addClass('visible');
+          console.log('フォーム表示');
+          break;
+        case 'wrapper':
+          $('.wrapper').addClass('visible');
+          console.log('フォーム表示');
+          break;
+          
         case 'selectBox':
           $('.selectBox').addClass('show');
           break;
@@ -350,7 +354,7 @@ window.addEventListener('load', function () {
   let selectedColor = 'black'; // デフォルトの色を黒に設定
 
 
-
+  //残しておくけどいらない
   showBtn.addEventListener('click', () => {
     //wrapper.style.display = 'block';
     wrapper.classList.toggle('none');
