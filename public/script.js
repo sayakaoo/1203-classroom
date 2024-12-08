@@ -19,13 +19,15 @@ window.addEventListener('load', function () {
   let split_chars; //よくわからないけどいるみたい
 
   let input = "";
-  let userChar = ''; // ユーザーが入力した文字を保存
+
+  let userChar = document.querySelector('#userVariable').value.trim();
 
 
   const text = {
+    //配列0のは時短のためのスキップ
     0: [
       "",
-      "おはようございます。今日の授業を始めていきたいと思います。",
+      "おはようございます。今日の授業を始めていきたいと思います。<skip 4>",
       "<item 1><fadeIn_chara 5 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -622,7 +624,6 @@ window.addEventListener('load', function () {
   
     // ユーザーの回答と文字を取得
     const userAnswer = document.querySelector('#userAnswer3').value.trim();
-    userChar = document.querySelector('#userVariable').value.trim();
   
     // 入力が1文字でない場合のチェック
     if (userChar.length !== 1) {
