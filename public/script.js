@@ -510,8 +510,7 @@ window.addEventListener('load', function () {
       const textResponse = await response.text(); // レスポンスをテキストとして取得
       console.log(textResponse); // レスポンスの内容を表示
       canvasButtonClick();
-      const highestPrediction = await predictImage(); // predictImage を待機して予測結果を取得
-      
+      await sleep(10000);
 
       // レスポンス内容を判定
       // ボタンの数だけ作らなきゃいけないよ
