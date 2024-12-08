@@ -142,6 +142,7 @@ window.addEventListener('load', function () {
           break;
         case 'showCanvas':
           $('.showCanvasButton').addClass('visible');
+          $('.wrapper').addClass('visible');
           console.log('フォーム表示');
           break;
           
