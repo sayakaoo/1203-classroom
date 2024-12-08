@@ -510,7 +510,7 @@ window.addEventListener('load', function () {
       const textResponse = await response.text(); // レスポンスをテキストとして取得
       console.log(textResponse); // レスポンスの内容を表示
       canvasButtonClick();
-      await sleep(10000);
+      await sleep(5000);
 
       // レスポンス内容を判定
       // ボタンの数だけ作らなきゃいけないよ
@@ -717,6 +717,10 @@ window.addEventListener('load', function () {
     } else {
         console.log("ボタンが見つかりません");
     }
+}
+//読み込みのための遅延のための関数
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 
