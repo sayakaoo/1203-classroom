@@ -67,7 +67,7 @@ window.addEventListener('load', function () {
     ],
     8: [
       "(1+3n)ありがとうございます。",
-      "(学習者)さんどのように求めたか説明してください。<wrapper>",
+      "(学習者)さんどのように求めたか説明してください。<showCanvas>",
 
     ],
 
@@ -140,8 +140,8 @@ window.addEventListener('load', function () {
           $('.formQ4').addClass('visible');
           console.log('フォーム表示');
           break;
-        case 'wrapper':
-          $('.wrapper').addClass('visible');
+        case 'showCanvas':
+          $('.showCanvasButton').addClass('visible');
           console.log('フォーム表示');
           break;
           
@@ -354,8 +354,7 @@ window.addEventListener('load', function () {
   let selectedColor = 'black'; // デフォルトの色を黒に設定
 
 
-  //残しておくけどいらない
-  /*showBtn.addEventListener('click', () => {
+  showBtn.addEventListener('click', () => {
     //wrapper.style.display = 'block';
     wrapper.classList.toggle('none');
     if (showBtn.innerHTML === 'ノートを非表示') {
@@ -375,7 +374,7 @@ window.addEventListener('load', function () {
       ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
     }
 
-  });*/
+  });
 
 
   // 色を選択する
