@@ -67,7 +67,7 @@ window.addEventListener('load', function () {
     ],
     8: [
       "(1+3n)ありがとうございます。",
-      "(学習者)さんどのように求めたか説明してください。<showCanvas>",
+      "(学習者)さんどのように求めたか説明してください。<showCanvas><apiform1>",
 
     ],
 
@@ -143,7 +143,11 @@ window.addEventListener('load', function () {
           $('.hint1').addClass('visible');
           console.log('フォーム表示');
           break;
-
+        case 'apiform1':
+          $('formapi1').addClass('visible');
+          
+          console.log('フォーム表示');
+          break;
         case 'selectBox':
           $('.selectBox').addClass('show');
           break;
