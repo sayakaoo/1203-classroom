@@ -657,6 +657,12 @@ document.querySelector('#textInputForm').addEventListener('submit', function (ev
 });
 
 
+  //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
+  function splitStr(str) {
+    return str.split('');
+  }
+
+
 
 
 })
