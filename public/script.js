@@ -132,7 +132,7 @@ window.addEventListener('load', function () {
           console.log('フォーム表示');
           break;
         case 'apiform1':
-          $('formapi1').addClass('visible');
+          $('.formapi1').addClass('visible');
           $('.submit-button1').addClass('visible');
           console.log('フォーム表示');
           break;
