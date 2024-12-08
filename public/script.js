@@ -19,6 +19,8 @@ window.addEventListener('load', function () {
   let split_chars; //よくわからないけどいるみたい
 
   let input = "";
+  let userChar = ''; // ユーザーが入力した文字を保存
+
 
   const text = {
     0: [
@@ -37,19 +39,21 @@ window.addEventListener('load', function () {
     ],
     3: [
       "では正方形の数を増やしてみましょう",
-      "正方形が50個のとき、マッチ棒は何本必要でしょうか？",
+      "正方形が50個、100個のとき、マッチ棒はそれぞれ何本必要でしょうか？",
       "描くのにも時間かかっちゃうよ、、",//誰かに言わせる
       "正方形の数が多い時数えるのは大変ですね",
       "どのようにしたら考えられるでしょうか<Q2form>",
     ],
     4: [
       "文字を使ってみるのはいい方法ですね！",
-      "",
-      "",
-      ""
+      "どの数を文字で表そうか。。<Q3form>",
     ],
     5: [
       "文字を使ってみるとかどうかな？？",
+      "",
+    ],
+    6: [
+      "そうですね、正方形の数を${userChar}を用いて表しましょう",
       "",
       "",
       ""
@@ -608,11 +612,50 @@ window.addEventListener('load', function () {
 
   });
 
+  //Q3の回答の分岐
+  document.querySelector('#Q3form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
-  //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
-  function splitStr(str) {
-    return str.split('');
+    const userAnswer = document.querySelector('#userAnswer').value; // ユーザーの回答を取得
+    $('.formQ3').removeClass('visible');
+    //正規表現らしいこれ便利、i フラグを使うことで大文字と小文字を区別しない
+    if (/(正方形|せいほうけい|しかく|四角)/i.test(userAnswer)) {
+      input = "<skip 5>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+
+    } else {
+      input = "<skip 6>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    }
+
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+
+
+
+  });
+
+
+document.querySelector('#textInputForm').addEventListener('submit', function (event) {
+  event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+  // ユーザーが入力した文字を取得
+  userChar = document.querySelector('#userVariable').value.trim();
+  
+  // 入力が1文字でない場合のチェック
+  if (userChar.length !== 1) {
+    alert("1文字だけ入力してください！");
+    return;
   }
+
+  console.log(`ユーザーが選択した文字: ${userChar}`);
+  console.log(textArray);
+
+});
+
 
 
 
