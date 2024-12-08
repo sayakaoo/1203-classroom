@@ -589,28 +589,27 @@ window.addEventListener('load', function () {
   //Q2の回答の分岐
   document.querySelector('#Q2form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
-
-    const userAnswer = document.querySelector('#userAnswer').value; // ユーザーの回答を取得
+  
+    const userAnswer = document.querySelector('#userAnswer').value.trim(); // 空白を除去
+    console.log(`ユーザーの入力: ${userAnswer}`); // 入力値を確認
+  
     $('.formQ2').removeClass('visible');
-    //正規表現らしいこれ便利、i フラグを使うことで大文字と小文字を区別しない
+  
     if (/(もじ|文字|x)/i.test(userAnswer)) {
+      console.log("条件に一致しました");
       input = "<skip 4>";
       split_chars = splitStr(input);
       console.log(split_chars);
-
     } else {
+      console.log("条件に一致しません");
       input = "<skip 5>";
       split_chars = splitStr(input);
       console.log(split_chars);
     }
-
+  
     main();
-    mess_box.click();
-    document.querySelector('#userAnswer').value = '';
-
-
-
   });
+  
 
   //Q3の回答の分岐
   document.querySelector('#Q3form').addEventListener('submit', function (event) {
