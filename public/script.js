@@ -70,8 +70,27 @@ window.addEventListener('load', function () {
       "(学習者)さんどのように求めたか説明してください。<showCanvas><apiform1>",
 
     ],
+    9: [
+      "ありがとうございます。",
+      "分かりやすい説明でした",
+    ],
+    10: [
+      "ありがとうございます。図をもう一度書いてみてください",
+    ],
+    11: [
+      "11",
+    ],
+    12: [
+      "12",
+    ],
 
-
+    //経由用
+    100: [
+      "経由用",
+      "",
+      "",
+      ""
+    ],
 
   };
 
@@ -136,7 +155,7 @@ window.addEventListener('load', function () {
           $('.submit-button1').addClass('visible');
           console.log('フォーム表示');
           break;
-        
+
         case 'selectBox':
           $('.selectBox').addClass('show');
           break;
@@ -465,30 +484,6 @@ window.addEventListener('load', function () {
   }
 
 
-  // 予測結果に基づいてシナリオを動的に変更
-  function changeScenarioBasedOnPrediction(highestPrediction) {
-    switch (highestPrediction.className) {
-      case "Class 1":
-        split_chars = ['<', 's', 'k', 'i', 'p', ' ', '2', '>'];
-        //もうここに文章を入れることにしようか
-        break;
-      case "Class 2":
-        split_chars = ['<', 's', 'k', 'i', 'p', ' ', '2', '>'];
-        break;
-      case "クラス3":
-        split_chars = ['select2', 'scene1'];
-        break;
-      default:
-        split_chars = ['select1', 'none'];
-    }
-
-    console.log("渡されるシナリオデータ:", split_chars);
-    main();
-
-  }
-
-
-
   // '保存'ボタンがクリックされたときに予測を実行
   document.getElementById("save-button").addEventListener("click", predictCanvas);
 
@@ -514,25 +509,44 @@ window.addEventListener('load', function () {
       });
       const textResponse = await response.text(); // レスポンスをテキストとして取得
       console.log(textResponse); // レスポンスの内容を表示
+      canvasButtonClick();
 
       // レスポンス内容を判定
       // ボタンの数だけ作らなきゃいけないよ
       if (buttonId === 'button1') {
         if (textResponse.includes("不正解")) {
-          split_chars = ['<', 's', 'k', 'i', 'p', ' ', '2', '>'];
-          console.log(split_chars); // 「不正解」が含まれていた場合（button1の場合）
+          switch (highestPrediction.className) {
+            case "Class 1":
+              input = "<skip 11>";
+              split_chars = splitStr(input);
+              break;
+            default:
+              input = "<skip 12>";
+              split_chars = splitStr(input);
+              break;
+          };
         } else if (textResponse.includes("正解")) {
-          console.log("ボタン1の正解");
+          switch (highestPrediction.className) {
+            case "Class 1":
+              input = "<skip 9>";
+              split_chars = splitStr(input);
+              break;
+            default:
+              input = "<skip 10>";
+              split_chars = splitStr(input);
+              break;
+          };
         } else {
           console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
         }
-
       } else if (buttonId === 'button2') {
         if (textResponse.includes("不正解")) {
-          split_chars = ['<', 's', 'k', 'i', 'p', ' ', '4', '>'];
+          input = "<skip >";
+          split_chars = splitStr(input);
           console.log(split_chars); // 「不正解」が含まれていた場合（button2の場合）
         } else if (textResponse.includes("正解")) {
-          console.log("ボタン2の正解");
+          input = "<skip >";
+          split_chars = splitStr(input);
         } else {
           console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
         }
@@ -692,6 +706,20 @@ window.addEventListener('load', function () {
   function splitStr(str) {
     return str.split('');
   }
+
+  //キャンバス送信ボタンの関数
+  function canvasButtonClick() {
+    const saveButton = document.getElementById('save-button');
+    if (saveButton) {
+        saveButton.click(); // ボタンのクリックイベントを発火
+        console.log("ボタンをクリックしました");
+    } else {
+        console.log("ボタンが見つかりません");
+    }
+}
+
+
+
 
 
 
