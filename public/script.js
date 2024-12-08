@@ -355,7 +355,7 @@ window.addEventListener('load', function () {
 
 
   //残しておくけどいらない
-  showBtn.addEventListener('click', () => {
+  /*showBtn.addEventListener('click', () => {
     //wrapper.style.display = 'block';
     wrapper.classList.toggle('none');
     if (showBtn.innerHTML === 'ノートを非表示') {
@@ -375,7 +375,7 @@ window.addEventListener('load', function () {
       ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
     }
 
-  });
+  });*/
 
 
   // 色を選択する
