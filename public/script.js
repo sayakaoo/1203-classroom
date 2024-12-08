@@ -119,6 +119,10 @@ window.addEventListener('load', function () {
           $('.formQ2').addClass('visible');
           console.log('フォーム表示');
           break;
+          case 'Q3form':
+            $('.formQ3').addClass('visible');
+            console.log('フォーム表示');
+            break;
 
         case 'selectBox':
           $('.selectBox').addClass('show');
@@ -608,6 +612,7 @@ window.addEventListener('load', function () {
     }
   
     main();
+    mess_box.click();
   });
   
 
