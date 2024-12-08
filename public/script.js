@@ -143,7 +143,7 @@ window.addEventListener('load', function () {
           $('.hint1').addClass('visible');
           console.log('フォーム表示');
           break;
-          
+
         case 'selectBox':
           $('.selectBox').addClass('show');
           break;
@@ -345,27 +345,27 @@ window.addEventListener('load', function () {
   const clearBtn = document.querySelector('#clear-button');
   const colorPicker = document.querySelector('#color-picker'); // 色選択用
   const wrapper = document.querySelector('.wrapper');
-  
+
   let x;
   let y;
   let mousePressed = false;
   let selectedColor = 'black'; // デフォルトの色を黒に設定
-  
+
   // 初期状態で画像を表示する
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const chara = new Image();
-    chara.src = "./img/item3.png";  // 画像のURLを指定
-    chara.onload = () => {
-      const scaleWidth = 800;  // 画像の幅を200pxに設定
-      const scaleHeight = 800; // 画像の高さを200pxに設定
-      ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
-    }
-  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const chara = new Image();
+  chara.src = "./img/item3.png";  // 画像のURLを指定
+  chara.onload = () => {
+    const scaleWidth = 800;  // 画像の幅を200pxに設定
+    const scaleHeight = 800; // 画像の高さを200pxに設定
+    ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
+  }
+
   // クリアボタンの処理
   clearBtn.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);  // キャンバスをクリア
   });
-  
+
   // 色を選択する
   colorPicker.addEventListener('change', (e) => {
     selectedColor = e.target.value;
@@ -558,59 +558,30 @@ window.addEventListener('load', function () {
 
   // 音声入力の処理
   // 音声入力の処理を共通関数で管理
-  // 音声入力の処理
-let recognition;  // 音声認識インスタンスを保持
+  function enableVoiceInput(inputId, buttonId) {
+    const startVoiceButton = document.getElementById(buttonId);
+    startVoiceButton.addEventListener('click', () => {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'ja-JP';
+      recognition.start();
 
-// 音声入力を有効にする共通関数
-function enableVoiceInput(inputId, startButtonId, stopButtonId) {
-  const startVoiceButton = document.getElementById(startButtonId);
-  const stopVoiceButton = document.getElementById(stopButtonId);
-  
-  // 音声認識インスタンスを初期化
-  recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-  recognition.lang = 'ja-JP';
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById(inputId).value = transcript;
+      };
 
-  startVoiceButton.addEventListener('click', () => {
-    recognition.start();
-    startVoiceButton.disabled = true;  // 発言するボタンを無効化
-    if (stopVoiceButton) {
-      stopVoiceButton.disabled = false;  // 発言を終了するボタンを有効化
-    }
-  });
-
-  // 発言を終了するボタンで音声認識を停止
-  if (stopVoiceButton) {
-    stopVoiceButton.addEventListener('click', () => {
-      recognition.stop();
-      startVoiceButton.disabled = false;  // 発言するボタンを再度有効化
-      stopVoiceButton.disabled = true;    // 発言を終了するボタンを無効化
+      recognition.onerror = (event) => {
+        console.error('音声認識エラー:', event.error);
+        alert('音声入力エラー: ' + event.error);
+      };
     });
   }
 
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript;
-    document.getElementById(inputId).value = transcript;
-  };
-
-  recognition.onerror = (event) => {
-    console.error('音声認識エラー:', event.error);
-    alert('音声入力エラー: ' + event.error);
-  };
-
-  // 音声認識終了時の処理（終了ボタンがない場合も自動で停止）
-  recognition.onend = () => {
-    startVoiceButton.disabled = false;  // 発言するボタンを再度有効化
-    if (stopVoiceButton) {
-      stopVoiceButton.disabled = true;  // 発言を終了するボタンを無効化
-    }
-  };
-}
-
-// 各フォームで音声入力を有効にする
-enableVoiceInput('userAnswer1', 'start-voice1');
-enableVoiceInput('userAnswer2', 'start-voice2');
-enableVoiceInput('userAnswer4', 'start-voice4');
-enableVoiceInput('apiuserAnswer1', 'apistart-voice1', 'apistop-voice1');
+  // 各フォームで音声入力を有効にする
+  enableVoiceInput('userAnswer1', 'start-voice1');
+  enableVoiceInput('userAnswer2', 'start-voice2');
+  enableVoiceInput('userAnswer4', 'start-voice4');
+  enableVoiceInput('apiuserAnswer1', 'apistart-voice1', 'apistop-voice1');
 
 
 
