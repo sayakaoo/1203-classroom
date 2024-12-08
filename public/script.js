@@ -19,15 +19,15 @@ window.addEventListener('load', function () {
   let split_chars; //よくわからないけどいるみたい
 
   let input = "";
+  let userChar = "";
 
-  let userChar = document.querySelector('#userVariable').value.trim();
 
 
   const text = {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "おはようございます。今日の授業を始めていきたいと思います。<skip 4>",
+      "おはようございます。今日の授業を始めていきたいと思います。<skip 7>",
       "<item 1><fadeIn_chara 5 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -51,15 +51,27 @@ window.addEventListener('load', function () {
       "どの数を文字で表そうか。。<Q3form>",
     ],
     5: [
-      "文字を使ってみるとかどうかな？？",
-      "",
+      "文字を使ってみるとかどうかな？"
     ],
     6: [
-      "そうですね、正方形の数を${userChar}を用いて表しましょう",
+      "そうですね、正方形の数をnを用いて表しましょう",
+      "では正方形がn個あるとき、マッチ棒は何本必要だろうか。どのように考えられるでしょう。まずは5分個人で考えてみてください",
+      "(5分タイマー)<skip 7>",
+
+    ],
+    7: [
+      "考えられましたか？では、(学習者)さん立てた式をおしえてください。<Q4form>",
       "",
       "",
       ""
     ],
+    8: [
+      "1+3nですね",
+      "",
+      "",
+      ""
+    ],
+
 
 
   };
@@ -121,11 +133,14 @@ window.addEventListener('load', function () {
           $('.formQ2').addClass('visible');
           console.log('フォーム表示');
           break;
-          case 'Q3form':
-            $('.formQ3').addClass('visible');
+        case 'Q3form':
+          $('.formQ3').addClass('visible');
+          console.log('フォーム表示');
+          break;
+          case 'Q4form':
+            $('.formQ4').addClass('visible');
             console.log('フォーム表示');
             break;
-
         case 'selectBox':
           $('.selectBox').addClass('show');
           break;
@@ -550,22 +565,34 @@ window.addEventListener('load', function () {
   });
 
   // 音声入力の処理
-  const startVoiceButton = document.getElementById('start-voice');
-  startVoiceButton.addEventListener('click', () => {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = 'ja-JP';
-    recognition.start();
+  // 音声入力の処理を共通関数で管理
+  function enableVoiceInput(inputId, buttonId) {
+    const startVoiceButton = document.getElementById(buttonId);
+    startVoiceButton.addEventListener('click', () => {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'ja-JP';
+      recognition.start();
 
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      document.getElementById('userAnswer').value = transcript;
-    };
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById(inputId).value = transcript;
+      };
 
-    recognition.onerror = (event) => {
-      console.error('音声認識エラー:', event.error);
-      alert('音声入力エラー: ' + event.error);
-    };
-  });
+      recognition.onerror = (event) => {
+        console.error('音声認識エラー:', event.error);
+        alert('音声入力エラー: ' + event.error);
+      };
+    });
+  }
+
+  enableVoiceInput('userAnswer1', 'start-voice1');
+  enableVoiceInput('userAnswer2', 'start-voice2');
+  enableVoiceInput('userAnswer4', 'start-voice4');
+
+  // 各フォームで音声入力を有効にする
+  enableVoiceInput('userAnswer1', 'start-voice1');
+  enableVoiceInput('userAnswer2', 'start-voice2');
+
 
   //Q1の回答の分岐
   document.querySelector('#Q1form').addEventListener('submit', function (event) {
@@ -587,20 +614,17 @@ window.addEventListener('load', function () {
     main();
     mess_box.click();
     document.querySelector('#userAnswer').value = '';
-
-
-
   });
 
   //Q2の回答の分岐
   document.querySelector('#Q2form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
-  
+
     const userAnswer = document.querySelector('#userAnswer2').value.trim(); // 空白を除去
     console.log(`ユーザーの入力: ${userAnswer}`); // 入力値を確認
-  
+
     $('.formQ2').removeClass('visible');
-  
+
     if (/(もじ|文字|x)/i.test(userAnswer)) {
       console.log("条件に一致しました");
       input = "<skip 4>";
@@ -612,28 +636,29 @@ window.addEventListener('load', function () {
       split_chars = splitStr(input);
       console.log(split_chars);
     }
-  
+
     main();
     mess_box.click();
   });
-  
+
 
   //Q3の回答の分岐
   document.querySelector('#Q3form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
-  
+
     // ユーザーの回答と文字を取得
     const userAnswer = document.querySelector('#userAnswer3').value.trim();
-  
+    userChar = document.querySelector('#userVariable').value.trim();
+
     // 入力が1文字でない場合のチェック
     if (userChar.length !== 1) {
       alert("1文字だけ入力してください！");
       return;
     }
-  
+
     // 入力内容を処理
     $('.formQ3').removeClass('visible');
-  
+
     if (/(正方形|せいほうけい|しかく|四角)/i.test(userAnswer)) {
       input = "<skip 6>";
       split_chars = splitStr(input);
@@ -643,19 +668,40 @@ window.addEventListener('load', function () {
       split_chars = splitStr(input);
       console.log("間違った回答:", split_chars);
     }
-  
+
     // 任意の文字を保存・利用
     console.log(`ユーザーが選択した文字: ${userChar}`);
-  
+
     // 次の処理を進める
     main();
     mess_box.click();
-  
+
     // 入力フォームをリセット
     document.querySelector('#userAnswer').value = '';
     document.querySelector('#userVariable').value = '';
   });
-  
+
+  //Q4の回答の分岐
+  document.querySelector('#Q4form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const userAnswer = document.querySelector('#userAnswer4').value; // ユーザーの回答を取得
+    $('.formQ4').removeClass('visible');
+
+    if (userAnswer === '1+3n') {
+      input = "<skip 8>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+
+    } else {
+      input = "<skip 2>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    }
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+  });
 
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
