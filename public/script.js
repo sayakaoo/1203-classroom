@@ -634,11 +634,11 @@ window.addEventListener('load', function () {
     $('.formQ3').removeClass('visible');
   
     if (/(正方形|せいほうけい|しかく|四角)/i.test(userAnswer)) {
-      input = "<skip 5>";
+      input = "<skip 6>";
       split_chars = splitStr(input);
       console.log("正しい回答:", split_chars);
     } else {
-      input = "<skip 6>";
+      input = "<skip 5>";
       split_chars = splitStr(input);
       console.log("間違った回答:", split_chars);
     }
