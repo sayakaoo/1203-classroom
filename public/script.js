@@ -504,7 +504,7 @@ window.addEventListener('load', function () {
 
     const buttonId = document.querySelector('button[type="submit"]:focus').value; // フォーカスされたボタンのvalueを取得
 
-    const userAnswer = document.getElementById('apiuserAnswer1').value;
+    const userAnswer = document.getElementById('apiuserAnswer').value;
 
     try {
       const response = await fetch('/api/evaluate', {
