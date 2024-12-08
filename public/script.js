@@ -615,46 +615,42 @@ window.addEventListener('load', function () {
   //Q3の回答の分岐
   document.querySelector('#Q3form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
-
-    const userAnswer = document.querySelector('#userAnswer').value; // ユーザーの回答を取得
+  
+    // ユーザーの回答と文字を取得
+    const userAnswer = document.querySelector('#userAnswer').value.trim();
+    const userChar = document.querySelector('#userVariable').value.trim();
+  
+    // 入力が1文字でない場合のチェック
+    if (userChar.length !== 1) {
+      alert("1文字だけ入力してください！");
+      return;
+    }
+  
+    // 入力内容を処理
     $('.formQ3').removeClass('visible');
-    //正規表現らしいこれ便利、i フラグを使うことで大文字と小文字を区別しない
+  
     if (/(正方形|せいほうけい|しかく|四角)/i.test(userAnswer)) {
       input = "<skip 5>";
       split_chars = splitStr(input);
-      console.log(split_chars);
-
+      console.log("正しい回答:", split_chars);
     } else {
       input = "<skip 6>";
       split_chars = splitStr(input);
-      console.log(split_chars);
+      console.log("間違った回答:", split_chars);
     }
-
+  
+    // 任意の文字を保存・利用
+    console.log(`ユーザーが選択した文字: ${userChar}`);
+  
+    // 次の処理を進める
     main();
     mess_box.click();
-    document.querySelector('#userAnswer').value = '';
-
-
-
-  });
-
-
-document.querySelector('#textInputForm').addEventListener('submit', function (event) {
-  event.preventDefault(); // フォームのデフォルト送信を防ぐ
-
-  // ユーザーが入力した文字を取得
-  userChar = document.querySelector('#userVariable').value.trim();
   
-  // 入力が1文字でない場合のチェック
-  if (userChar.length !== 1) {
-    alert("1文字だけ入力してください！");
-    return;
-  }
-
-  console.log(`ユーザーが選択した文字: ${userChar}`);
-  console.log(textArray);
-
-});
+    // 入力フォームをリセット
+    document.querySelector('#userAnswer').value = '';
+    document.querySelector('#userVariable').value = '';
+  });
+  
 
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
