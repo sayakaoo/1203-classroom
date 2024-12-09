@@ -85,15 +85,15 @@ window.addEventListener('load', function () {
 
     //間に何個か入れよう
     20: [
-      "次にAさんどのような式を立てたか教えてください",
-      "4+3(n-1)",
-      "",
-      ""
+      "ではAさんどのような式を立てたか教えてください",
+      "4+3(n-1)という式をたてました。",
+      "どのような図を書きましたか？",
+      "このような図をかきました。<item 4>"
     ],
 
     //経由用
     100: [
-      "経由用",
+      "未作成",
       "",
       "",
       ""
@@ -497,7 +497,7 @@ window.addEventListener('load', function () {
   // chatgptapi解答送信の処理
   const form = document.getElementById('answer-form');
   form.addEventListener('submit', async (e) => {
-    
+
     const apiUserAnswer = document.getElementById("apiUserAnswer").value; // 入力内容を取得
         console.log("ユーザーの解答:", apiUserAnswer);
     console.log("chatgpt認識中");
@@ -697,12 +697,15 @@ window.addEventListener('load', function () {
     $('.formQ4').removeClass('visible');
 
     if (userAnswer === '1+3n') {
-      input = "<skip 8>";
+      //さきにAさんのパターン
+      input = "<skip 20>";
+      //最初にユーザーの発表なら8に進む
+      //input = "<skip 8>";
       split_chars = splitStr(input);
       console.log(split_chars);
 
     } else {
-      input = "<skip 2>";
+      input = "<skip 100>";
       split_chars = splitStr(input);
       console.log(split_chars);
     }
