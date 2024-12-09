@@ -497,6 +497,9 @@ window.addEventListener('load', function () {
   // chatgptapi解答送信の処理
   const form = document.getElementById('answer-form');
   form.addEventListener('submit', async (e) => {
+    
+    const apiUserAnswer = document.getElementById("apiUserAnswer").value; // 入力内容を取得
+        console.log("ユーザーの解答:", apiUserAnswer);
     console.log("chatgpt認識中");
     $('.answerform').removeClass('visible');
     e.preventDefault(); // 
