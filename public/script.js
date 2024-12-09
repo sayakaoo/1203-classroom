@@ -16,7 +16,7 @@ window.addEventListener('load', function () {
   var select_text1 = document.getElementById('selectText1');
   var select_text2 = document.getElementById('selectText2');
   var select_text3 = document.getElementById('selectText3');
-  let split_chars; //よくわからないけどいるみたい
+  let split_chars;
 
   let input = "";
   let userChar = "";
@@ -71,7 +71,7 @@ window.addEventListener('load', function () {
     ],
     9: [
       "ありがとうございます。",
-      "分かりやすい説明でした",
+      "分かりやすい説明でした<skip 20>",
     ],
     10: [
       "図をもう一度書いてみてください",
@@ -81,6 +81,14 @@ window.addEventListener('load', function () {
     ],
     12: [
       "もう一度どのように求めたか説明してみましょう",
+    ],
+
+    //間に何個か入れよう
+    20: [
+      "次にAさんどのような式を立てたか教えてください",
+      "4+3(n-1)",
+      "",
+      ""
     ],
 
     //経由用
