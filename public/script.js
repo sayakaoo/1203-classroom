@@ -71,7 +71,7 @@ window.addEventListener('load', function () {
     ],
     9: [
       "ありがとうございます。",
-      "分かりやすい説明でした<skip 20>",
+      "分かりやすい説明でした<skip 8>",
     ],
     10: [
       "図をもう一度書いてみてください",
@@ -698,7 +698,7 @@ window.addEventListener('load', function () {
 
     if (userAnswer === '1+3n') {
       //さきにAさんのパターン
-      input = "<skip 20>";
+      input = "<skip 8>";
       //最初にユーザーの発表なら8に進む
       //input = "<skip 8>";
       split_chars = splitStr(input);
