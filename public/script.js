@@ -566,7 +566,9 @@ window.addEventListener('load', function () {
     }
 
     main();
+    mess_box.click();
   });
+  
 
   // 音声入力の処理
   // 音声入力の処理を共通関数で管理
