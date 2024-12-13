@@ -28,7 +28,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<fadeIn_chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<fadeIn_chara 5 1><showCanvas>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -61,7 +61,7 @@ window.addEventListener('load', function () {
 
     ],
     7: [
-      "<fadeIn_chara 5 1><fadeIn_chara 3 5>立てた式を1つおしえてね<Q4form>",
+      "<fadeOut_chara 5 1><fadeIn_chara 3 5>立てた式を1つおしえてね<Q4form>",
       ""
     ],
     //今は8~12は使っていない
@@ -86,11 +86,20 @@ window.addEventListener('load', function () {
 
     //間に何個か入れよう
     20: [
-      "<fadeOut_chara 3 5>ではAさんどのような式を立てたか教えてください",
+      "<fadeOut_chara 3 5><fadeIn_chara 5 1>ではAさんどのような式を立てたか教えてください",
       "4+3(n-1)という式をたてました。",
-      "どのような図を書きましたか？",
-      "このような図をかきました。<item 4>"
+      "ありがとうございます。",
+      "これはどのような図に表せるでしょうか？<showCanvas>"
     ],
+    21: [
+      "",
+      "",
+      "",
+      ""
+    ],
+
+
+
 
     //経由用
     100: [
@@ -735,11 +744,6 @@ window.addEventListener('load', function () {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-
-
-
-
 
 
 })
