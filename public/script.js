@@ -612,7 +612,7 @@ window.addEventListener('load', function () {
       return;
     }
   
-    if (highestPrediction.className === "Class2") {
+    if (highestPrediction.className === "Class 2") {
       console.log("class2が検出されました。特定の処理を実行します。");
       input = "<skip 21>";
               split_chars = splitStr(input);
