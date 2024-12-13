@@ -89,7 +89,7 @@ window.addEventListener('load', function () {
       "<fadeOut_chara 3 5><fadeIn_chara 5 1>ではAさんどのような式を立てたか教えてください",
       "4+3(n-1)という式をたてました。",
       "ありがとうございます。",
-      "これはどのような図に表せるでしょうか？<showCanvas>"
+      "これはどのような図に表せるでしょうか？<showCanvas1>"
     ],
     21: [
       "21",
@@ -503,6 +503,23 @@ window.addEventListener('load', function () {
     }
   }
 
+  // 画像を予測<showCanvas1>用
+  async function predictImage(imageElement) {
+    if (!model) {
+      console.error("モデルがロードされていません");
+      return;
+    }
+
+    try {
+      const predictions = await model.predict(imageElement);
+      highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
+      console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
+      handlePrediction();
+    } catch (error) {
+      console.error("予測中にエラーが発生しました: ", error);
+    }
+  }
+ 
 
   // '保存'ボタンがクリックされたときに予測を実行
   document.getElementById("save-button").addEventListener("click", predictCanvas);
@@ -775,7 +792,7 @@ window.addEventListener('load', function () {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  runPrediction(imageElement);
+  
 
 
 })
