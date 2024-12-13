@@ -407,7 +407,7 @@ window.addEventListener('load', function () {
 //Voiceboxで実行用
   async function generateVoice(text) {
     const speakerId = 1; // 使用する話者ID (例えば1は「四国めたん（ノーマル）」)
-    const baseUrl = 'http://localhost:50021';
+    const baseUrl = 'https://xxxxxx.ngrok.io';  // ngrokのURLに変更
 
     try {
         // テキストをクエリに変換
