@@ -43,7 +43,7 @@ window.addEventListener('load', function () {
     3: [
       "<fadeOut_item 1>では正方形の数を増やしてみましょう",
       "正方形が50個、100個のとき、マッチ棒はそれぞれ何本必要でしょうか？<fadeOut_chara 5 1>",
-      "描くのにも時間かかっちゃうよ、、",//誰かに言わせる
+      "<fadeIn_chara 5 2>描くのにも時間かかっちゃうよ、、",//誰かに言わせる
       "正方形の数が多い時数えるのは大変ですね",
       "どのようにしたら考えられるでしょうか<Q2form>",
     ],
@@ -64,6 +64,7 @@ window.addEventListener('load', function () {
       "考えられましたか？では、(学習者)さん立てた式をおしえてください。<Q4form>",
       ""
     ],
+    //今は8~12は使っていない
     8: [
       "(1+3n)ありがとうございます。",
       "(学習者)さんどのように求めたか説明してください。<showCanvas><apiform1>",
@@ -698,7 +699,7 @@ window.addEventListener('load', function () {
 
     if (userAnswer === '1+3n') {
       //さきにAさんのパターン
-      input = "<skip 8>";
+      input = "<skip 20>";
       //最初にユーザーの発表なら8に進む
       //input = "<skip 8>";
       split_chars = splitStr(input);
