@@ -850,10 +850,12 @@ window.addEventListener('load', function () {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
     const userAnswer1 = document.querySelector('#userAnswer71').value; // ユーザーの回答を取得
+    console.log(userAnswer1);
     const userAnswer2 = document.querySelector('#userAnswer72').value;
     $('.formQ7').removeClass('visible');
-
-    if (userAnswer1 === '赤で囲んだ部分' || '1番左にある1本のマッチ棒' && userAnswer2 === '3本のマッチ棒でできる青で囲ったコの字型の部分' || '3本のマッチ棒からなる形') {
+    console.log(userAnswer2);
+    if ((userAnswer1 === '赤で囲んだ部分' || userAnswer1 === '1番左にある1本のマッチ棒') &&
+    (userAnswer2 === '3本のマッチ棒でできる青で囲ったコの字型の部分' || userAnswer2 === '3本のマッチ棒からなる形')){
       input = "<skip 23>";
       split_chars = splitStr(input);
       console.log(split_chars);
