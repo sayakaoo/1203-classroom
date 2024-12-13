@@ -96,7 +96,13 @@ window.addEventListener('load', function () {
       "ではAさんどのように考えたか教えてください。",
       "<item 5>図のように考えました．",
       "赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分が(n-1)個だけあるから4+3(n-1)という式になりました",
-      "ありがとうございます。では次に(学習者)さんどのように考えたか式を教えてください。",
+      "ありがとうございます。では次に(学習者)さんどのように考えたか式を教えてください。<Q5form>",
+    ],
+    22: [
+      "",
+      "",
+      "",
+      ""
     ],
 
 
@@ -160,6 +166,10 @@ window.addEventListener('load', function () {
           break;
         case 'Q4form':
           $('.formQ4').addClass('visible');
+          console.log('フォーム表示');
+          break;
+        case 'Q5form':
+          $('.formQ5').addClass('visible');
           console.log('フォーム表示');
           break;
         case 'showCanvas':
@@ -600,7 +610,6 @@ window.addEventListener('load', function () {
       console.error('エラー:', error);
       document.getElementById('response').textContent = 'サーバーエラーが発生しました';
     }
-
     main();
     mess_box.click();
   });
@@ -625,12 +634,6 @@ window.addEventListener('load', function () {
     main();
     mess_box.click();
   }
-
-  async function runPrediction(imageElement) {
-    await predictImage(imageElement); // predictImageはそのまま利用
-    handlePrediction(); // 結果をhandlePredictionに渡す
-  }
-
 
   // 音声入力の処理
   // 音声入力の処理を共通関数で管理
@@ -773,6 +776,27 @@ window.addEventListener('load', function () {
     document.querySelector('#userAnswer').value = '';
   });
 
+  //Q5の回答の分岐
+  document.querySelector('#Q5form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const userAnswer = document.querySelector('#userAnswer5').value; // ユーザーの回答を取得
+    $('.formQ5').removeClass('visible');
+
+    if (userAnswer === '1+3n') {
+      //さきにAさんのパターン
+      input = "<skip 22>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    } else {
+      input = "<skip 100>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    }
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+  });
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
   function splitStr(str) {
