@@ -253,8 +253,8 @@ body{
 /* 全体のフォームスタイル */
 form.form {
     position: absolute;
-    top: 768px;
-    left: 700px;
+    top: 778px;
+    left: 350px;
     width: 100%;
     max-width: 400px;
     margin: 20px auto;

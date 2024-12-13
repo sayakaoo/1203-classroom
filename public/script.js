@@ -379,6 +379,12 @@ window.addEventListener('load', function () {
 
         // window.speechSynthesis.speak(msg);
 
+        //Voiceboxで実行用
+        let textDate = text[scene_cnt];
+        var textRead = textDate[line_cnt];
+        textRead = textRead.replace(/<[^>]*>/g, ''); // コマンドを除去
+        generateVoice(textRead); // VOICEVOXで読み上げる
+
 
 
 
@@ -398,6 +404,47 @@ window.addEventListener('load', function () {
 
   }
   );
+//Voiceboxで実行用
+  async function generateVoice(text) {
+    const speakerId = 1; // 使用する話者ID (例えば1は「四国めたん（ノーマル）」)
+    const baseUrl = 'http://localhost:50021';
+
+    try {
+        // テキストをクエリに変換
+        const queryRes = await fetch(`${baseUrl}/audio_query?text=${encodeURIComponent(text)}&speaker=${speakerId}`, {
+            method: 'POST'
+        });
+
+        if (!queryRes.ok) {
+            throw new Error('Audio query failed');
+        }
+        const queryData = await queryRes.json();
+
+        // 音声合成リクエスト
+        const synthesisRes = await fetch(`${baseUrl}/synthesis?speaker=${speakerId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(queryData)
+        });
+
+        if (!synthesisRes.ok) {
+            throw new Error('Synthesis failed');
+        }
+        const audioBlob = await synthesisRes.blob();
+
+        // オーディオを再生
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audio = new Audio(audioUrl);
+        audio.play();
+
+        console.log('音声を再生中...');
+    } catch (error) {
+        console.error('エラー:', error);
+    }
+}
+
 
   function textClick() {
     $('#textbox').trigger('click');
@@ -855,7 +902,7 @@ window.addEventListener('load', function () {
     $('.formQ7').removeClass('visible');
     console.log(userAnswer2);
     if ((userAnswer1 === '赤で囲んだ部分' || userAnswer1 === '1番左にある1本のマッチ棒') &&
-    (userAnswer2 === '3本のマッチ棒でできる青で囲ったコの字型の部分' || userAnswer2 === '3本のマッチ棒からなる形')){
+      (userAnswer2 === '3本のマッチ棒でできる青で囲ったコの字型の部分' || userAnswer2 === '3本のマッチ棒からなる形')) {
       input = "<skip 23>";
       split_chars = splitStr(input);
       console.log(split_chars);
