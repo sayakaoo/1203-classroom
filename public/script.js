@@ -92,7 +92,7 @@ window.addEventListener('load', function () {
       "これはどのような図に表せるでしょうか？<showCanvas>"
     ],
     21: [
-      "",
+      "21",
       "",
       "",
       ""
@@ -588,6 +588,30 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
+  // canvasの画像判定後の分岐処理
+  function handlePrediction() {
+    if (!highestPrediction) {
+      console.log("予測結果が無効です");
+      return;
+    }
+  
+    if (highestPrediction.className === "class2") {
+      console.log("class2が検出されました。特定の処理を実行します。");
+      input = "<skip 21>";
+              split_chars = splitStr(input);
+    } else {
+      console.log("他のクラスが検出されました。");
+      // 他のクラスの時の処理をここに記述
+    }
+    main();
+    mess_box.click();
+  }
+  
+  // `predictImage` を呼び出して予測結果を取得
+  async function main(imageElement) {
+    await predictImage(imageElement); // predictImageはそのまま利用
+    handlePrediction(); // 結果をhandlePredictionに渡す
+  }
 
   // 音声入力の処理
   // 音声入力の処理を共通関数で管理
