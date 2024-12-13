@@ -99,7 +99,11 @@ window.addEventListener('load', function () {
       "ありがとうございます。では次に(学習者)さんどのように考えたか式を教えてください。<Q5form>",
     ],
     22: [
-      "",
+      "(1+3n)ありがとうございます。",
+      "(学習者)さんどのように求めたか説明してください。<showCanvas><Q6form>"
+    ],
+    23: [
+      "ありがとうございます。",
       "",
       "",
       ""
@@ -170,6 +174,10 @@ window.addEventListener('load', function () {
           break;
         case 'Q5form':
           $('.formQ5').addClass('visible');
+          console.log('フォーム表示');
+          break;
+        case 'Q6form':
+          $('.formQ6').addClass('visible');
           console.log('フォーム表示');
           break;
         case 'showCanvas':
@@ -497,21 +505,7 @@ window.addEventListener('load', function () {
     imageElement.onload = () => predictImage(imageElement);
   }
 
-  // 画像を予測
-  async function predictImage(imageElement) {
-    if (!model) {
-      console.error("モデルがロードされていません");
-      return;
-    }
 
-    try {
-      const predictions = await model.predict(imageElement);
-      highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
-      console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
-    } catch (error) {
-      console.error("予測中にエラーが発生しました: ", error);
-    }
-  }
 
   // 画像を予測<showCanvas1>用
   async function predictImage(imageElement) {
@@ -525,6 +519,22 @@ window.addEventListener('load', function () {
       highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
       console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
       handlePrediction();
+    } catch (error) {
+      console.error("予測中にエラーが発生しました: ", error);
+    }
+  }
+
+  // 画像を予測
+  async function predictImage(imageElement) {
+    if (!model) {
+      console.error("モデルがロードされていません");
+      return;
+    }
+
+    try {
+      const predictions = await model.predict(imageElement);
+      highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
+      console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
     } catch (error) {
       console.error("予測中にエラーが発生しました: ", error);
     }
@@ -797,6 +807,28 @@ window.addEventListener('load', function () {
     mess_box.click();
     document.querySelector('#userAnswer').value = '';
   });
+
+  //Q6の回答の分岐
+  document.querySelector('#Q6form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const userAnswer = document.querySelector('#userAnswer6').value; // ユーザーの回答を取得
+    $('.formQ6').removeClass('visible');
+
+    if (userAnswer === '赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になる' || userAnswer === '1番左にある1本のマッチ棒と、3本のマッチ棒からなるコの字型') {
+      input = "<skip 23>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    } else{
+      input = "<skip 24>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    }
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+  });
+
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
   function splitStr(str) {
