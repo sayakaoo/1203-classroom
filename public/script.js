@@ -607,11 +607,11 @@ window.addEventListener('load', function () {
     mess_box.click();
   }
   
-  // `predictImage` を呼び出して予測結果を取得
-  async function main(imageElement) {
+  async function runPrediction(imageElement) {
     await predictImage(imageElement); // predictImageはそのまま利用
     handlePrediction(); // 結果をhandlePredictionに渡す
   }
+  
 
   // 音声入力の処理
   // 音声入力の処理を共通関数で管理
@@ -774,6 +774,8 @@ window.addEventListener('load', function () {
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  runPrediction(imageElement);
 
 
 })
