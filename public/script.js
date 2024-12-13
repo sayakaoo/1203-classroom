@@ -21,6 +21,7 @@ window.addEventListener('load', function () {
   let input = "";
   let userChar = "";
   let highestPrediction = "";
+  const clearBtn = document.querySelector('#clear-button');
 
 
 
@@ -28,7 +29,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<fadeIn_chara 5 1><showCanvas1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<skip 20><fadeIn_chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -92,7 +93,7 @@ window.addEventListener('load', function () {
       "これはどのような図に表せるでしょうか？<showCanvas1>"
     ],
     21: [
-      "21",
+      "ではAさんどのように考えたか教えてください。",
       "",
       "",
       ""
@@ -377,7 +378,6 @@ window.addEventListener('load', function () {
   //キャンバス用の関数
   const canvas = document.querySelector('#drawing-area');
   const ctx = canvas.getContext('2d');
-  const clearBtn = document.querySelector('#clear-button');
   const colorPicker = document.querySelector('#color-picker'); // 色選択用
   const wrapper = document.querySelector('.wrapper');
 
@@ -519,7 +519,7 @@ window.addEventListener('load', function () {
       console.error("予測中にエラーが発生しました: ", error);
     }
   }
- 
+
 
   // '保存'ボタンがクリックされたときに予測を実行
   document.getElementById("save-button").addEventListener("click", predictCanvas);
@@ -611,24 +611,25 @@ window.addEventListener('load', function () {
       console.log("予測結果が無効です");
       return;
     }
-  
+
     if (highestPrediction.className === "Class 2") {
       console.log("class2が検出されました。特定の処理を実行します。");
       input = "<skip 21>";
-              split_chars = splitStr(input);
+      split_chars = splitStr(input);
     } else {
       console.log("他のクラスが検出されました。");
-      // 他のクラスの時の処理をここに記述
+      alert("もう一度キャンバスに書いてみてください。ヒント:4と3(n-1)はそれぞれ何を表しているでしょうか ");
+      clearBtn.click();
     }
     main();
     mess_box.click();
   }
-  
+
   async function runPrediction(imageElement) {
     await predictImage(imageElement); // predictImageはそのまま利用
     handlePrediction(); // 結果をhandlePredictionに渡す
   }
-  
+
 
   // 音声入力の処理
   // 音声入力の処理を共通関数で管理
@@ -792,7 +793,7 @@ window.addEventListener('load', function () {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  
+
 
 
 })
