@@ -103,7 +103,13 @@ window.addEventListener('load', function () {
       "(学習者)さんどのように求めたか説明してください。<showCanvas><Q6form>"
     ],
     23: [
-      "ありがとうございます。",
+      "<closeCanvas>ありがとうございます。",
+      "次にCさんどのように考えたか教えてください。",
+      "正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃっておかしい、、",
+      "そうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？・・・・"
+    ],
+    24: [
+      "もう一度考えてみましょう。1と3nはそれぞれ何を表していますか？<Q7form>",
       "",
       "",
       ""
@@ -180,10 +186,20 @@ window.addEventListener('load', function () {
           $('.formQ6').addClass('visible');
           console.log('フォーム表示');
           break;
+        case 'Q7form':
+          $('.formQ7').addClass('visible');
+          console.log('フォーム表示');
+          break;
         case 'showCanvas':
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
+          console.log('フォーム表示');
+          break;
+        case 'closeCanvas':
+          $('.showCanvasButton').removeClass('visible');
+          $('.wrapper').removeClass('visible');
+          $('.hint1').removeClass('visible');
           console.log('フォーム表示');
           break;
         case 'apiform1':
@@ -815,11 +831,33 @@ window.addEventListener('load', function () {
     const userAnswer = document.querySelector('#userAnswer6').value; // ユーザーの回答を取得
     $('.formQ6').removeClass('visible');
 
-    if (userAnswer === '赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になる' || userAnswer === '1番左にある1本のマッチ棒と、3本のマッチ棒からなるコの字型') {
+    if (userAnswer === '赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn個だけあるから1+3nという式になる' || userAnswer === '1番左にある1本のマッチ棒と、3本のマッチ棒からなるコの字型') {
       input = "<skip 23>";
       split_chars = splitStr(input);
       console.log(split_chars);
-    } else{
+    } else {
+      input = "<skip 24>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    }
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+  });
+
+  //Q7の回答の分岐
+  document.querySelector('#Q7form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const userAnswer1 = document.querySelector('#userAnswer71').value; // ユーザーの回答を取得
+    const userAnswer2 = document.querySelector('#userAnswer72').value;
+    $('.formQ7').removeClass('visible');
+
+    if (userAnswer1 === '赤で囲んだ部分' || '1番左にある1本のマッチ棒' && userAnswer2 === '3本のマッチ棒でできる青で囲ったコの字型の部分' || '3本のマッチ棒からなる形') {
+      input = "<skip 23>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    } else {
       input = "<skip 24>";
       split_chars = splitStr(input);
       console.log(split_chars);
