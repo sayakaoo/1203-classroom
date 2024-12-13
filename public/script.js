@@ -28,7 +28,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<fadeIn_chara 5 1><showCanvas>おはようございます。今日の授業を始めていきたいと思います。",
+      "<fadeIn_chara 5 1><showCanvas1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -170,6 +170,12 @@ window.addEventListener('load', function () {
         case 'apiform1':
           $('.formapi1').addClass('visible');
           $('.submit-button1').addClass('visible');
+          console.log('フォーム表示');
+          break;
+        case 'showCanvas1':
+          $('.showCanvasButton').addClass('visible');
+          $('.wrapper').addClass('visible');
+          $('.saveButton').addClass('visible');
           console.log('フォーム表示');
           break;
 
@@ -509,7 +515,7 @@ window.addEventListener('load', function () {
   form.addEventListener('submit', async (e) => {
 
     const apiUserAnswer = document.getElementById("apiUserAnswer").value; // 入力内容を取得
-        console.log("ユーザーの解答:", apiUserAnswer);
+    console.log("ユーザーの解答:", apiUserAnswer);
     console.log("chatgpt認識中");
     $('.answerform').removeClass('visible');
     e.preventDefault(); // 
@@ -581,7 +587,7 @@ window.addEventListener('load', function () {
     main();
     mess_box.click();
   });
-  
+
 
   // 音声入力の処理
   // 音声入力の処理を共通関数で管理
@@ -734,16 +740,16 @@ window.addEventListener('load', function () {
   function canvasButtonClick() {
     const saveButton = document.getElementById('save-button');
     if (saveButton) {
-        saveButton.click(); // ボタンのクリックイベントを発火
-        console.log("ボタンをクリックしました");
+      saveButton.click(); // ボタンのクリックイベントを発火
+      console.log("ボタンをクリックしました");
     } else {
-        console.log("ボタンが見つかりません");
+      console.log("ボタンが見つかりません");
     }
-}
-//読み込みのための遅延のための関数
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+  }
+  //読み込みのための遅延のための関数
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
 
 })
