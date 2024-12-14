@@ -589,6 +589,7 @@ window.addEventListener('load', function () {
     } catch (error) {
       console.error("予測中にエラーが発生しました: ", error);
     }
+    handlePrediction();
   }
 
 
