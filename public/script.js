@@ -29,7 +29,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<fadeIn_chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<fadeIn_chara 5 1>おはようございます。今日の授業を始めていきたいと思います。<skip 20>",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -90,7 +90,7 @@ window.addEventListener('load', function () {
       "<fadeOut_chara 3 5><fadeIn_chara 5 1>ではAさんどのような式を立てたか教えてください",
       "1+3nという式をたてました。",
       "ありがとうございます。",
-      "これはどのような図に表せるでしょうか？<showCanvas1>"
+      "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas1>"
     ],
     21: [
       "ではAさんどのように考えたか教えてください。",
@@ -410,11 +410,7 @@ window.addEventListener('load', function () {
 
         // window.speechSynthesis.speak(msg);
 
-        //Voiceboxで実行用
-        let textDate = text[scene_cnt];
-        var textRead = textDate[line_cnt];
-        textRead = textRead.replace(/<[^>]*>/g, ''); // コマンドを除去
-        generateVoice(textRead); // VOICEVOXで読み上げる
+       
 
 
 
@@ -435,46 +431,7 @@ window.addEventListener('load', function () {
 
   }
   );
-  //Voiceboxで実行用
-  async function generateVoice(text) {
-    const speakerId = 1; // 使用する話者ID (例えば1は「四国めたん（ノーマル）」)
-    const baseUrl = 'https://xxxxxx.ngrok.io';  // ngrokのURLに変更
-
-    try {
-      // テキストをクエリに変換
-      const queryRes = await fetch(`${baseUrl}/audio_query?text=${encodeURIComponent(text)}&speaker=${speakerId}`, {
-        method: 'POST'
-      });
-
-      if (!queryRes.ok) {
-        throw new Error('Audio query failed');
-      }
-      const queryData = await queryRes.json();
-
-      // 音声合成リクエスト
-      const synthesisRes = await fetch(`${baseUrl}/synthesis?speaker=${speakerId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(queryData)
-      });
-
-      if (!synthesisRes.ok) {
-        throw new Error('Synthesis failed');
-      }
-      const audioBlob = await synthesisRes.blob();
-
-      // オーディオを再生
-      const audioUrl = URL.createObjectURL(audioBlob);
-      const audio = new Audio(audioUrl);
-      audio.play();
-
-      console.log('音声を再生中...');
-    } catch (error) {
-      console.error('エラー:', error);
-    }
-  }
+  
 
 
   function textClick() {
