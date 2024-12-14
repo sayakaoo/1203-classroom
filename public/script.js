@@ -62,7 +62,7 @@ window.addEventListener('load', function () {
 
     ],
     7: [
-      "<fadeOut_chara 5 1><fadeIn_chara 3 5>立てた式を1つおしえてね<Q4form>",
+      "<fadeOut_chara 5 1><fadeIn_chara 3 5>立てた式を1つおしえてください<Q4form>",
       ""
     ],
     //今は8~12は使っていない
@@ -862,7 +862,7 @@ window.addEventListener('load', function () {
     const userAnswer = document.querySelector('#userAnswer4').value; // ユーザーの回答を取得
     $('.formQ4').removeClass('visible');
 
-    if (userAnswer === '1+3n') {
+    if (userAnswer === '4+3(n-1)') {
       //さきにAさんのパターン
       input = "<skip 20>";
       //最初にユーザーの発表なら8に進む
