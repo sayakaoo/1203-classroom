@@ -88,32 +88,55 @@ window.addEventListener('load', function () {
     //間に何個か入れよう
     20: [
       "<fadeOut_chara 3 5><fadeIn_chara 5 1>ではAさんどのような式を立てたか教えてください",
-      "4+3(n-1)という式をたてました。",
+      "1+3nという式をたてました。",
       "ありがとうございます。",
       "これはどのような図に表せるでしょうか？<showCanvas1>"
     ],
     21: [
       "ではAさんどのように考えたか教えてください。",
       "<item 5>図のように考えました．",
-      "赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分が(n-1)個だけあるから4+3(n-1)という式になりました",
+      "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
       "ありがとうございます。では次に(学習者)さんどのように考えたか式を教えてください。<Q5form>",
     ],
     22: [
-      "(1+3n)ありがとうございます。",
+      "(4+3(n-1))ありがとうございます。",
       "(学習者)さんどのように求めたか説明してください。<showCanvas><Q6form>"
     ],
     23: [
-      "<closeCanvas>ありがとうございます。赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn個だけあるので1+3nという式になりますね。",
+      "<closeCanvas>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。",
       "次にCさんどのように考えたか教えてください。",
       "正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃっておかしい、、",
       "そうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？・・・・"
     ],
     24: [
-      "もう一度考えてみましょう。1と3nはそれぞれ何を表していますか？<Q7form>",
+      "もう一度考えてみましょう。4と3(n-1)はそれぞれ何を表していますか？<Q7form>",
       "",
       "",
       ""
     ],
+    25: [
+      "(4+3n)ありがとうございます。",
+      "(学習者)さんどのように求めたか説明してください。<showCanvas><Q8form>",
+      "",
+      ""
+    ],
+    26: [
+      "ありがとうございます。",
+      "その式が正しいか確かめることはできますか？",
+      "どのような方法で確かめることが出来ますか？<Q9form>",
+      ""
+    ],
+    27: [
+      "そうですね、正方形が3個のときマッチ棒は10本だったからこれを当てはめてみましょう",
+      "どうでしたか？",
+      "(式は正しい，正しくないで分岐させ，何が違うのかを考える)"
+    ],
+    28: [
+      "最初に正方形が3個のときを考えたからそれを式に当てはめてみたらどうかな？<skip 28>",
+      "",
+      ""
+    ],
+
 
 
 
@@ -188,6 +211,14 @@ window.addEventListener('load', function () {
           break;
         case 'Q7form':
           $('.formQ7').addClass('visible');
+          console.log('フォーム表示');
+          break;
+        case 'Q8form':
+          $('.formQ8').addClass('visible');
+          console.log('フォーム表示');
+          break;
+        case 'Q9form':
+          $('.formQ9').addClass('visible');
           console.log('フォーム表示');
           break;
         case 'showCanvas':
@@ -404,46 +435,46 @@ window.addEventListener('load', function () {
 
   }
   );
-//Voiceboxで実行用
+  //Voiceboxで実行用
   async function generateVoice(text) {
     const speakerId = 1; // 使用する話者ID (例えば1は「四国めたん（ノーマル）」)
     const baseUrl = 'https://xxxxxx.ngrok.io';  // ngrokのURLに変更
 
     try {
-        // テキストをクエリに変換
-        const queryRes = await fetch(`${baseUrl}/audio_query?text=${encodeURIComponent(text)}&speaker=${speakerId}`, {
-            method: 'POST'
-        });
+      // テキストをクエリに変換
+      const queryRes = await fetch(`${baseUrl}/audio_query?text=${encodeURIComponent(text)}&speaker=${speakerId}`, {
+        method: 'POST'
+      });
 
-        if (!queryRes.ok) {
-            throw new Error('Audio query failed');
-        }
-        const queryData = await queryRes.json();
+      if (!queryRes.ok) {
+        throw new Error('Audio query failed');
+      }
+      const queryData = await queryRes.json();
 
-        // 音声合成リクエスト
-        const synthesisRes = await fetch(`${baseUrl}/synthesis?speaker=${speakerId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(queryData)
-        });
+      // 音声合成リクエスト
+      const synthesisRes = await fetch(`${baseUrl}/synthesis?speaker=${speakerId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(queryData)
+      });
 
-        if (!synthesisRes.ok) {
-            throw new Error('Synthesis failed');
-        }
-        const audioBlob = await synthesisRes.blob();
+      if (!synthesisRes.ok) {
+        throw new Error('Synthesis failed');
+      }
+      const audioBlob = await synthesisRes.blob();
 
-        // オーディオを再生
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const audio = new Audio(audioUrl);
-        audio.play();
+      // オーディオを再生
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      audio.play();
 
-        console.log('音声を再生中...');
+      console.log('音声を再生中...');
     } catch (error) {
-        console.error('エラー:', error);
+      console.error('エラー:', error);
     }
-}
+  }
 
 
   function textClick() {
@@ -856,13 +887,12 @@ window.addEventListener('load', function () {
     const userAnswer = document.querySelector('#userAnswer5').value; // ユーザーの回答を取得
     $('.formQ5').removeClass('visible');
 
-    if (userAnswer === '1+3n') {
-      //さきにAさんのパターン
+    if (userAnswer === '4+3(n-1)') {
       input = "<skip 22>";
       split_chars = splitStr(input);
       console.log(split_chars);
-    } else {
-      input = "<skip 100>";
+    } else if (userAnswer === '4+3n') {
+      input = "<skip 25>";
       split_chars = splitStr(input);
       console.log(split_chars);
     }
@@ -878,7 +908,7 @@ window.addEventListener('load', function () {
     const userAnswer = document.querySelector('#userAnswer6').value; // ユーザーの回答を取得
     $('.formQ6').removeClass('visible');
 
-    if (userAnswer === '赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn個だけあるから1+3nという式になる' || userAnswer === '1番左にある1本のマッチ棒と、3本のマッチ棒からなるコの字型') {
+    if (userAnswer === '赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるから4+3(n-1)という式になる' || userAnswer === '1番左にある4本のマッチ棒と、3本のマッチ棒からなるコの字型がn-1個だけあるから4+3(n-1)という式になる') {
       input = "<skip 23>";
       split_chars = splitStr(input);
       console.log(split_chars);
@@ -901,13 +931,55 @@ window.addEventListener('load', function () {
     const userAnswer2 = document.querySelector('#userAnswer72').value;
     $('.formQ7').removeClass('visible');
     console.log(userAnswer2);
-    if ((userAnswer1 === '赤で囲んだ部分' || userAnswer1 === '1番左にある1本のマッチ棒') &&
+    if ((userAnswer1 === '赤で囲んだ部分' || userAnswer1 === '1番左にある4本のマッチ棒') &&
       (userAnswer2 === '3本のマッチ棒でできる青で囲ったコの字型の部分' || userAnswer2 === '3本のマッチ棒からなる形')) {
       input = "<skip 23>";
       split_chars = splitStr(input);
       console.log(split_chars);
     } else {
       input = "<skip 24>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    }
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+  });
+
+  //Q8の回答の分岐
+  document.querySelector('#Q8form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const userAnswer = document.querySelector('#userAnswer8').value; // ユーザーの回答を取得
+    $('.formQ8').removeClass('visible');
+
+    if (userAnswer === '赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分が正方形の数だけあるから4+3nという式になる' || userAnswer === '1番左にある4本のマッチ棒と、3本のマッチ棒からなるコの字型がn個だけあるから4+3nという式になる') {
+      input = "<skip 26>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    } else {
+      input = "<skip 100>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    }
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+  });
+
+  //Q9の回答の分岐
+  document.querySelector('#Q9form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const userAnswer = document.querySelector('#userAnswer9').value; // ユーザーの回答を取得
+    $('.formQ9').removeClass('visible');
+
+    if (userAnswer === '正方形が3個のときマッチ棒は10本だったからこれを代入する' || userAnswer === '最初に考えた正方形が3個の時を考えてみる') {
+      input = "<skip 27>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    } else {
+      input = "<skip 28>";
       split_chars = splitStr(input);
       console.log(split_chars);
     }
