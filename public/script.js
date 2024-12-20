@@ -29,8 +29,8 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<fadeIn_chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
-      "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
+      "<chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。<charaOut 5 1>",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
     1: [
@@ -50,7 +50,7 @@ window.addEventListener('load', function () {
     ],
     4: [
       "文字を使ってみるのはいい方法ですね！",
-      "どの数を文字で表そうか。。<Q3form>",
+      "どの数を文字で表そうか。。<form 3>",
     ],
     5: [
       "文字を使ってみるとかどうかな？"
@@ -63,7 +63,7 @@ window.addEventListener('load', function () {
 
     ],
     7: [
-      "立てた式を1つおしえてください<Q4form>",
+      "立てた式を1つおしえてください<form 4>",
       ""
     ],
     //今は8~12は使っていない
@@ -97,11 +97,11 @@ window.addEventListener('load', function () {
       "ではAさんどのように考えたか教えてください。",
       "<item 5>図のように考えました．",
       "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
-      "  ありがとうございます。<closeCanvas>では次に(学習者)さんどのように考えたか式を教えてください。<Q5form>",
+      "  ありがとうございます。<closeCanvas>では次に(学習者)さんどのように考えたか式を教えてください。<form 5>",
     ],
     22: [
       "(4+3(n-1))ありがとうございます。",
-      "(学習者)さんどのように求めたか説明してください。<showCanvas><Q6form>"
+      "(学習者)さんどのように求めたか説明してください。<showCanvas><form 6>"
     ],
     23: [
       "<closeCanvas>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5>",
@@ -111,21 +111,21 @@ window.addEventListener('load', function () {
       "・・・<skip 21>"
     ],
     24: [
-      "もう一度考えてみましょう。4と3(n-1)はそれぞれ何を表していますか？<Q7form>",
+      "もう一度考えてみましょう。4と3(n-1)はそれぞれ何を表していますか？<form 7>",
       "",
       "",
       ""
     ],
     25: [
       "(4+3n)ありがとうございます。",
-      "(学習者)さんどのように求めたか説明してください。<showCanvas><Q8form>",
+      "(学習者)さんどのように求めたか説明してください。<showCanvas><form 8>",
       "",
       ""
     ],
     26: [
       "ありがとうございます。",
       "4+3nという式が正しいか確かめることはできますか？",
-      "どのような方法で確かめることが出来ますか？<Q9form>",
+      "どのような方法で確かめることが出来ますか？<form 9>",
       ""
     ],
     27: [
@@ -309,13 +309,13 @@ window.addEventListener('load', function () {
           $('.itembox').addClass('fadein');
           setTimeout(fadeIn_item_remove, 500);
           break;
-        case 'fadeOut_chara':
-          function fadeOut_chara_remove() {
+        case 'charaOut':
+          function chara_remove() {
             $('#charaposition' + tagget_str[1]).removeClass('fadeout');
             document.getElementById('chara' + tagget_str[1]).src = 'img/chara' + tagget_str[2] + '.png';
           }
           $('#charaposition' + tagget_str[1]).addClass('fadeout');
-          setTimeout(fadeOut_chara_remove, 500);
+          chara_remove();
           break;
         case 'fadeOut_bg':
           function fadeOut_bg_remove() {
