@@ -22,7 +22,7 @@ window.addEventListener('load', function () {
   let userChar = "";
   let highestPrediction = "";
   const clearBtn = document.querySelector('#clear-button');
-  
+
 
 
 
@@ -194,6 +194,8 @@ window.addEventListener('load', function () {
           console.log('フォーム表示: ' + targetClass); // 確認用のログ
           break;
         case 'showCanvas':
+          const canvassave= 'saveButton' + tagget_str[1]; // 動的にクラス名を作成
+          $('#' + canvassave).addClass('visible');    // 作成したクラス名を利用
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
@@ -285,7 +287,7 @@ window.addEventListener('load', function () {
           document.getElementById('item').src = 'img/item' + tagget_str[1] + '.png';
           break;
         case 'itemOut':
-          document.getElementById('item').src= '';
+          document.getElementById('item').src = '';
           break;
       }
     }
@@ -453,6 +455,8 @@ window.addEventListener('load', function () {
       console.error("モデルの読み込み中にエラーが発生しました: ", error);
     }
   }
+  let buttonId;
+
 
   // キャンバスの内容を予測
   async function predictCanvas() {
@@ -482,14 +486,13 @@ window.addEventListener('load', function () {
     } catch (error) {
       console.error("予測中にエラーが発生しました: ", error);
     }
-    if(canvasNum === 1){
+    if (buttonId = 1) {
+      console.log(buttonidが1です);
       handlePrediction();
-      console.log(キャンバス1);
-    }else{
-      console.log(キャンバス2);
+    } else {
+      console.log(buttonidが2です);
     }
   }
-  let canvasNum =tagget_str[1];
 
   // canvasの画像判定後の分岐処理
   //ここを分けて分岐を調整するのが妥当
@@ -513,7 +516,12 @@ window.addEventListener('load', function () {
     mess_box.click();
   }
   // '保存'ボタンがクリックされたときに予測を実行
-  document.getElementById("save-button").addEventListener("click", predictCanvas);
+  //保存ボタンのidを取得
+  this.document.querySelector("saveButton").addEventListener("click", function (event) {
+    buttonId = event.target.id; // ボタンのIDを取得
+    console.log("クリックされたボタンのIDは: " + buttonId);
+    predictCanvas();
+  });
 
   // 初期化
   loadModel();
