@@ -30,7 +30,7 @@ window.addEventListener('load', function () {
     0: [
       "",
       "<chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
-      "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。<charaOut 5 1>",
+      "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。<charaOut 5>",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
     1: [
@@ -310,13 +310,8 @@ window.addEventListener('load', function () {
           setTimeout(fadeIn_item_remove, 500);
           break;
         case 'charaOut':
-          function chara_remove() {
-            $('#charaposition' + tagget_str[1]).removeClass('fadeout');
-            document.getElementById('chara' + tagget_str[1]).src = 'img/chara' + tagget_str[2] + '.png';
-          }
-          $('#charaposition' + tagget_str[1]).addClass('fadeout');
-          chara_remove();
-          break;
+          document.getElementById('chara' + tagget_str[1]).src = '';
+    break;
         case 'fadeOut_bg':
           function fadeOut_bg_remove() {
             $('#bgimg').removeClass('fadeout');
