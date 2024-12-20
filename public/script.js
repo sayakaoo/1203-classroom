@@ -22,7 +22,7 @@ window.addEventListener('load', function () {
   let userChar = "";
   let highestPrediction = "";
   const clearBtn = document.querySelector('#clear-button');
-  let canvasNum =tagget_str[1];
+  
 
 
 
@@ -489,6 +489,7 @@ window.addEventListener('load', function () {
       console.log(キャンバス2);
     }
   }
+  let canvasNum =tagget_str[1];
 
   // canvasの画像判定後の分岐処理
   //ここを分けて分岐を調整するのが妥当
