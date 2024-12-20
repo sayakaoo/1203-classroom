@@ -517,7 +517,7 @@ window.addEventListener('load', function () {
   }
   // '保存'ボタンがクリックされたときに予測を実行
   //保存ボタンのidを取得
-  document.querySelector("saveButton").addEventListener("click", function (event) {
+  document.querySelector(".saveButton").addEventListener("click", function (event) {
     buttonId = event.target.id; // ボタンのIDを取得
     console.log("クリックされたボタンのIDは: " + buttonId);
     predictCanvas();
