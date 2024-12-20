@@ -29,9 +29,9 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 21><fadeIn_chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<fadeIn_chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
-      "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
+      "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
     1: [
       "そうですね、数えてみると10本ですね",
@@ -39,7 +39,7 @@ window.addEventListener('load', function () {
     ],
     2: [
       "本当ですか？数えてみましょう",
-      "<Q1form>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
+      "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
     3: [
       "<fadeOut_item 1>では正方形の数を増やしてみましょう",
@@ -187,41 +187,10 @@ window.addEventListener('load', function () {
         case 'saveButtonremove':
           $('.saveButton').removeClass('Buttonshow');
           break;
-        case 'Q1form':
-          $('.formQ1').addClass('visible');
-          console.log('フォーム表示');
-          break;
-        case 'Q2form':
-          $('.formQ2').addClass('visible');
-          console.log('フォーム表示');
-          break;
-        case 'Q3form':
-          $('.formQ3').addClass('visible');
-          console.log('フォーム表示');
-          break;
-        case 'Q4form':
-          $('.formQ4').addClass('visible');
-          console.log('フォーム表示');
-          break;
-        case 'Q5form':
-          $('.formQ5').addClass('visible');
-          console.log('フォーム表示');
-          break;
-        case 'Q6form':
-          $('.formQ6').addClass('visible');
-          console.log('フォーム表示');
-          break;
-        case 'Q7form':
-          $('.formQ7').addClass('visible');
-          console.log('フォーム表示');
-          break;
-        case 'Q8form':
-          $('.formQ8').addClass('visible');
-          console.log('フォーム表示');
-          break;
-        case 'Q9form':
-          $('.formQ9').addClass('visible');
-          console.log('フォーム表示');
+        case 'form':
+          const targetClass = 'formQ' + tagget_str[1]; // 動的にクラス名を作成
+          $('.' + targetClass).addClass('visible');    // 作成したクラス名を利用
+          console.log('フォーム表示: ' + targetClass); // 確認用のログ
           break;
         case 'showCanvas':
           $('.showCanvasButton').addClass('visible');
@@ -412,7 +381,7 @@ window.addEventListener('load', function () {
 
         // window.speechSynthesis.speak(msg);
 
-       
+
 
 
 
@@ -433,7 +402,7 @@ window.addEventListener('load', function () {
 
   }
   );
-  
+
 
 
   function textClick() {
