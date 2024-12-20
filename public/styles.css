@@ -125,7 +125,9 @@ body{
 #text{
     color: #000;
     font-size: 1.8rem;
-    font-family: serif;
+    font-family: "DotGothic16", sans-serif; /* ドット文字フォントを指定 */
+    line-height: 1.2; /* ドット文字らしい行間を調整 */
+
 }
 .selectBox{
     position: absolute;
