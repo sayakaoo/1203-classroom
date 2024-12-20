@@ -22,6 +22,7 @@ window.addEventListener('load', function () {
   let userChar = "";
   let highestPrediction = "";
   const clearBtn = document.querySelector('#clear-button');
+  let canvasNum =tagget_str[1];
 
 
 
@@ -29,7 +30,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<chara 5 1><showCanvas 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。<charaOut 5>",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -42,11 +43,11 @@ window.addEventListener('load', function () {
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
     3: [
-      "<fadeOut_item 1>では正方形の数を増やしてみましょう",
-      "正方形が50個、100個のとき、マッチ棒はそれぞれ何本必要でしょうか？<fadeOut_chara 5 1>",
-      "<fadeIn_chara 5 2>描くのにも時間かかっちゃうよ、、<fadeOut_chara 5 2>",
-      "<fadeIn_chara 5 1>正方形の数が多い時数えるのは大変ですね",
-      "どのようにしたら考えられるでしょうか<Q2form>",
+      "<itemOut 1>では正方形の数を増やしてみましょう",
+      "正方形が50個、100個のとき、マッチ棒はそれぞれ何本必要でしょうか？<charaOut 5>",
+      "<chara 5 2>描くのにも時間かかっちゃうよ、、<charaOut 5>",
+      "chara 5 1>正方形の数が多い時数えるのは大変ですね",
+      "どのようにしたら考えられるでしょうか<form 2>",
     ],
     4: [
       "文字を使ってみるのはいい方法ですね！",
@@ -91,7 +92,7 @@ window.addEventListener('load', function () {
       "ではAさんどのような式を立てたか教えてください",
       "1+3nという式をたてました。",
       "ありがとうございます。",
-      "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas1>"
+      "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas>"
     ],
     21: [
       "ではAさんどのように考えたか教えてください。",
@@ -196,7 +197,6 @@ window.addEventListener('load', function () {
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
-          console.log('フォーム表示');
           break;
         case 'closeCanvas':
           $('.showCanvasButton').removeClass('visible');
@@ -209,12 +209,7 @@ window.addEventListener('load', function () {
           $('.submit-button1').addClass('visible');
           console.log('フォーム表示');
           break;
-        case 'showCanvas1':
-          $('.showCanvasButton').addClass('visible');
-          $('.wrapper').addClass('visible');
-          $('.saveButton').addClass('visible');
-          console.log('フォーム表示');
-          break;
+
 
         case 'selectBox':
           $('.selectBox').addClass('show');
@@ -283,64 +278,14 @@ window.addEventListener('load', function () {
         case 'chara':
           document.getElementById('chara' + tagget_str[1]).src = 'img/chara' + tagget_str[2] + '.png';
           break;
+        case 'charaOut':
+          document.getElementById('chara' + tagget_str[1]).src = '';
+          break;
         case 'item':
           document.getElementById('item').src = 'img/item' + tagget_str[1] + '.png';
           break;
-
-        case 'fadeIn_chara':
-          function fadeIn_chara_remove() {
-            $('#charaposition' + tagget_str[1]).removeClass('fadein');
-          }
-          $('#charaposition' + tagget_str[1]).addClass('fadein');
-          document.getElementById('chara' + tagget_str[1]).src = 'img/chara' + tagget_str[2] + '.png';
-          setTimeout(fadeIn_chara_remove, 500);
-          break;
-        case 'fadeIn_bg':
-          function fadeIn_bg_remove() {
-            $('#bgimg').removeClass('fadein');
-          }
-          $('#bgimg').addClass('fadein');
-          setTimeout(fadeIn_bg_remove, 500);
-          break;
-        case 'fadeIn_item':
-          function fadeIn_item_remove() {
-            $('.itembox').removeClass('fadein');
-          }
-          $('.itembox').addClass('fadein');
-          setTimeout(fadeIn_item_remove, 500);
-          break;
-        case 'charaOut':
-          document.getElementById('chara' + tagget_str[1]).src = '';
-    break;
-        case 'fadeOut_bg':
-          function fadeOut_bg_remove() {
-            $('#bgimg').removeClass('fadeout');
-            document.getElementById('bgimg').src = 'img/bg' + tagget_str[1] + '.jpg';
-          }
-          $('#bgimg').addClass('fadeout');
-          setTimeout(fadeOut_bg_remove, 500);
-          break;
-        case 'fadeOut_item':
-          function fadeOut_item_remove() {
-            $('.itembox').removeClass('fadeout');
-            document.getElementById('item').src = 'img/item0.png';
-          }
-          $('.itembox').addClass('fadeout');
-          setTimeout(fadeOut_item_remove, 500);
-          break;
-        case 'fadeOutIn_bg':
-          function fadeOutIn_bg_change() {
-            document.getElementById('bgimg').src = 'img/bg' + tagget_str[1] + '.jpg';
-          }
-          function fadeOutIn_bg_remove() {
-            $('#bgimg').removeClass('fadeoutin');
-            $('#textbox').removeClass('none');
-            $('#textbox').trigger('click');
-          }
-          $('#bgimg').addClass('fadeoutin');
-          $('#textbox').addClass('none');
-          setTimeout(fadeOutIn_bg_change, 1500);
-          setTimeout(fadeOutIn_bg_remove, 3000);
+        case 'itemOut':
+          document.getElementById('item').src= '';
           break;
       }
     }
@@ -523,24 +468,6 @@ window.addEventListener('load', function () {
   }
 
 
-
-  // 画像を予測<showCanvas1>用
-  async function predictImage(imageElement) {
-    if (!model) {
-      console.error("モデルがロードされていません");
-      return;
-    }
-
-    try {
-      const predictions = await model.predict(imageElement);
-      highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
-      console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
-      handlePrediction();
-    } catch (error) {
-      console.error("予測中にエラーが発生しました: ", error);
-    }
-  }
-
   // 画像を予測
   async function predictImage(imageElement) {
     if (!model) {
@@ -555,10 +482,35 @@ window.addEventListener('load', function () {
     } catch (error) {
       console.error("予測中にエラーが発生しました: ", error);
     }
-    handlePrediction();
+    if(canvasNum === 1){
+      handlePrediction();
+      console.log(キャンバス1);
+    }else{
+      console.log(キャンバス2);
+    }
   }
 
+  // canvasの画像判定後の分岐処理
+  //ここを分けて分岐を調整するのが妥当
+  function handlePrediction() {
+    if (!highestPrediction) {
+      console.log("予測結果が無効です");
+      return;
+    }
 
+    if (highestPrediction.className === "Class 2") {
+      console.log("class2が検出されました。特定の処理を実行します。");
+      input = "<skip 21>";
+      split_chars = splitStr(input);
+    } else {
+      console.log("他のクラスが検出されました。");
+      alert("もう一度キャンバスに書いてみてください。ヒント:4と3(n-1)はそれぞれ何を表しているでしょうか ");
+      clearBtn.click();
+      // 二回目のミスでは絶対次に行くようなのにしたい
+    }
+    main();
+    mess_box.click();
+  }
   // '保存'ボタンがクリックされたときに予測を実行
   document.getElementById("save-button").addEventListener("click", predictCanvas);
 
@@ -642,26 +594,6 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
-  // canvasの画像判定後の分岐処理
-  function handlePrediction() {
-    if (!highestPrediction) {
-      console.log("予測結果が無効です");
-      return;
-    }
-
-    if (highestPrediction.className === "Class 2") {
-      console.log("class2が検出されました。特定の処理を実行します。");
-      input = "<skip 21>";
-      split_chars = splitStr(input);
-    } else {
-      console.log("他のクラスが検出されました。");
-      alert("もう一度キャンバスに書いてみてください。ヒント:4と3(n-1)はそれぞれ何を表しているでしょうか ");
-      clearBtn.click();
-      // 二回目のミスでは絶対次に行くようなのにしたい
-    }
-    main();
-    mess_box.click();
-  }
 
   // 音声入力の処理
   // 音声入力の処理を共通関数で管理
