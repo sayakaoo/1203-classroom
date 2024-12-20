@@ -486,12 +486,8 @@ window.addEventListener('load', function () {
     } catch (error) {
       console.error("予測中にエラーが発生しました: ", error);
     }
-    if (buttonId = 1) {
-      console.log(buttonidが1です);
       handlePrediction();
-    } else {
-      console.log(buttonidが2です);
-    }
+    
   }
 
   // canvasの画像判定後の分岐処理
