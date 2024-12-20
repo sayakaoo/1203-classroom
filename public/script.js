@@ -194,7 +194,7 @@ window.addEventListener('load', function () {
           console.log('フォーム表示: ' + targetClass); // 確認用のログ
           break;
         case 'showCanvas':
-          const canvassave= 'saveButton' + tagget_str[1]; // 動的にクラス名を作成
+          const canvassave = 'saveButton' + tagget_str[1]; // 動的にクラス名を作成
           $('#' + canvassave).addClass('visible');    // 作成したクラス名を利用
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
@@ -501,17 +501,20 @@ window.addEventListener('load', function () {
       console.log("予測結果が無効です");
       return;
     }
-
-    if (highestPrediction.className === "Class 2") {
-      console.log("class2が検出されました。特定の処理を実行します。");
-      input = "<skip 21>";
-      split_chars = splitStr(input);
-    } else {
-      console.log("他のクラスが検出されました。");
-      alert("もう一度キャンバスに書いてみてください。ヒント:4と3(n-1)はそれぞれ何を表しているでしょうか ");
-      clearBtn.click();
-      // 二回目のミスでは絶対次に行くようなのにしたい
+    //buttonIdが何かによっていったんif
+    if (buttonId == "saveButton1") {
+      if (highestPrediction.className === "saveButton1") {
+        console.log("class2が検出されました。特定の処理を実行します。");
+        input = "<skip 21>";
+        split_chars = splitStr(input);
+      } else {
+        console.log("他のクラスが検出されました。");
+        alert("もう一度キャンバスに書いてみてください。ヒント:4と3(n-1)はそれぞれ何を表しているでしょうか ");
+        clearBtn.click();
+        // 二回目のミスでは絶対次に行くようなのにしたい
+      }
     }
+
     main();
     mess_box.click();
   }
