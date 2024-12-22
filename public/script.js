@@ -31,7 +31,7 @@ window.addEventListener('load', function () {
     0: [
       "",
       "<chara 5 1><showCanvas 1>おはようございます。今日の授業を始めていきたいと思います。",
-      "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。<charaOut 5>",
+      "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
     1: [
@@ -46,7 +46,7 @@ window.addEventListener('load', function () {
       "<itemOut 1>では正方形の数を増やしてみましょう",
       "正方形が50個、100個のとき、マッチ棒はそれぞれ何本必要でしょうか？<charaOut 5>",
       "<chara 5 2>描くのにも時間かかっちゃうよ、、<charaOut 5>",
-      "chara 5 1>正方形の数が多い時数えるのは大変ですね",
+      "<chara 5 1>正方形の数が多い時数えるのは大変ですね",
       "どのようにしたら考えられるでしょうか<form 2>",
     ],
     4: [
@@ -54,7 +54,7 @@ window.addEventListener('load', function () {
       "どの数を文字で表そうか。。<form 3>",
     ],
     5: [
-      "文字を使ってみるとかどうかな？"
+      "文字を使ってみるとかどうかな？<skip 4>"
     ],
     6: [
       "そうですね、正方形の数をnを用いて表しましょう",
@@ -90,20 +90,23 @@ window.addEventListener('load', function () {
     //間に何個か入れよう
     20: [
       "ではAさんどのような式を立てたか教えてください",
-      "1+3nという式をたてました。",
-      "ありがとうございます。",
-      "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas>"
+      "<charaOut 5><chara 5 3>1+3nという式をたてました。",
+      "<charaOut 5><chara 5 1>ありがとうございます。",
+      "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas 1>"
     ],
     21: [
+      "みなさん考えられましたか？",
       "ではAさんどのように考えたか教えてください。",
-      "<item 5>図のように考えました．",
+      "<charaOut 5><chara 5 3><item 5>図のように考えました．",
       "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
-      "  ありがとうございます。<closeCanvas>では次に(学習者)さんどのように考えたか式を教えてください。<form 5>",
+      "<charaOut 5><chara 5 1>ありがとうございます。<closeCanvas>では次に(学習者)さんどのように考えたか式を教えてください。<form 5>",
     ],
+
+    //22編集中
     22: [
       "(4+3(n-1))ありがとうございます。",
-      "(学習者)さんどのように求めたか説明してください。<showCanvas><form 6>"
-    ],
+      "(学習者)さんどのように求めたか説明してください。<showCanvas 2><form 6>"
+    ], 
     23: [
       "<closeCanvas>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5>",
       "次にCさんどのように考えたか教えてください。",
@@ -112,10 +115,7 @@ window.addEventListener('load', function () {
       "・・・<skip 21>"
     ],
     24: [
-      "もう一度考えてみましょう。4と3(n-1)はそれぞれ何を表していますか？<form 7>",
-      "",
-      "",
-      ""
+      "もう一度考えてみましょう。4と3(n-1)はそれぞれ何を表していますか？<form 7>"
     ],
     25: [
       "(4+3n)ありがとうございます。",
@@ -499,17 +499,21 @@ window.addEventListener('load', function () {
     }
     //buttonIdが何かによっていったんif
     if (buttonId == "saveButton1") {
-      if (highestPrediction.className === "saveButton1") {
-        console.log("class2が検出されました。特定の処理を実行します。");
+      if (highestPrediction.className === "Class2") {
+        console.log("class2が検出されました。");
         input = "<skip 21>";
         split_chars = splitStr(input);
       } else {
         console.log("他のクラスが検出されました。");
-        alert("もう一度キャンバスに書いてみてください。ヒント:4と3(n-1)はそれぞれ何を表しているでしょうか ");
-        clearBtn.click();
-        // 二回目のミスでは絶対次に行くようなのにしたい
+        input = "<skip 21>";
+        split_chars = splitStr(input);
+        //ここは間違っていたことを記録して将来分岐する形にしたい
       }
+    }else{
+
     }
+
+  
 
     main();
     mess_box.click();
