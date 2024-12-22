@@ -11,6 +11,7 @@
   ],
   "routes": [
     { "src": "/api/evaluate", "dest": "api/evaluate.js" },
+    { "src": "/api/voicevox", "dest": "api/voicevox.js" },
     { "src": "/(.*)", "dest": "/public/$1" }
   ]
 }
