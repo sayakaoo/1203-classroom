@@ -16,7 +16,7 @@ body{
     margin: 10px auto;
     overflow: hidden;
     border: solid 5px #000;
-   background-color: #d2d7de;
+   background-color: #d9dee5;
 }
 #bgbimg{
     position: absolute;
@@ -24,7 +24,7 @@ body{
     height: auto;
     z-index: 1;
     object-fit: cover;
-    margin: 16px 10px;
+    margin: 0px;
     opacity: 0.8;
 }
 #bgcimg{
