@@ -325,7 +325,7 @@ window.addEventListener('load', function () {
         // window.speechSynthesis.speak(msg);
 
         // 非同期処理を呼び出す,voicebox
-        readTextWithVoicevox();
+        // readTextWithVoicevox();
 
         if (line_cnt >= text[scene_cnt].length) {
           line_cnt = 0;
