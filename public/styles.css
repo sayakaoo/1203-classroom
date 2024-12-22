@@ -16,6 +16,7 @@ body{
     margin: 10px auto;
     overflow: hidden;
     border: solid 5px #000;
+   background-color: #d2d7de;
 }
 #bgbimg{
     position: absolute;
