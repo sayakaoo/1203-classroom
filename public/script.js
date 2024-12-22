@@ -341,29 +341,30 @@ window.addEventListener('load', function () {
   }
   );
 
-  // VOICEVOXを使用してテキストを読み上げる関数
-  async function readTextWithVoicevox(text) {
-    try {
-      const response = await fetch('https://1203-classroom.vercel.app/api/voicevox', {
-        method: 'POST',  // POST メソッドに変更
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text: text }),
-      });
+  // // VOICEVOXを使用してテキストを読み上げる関数むずいできない
 
-      if (response.ok) {
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const audio = new Audio(audioUrl);
-        audio.play();
-      } else {
-        console.error('音声合成リクエストに失敗しました');
-      }
-    } catch (error) {
-      console.error('音声生成エラー:', error);
-    }
-  }
+  // async function readTextWithVoicevox(text) {
+  //   try {
+  //     const response = await fetch('https://1203-classroom.vercel.app/api/voicevox', {
+  //       method: 'POST',  // POST メソッドに変更
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ text: text }),
+  //     });
+
+  //     if (response.ok) {
+  //       const audioBlob = await response.blob();
+  //       const audioUrl = URL.createObjectURL(audioBlob);
+  //       const audio = new Audio(audioUrl);
+  //       audio.play();
+  //     } else {
+  //       console.error('音声合成リクエストに失敗しました');
+  //     }
+  //   } catch (error) {
+  //     console.error('音声生成エラー:', error);
+  //   }
+  // }
 
 
 
