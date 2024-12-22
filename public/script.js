@@ -308,27 +308,24 @@ window.addEventListener('load', function () {
       if (!stop_flg) {
         line_cnt++; //次の文に行く
 
-        //読み上げを行う関数
-        //WebSpeechApiにて実行してる
-        let textDate = text[scene_cnt];
-        var textRead = textDate[line_cnt];
-        // コマンドを除去する正規表現
-        textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
-        var msg = new SpeechSynthesisUtterance();
-let voices = window.speechSynthesis.getVoices();
-msg.voice = voices.find(voice => voice.name.includes('Google 日本語')); // 好みの音声を選択
+//         //読み上げを行う関数
+//         //WebSpeechApiにて実行してる
+//         let textDate = text[scene_cnt];
+//         var textRead = textDate[line_cnt];
+//         // コマンドを除去する正規表現
+//         textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
+//         var msg = new SpeechSynthesisUtterance();
+// let voices = window.speechSynthesis.getVoices();
+// msg.voice = voices.find(voice => voice.name.includes('Google 日本語')); // 好みの音声を選択
+// msg.text = textRead;
+// msg.lang = 'ja-JP';
+// msg.rate = 1.0; // 適度な速度
+// msg.pitch = 1.2; // 自然な声の高さ
 
-msg.text = textRead;
-msg.lang = 'ja-JP';
-msg.rate = 1.0; // 適度な速度
-msg.pitch = 1.2; // 自然な声の高さ
+// window.speechSynthesis.speak(msg);
 
-window.speechSynthesis.speak(msg);
-
-
-
-
-
+// 非同期処理を呼び出す,voicebox
+readTextWithVoicevox();
 
         if (line_cnt >= text[scene_cnt].length) {
           line_cnt = 0;
@@ -340,13 +337,29 @@ window.speechSynthesis.speak(msg);
       split_chars = text[scene_cnt][line_cnt].split('');
       mess_text.innerHTML = '';
       main();
-
-
     }
-
   }
   );
 
+// VOICEVOXを使用してテキストを読み上げる関数
+async function readTextWithVoicevox() {
+  try {
+      let textDate = text[scene_cnt];
+      let textRead = textDate[line_cnt];
+      textRead = textRead.replace(/<[^>]*>/g, ''); // コマンドを除去
+
+      // VercelのAPIエンドポイントを呼び出し
+      const response = await fetch(`/api/voicevox?text=${encodeURIComponent(textRead)}`);
+      if (!response.ok) throw new Error('VOICEVOX音声生成に失敗しました');
+
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      audio.play();
+  } catch (error) {
+      console.error('音声生成エラー:', error);
+  }
+}
 
 
   function textClick() {
