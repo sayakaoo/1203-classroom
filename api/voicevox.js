@@ -7,7 +7,7 @@ export default async function handler(req, res) {
       const voicevoxBaseUrl = process.env.VOICEVOX_URL || 'https://1094-2400-4051-f81-3e00-ed37-3ce8-5d80-bdea.ngrok-free.app/api/voicevox';
       
       // ngrok で公開された Voicevox サーバーの URL
-      const response = await fetch(`${voicevoxBaseUrl}`, {
+      const response = await fetch(voicevoxBaseUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 
       // Voicevox サーバーからのレスポンス確認
       if (!response.ok) {
-        throw new Error('Failed to fetch audio from Voicevox');
+        throw new Error(`Voicevox request failed with status: ${response.status}`);
       }
 
       // 音声データを取得
