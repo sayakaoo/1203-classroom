@@ -308,20 +308,22 @@ window.addEventListener('load', function () {
       if (!stop_flg) {
         line_cnt++; //次の文に行く
 
-        // //読み上げを行う関数
-        // //WebSpeechApiにて実行してる
-        // let textDate = text[scene_cnt];
-        // var textRead = textDate[line_cnt];
-        // // コマンドを除去する正規表現
-        // textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
-        // var msg = new SpeechSynthesisUtterance();
-        // console.log(textRead);
-        // msg.text = textRead;
-        // msg.lang = 'ja-JP';
-        // msg.rate = 3.0;//速度
-        // msg.pitch = 0.3;//声の高さ
+        //読み上げを行う関数
+        //WebSpeechApiにて実行してる
+        let textDate = text[scene_cnt];
+        var textRead = textDate[line_cnt];
+        // コマンドを除去する正規表現
+        textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
+        var msg = new SpeechSynthesisUtterance();
+let voices = window.speechSynthesis.getVoices();
+msg.voice = voices.find(voice => voice.name.includes('Google 日本語')); // 好みの音声を選択
 
-        // window.speechSynthesis.speak(msg);
+msg.text = textRead;
+msg.lang = 'ja-JP';
+msg.rate = 1.0; // 適度な速度
+msg.pitch = 1.2; // 自然な声の高さ
+
+window.speechSynthesis.speak(msg);
 
 
 
