@@ -106,7 +106,7 @@ window.addEventListener('load', function () {
     22: [
       "(4+3(n-1))ありがとうございます。",
       "(学習者)さんどのように求めたか説明してください。<showCanvas 2><form 6>"
-    ], 
+    ],
     23: [
       "<closeCanvas>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5>",
       "次にCさんどのように考えたか教えてください。",
@@ -308,24 +308,24 @@ window.addEventListener('load', function () {
       if (!stop_flg) {
         line_cnt++; //次の文に行く
 
-//         //読み上げを行う関数
-//         //WebSpeechApiにて実行してる
-//         let textDate = text[scene_cnt];
-//         var textRead = textDate[line_cnt];
-//         // コマンドを除去する正規表現
-//         textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
-//         var msg = new SpeechSynthesisUtterance();
-// let voices = window.speechSynthesis.getVoices();
-// msg.voice = voices.find(voice => voice.name.includes('Google 日本語')); // 好みの音声を選択
-// msg.text = textRead;
-// msg.lang = 'ja-JP';
-// msg.rate = 1.0; // 適度な速度
-// msg.pitch = 1.2; // 自然な声の高さ
+        //         //読み上げを行う関数
+        //         //WebSpeechApiにて実行してる
+        //         let textDate = text[scene_cnt];
+        //         var textRead = textDate[line_cnt];
+        //         // コマンドを除去する正規表現
+        //         textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
+        //         var msg = new SpeechSynthesisUtterance();
+        // let voices = window.speechSynthesis.getVoices();
+        // msg.voice = voices.find(voice => voice.name.includes('Google 日本語')); // 好みの音声を選択
+        // msg.text = textRead;
+        // msg.lang = 'ja-JP';
+        // msg.rate = 1.0; // 適度な速度
+        // msg.pitch = 1.2; // 自然な声の高さ
 
-// window.speechSynthesis.speak(msg);
+        // window.speechSynthesis.speak(msg);
 
-// 非同期処理を呼び出す,voicebox
-readTextWithVoicevox();
+        // 非同期処理を呼び出す,voicebox
+        readTextWithVoicevox();
 
         if (line_cnt >= text[scene_cnt].length) {
           line_cnt = 0;
@@ -341,25 +341,30 @@ readTextWithVoicevox();
   }
   );
 
-// VOICEVOXを使用してテキストを読み上げる関数
-async function readTextWithVoicevox() {
-  try {
-      let textDate = text[scene_cnt];
-      let textRead = textDate[line_cnt];
-      textRead = textRead.replace(/<[^>]*>/g, ''); // コマンドを除去
+  // VOICEVOXを使用してテキストを読み上げる関数
+  async function readTextWithVoicevox(text) {
+    try {
+      const response = await fetch('https://1203-classroom.vercel.app/api/voicevox', {
+        method: 'POST',  // POST メソッドに変更
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: text }),
+      });
 
-      // VercelのAPIエンドポイントを呼び出し
-      const response = await fetch(`/api/voicevox?text=${encodeURIComponent(textRead)}`);
-      if (!response.ok) throw new Error('VOICEVOX音声生成に失敗しました');
-
-      const audioBlob = await response.blob();
-      const audioUrl = URL.createObjectURL(audioBlob);
-      const audio = new Audio(audioUrl);
-      audio.play();
-  } catch (error) {
+      if (response.ok) {
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audio = new Audio(audioUrl);
+        audio.play();
+      } else {
+        console.error('音声合成リクエストに失敗しました');
+      }
+    } catch (error) {
       console.error('音声生成エラー:', error);
+    }
   }
-}
+
 
 
   function textClick() {
@@ -501,8 +506,8 @@ async function readTextWithVoicevox() {
     } catch (error) {
       console.error("予測中にエラーが発生しました: ", error);
     }
-      handlePrediction();
-    
+    handlePrediction();
+
   }
 
   // canvasの画像判定後の分岐処理
@@ -524,11 +529,11 @@ async function readTextWithVoicevox() {
         split_chars = splitStr(input);
         //ここは間違っていたことを記録して将来分岐する形にしたい
       }
-    }else{
+    } else {
 
     }
 
-  
+
 
     main();
     mess_box.click();
