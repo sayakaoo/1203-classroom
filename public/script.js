@@ -99,7 +99,7 @@ window.addEventListener('load', function () {
       "ではAさんどのように考えたか教えてください。",
       "<charaOut 5><chara 5 3><item 5>図のように考えました．",
       "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
-      "<charaOut 5><chara 5 1>ありがとうございます。<closeCanvas>では次に(学習者)さんどのように考えたか式を教えてください。<form 5>",
+      "<charaOut 5><itemOut 5><chara 5 1>ありがとうございます。<closeCanvas 1>では次に(学習者)さんどのように考えたか式を教えてください。<form 5>",
     ],
 
     //22編集中
@@ -108,7 +108,7 @@ window.addEventListener('load', function () {
       "(学習者)さんどのように求めたか説明してください。<showCanvas 2><form 6>"
     ],
     23: [
-      "<closeCanvas>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5>",
+      "<closeCanvas 2>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5>",
       "次にCさんどのように考えたか教えてください。",
       "正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。",
       "たしかにそうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？・・・・",
@@ -189,8 +189,8 @@ window.addEventListener('load', function () {
           $('.saveButton').removeClass('Buttonshow');
           break;
         case 'form':
-          const targetClass = 'formQ' + tagget_str[1]; // 動的にクラス名を作成
-          $('.' + targetClass).addClass('visible');    // 作成したクラス名を利用
+          const targetClass = 'formQ' + tagget_str[1]; 
+          $('.' + targetClass).addClass('visible'); 
           console.log('フォーム表示: ' + targetClass); // 確認用のログ
           break;
         case 'showCanvas':
@@ -201,6 +201,8 @@ window.addEventListener('load', function () {
           $('.hint1').addClass('visible');
           break;
         case 'closeCanvas':
+          const canvasclose= 'saveButton' + tagget_str[1]; // 動的にクラス名を作成
+          $('#' + canvasclose).removeClass('visible');    // 作成したクラス名を利用
           $('.showCanvasButton').removeClass('visible');
           $('.wrapper').removeClass('visible');
           $('.hint1').removeClass('visible');
@@ -341,7 +343,7 @@ window.addEventListener('load', function () {
   }
   );
 
-  // // VOICEVOXを使用してテキストを読み上げる関数むずいできない
+  // // VOICEVOXを使用してテキストを読み上げる関数むずいできない泣泣
 
   // async function readTextWithVoicevox(text) {
   //   try {
@@ -897,9 +899,5 @@ window.addEventListener('load', function () {
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-
-
-
-
 })
 
