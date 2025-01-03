@@ -570,7 +570,8 @@ window.addEventListener('load', function () {
       const response = await fetch('/api/evaluate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userAnswer, buttonId }),
+        body: JSON.stringify({ apiUserAnswer: userAnswer, buttonId }),
+
       });
       const textResponse = await response.text(); // レスポンスをテキストとして取得
       console.log(textResponse); // レスポンスの内容を表示
