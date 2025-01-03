@@ -189,8 +189,8 @@ window.addEventListener('load', function () {
           $('.saveButton').removeClass('Buttonshow');
           break;
         case 'form':
-          const targetClass = 'formQ' + tagget_str[1]; 
-          $('.' + targetClass).addClass('visible'); 
+          const targetClass = 'formQ' + tagget_str[1];
+          $('.' + targetClass).addClass('visible');
           console.log('フォーム表示: ' + targetClass); // 確認用のログ
           break;
         case 'showCanvas':
@@ -201,20 +201,27 @@ window.addEventListener('load', function () {
           $('.hint1').addClass('visible');
           break;
         case 'closeCanvas':
-          const canvasclose= 'saveButton' + tagget_str[1]; // 動的にクラス名を作成
+          const canvasclose = 'saveButton' + tagget_str[1]; // 動的にクラス名を作成
           $('#' + canvasclose).removeClass('visible');    // 作成したクラス名を利用
           $('.showCanvasButton').removeClass('visible');
           $('.wrapper').removeClass('visible');
           $('.hint1').removeClass('visible');
           console.log('フォーム表示');
           break;
-        case 'apiform1':
-          $('.formapi1').addClass('visible');
-          $('.submit-button1').addClass('visible');
+        case 'apiform':
+          const formapi = 'formapi' + tagget_str[1]; // 動的にクラス名を作成
+          $('.' + formapi).addClass('visible');
+          const button = 'submit-button' + tagget_str[1]; // 動的にクラス名を作成
+          $('.' + button).addClass('visible');
           console.log('フォーム表示');
           break;
-
-
+        case 'colseapiform':
+          const formapi1 = 'formapi' + tagget_str[1]; // 動的にクラス名を作成
+          $('.' + formapi1).removeClass('visible');
+          const button1 = 'submit-button' + tagget_str[1]; // 動的にクラス名を作成
+          $('.' + button1).removeClass('visible');
+          console.log('フォーム表示');
+          break;
         case 'selectBox':
           $('.selectBox').addClass('show');
           break;
@@ -886,22 +893,35 @@ window.addEventListener('load', function () {
     return str.split('');
   }
 
-  //キャンバス送信ボタンの関数
-  function canvasButtonClick() {
-    const saveButton = document.getElementById('save-button');
-    if (saveButton) {
-      saveButton.click(); // ボタンのクリックイベントを発火
-      console.log("ボタンをクリックしました");
-    } else {
-      console.log("ボタンが見つかりません");
-    }
+  // 共通部分を持つボタンにイベントリスナーを追加
+document.querySelectorAll('[class^="submit-button"]').forEach(button => {
+  button.addEventListener('click', (e) => {
+    e.preventDefault(); // デフォルトのフォーム送信を防止
+    canvasButtonClick(e.target); // 押されたボタンを引数に渡して関数を呼び出す
+  });
+});
+
+// canvasButtonClick関数
+function canvasButtonClick(clickedButton) {
+  const buttonValue = clickedButton.value; // 押されたボタンの値を取得
+  const saveButtonId = `saveButton${buttonValue.replace('button', '')}`; // 対応するIDを生成
+
+  const saveButton = document.getElementById(saveButtonId); // 対応するボタンを取得
+  if (saveButton) {
+    saveButton.click(); // ボタンのクリックイベントを発火
+    console.log(`ボタン ${saveButtonId} をクリックしました`);
+  } else {
+    console.log(`ボタン ${saveButtonId} が見つかりません`);
   }
+}
+
+
   //読み込みのための遅延のための関数
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  
+
 
 })
 
