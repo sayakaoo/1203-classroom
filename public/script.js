@@ -560,6 +560,7 @@ window.addEventListener('load', function () {
   loadModel();
 
   // chatgptapi解答送信の処理
+  //動きはいまいち理解していない
   const form = document.getElementById('answer-form');
   form.addEventListener('submit', async (e) => {
 
@@ -896,24 +897,43 @@ window.addEventListener('load', function () {
   // 共通部分を持つボタンにイベントリスナーを追加
 document.querySelectorAll('[class^="submit-button"]').forEach(button => {
   button.addEventListener('click', (e) => {
-    e.preventDefault(); // デフォルトのフォーム送信を防止
-    canvasButtonClick(e.target); // 押されたボタンを引数に渡して関数を呼び出す
+    const buttonValue = e.target.value; // 押されたボタンの値を取得
+    const saveButtonId = `saveButton${buttonValue.replace('button', '')}`; // 対応するIDを生成
+
+    const saveButton = document.getElementById(saveButtonId); // 対応するボタンを取得
+    if (saveButton) {
+      saveButton.click(); // ボタンのクリックイベントを発火
+      console.log(`ボタン ${saveButtonId} をクリックしました`);
+    } else {
+      console.log(`ボタン ${saveButtonId} が見つかりません`);
+    }
   });
 });
 
-// canvasButtonClick関数
-function canvasButtonClick(clickedButton) {
-  const buttonValue = clickedButton.value; // 押されたボタンの値を取得
-  const saveButtonId = `saveButton${buttonValue.replace('button', '')}`; // 対応するIDを生成
+// フォーム送信処理を継続するようにsubmitイベントは保持
+const form = document.getElementById('answer-form');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault(); // デフォルトのフォーム送信を防止
 
-  const saveButton = document.getElementById(saveButtonId); // 対応するボタンを取得
-  if (saveButton) {
-    saveButton.click(); // ボタンのクリックイベントを発火
-    console.log(`ボタン ${saveButtonId} をクリックしました`);
-  } else {
-    console.log(`ボタン ${saveButtonId} が見つかりません`);
+  const apiUserAnswer = document.getElementById("apiUserAnswer").value; // 入力内容を取得
+  console.log("ユーザーの解答:", apiUserAnswer);
+
+  const buttonId = document.querySelector('button[type="submit"]:focus').value; // フォーカスされたボタンのvalueを取得
+
+  try {
+    const response = await fetch('/api/evaluate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ apiUserAnswer, buttonId }),
+    });
+
+    const textResponse = await response.text();
+    console.log("判定結果:", textResponse);
+  } catch (error) {
+    console.error('エラー:', error);
   }
-}
+});
+
 
 
   //読み込みのための遅延のための関数
