@@ -911,8 +911,8 @@ document.querySelectorAll('[class^="submit-button"]').forEach(button => {
 });
 
 // フォーム送信処理を継続するようにsubmitイベントは保持
-const form = document.getElementById('answer-form');
-form.addEventListener('submit', async (e) => {
+const formapi = document.getElementById('answer-form');
+formapi.addEventListener('submit', async (e) => {
   e.preventDefault(); // デフォルトのフォーム送信を防止
 
   const apiUserAnswer = document.getElementById("apiUserAnswer").value; // 入力内容を取得
