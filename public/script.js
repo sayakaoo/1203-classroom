@@ -95,7 +95,7 @@ window.addEventListener('load', function () {
       "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas 0>"
     ],
     21: [
-      "みなさん考えられましたか？",
+      "<closeCanvas 0>みなさん考えられましたか？",
       "ではAさんどのように考えたか教えてください。",
       "<charaOut 5><chara 5 3><item 5>図のように考えました．",
       "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
@@ -527,22 +527,32 @@ window.addEventListener('load', function () {
       console.log("予測結果が無効です");
       return;
     }
-    //buttonIdが何かによっていったんif
-    if (buttonId == "saveButton1") {
-      if (highestPrediction.className === "Class2") {
-        console.log("class2が検出されました。");
-        input = "<skip 21>";
-        split_chars = splitStr(input);
-      } else {
-        console.log("他のクラスが検出されました。");
-        input = "<skip 21>";
-        split_chars = splitStr(input);
-        //ここは間違っていたことを記録して将来分岐する形にしたい
-      }
-    } else if(buttonId == "saveButton0"){
-      console.log("saveButton0が検出されました。");
+    //buttonIdが何かによってswitch
+    switch (buttonId) {
+      
+      case "saveButton0":
+        if (highestPrediction.className === "Class2") {
+          console.log("Class2が検出されました。");
+          input = "<skip 21>";
+          split_chars = splitStr(input);
+        } else {
+          console.log("他のクラスが検出されました。");
+          input = "<skip 21>";
+          split_chars = splitStr(input);
+          // ここに間違いを記録する処理を追加?
+          //とりあえず21に飛ばしちゃう
+        }
+        break;
+    
+      case "saveButton1":
+        
 
+      default:
+        console.log(`未知のボタンIDが検出されました: ${buttonId}`);
+        // 追加のデフォルト処理を実行
+        break;
     }
+    
 
 
 
