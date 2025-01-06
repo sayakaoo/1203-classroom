@@ -30,7 +30,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 22><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -92,7 +92,7 @@ window.addEventListener('load', function () {
       "ではAさんどのような式を立てたか教えてください",
       "<charaOut 5><chara 5 3>1+3nという式をたてました。",
       "<charaOut 5><chara 5 1>ありがとうございます。",
-      "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas 1>"
+      "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas 0>"
     ],
     21: [
       "みなさん考えられましたか？",
@@ -539,7 +539,8 @@ window.addEventListener('load', function () {
         split_chars = splitStr(input);
         //ここは間違っていたことを記録して将来分岐する形にしたい
       }
-    } else {
+    } else if(buttonId == "saveButton0"){
+      console.log("saveButton0が検出されました。");
 
     }
 
@@ -894,7 +895,7 @@ window.addEventListener('load', function () {
     return str.split('');
   }
 
-  // 共通部分を持つボタンにイベントリスナーを追加
+  // chatgptを送信するとそれと同時に画像を提出してくれるボタン、画像のid="saveButton1"とchatgptのclass="submit-button1"の番号を対応させておく
 document.querySelectorAll('[class^="submit-button"]').forEach(button => {
   button.addEventListener('click', (e) => {
     const buttonValue = e.target.value; // 押されたボタンの値を取得
