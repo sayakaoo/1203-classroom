@@ -945,7 +945,7 @@ window.addEventListener('load', function () {
             break;
           default:
             console.log("説明〇図×");
-            input = "<skip 29>";
+            input = "<skip 32>";
             split_chars = splitStr(input);
             break;
         };
