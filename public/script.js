@@ -556,6 +556,7 @@ window.addEventListener('load', function () {
           // ここに間違いを記録する処理を追加?
           //とりあえず21に飛ばしちゃう
         }
+        break;
 
 
       default:
