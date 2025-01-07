@@ -581,16 +581,16 @@ window.addEventListener('load', function () {
         // 追加のデフォルト処理を実行
         break;
     }
-
-
-
-
     main();
     mess_box.click();
   }
- 
-  
 
+  // ボタンのクリックイベントを設定
+document.getElementById('saveButton').addEventListener('click', () => {
+  predictCanvas(); // ボタンがクリックされたときに関数を実行
+  console.log("画像判断開始");
+});
+ 
 
   // 初期化
   loadModel();
