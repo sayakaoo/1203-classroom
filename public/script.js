@@ -137,7 +137,7 @@ window.addEventListener('load', function () {
       "どうでしたか？",
       "(式は正しい，正しくないで分岐させ，何が違うのかを考える)"
     ],
-    
+
     28: [
       "最初に正方形が3個のときを考えたからそれを式に当てはめてみたらどうかな？<skip 28>",
       "",
@@ -219,7 +219,7 @@ window.addEventListener('load', function () {
           break;
           case 'hint':
           const hint = 'hint' + tagget_str[1]; // 動的にクラス名を作成
-          $('#' + hint).removeClass('visible');    // 作成したクラス名を利用;
+          $('#' + hint).addClass('visible');    // 作成したクラス名を利用;
           console.log('ヒント表示');
           break;
           //apiとともにキャンバスを出すときのやつ(送信ボタンを出さない)
