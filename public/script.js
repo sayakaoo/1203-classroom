@@ -108,7 +108,7 @@ window.addEventListener('load', function () {
     //22編集中
     22: [
       "(4+3(n-1))ありがとうございます。",
-      "(学習者)さんどのように求めたか説明してください。<showCanvasapi><apiform 1>"
+      "(学習者)さんどのように求めたか説明してください。<showCanvaswithapi><apiform 1>"
     ],
     23: [
       "<closeCanvas 2>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5>",
