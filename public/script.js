@@ -545,6 +545,17 @@ window.addEventListener('load', function () {
         break;
 
       case "saveButton1":
+        if (highestPrediction.className === "Class2") {
+          console.log("saveButton1でClass2が検出されました。");
+          input = "<skip 21>";
+          split_chars = splitStr(input);
+        } else {
+          console.log("saveButton1で他のクラスが検出されました。");
+          input = "<skip 21>";
+          split_chars = splitStr(input);
+          // ここに間違いを記録する処理を追加?
+          //とりあえず21に飛ばしちゃう
+        }
 
 
       default:
@@ -855,27 +866,6 @@ window.addEventListener('load', function () {
     const buttonId = document.querySelector('button[type="submit"]:focus').value; 
     // フォーカスされたボタンのvalueを取得
 
-    //chatgptをsubmitしたとき、対応する画像をsaveする関数
-    document.querySelectorAll('button[type="submit"]').forEach(button => {
-      button.addEventListener('click', (event) => {
-        // フォーカスされたボタンのvalueを取得
-        const buttonValue = event.target.value;
-    
-        // 対応するボタンのIDを生成
-        const targetButtonId = `saveButton${buttonValue}`;
-    
-        // 対象のボタンを取得
-        const targetButton = document.getElementById(targetButtonId);
-    
-        // 対象のボタンが存在すればクリックを実行
-        if (targetButton) {
-          targetButton.click();
-          console.log("chatgpt送信前、画像送信しました");
-        } else {
-          console.log("chatgptのみ");
-        }
-      });
-    });
     
 
 
