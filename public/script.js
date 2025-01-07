@@ -852,7 +852,32 @@ window.addEventListener('load', function () {
     const apiUserAnswer = document.getElementById("apiUserAnswer").value; // 入力内容を取得
     console.log("ユーザーの解答:", apiUserAnswer);
 
-    const buttonId = document.querySelector('button[type="submit"]:focus').value; // フォーカスされたボタンのvalueを取得
+    const buttonId = document.querySelector('button[type="submit"]:focus').value; 
+    // フォーカスされたボタンのvalueを取得
+
+    //chatgptをsubmitしたとき、対応する画像をsaveする関数
+    document.querySelectorAll('button[type="submit"]').forEach(button => {
+      button.addEventListener('click', (event) => {
+        // フォーカスされたボタンのvalueを取得
+        const buttonValue = event.target.value;
+    
+        // 対応するボタンのIDを生成
+        const targetButtonId = `saveButton${buttonValue}`;
+    
+        // 対象のボタンを取得
+        const targetButton = document.getElementById(targetButtonId);
+    
+        // 対象のボタンが存在すればクリックを実行
+        if (targetButton) {
+          targetButton.click();
+          console.log("chatgpt送信前、画像送信しました");
+        } else {
+          console.log("chatgptのみ");
+        }
+      });
+    });
+    
+
 
     try {
       const response = await fetch('/api/evaluate', {
@@ -866,7 +891,6 @@ window.addEventListener('load', function () {
     } catch (error) {
       console.error('エラー:', error);
     }
-    canvasButtonClick();
     await sleep(5000);
     // レスポンス内容を判定
     // ボタンの数だけ作らなきゃいけないよ
