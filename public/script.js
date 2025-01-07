@@ -600,7 +600,7 @@ window.addEventListener('load', function () {
   //保存ボタンのidを取得
   document.querySelectorAll(".saveButton").forEach(button => {
     button.addEventListener("click", function (event) {
-      const buttonId = event.target.id; // クリックされたボタンのIDを取得
+      buttonId = event.target.id; // クリックされたボタンのIDを取得
       console.log("クリックされたボタンのIDは: " + buttonId);
       predictCanvas();
     });
