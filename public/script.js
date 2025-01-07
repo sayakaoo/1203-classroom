@@ -748,6 +748,7 @@ window.addEventListener('load', function () {
   });
 
   //4+3(n-1)において様々な全角、半角など統一させるための関数
+  //絶対もっといいのある
   function normalize(answer) {
     return answer
       .replace(/[（）＋－]/g, (m) => ({ '（': '(', '）': ')', '＋': '+', '－': '-' }[m])) // 全角記号を半角に変換
