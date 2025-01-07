@@ -30,7 +30,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<skip 22><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -590,7 +590,6 @@ window.addEventListener('load', function () {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ apiUserAnswer: userAnswer, buttonId }),
-
       });
       const textResponse = await response.text(); // レスポンスをテキストとして取得
       console.log(textResponse); // レスポンスの内容を表示
@@ -906,6 +905,7 @@ window.addEventListener('load', function () {
   }
 
   // chatgptを送信するとそれと同時に画像を提出してくれるボタン、画像のid="saveButton1"とchatgptのclass="submit-button1"の番号を対応させておく
+  //1個下の関数とセット
 document.querySelectorAll('[class^="submit-button"]').forEach(button => {
   button.addEventListener('click', (e) => {
     const buttonValue = e.target.value; // 押されたボタンの値を取得
@@ -931,18 +931,6 @@ formapi.addEventListener('submit', async (e) => {
 
   const buttonId = document.querySelector('button[type="submit"]:focus').value; // フォーカスされたボタンのvalueを取得
 
-  try {
-    const response = await fetch('/api/evaluate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ apiUserAnswer, buttonId }),
-    });
-
-    const textResponse = await response.text();
-    console.log("判定結果:", textResponse);
-  } catch (error) {
-    console.error('エラー:', error);
-  }
 });
 
 
