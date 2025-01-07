@@ -203,8 +203,7 @@ window.addEventListener('load', function () {
           console.log('フォーム表示: ' + targetClass); // 確認用のログ
           break;
         case 'showCanvas':
-          const canvassave = 'saveButton' + tagget_str[1]; // 動的にクラス名を作成
-          $('#' + canvassave).addClass('visible');    // 作成したクラス名を利用
+          $('#saveButton').addClass('visible');    // 作成したクラス名を利用
           buttonId ='saveButton' + tagget_str[1];
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
@@ -235,8 +234,7 @@ window.addEventListener('load', function () {
         case 'apiform':
           const formapi = 'formapi' + tagget_str[1]; // 動的にクラス名を作成
           $('.' + formapi).addClass('visible');
-          const button = 'submit-button' + tagget_str[1]; // 動的にクラス名を作成
-          $('.' + button).addClass('visible');
+          $('.submit-button').addClass('visible');
           console.log('フォーム表示');
           buttonId ='saveButton' + tagget_str[1];
           break;
