@@ -21,6 +21,8 @@ window.addEventListener('load', function () {
   let input = "";
   let userChar = "";
   let highestPrediction = "";
+  let textResponse = "";
+  //saveButtonId宣言でhandlePrediction()で使えるようにしている
   let saveButtonId ="";
   const clearBtn = document.querySelector('#clear-button');
 
@@ -881,7 +883,7 @@ window.addEventListener('load', function () {
         body: JSON.stringify({ apiUserAnswer, buttonId }),
       });
 
-      const textResponse = await response.text();
+      textResponse = await response.text();
       console.log("判定結果:", textResponse);
     } catch (error) {
       console.error('エラー:', error);
@@ -933,6 +935,7 @@ window.addEventListener('load', function () {
     } else {
       console.log("未知のボタンID");
     }
+
 
 
   main();
