@@ -945,6 +945,7 @@ window.addEventListener('load', function () {
 
   main();
   mess_box.click();
+  canvasClearButtonClick();
 
 });
 
@@ -954,6 +955,19 @@ window.addEventListener('load', function () {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+function canvasClearButtonClick() {
+  const button = document.getElementById('clear-button');
+  if (button) {
+    button.click(); // clear-buttonをクリックしたことにする
+    console.log('キャンバスを消しました');
+  } else {
+    console.log('ボタンが見つかりません');
+  }
+}
+
+
+
 
 
 
