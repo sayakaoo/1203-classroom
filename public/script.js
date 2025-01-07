@@ -98,24 +98,20 @@ window.addEventListener('load', function () {
       "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas 0>"
     ],
     21: [
-      "<closeCanvas 0>みなさん考えられましたか？",
+      "みなさん考えられましたか？",
       "ではAさんどのように考えたか教えてください。",
-      "<charaOut 5><chara 5 3><item 5>図のように考えました．",
+      "<charaOut 5><chara 5 3><item 4>図のように考えました．",
       "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
-      "<charaOut 5><itemOut 5><chara 5 1>ありがとうございます。<closeCanvas 1>では次に(学習者)さんどのように考えたか式を教えてください。<form 5>",
+      "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の回答と見比べてみましょう。<closeCanvas 0>では次に(学習者)さんどのように考えたか式を教えてください。<form 5>",
     ],
 
     //22編集中
     22: [
       "(4+3(n-1))ありがとうございます。",
-      "(学習者)さんどのように求めたか説明してください。<showCanvaswithapi><apiform 1>"
+      "(学習者)さんどのように求めたか説明してください。<showCanvaswithapi><apiform 1><hint 1>"
     ],
     23: [
-      "<closeCanvas 2><colseapiform 1>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5>",
-      "次にCさんどのように考えたか教えてください。",
-      "正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。",
-      "たしかにそうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？・・・・",
-      "・・・<skip 21>"
+      "<closeCanvas><colseapiform><closehint>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5><skip 30>",
     ],
     24: [
       "もう一度考えてみましょう。4と3(n-1)はそれぞれ何を表していますか？<form 7>"
@@ -144,9 +140,22 @@ window.addEventListener('load', function () {
       ""
     ],
     29: [
-      "<closeCanvas 2><colseapiform 1>図をもう一度書いてみましょう<showCanvas><hint 2>",
+      "<closeCanvas 2><colseapiform 1>図をもう一度書いてみましょう<showCanvas 2><hint 2>",
       "",
       ""
+    ],
+    30: [
+      "次にCさんどのように考えたか教えてください。",
+      "正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。",
+      "たしかにそうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？・・・・",
+      "・・・",
+      ""
+    ],
+    31: [
+      "ありがとうございます。<item 5>Aさんの例と同じように考えると、このように考えられそうですね(分かりやすく動画で解説したいな)",
+      "もう一度解答を見直してみましょう",
+      "クリックで次の問題に進む",
+      "<closeCanvas><closehint><itemOut 5><skip 30>"
     ],
 
 
@@ -207,11 +216,9 @@ window.addEventListener('load', function () {
           $('#' + canvassave).addClass('visible');    // 作成したクラス名を利用
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
-          $('.hint1').addClass('visible');
           break;
         case 'closeCanvas':
-          const canvasclose = 'saveButton' + tagget_str[1]; // 動的にクラス名を作成
-          $('#' + canvasclose).removeClass('visible');    // 作成したクラス名を利用
+          $('.saveButton').removeClass('visible');    // 作成したクラス名を利用
           $('.showCanvasButton').removeClass('visible');
           $('.wrapper').removeClass('visible');
           $('.hint1').removeClass('visible');
@@ -220,6 +227,10 @@ window.addEventListener('load', function () {
           case 'hint':
           const hint = 'hint' + tagget_str[1]; // 動的にクラス名を作成
           $('#' + hint).addClass('visible');    // 作成したクラス名を利用;
+          console.log('ヒント表示');
+          break;
+          case 'closehint':
+          $('.hint').removeClass('visible');    // 作成したクラス名を利用;
           console.log('ヒント表示');
           break;
           //apiとともにキャンバスを出すときのやつ(送信ボタンを出さない)
@@ -235,10 +246,8 @@ window.addEventListener('load', function () {
           console.log('フォーム表示');
           break;
         case 'colseapiform':
-          const formapi1 = 'formapi' + tagget_str[1]; // 動的にクラス名を作成
-          $('.' + formapi1).removeClass('visible');
-          const button1 = 'submit-button' + tagget_str[1]; // 動的にクラス名を作成
-          $('.' + button1).removeClass('visible');
+          $('.formapi').removeClass('visible');
+          $('.submit-button').removeClass('visible');
           console.log('フォーム表示');
           break;
         case 'selectBox':
@@ -550,8 +559,8 @@ window.addEventListener('load', function () {
     switch (saveButtonId) {
 
       case "saveButton0":
-        if (highestPrediction.className === "Class2") {
-          console.log("Class2が検出されました。");
+        if (highestPrediction.className === "1+3n") {
+          console.log("画像は1+3n");
           input = "<skip 21>";
           split_chars = splitStr(input);
         } else {
@@ -562,8 +571,19 @@ window.addEventListener('load', function () {
           //とりあえず21に飛ばしちゃう
         }
         break;
-
-
+        case "saveButton2":
+          if (highestPrediction.className === "3+4(n-1)") {
+            console.log("画像は3+4(n-1)");
+            input = "<skip 23>";
+            split_chars = splitStr(input);
+          } else {
+            console.log("2度目の画像間違い");
+            input = "<skip 31>";
+            split_chars = splitStr(input);
+            // ここに間違いを記録する処理を追加?
+            //とりあえず21に飛ばしちゃう
+          }
+          break;
       default:
         console.log(`未知のボタンIDが検出されました: ${buttonId}`);
         // 追加のデフォルト処理を実行
