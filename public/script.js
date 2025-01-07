@@ -556,7 +556,7 @@ window.addEventListener('load', function () {
       return;
     }
     //buttonIdが何かによってswitch
-    switch (ButtonId) {
+    switch (buttonId) {
 
       case "saveButton0":
         if (highestPrediction.className === "1+3n") {
