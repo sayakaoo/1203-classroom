@@ -529,7 +529,7 @@ window.addEventListener('load', function () {
     }
     //buttonIdが何かによってswitch
     switch (buttonId) {
-      
+
       case "saveButton0":
         if (highestPrediction.className === "Class2") {
           console.log("Class2が検出されました。");
@@ -543,16 +543,16 @@ window.addEventListener('load', function () {
           //とりあえず21に飛ばしちゃう
         }
         break;
-    
+
       case "saveButton1":
-        
+
 
       default:
         console.log(`未知のボタンIDが検出されました: ${buttonId}`);
         // 追加のデフォルト処理を実行
         break;
     }
-    
+
 
 
 
@@ -829,53 +829,104 @@ window.addEventListener('load', function () {
 
   // chatgptを送信するとそれと同時に画像を提出してくれるボタン、画像のid="saveButton1"とchatgptのclass="submit-button1"の番号を対応させておく
   //1個下の関数とセット
-document.querySelectorAll('[class^="submit-button"]').forEach(button => {
-  button.addEventListener('click', (e) => {
-    const buttonValue = e.target.value; // 押されたボタンの値を取得
-    const saveButtonId = `saveButton${buttonValue.replace('button', '')}`; // 対応するIDを生成
+  document.querySelectorAll('[class^="submit-button"]').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const buttonValue = e.target.value; // 押されたボタンの値を取得
+      const saveButtonId = `saveButton${buttonValue.replace('button', '')}`; // 対応するIDを生成
 
-    const saveButton = document.getElementById(saveButtonId); // 対応するボタンを取得
-    if (saveButton) {
-      saveButton.click(); // ボタンのクリックイベントを発火
-      console.log(`ボタン ${saveButtonId} をクリックしました`);
-    } else {
-      console.log(`ボタン ${saveButtonId} が見つかりません`);
-    }
-  });
-});
-
-// フォーム送信処理を継続するようにsubmitイベントは保持
-const formapi = document.getElementById('answer-form');
-formapi.addEventListener('submit', async (e) => {
-  e.preventDefault(); // デフォルトのフォーム送信を防止
-
-  const apiUserAnswer = document.getElementById("apiUserAnswer").value; // 入力内容を取得
-  console.log("ユーザーの解答:", apiUserAnswer);
-
-  const buttonId = document.querySelector('button[type="submit"]:focus').value; // フォーカスされたボタンのvalueを取得
-
-  try {
-    const response = await fetch('/api/evaluate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ apiUserAnswer, buttonId }),
+      const saveButton = document.getElementById(saveButtonId); // 対応するボタンを取得
+      if (saveButton) {
+        saveButton.click(); // ボタンのクリックイベントを発火
+        console.log(`ボタン ${saveButtonId} をクリックしました`);
+      } else {
+        console.log(`ボタン ${saveButtonId} が見つかりません`);
+      }
     });
+  });
 
-    const textResponse = await response.text();
-    console.log("判定結果:", textResponse);
-  } catch (error) {
-    console.error('エラー:', error);
-  }
+  // フォーム送信処理を継続するようにsubmitイベントは保持
+  const formapi = document.getElementById('answer-form');
+  formapi.addEventListener('submit', async (e) => {
+    e.preventDefault(); // デフォルトのフォーム送信を防止
 
+    const apiUserAnswer = document.getElementById("apiUserAnswer").value; // 入力内容を取得
+    console.log("ユーザーの解答:", apiUserAnswer);
+
+    const buttonId = document.querySelector('button[type="submit"]:focus').value; // フォーカスされたボタンのvalueを取得
+
+    try {
+      const response = await fetch('/api/evaluate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ apiUserAnswer, buttonId }),
+      });
+
+      const textResponse = await response.text();
+      console.log("判定結果:", textResponse);
+    } catch (error) {
+      console.error('エラー:', error);
+    }
+    canvasButtonClick();
+    await sleep(5000);
+    // レスポンス内容を判定
+    // ボタンの数だけ作らなきゃいけないよ
+    if (buttonId === 'button1') {
+      if (textResponse.includes("不正解")) {
+        switch (highestPrediction.className) {
+          case "Class 1":
+            console.log("不正解、１");
+            input = "<skip 11>";
+            split_chars = splitStr(input);
+            break;
+          default:
+            console.log("不正解、２");
+            input = "<skip 12>";
+            split_chars = splitStr(input);
+            break;
+        };
+      } else if (textResponse.includes("正解")) {
+        switch (highestPrediction.className) {
+          case "Class 1":
+            console.log("正解１");
+            input = "<skip 9>";
+            split_chars = splitStr(input);
+            break;
+          default:
+            console.log("正解２");
+            input = "<skip 10>";
+            split_chars = splitStr(input);
+            break;
+        };
+      } else {
+        console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
+      }
+    } else if (buttonId === 'button2') {
+      if (textResponse.includes("不正解")) {
+        input = "<skip >";
+        split_chars = splitStr(input);
+        console.log(split_chars); // 「不正解」が含まれていた場合（button2の場合）
+      } else if (textResponse.includes("正解")) {
+        input = "<skip >";
+        split_chars = splitStr(input);
+      } else {
+        console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
+      }
+    } else {
+      console.log("未知のボタンID");
+    }
+
+
+  main();
+  mess_box.click();
 
 });
 
 
 
-  //読み込みのための遅延のための関数
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+//読み込みのための遅延のための関数
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
 
