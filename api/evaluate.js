@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
   let prompt = ""; // 初期化
 
 // 最初を赤で囲んだ場合の分岐
-  if (buttonId === "button1") {
+  if (buttonId === "saveButton1") {
     prompt = `ユーザーは三重引用符で囲んだテキストを提供します。これは「正方形をn番目までつくる場合マッチ棒は何本必要か？」というマッチ棒の規則性問題の回答です。ユーザーは4+3(n-1)という回答の説明をしています。次のステップで手順を実行してください。
 
 """${apiUserAnswer}"""
@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
   "buttonId": "<buttonId>"
 }
 `;
-  } else if (buttonId === "button3") {
+  } else if (buttonId === "saveButton3") {
     prompt = `ユーザーは三重引用符で囲んだテキストを提供します。これは「正方形をn番目までつくる場合マッチ棒は何本必要か？」というマッチ棒の規則性問題の回答です。ユーザーは4+3(n-1)という回答の説明をしています。次のステップで手順を実行してください。
 
     """${apiUserAnswer}"""

@@ -22,8 +22,7 @@ window.addEventListener('load', function () {
   let userChar = "";
   let highestPrediction = "";
   let textResponse = "";
-  //saveButtonId宣言でhandlePrediction()で使えるようにしている
-  let saveButtonId = "";
+  let buttonId= "";
   const clearBtn = document.querySelector('#clear-button');
 
 
@@ -33,7 +32,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 7><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<skip 22><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -145,6 +144,12 @@ window.addEventListener('load', function () {
     34: [
       "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 3><apiform 4><showCanvaswithapi>",
     ],
+    25: [
+      "(4+3n)ありがとうございます。",
+      "(学習者)さんどのように求めたか説明してください。<showCanvaswithapi><apiform 5><hint 1>",
+      "",
+      ""
+    ],
 
 
 
@@ -200,8 +205,10 @@ window.addEventListener('load', function () {
         case 'showCanvas':
           const canvassave = 'saveButton' + tagget_str[1]; // 動的にクラス名を作成
           $('#' + canvassave).addClass('visible');    // 作成したクラス名を利用
+          buttonId ='saveButton' + tagget_str[1];
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
+
           break;
         case 'closeCanvas':
           $('.saveButton').removeClass('visible');    // 作成したクラス名を利用
@@ -223,6 +230,7 @@ window.addEventListener('load', function () {
         case 'showCanvaswithapi':
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
+          buttonId ='saveButton' + tagget_str[1];
           break;
         case 'apiform':
           const formapi = 'formapi' + tagget_str[1]; // 動的にクラス名を作成
@@ -230,6 +238,7 @@ window.addEventListener('load', function () {
           const button = 'submit-button' + tagget_str[1]; // 動的にクラス名を作成
           $('.' + button).addClass('visible');
           console.log('フォーム表示');
+          buttonId ='saveButton' + tagget_str[1];
           break;
         case 'colseapiform':
           $('.formapi').removeClass('visible');
@@ -499,7 +508,6 @@ window.addEventListener('load', function () {
       console.error("モデルの読み込み中にエラーが発生しました: ", error);
     }
   }
-  let buttonId;
 
 
   // キャンバスの内容を予測
@@ -582,15 +590,8 @@ window.addEventListener('load', function () {
     main();
     mess_box.click();
   }
-  // '保存'ボタンがクリックされたときに予測を実行
-  //保存ボタンのidを取得
-  document.querySelectorAll(".saveButton").forEach(button => {
-    button.addEventListener("click", function (event) {
-      buttonId = event.target.id; // クリックされたボタンのIDを取得
-      console.log("クリックされたボタンのIDは: " + buttonId);
-      predictCanvas();
-    });
-  });
+ 
+  
 
 
   // 初期化
@@ -729,12 +730,8 @@ window.addEventListener('load', function () {
       //input = "<skip 8>";
       split_chars = splitStr(input);
       console.log(split_chars);
-    }else if (userAnswer === '4+3n') {
-      //さきにAさんのパターン
-      input = "<skip 20>";
-      console.log(normalize(userAnswer));
-      //最初にユーザーの発表なら8に進む
-      //input = "<skip 8>";
+    }else if (normalize(userAnswer) === '3n+4' || normalize(userAnswer) === '4+3n') {
+      input = "<skip 35>";
       split_chars = splitStr(input);
       console.log(split_chars);
     } else {
@@ -785,22 +782,17 @@ window.addEventListener('load', function () {
     return str.split('');
   }
 
-  // chatgptを送信するとそれと同時に画像を提出してくれるボタン、画像のid="saveButton1"とchatgptのclass="submit-button1"の番号を対応させておく
-  //1個下の関数とセット
-  document.querySelectorAll('[class^="submit-button"]').forEach(button => {
-    button.addEventListener('click', (e) => {
-      const buttonValue = e.target.value; // 押されたボタンの値を取得
-      saveButtonId = `saveButton${buttonValue.replace('button', '')}`; // 対応するIDを生成
-
-      const saveButton = document.getElementById(saveButtonId); // 対応するボタンを取得
-      if (saveButton) {
-        saveButton.click(); // ボタンのクリックイベントを発火
-        console.log(`ボタン ${saveButtonId} をクリックしました`);
-      } else {
-        console.log(`ボタン ${saveButtonId} が見つかりません`);
-      }
-    });
+  // chatgptを送信するとそれと同時に画像を提出してくれるボタン、
+  document.querySelector('.submit-button').addEventListener('click', (e) => {
+    const saveButton = document.getElementById('saveButton'); // 対応するボタンを取得
+    if (saveButton) {
+      saveButton.click(); // ボタンのクリックイベントを発火
+      console.log('画像を提出するボタンをクリックしました');
+    } else {
+      console.log('画像を提出するボタンが見つかりません');
+    }
   });
+  
 
   // フォーム送信処理を継続するようにsubmitイベントは保持
   const formapi = document.getElementById('answer-form');
@@ -809,12 +801,6 @@ window.addEventListener('load', function () {
 
     const apiUserAnswer = document.getElementById("apiUserAnswer").value; // 入力内容を取得
     console.log("ユーザーの解答:", apiUserAnswer);
-
-    const buttonId = document.querySelector('button[type="submit"]:focus').value;
-    // フォーカスされたボタンのvalueを取得
-
-
-
 
     try {
       const response = await fetch('/api/evaluate', {
@@ -834,7 +820,7 @@ window.addEventListener('load', function () {
     //何でかは全くわからないけど、chatgpt送信、画像送信後この関数に行く
 
 
-    if (buttonId === 'button1') {
+    if (buttonId === 'saveButton1') {
       if (textResponse.includes("不正解")) {
         switch (highestPrediction.className) {
           case "4+3(n-1)":
@@ -864,7 +850,7 @@ window.addEventListener('load', function () {
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
       }
-    } else if (buttonId === 'button3') {
+    } else if (buttonId === 'saveButton3') {
       if (textResponse.includes("不正解")) {
         input = "<skip 33>";
         split_chars = splitStr(input);
@@ -874,7 +860,7 @@ window.addEventListener('load', function () {
       } else {
         console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
       }
-    }else if (buttonId === 'button4') {
+    }else if (buttonId === 'saveButton4') {
       if (textResponse.includes("不正解")) {
         switch (highestPrediction.className) {
           case "4+3(n-1)":
