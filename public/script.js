@@ -111,7 +111,7 @@ window.addEventListener('load', function () {
       "(学習者)さんどのように求めたか説明してください。<showCanvaswithapi><apiform 1>"
     ],
     23: [
-      "<closeCanvas 2>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5>",
+      "<closeCanvas 2><colseapiform 1>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5>",
       "次にCさんどのように考えたか教えてください。",
       "正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。",
       "たしかにそうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？・・・・",
@@ -137,8 +137,14 @@ window.addEventListener('load', function () {
       "どうでしたか？",
       "(式は正しい，正しくないで分岐させ，何が違うのかを考える)"
     ],
+    
     28: [
       "最初に正方形が3個のときを考えたからそれを式に当てはめてみたらどうかな？<skip 28>",
+      "",
+      ""
+    ],
+    29: [
+      "<closeCanvas 2><colseapiform 1>図をもう一度書いてみましょう<showCanvas><hint 2>",
       "",
       ""
     ],
@@ -211,9 +217,13 @@ window.addEventListener('load', function () {
           $('.hint1').removeClass('visible');
           console.log('フォーム表示');
           break;
+          case 'hint':
+          const hint = 'hint' + tagget_str[1]; // 動的にクラス名を作成
+          $('#' + hint).removeClass('visible');    // 作成したクラス名を利用;
+          console.log('ヒント表示');
+          break;
           //apiとともにキャンバスを出すときのやつ(送信ボタンを出さない)
           case 'showCanvaswithapi':
-            $('.showCanvasButton').addClass('visible');
             $('.wrapper').addClass('visible');
             $('.hint1').addClass('visible');
             break;
@@ -482,7 +492,7 @@ window.addEventListener('load', function () {
 
 
   // Teachable MachineでエクスポートしたモデルのURL
-  const modelURL = "https://teachablemachine.withgoogle.com/models/tLuDsRP9H/";
+  const modelURL = "https://teachablemachine.withgoogle.com/models/xbPaKLXkL/";
 
   // モデルのロード
   let model;
@@ -546,20 +556,6 @@ window.addEventListener('load', function () {
           split_chars = splitStr(input);
         } else {
           console.log("他のクラスが検出されました。");
-          input = "<skip 21>";
-          split_chars = splitStr(input);
-          // ここに間違いを記録する処理を追加?
-          //とりあえず21に飛ばしちゃう
-        }
-        break;
-
-      case "saveButton1":
-        if (highestPrediction.className === "Class2") {
-          console.log("saveButton1でClass2が検出されました。");
-          input = "<skip 21>";
-          split_chars = splitStr(input);
-        } else {
-          console.log("saveButton1で他のクラスが検出されました。");
           input = "<skip 21>";
           split_chars = splitStr(input);
           // ここに間違いを記録する処理を追加?
@@ -898,10 +894,12 @@ window.addEventListener('load', function () {
     // レスポンス内容を判定
     // ボタンの数だけ作らなきゃいけないよ
     //何でかは全くわからないけど、chatgpt送信、画像送信後この関数に行く
+
+  
     if (buttonId === 'button1') {
       if (textResponse.includes("不正解")) {
         switch (highestPrediction.className) {
-          case "Class 1":
+          case "4+3(n-1)":
             console.log("不正解、１");
             input = "<skip 11>";
             split_chars = splitStr(input);
@@ -914,14 +912,14 @@ window.addEventListener('load', function () {
         };
       } else if (textResponse.includes("正解")) {
         switch (highestPrediction.className) {
-          case "Class 1":
-            console.log("正解１");
-            input = "<skip 9>";
+          case "4+3(n-1)":
+            console.log("図も説明も正解");
+            input = "<skip 23>";
             split_chars = splitStr(input);
             break;
           default:
-            console.log("正解２");
-            input = "<skip 10>";
+            console.log("説明〇図×");
+            input = "<skip 29>";
             split_chars = splitStr(input);
             break;
         };
