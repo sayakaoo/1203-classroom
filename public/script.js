@@ -752,7 +752,7 @@ window.addEventListener('load', function () {
     return answer
       .replace(/[（）＋－]/g, (m) => ({ '（': '(', '）': ')', '＋': '+', '－': '-' }[m])) // 全角記号を半角に変換
       .replace(/\s+/g, '') // 空白を除去
-      .replace(/\((n-1)\)|3n-3/g, '3(n-1)+4'); // 表現を統一
+      .replace(/N/g, 'n'); // 大文字のNを小文字のnに変換
   }
 
   //Q5の回答の分岐
