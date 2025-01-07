@@ -21,6 +21,7 @@ window.addEventListener('load', function () {
   let input = "";
   let userChar = "";
   let highestPrediction = "";
+  let savebuttonId ="";
   const clearBtn = document.querySelector('#clear-button');
 
 
@@ -528,7 +529,7 @@ window.addEventListener('load', function () {
       return;
     }
     //buttonIdが何かによってswitch
-    switch (buttonId) {
+    switch (savebuttonId) {
 
       case "saveButton0":
         if (highestPrediction.className === "Class2") {
@@ -847,7 +848,7 @@ window.addEventListener('load', function () {
   document.querySelectorAll('[class^="submit-button"]').forEach(button => {
     button.addEventListener('click', (e) => {
       const buttonValue = e.target.value; // 押されたボタンの値を取得
-      const saveButtonId = `saveButton${buttonValue.replace('button', '')}`; // 対応するIDを生成
+      saveButtonId = `saveButton${buttonValue.replace('button', '')}`; // 対応するIDを生成
 
       const saveButton = document.getElementById(saveButtonId); // 対応するボタンを取得
       if (saveButton) {
