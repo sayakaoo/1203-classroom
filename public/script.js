@@ -23,7 +23,7 @@ window.addEventListener('load', function () {
   let highestPrediction = "";
   let textResponse = "";
   //saveButtonId宣言でhandlePrediction()で使えるようにしている
-  let saveButtonId ="";
+  let saveButtonId = "";
   const clearBtn = document.querySelector('#clear-button');
 
 
@@ -140,7 +140,7 @@ window.addEventListener('load', function () {
       ""
     ],
     29: [
-      "<closeCanvas 2><colseapiform 1>図をもう一度書いてみましょう<showCanvas 2><hint 2>",
+      "<closeCanvas><colseapiform><closehint>図をもう一度書いてみましょう<showCanvas 2><hint 2>",
       "",
       ""
     ],
@@ -152,13 +152,19 @@ window.addEventListener('load', function () {
       ""
     ],
     31: [
-      "ありがとうございます。<item 5>Aさんの例と同じように考えると、このように考えられそうですね(分かりやすく動画で解説したいな)",
+      "<closeCanvas><closehint>ありがとうございます。図をもう一度考えてみましょう",
+      "<item 5>Aさんの例と同じように考えると、このように考えられそうですね(分かりやすく動画で解説したいな)",
       "もう一度解答を見直してみましょう",
       "クリックで次の問題に進む",
       "<closeCanvas><closehint><itemOut 5><skip 30>"
     ],
 
-
+    32: [
+      "<closeCanvas><closehint>ありがとうございます。",
+      "先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 3><apiform 3>",
+      "",
+      ""
+    ],
 
 
 
@@ -224,20 +230,20 @@ window.addEventListener('load', function () {
           $('.hint1').removeClass('visible');
           console.log('フォーム表示');
           break;
-          case 'hint':
+        case 'hint':
           const hint = 'hint' + tagget_str[1]; // 動的にクラス名を作成
           $('#' + hint).addClass('visible');    // 作成したクラス名を利用;
           console.log('ヒント表示');
           break;
-          case 'closehint':
+        case 'closehint':
           $('.hint').removeClass('visible');    // 作成したクラス名を利用;
           console.log('ヒント表示');
           break;
-          //apiとともにキャンバスを出すときのやつ(送信ボタンを出さない)
-          case 'showCanvaswithapi':
-            $('.wrapper').addClass('visible');
-            $('.hint1').addClass('visible');
-            break;
+        //apiとともにキャンバスを出すときのやつ(送信ボタンを出さない)
+        case 'showCanvaswithapi':
+          $('.wrapper').addClass('visible');
+          $('.hint1').addClass('visible');
+          break;
         case 'apiform':
           const formapi = 'formapi' + tagget_str[1]; // 動的にクラス名を作成
           $('.' + formapi).addClass('visible');
@@ -571,19 +577,19 @@ window.addEventListener('load', function () {
           //とりあえず21に飛ばしちゃう
         }
         break;
-        case "saveButton2":
-          if (highestPrediction.className === "3+4(n-1)") {
-            console.log("画像は3+4(n-1)");
-            input = "<skip 23>";
-            split_chars = splitStr(input);
-          } else {
-            console.log("2度目の画像間違い");
-            input = "<skip 31>";
-            split_chars = splitStr(input);
-            // ここに間違いを記録する処理を追加?
-            //とりあえず21に飛ばしちゃう
-          }
-          break;
+      case "saveButton2":
+        if (highestPrediction.className === "3+4(n-1)") {
+          console.log("画像は3+4(n-1)");
+          input = "<skip 23>";
+          split_chars = splitStr(input);
+        } else {
+          console.log("2度目の画像間違い");
+          input = "<skip 31>";
+          split_chars = splitStr(input);
+          // ここに間違いを記録する処理を追加?
+          //とりあえず21に飛ばしちゃう
+        }
+        break;
       default:
         console.log(`未知のボタンIDが検出されました: ${buttonId}`);
         // 追加のデフォルト処理を実行
@@ -605,7 +611,7 @@ window.addEventListener('load', function () {
       predictCanvas();
     });
   });
-  
+
 
   // 初期化
   loadModel();
@@ -892,10 +898,10 @@ window.addEventListener('load', function () {
     const apiUserAnswer = document.getElementById("apiUserAnswer").value; // 入力内容を取得
     console.log("ユーザーの解答:", apiUserAnswer);
 
-    const buttonId = document.querySelector('button[type="submit"]:focus').value; 
+    const buttonId = document.querySelector('button[type="submit"]:focus').value;
     // フォーカスされたボタンのvalueを取得
 
-    
+
 
 
     try {
@@ -915,13 +921,13 @@ window.addEventListener('load', function () {
     // ボタンの数だけ作らなきゃいけないよ
     //何でかは全くわからないけど、chatgpt送信、画像送信後この関数に行く
 
-  
+
     if (buttonId === 'button1') {
       if (textResponse.includes("不正解")) {
-        switch (highestPrediction.className){
+        switch (highestPrediction.className) {
           case "4+3(n-1)":
             console.log("図〇、説明×");
-            input = "<skip 11>";
+            input = "<skip 31>";
             split_chars = splitStr(input);
             break;
           default:
@@ -946,7 +952,7 @@ window.addEventListener('load', function () {
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
       }
-    } else if (buttonId === 'button2') {
+    } else if (buttonId === 'button3') {
       if (textResponse.includes("不正解")) {
         input = "<skip >";
         split_chars = splitStr(input);
@@ -963,28 +969,28 @@ window.addEventListener('load', function () {
 
 
 
-  main();
-  mess_box.click();
-  canvasClearButtonClick();
+    main();
+    mess_box.click();
+    canvasClearButtonClick();
 
-});
+  });
 
 
 
-//読み込みのための遅延のための関数
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function canvasClearButtonClick() {
-  const button = document.getElementById('clear-button');
-  if (button) {
-    button.click(); // clear-buttonをクリックしたことにする
-    console.log('キャンバスを消しました');
-  } else {
-    console.log('ボタンが見つかりません');
+  //読み込みのための遅延のための関数
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
-}
+
+  function canvasClearButtonClick() {
+    const button = document.getElementById('clear-button');
+    if (button) {
+      button.click(); // clear-buttonをクリックしたことにする
+      console.log('キャンバスを消しました');
+    } else {
+      console.log('ボタンが見つかりません');
+    }
+  }
 
 
 
