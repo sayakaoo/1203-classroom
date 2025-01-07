@@ -21,7 +21,7 @@ window.addEventListener('load', function () {
   let input = "";
   let userChar = "";
   let highestPrediction = "";
-  let savebuttonId ="";
+  let saveButtonId ="";
   const clearBtn = document.querySelector('#clear-button');
 
 
@@ -529,7 +529,7 @@ window.addEventListener('load', function () {
       return;
     }
     //buttonIdが何かによってswitch
-    switch (savebuttonId) {
+    switch (saveButtonId) {
 
       case "saveButton0":
         if (highestPrediction.className === "Class2") {
