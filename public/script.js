@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 20><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<skip 22><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -918,14 +918,14 @@ window.addEventListener('load', function () {
   
     if (buttonId === 'button1') {
       if (textResponse.includes("不正解")) {
-        switch (highestPrediction.className) {
+        switch (highestPrediction.className){
           case "4+3(n-1)":
-            console.log("不正解、１");
+            console.log("図〇、説明×");
             input = "<skip 11>";
             split_chars = splitStr(input);
             break;
           default:
-            console.log("不正解、２");
+            console.log("図も説明も不正解");
             input = "<skip 12>";
             split_chars = splitStr(input);
             break;
