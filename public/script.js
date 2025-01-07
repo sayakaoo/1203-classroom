@@ -570,83 +570,6 @@ window.addEventListener('load', function () {
   // 初期化
   loadModel();
 
-  // chatgptapi解答送信の処理
-  //動きはいまいち理解していない
-  const form = document.getElementById('answer-form');
-  form.addEventListener('submit', async (e) => {
-
-    const apiUserAnswer = document.getElementById("apiUserAnswer").value; // 入力内容を取得
-    console.log("ユーザーの解答:", apiUserAnswer);
-    console.log("chatgpt認識中");
-    $('.answerform').removeClass('visible');
-    e.preventDefault(); // 
-
-    const buttonId = document.querySelector('button[type="submit"]:focus').value; // フォーカスされたボタンのvalueを取得
-
-    const userAnswer = document.getElementById('apiUserAnswer').value;
-
-    try {
-      const response = await fetch('/api/evaluate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ apiUserAnswer: userAnswer, buttonId }),
-      });
-      const textResponse = await response.text(); // レスポンスをテキストとして取得
-      console.log(textResponse); // レスポンスの内容を表示
-      canvasButtonClick();
-      await sleep(5000);
-
-      // レスポンス内容を判定
-      // ボタンの数だけ作らなきゃいけないよ
-      if (buttonId === 'button1') {
-        if (textResponse.includes("不正解")) {
-          switch (highestPrediction.className) {
-            case "Class 1":
-              input = "<skip 11>";
-              split_chars = splitStr(input);
-              break;
-            default:
-              input = "<skip 12>";
-              split_chars = splitStr(input);
-              break;
-          };
-        } else if (textResponse.includes("正解")) {
-          switch (highestPrediction.className) {
-            case "Class 1":
-              input = "<skip 9>";
-              split_chars = splitStr(input);
-              break;
-            default:
-              input = "<skip 10>";
-              split_chars = splitStr(input);
-              break;
-          };
-        } else {
-          console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
-        }
-      } else if (buttonId === 'button2') {
-        if (textResponse.includes("不正解")) {
-          input = "<skip >";
-          split_chars = splitStr(input);
-          console.log(split_chars); // 「不正解」が含まれていた場合（button2の場合）
-        } else if (textResponse.includes("正解")) {
-          input = "<skip >";
-          split_chars = splitStr(input);
-        } else {
-          console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
-        }
-      } else {
-        console.log("未知のボタンID");
-      }
-
-
-    } catch (error) {
-      console.error('エラー:', error);
-      document.getElementById('response').textContent = 'サーバーエラーが発生しました';
-    }
-    main();
-    mess_box.click();
-  });
 
 
   // 音声入力の処理
@@ -930,6 +853,20 @@ formapi.addEventListener('submit', async (e) => {
   console.log("ユーザーの解答:", apiUserAnswer);
 
   const buttonId = document.querySelector('button[type="submit"]:focus').value; // フォーカスされたボタンのvalueを取得
+
+  try {
+    const response = await fetch('/api/evaluate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ apiUserAnswer, buttonId }),
+    });
+
+    const textResponse = await response.text();
+    console.log("判定結果:", textResponse);
+  } catch (error) {
+    console.error('エラー:', error);
+  }
+
 
 });
 
