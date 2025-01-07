@@ -732,6 +732,7 @@ window.addEventListener('load', function () {
     }else if (userAnswer === '4+3n') {
       //さきにAさんのパターン
       input = "<skip 20>";
+      console.log(normalize(userAnswer));
       //最初にユーザーの発表なら8に進む
       //input = "<skip 8>";
       split_chars = splitStr(input);
