@@ -572,11 +572,14 @@ window.addEventListener('load', function () {
   }
   // '保存'ボタンがクリックされたときに予測を実行
   //保存ボタンのidを取得
-  document.querySelector(".saveButton").addEventListener("click", function (event) {
-    buttonId = event.target.id; // ボタンのIDを取得
-    console.log("クリックされたボタンのIDは: " + buttonId);
-    predictCanvas();
+  document.querySelectorAll(".saveButton").forEach(button => {
+    button.addEventListener("click", function (event) {
+      const buttonId = event.target.id; // クリックされたボタンのIDを取得
+      console.log("クリックされたボタンのIDは: " + buttonId);
+      predictCanvas();
+    });
   });
+  
 
   // 初期化
   loadModel();
