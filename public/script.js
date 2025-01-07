@@ -108,7 +108,7 @@ window.addEventListener('load', function () {
     //22編集中
     22: [
       "(4+3(n-1))ありがとうございます。",
-      "(学習者)さんどのように求めたか説明してください。<showCanvas 2><apiform 1>"
+      "(学習者)さんどのように求めたか説明してください。<showCanvasapi><apiform 1>"
     ],
     23: [
       "<closeCanvas 2>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5>",
@@ -211,6 +211,12 @@ window.addEventListener('load', function () {
           $('.hint1').removeClass('visible');
           console.log('フォーム表示');
           break;
+          //apiとともにキャンバスを出すときのやつ(送信ボタンを出さない)
+          case 'showCanvaswithapi':
+            $('.showCanvasButton').addClass('visible');
+            $('.wrapper').addClass('visible');
+            $('.hint1').addClass('visible');
+            break;
         case 'apiform':
           const formapi = 'formapi' + tagget_str[1]; // 動的にクラス名を作成
           $('.' + formapi).addClass('visible');
@@ -524,7 +530,7 @@ window.addEventListener('load', function () {
   }
 
   // canvasの画像判定後の分岐処理
-  //ここを分けて分岐を調整するのが妥当
+  //画像だけの時はこの関数の中かも
   function handlePrediction() {
     if (!highestPrediction) {
       console.log("予測結果が無効です");
@@ -891,6 +897,7 @@ window.addEventListener('load', function () {
     await sleep(5000);
     // レスポンス内容を判定
     // ボタンの数だけ作らなきゃいけないよ
+    //何でかは全くわからないけど、chatgpt送信、画像送信後この関数に行く
     if (buttonId === 'button1') {
       if (textResponse.includes("不正解")) {
         switch (highestPrediction.className) {
