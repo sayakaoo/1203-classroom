@@ -6,14 +6,14 @@ const openai = new OpenAI({
 });
 
 
-export default async function handler(req, res) {
-  if (req.method === "POST") {
-    const { message, history } = req.body;
-
-    if (!message) {
-      return res.status(400).json({ error: "メッセージが必要です。" });
-    }
-
+module.exports = async (req, res) => {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' }); // POST以外は拒否
+  }
+  console.log('Received request:', req.body);
+  if (!process.env.OPENAI_API_KEY) {
+    console.error('APIキーが設定されていません');
+  }
     try {
       const response = await openai.createChatCompletion({
         model: "'gpt-3.5-turbo'",
@@ -42,8 +42,4 @@ export default async function handler(req, res) {
       console.error("OpenAI APIエラー:", error.response || error.message);
       res.status(500).json({ error: "APIリクエスト中にエラーが発生しました。" });
     }
-  } else {
-    res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
-}
+  } 
