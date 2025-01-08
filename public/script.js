@@ -1019,6 +1019,12 @@ window.addEventListener('load', function () {
     // レスポンス内容を判定
     // ボタンの数だけ作らなきゃいけないよ
     //何でかは全くわからないけど、chatgpt送信、画像送信後この関数に行く
+    document.getElementById('answer-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // フォームのデフォルト送信を防ぐ
+      const inputField = document.getElementById('apiUserAnswer');
+      inputField.value = ''; // 入力内容をクリア
+      console.log("入力内容を消しました");
+  });
 
 
     if (buttonId === 'saveButton1') {
