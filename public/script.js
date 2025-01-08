@@ -985,32 +985,30 @@ window.addEventListener('load', function () {
     document.querySelector('#userAnswer').value = '';
   });
 
-  //Q8の回答の分岐
+  //Q9の回答の分岐
   document.querySelector('#Q9form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
-    const userAnswer1 = document.querySelector('#userAnswer1').value; // 解答1を取得
-  const userAnswer2 = document.querySelector('#userAnswer2').value; // 解答2を取得
-  
-  // ここで各解答を処理
-  console.log('解答1:', userAnswer1);
-  console.log('解答2:', userAnswer2);
+    // 解答を取得する前にDOMが更新されているか確認
+    const userAnswer1 = document.querySelector('#userAnswer1').value.trim(); // 解答1を取得 (trimで余分なスペースを削除)
+    const userAnswer2 = document.querySelector('#userAnswer2').value.trim(); // 解答2を取得
 
-  // 例えば、回答に応じて分岐処理を行う
-  if (userAnswer1 === '1+3n' && userAnswer2=== '1+3n') {
-    input = "<skip 58>"; // 例として次の処理をスキップ
-    split_chars = splitStr(input);
-    console.log(split_chars);
-  } else {
-    input = "<skip 60>"; // 異なる処理
-    split_chars = splitStr(input);
-    console.log(split_chars);
-  }
-  $('.formQ9').removeClass('visible');
-    main();
-    mess_box.click();
-    document.querySelector('#userAnswer').value = '';
-  });
+    // ここで各解答を処理
+    console.log('解答1:', userAnswer1);
+    console.log('解答2:', userAnswer2);
+
+    // 例えば、回答に応じて分岐処理を行う
+    if (userAnswer1 === '1+3n' && userAnswer2 === '1+3n') {
+        input = "<skip 58>"; // 例として次の処理をスキップ
+        split_chars = splitStr(input);
+        console.log(split_chars);
+    } else {
+        input = "<skip 60>"; // 異なる処理
+        split_chars = splitStr(input);
+        console.log(split_chars);
+    }
+});
+
 
 
 
