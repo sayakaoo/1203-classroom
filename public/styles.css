@@ -270,6 +270,7 @@ body{
     font-size: 14px;
     color: #367293; /* 文字色を指定 */
   }
+  .gwform,
   .fullcanvas {
     position: absolute; /* ページ内で位置を指定 */
     top: 1200px; /* 上から1500px */

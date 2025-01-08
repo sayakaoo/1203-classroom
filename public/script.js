@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 50><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<skip 30><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -305,9 +305,9 @@ window.addEventListener('load', function () {
           console.log('ボタン表示');
           buttonId = 'saveButton' + tagget_str[1];
           break;
-          case 'gwform':
-            $('.gwform').removeClass('visible');
-            break;
+        case 'gwform':
+          $('.gwform').addClass('visible');
+          break;
         case 'form':
           const targetClass = 'formQ' + tagget_str[1];
           $('.' + targetClass).addClass('visible');
@@ -1020,7 +1020,7 @@ window.addEventListener('load', function () {
     // ボタンの数だけ作らなきゃいけないよ
     //何でかは全くわからないけど、chatgpt送信、画像送信後この関数に行く
     const inputField = document.getElementById('apiUserAnswer');
-      inputField.value = ''; // 入力内容をクリア
+    inputField.value = ''; // 入力内容をクリア
 
 
     if (buttonId === 'saveButton1') {
@@ -1145,7 +1145,7 @@ window.addEventListener('load', function () {
       } else {
         console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
       }
-    }else if (buttonId === 'saveButton10') {
+    } else if (buttonId === 'saveButton10') {
       if (textResponse.includes("不正解")) {
         switch (highestPrediction.className) {
           case "4+3(n-1)":
@@ -1216,9 +1216,9 @@ window.addEventListener('load', function () {
   //グループワーク終了ボタンを押したときの処理
   const endButton = document.querySelector('.endButton');
   endButton.addEventListener('click', (event) => {
-    event.preventDefault(); 
-        input = "<skip 57>";
-        split_chars = splitStr(input);    
+    event.preventDefault();
+    input = "<skip 57>";
+    split_chars = splitStr(input);
     console.log('グループワークを終了しました');
     $('.gwform').removeClass('visible');
     main();
@@ -1228,33 +1228,33 @@ window.addEventListener('load', function () {
 
   //chat用
   const chatInput = document.getElementById("userInput");
-const sendButton = document.getElementById("sendButton");
-const chatOutput = document.getElementById("chatWindow");
+  const sendButton = document.getElementById("sendButton");
+  const chatOutput = document.getElementById("chatWindow");
 
-sendButton.addEventListener("click", async (e) => {
-  e.preventDefault();
+  sendButton.addEventListener("click", async (e) => {
+    e.preventDefault();
 
-  const userMessage = chatInput.value;
-  chatOutput.innerHTML += `<div class="message student"><strong>（学習者）さん：</strong> ${userMessage}</div>`;
-  chatInput.value = "";
+    const userMessage = chatInput.value;
+    chatOutput.innerHTML += `<div class="message student"><strong>（学習者）さん：</strong> ${userMessage}</div>`;
+    chatInput.value = "";
 
-  try {
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-        headers: { 'Content-Type': 'application/json'  },
-      body: JSON.stringify({ message: userMessage }),
-    });
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage }),
+      });
 
-    if (!response.ok) throw new Error("サーバーエラー");
+      if (!response.ok) throw new Error("サーバーエラー");
 
-    const data = await response.json();
-    chatOutput.innerHTML += `<div class="message assistant"><strong>Aさん：</strong> ${data.response}</div>`;
-  } catch (error) {
-    chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
-  }
-});
+      const data = await response.json();
+      chatOutput.innerHTML += `<div class="message assistant"><strong>Aさん：</strong> ${data.response}</div>`;
+    } catch (error) {
+      chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
+    }
+  });
 
-  
+
 
 
 })
