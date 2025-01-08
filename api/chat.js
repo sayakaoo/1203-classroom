@@ -5,6 +5,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+let history = [];
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
