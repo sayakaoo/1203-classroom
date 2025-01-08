@@ -997,7 +997,7 @@ window.addEventListener('load', function () {
   console.log('解答2:', userAnswer2);
 
   // 例えば、回答に応じて分岐処理を行う
-  if (normalize(userAnswer1) === '1+3n' && normalize(userAnswer2) === '1+3n') {
+  if (userAnswer1 === '1+3n' && userAnswer2=== '1+3n') {
     input = "<skip 58>"; // 例として次の処理をスキップ
     split_chars = splitStr(input);
     console.log(split_chars);
