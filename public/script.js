@@ -844,7 +844,7 @@ window.addEventListener('load', function () {
   });
 
   //Q7の回答の分岐
-  document.getElementById('correctButton').addEventListener('click', () => {
+  document.getElementById('correctButton7').addEventListener('click', () => {
     input = "<skip 41>";
     split_chars = splitStr(input);
     console.log("わかった");
@@ -853,7 +853,7 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
-  document.getElementById('incorrectButton').addEventListener('click', () => {
+  document.getElementById('incorrectButton7').addEventListener('click', () => {
     input = "<skip 42>";
     split_chars = splitStr(input);
     console.log("わからない");
