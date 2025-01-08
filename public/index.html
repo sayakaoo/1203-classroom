@@ -27,7 +27,7 @@
         <p class="selectText" id="selectText3"></p>
       </div>
     </div>
-    
+
 
 
     <div class="classroom">
@@ -47,7 +47,7 @@
       <div class="charaposition" id="charaposition4"><img src="" alt="" id="chara4"></div><!--三人表示-->
       <div class="charaposition" id="charaposition5"><img src="" alt="" id="chara5"></div><!--三人表示-->
     </div>
-    
+
     <div id="messbox">
       <div id="textbox">
         <p id="text"></p>
@@ -98,7 +98,7 @@
     <button type="button" id="correctButton">正しい</button>
     <button type="button" id="incorrectButton">正しくない</button>
   </form>
-  
+
   <form id="Q7form" class="formQ7 form">
     <button type="button" id="correctButton7">正しい式が分かった</button>
     <button type="button" id="incorrectButton7">分からない</button>
@@ -121,7 +121,7 @@
     <!--発言終了ボタンはいつかつくろう-->
     <!--<button id="apistop-voice1" type="button" disabled>発言を終了する</button>-->
     <div id="response"></div>
-    <button type="submit" class="submit-button "  value="button">送信1</button>
+    <button type="submit" class="submit-button " value="button">送信1</button>
   </form>
 
 
@@ -154,46 +154,47 @@
     <img src="img/image3.jpg" alt="画像の説明" width="180" height="61">
     <p>Aさんの説明<br>「赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn-1個だけあるから4+3(n-1)という式になりました」</p>
   </div>
-  <div cl
+   <!--キャンバス，黒板の要素の順番変えるとうまくいかないよ-->
+    <div class="fullcanvas">
+      <button id="show-canvas-button" class="showCanvasButton">ノートを表示する</button>
+      <!--画像のみを送信-->
+      <button id="saveButton" class="saveButton">画像を提出する</button>
+      <div class="wrapper">
+        <div class="canvasbutton">
+          <!-- 色選択 -->
+          <!-- <label for="color-picker"></label> -->
+          <select id="color-picker">
+            <option value="black">黒</option>
+            <option value="red">赤</option>
+            <option value="blue">青</option>
+          </select>
+          <!-- 消去ボタン -->
+          <button id="clear-button">消す</button>
+        </div>
+        <canvas class="canvas" id="drawing-area" width="1000" height="1050"></canvas>
 
-  <!--キャンバス，黒板の要素の順番変えるとうまくいかないよ-->
-  <button id="show-canvas-button" class="showCanvasButton">ノートを表示する</button>
-  <!--画像のみを送信-->
-  <button id="saveButton" class="saveButton">画像を提出する</button>
-  <div class="wrapper">
-    <div class="canvasbutton">
-      <!-- 色選択 -->
-      <!-- <label for="color-picker"></label> -->
-      <select id="color-picker">
-        <option value="black">黒</option>
-        <option value="red">赤</option>
-        <option value="blue">青</option>
-      </select>
-      <!-- 消去ボタン -->
-      <button id="clear-button">消す</button>
+      </div>
     </div>
-    <canvas class="canvas" id="drawing-area" width="1000" height="1050"></canvas>
 
-  </div>
-
-  <!-- chat用 -->
-   <div class="gwform">
-  <div id="chatWindow">
-    <div class="message assistant">
-      Cさんの<br>「正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。」<br>この発言について考えよう。
+    <!-- chat用 -->
+    <div class="gwform">
+      <div id="chatWindow">
+        <div class="message assistant">
+          Cさんの<br>「正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。」<br>この発言について考えよう。
+        </div>
+      </div>
+      <div class="input-container">
+        <input type="text" id="userInput" placeholder="ここに入力してください">
+        <button id="sendButton">送信</button>
+      </div>
+      <button class="endButton">グループワークを終わる</button>
     </div>
-  </div>
-  <div class="input-container">
-    <input type="text" id="userInput" placeholder="ここに入力してください">
-    <button id="sendButton">送信</button>
-  </div>
-  <button class="endButton">グループワークを終わる</button>
-</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 
