@@ -1207,27 +1207,34 @@ window.addEventListener('load', function () {
 
 
   //chat用
-  const chatForm = document.getElementById("chatForm");
-const chatInput = document.getElementById("chatInput");
-const chatOutput = document.getElementById("chatOutput");
+  const chatInput = document.getElementById("userInput");
+const sendButton = document.getElementById("sendButton");
+const chatOutput = document.getElementById("chatWindow");
 
-chatForm.addEventListener("submit", async (e) => {
+sendButton.addEventListener("click", async (e) => {
   e.preventDefault();
 
   const userMessage = chatInput.value;
-  chatOutput.innerHTML += `<p><strong>生徒：</strong> ${userMessage}</p>`;
+  chatOutput.innerHTML += `<div class="message student"><strong>生徒：</strong> ${userMessage}</div>`;
   chatInput.value = "";
 
-  const response = await fetch("/api/chat", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message: userMessage }),
-  });
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: userMessage }),
+    });
 
-  const data = await response.json();
-  chatOutput.innerHTML += `<p><strong>先生：</strong> ${data.response}</p>`;
+    if (!response.ok) throw new Error("サーバーエラー");
+
+    const data = await response.json();
+    chatOutput.innerHTML += `<div class="message assistant"><strong>先生：</strong> ${data.response}</div>`;
+  } catch (error) {
+    chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
+  }
 });
 
+  
 
 
 })
