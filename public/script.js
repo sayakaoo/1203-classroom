@@ -863,7 +863,7 @@ window.addEventListener('load', function () {
       split_chars = splitStr(input);
       console.log(split_chars);
       rootId = "1";
-    } else if (normalize(userAnswer) === '3n+4' || normalize(userAnswer) === '4+3n') {
+    } else if (normalize(userAnswer) === '3n+1' || normalize(userAnswer) === '1+3n') {
       input = "<skip 47>";
       split_chars = splitStr(input);
       console.log(split_chars);
