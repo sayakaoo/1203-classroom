@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
     // 会話履歴に新しいメッセージを追加
     history.push({ role: "user", content: message });
 
-    const response = await openai.createChatCompletion({
+    const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',  // モデル名の修正
       messages: [
         {
@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
       temperature: 0.7,
     });
 
-    const reply = response.data.choices[0].message.content;
+    const reply = response.choices[0].message.content;
     
     // 会話履歴にAPIの返信も追加
     history.push({ role: "assistant", content: reply });
