@@ -271,7 +271,7 @@ body{
     color: #367293; /* 文字色を指定 */
   }
   .fullcanvas{
-    top: 1000px;
+    top: 800px;
     width: 100%;
     max-width: 400px;
     margin: 20px auto;
