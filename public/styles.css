@@ -282,12 +282,14 @@ body{
     text-align: right; /* 内部のテキストや要素を右揃え */
 }
 
-.gwform{
+.gwform {
     position: absolute; /* ページ内で位置を指定 */
-    top: 100px; /* 上から1500px */
+    top: 100px; /* 上から100px */
+    left: 50%; /* 横方向の中央 */
+    transform: translateX(-50%); /* 中央揃え調整 */
     width: 100%;
-    z-index: 100;
     max-width: 800px; /* 横幅制限 */
+    z-index: 100;
     margin: 0 auto; /* 中央揃え */
     padding: 20px;
     border: 2px solid #3d81a5;
@@ -298,6 +300,7 @@ body{
     font-size: 14px;
     color: #367293; /* 文字色を指定 */
 }
+
 
 
 /*フォームのデザイン*/
