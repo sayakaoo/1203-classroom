@@ -990,8 +990,8 @@ window.addEventListener('load', function () {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
     // 解答を取得する前にDOMが更新されているか確認
-    const userAnswer1 = document.querySelector('#userAnswer1').value.trim(); // 解答1を取得 (trimで余分なスペースを削除)
-    const userAnswer2 = document.querySelector('#userAnswer2').value.trim(); // 解答2を取得
+    const userAnswer1 = document.querySelector('#userAnswer91').value.trim(); // 解答1を取得 (trimで余分なスペースを削除)
+    const userAnswer2 = document.querySelector('#userAnswer92').value.trim(); // 解答2を取得
 
     // ここで各解答を処理
     console.log('解答1:', userAnswer1);
