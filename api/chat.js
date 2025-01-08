@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
     history.push({ role: "user", content: message });
 
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',  // モデル名の修正
+      model: 'gpt-4o-mini-2024-07-18',  // モデル名の修正
       messages: [
         {
           role: "system",
@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
             この発言を受けて、あなたは他の生徒と一緒に考えていきます。「4n-(n-1)」という式がユーザーの発言から出たら会話を終了してください。
         
             重要なポイント：
-            - あなたの発言はできるだけ一言にしてください。
+            - あなたの発言はできるだけ一文にしてください。
             - どの部分で間違えているのかを一緒に考えます。
             - 他の生徒の意見を尊重しながら、正しい考え方を導き出すように努めます。
             -考えを深めていきましょう。
