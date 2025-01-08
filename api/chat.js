@@ -1,10 +1,10 @@
-import { Configuration, OpenAIApi } from "openai";
+require('dotenv').config();
+const { OpenAI } = require('openai');
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY, // 環境変数からAPIキーを取得
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
-const openai = new OpenAIApi(configuration);
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
