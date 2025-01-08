@@ -23,6 +23,7 @@ window.addEventListener('load', function () {
   let highestPrediction = "";
   let textResponse = "";
   let buttonId = "";
+  let rootId = "0";
   const clearBtn = document.querySelector('#clear-button');
 
 
@@ -32,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 20><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<skip 38><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -101,7 +102,10 @@ window.addEventListener('load', function () {
       "ではAさんどのように考えたか教えてください。",
       "<charaOut 5><chara 5 3><item 4>図のように考えました．",
       "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
-      "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の回答と見比べてみましょう。<closeCanvas 0>では次に(学習者)さんどのように考えたか式を教えてください。<form 5>",
+      "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の回答と見比べてみましょう。<root>",
+    ],
+    44: [
+      "<closeCanvas 0>では次に(学習者)さんどのように考えたか式を教えてください。<form 5>"
     ],
 
     //22編集中
@@ -151,13 +155,34 @@ window.addEventListener('load', function () {
     ],
     36: [
       "そうですね、具体的な数を入れてみましょう。",
-      "正方形が3個のときマッチ棒は10本だったからこれを当てはめてみましょう",
-      "どうでしたか？",
-      "(式は正しい，正しくないで分岐させ，何が違うのかを考える)"
+      "正方形が3個のときマッチ棒は10本だったからこれを当てはめてみましょう<skip 38>",
     ],
-    36: [
-      "<charaOut 5><chara 5 2>最初に正方形が3個のときを考えたからそれを式に当てはめてみたらどうかな？<skip 28>",
+    37: [
+      "<charaOut 5><chara 5 3>最初に正方形が3個のときを考えたからそれを式に当てはめてみたらどうかな？",
+      "<charaOut 5><chara 5 1>いいですね。正方形が3個のときマッチ棒は10本だったからこれを当てはめてみましょう<skip 38>",
     ],
+    38: [
+      "どうでしたか？<form 6>",
+    ],
+    39: [
+      "一緒に確認してみましょう(映像で説明できたらいいな)<skip 40>",
+    ],
+    40: [
+      "正方形が3個のときマッチ棒は13本必要なことになってしまうので式が違いそうですね。",
+      "どのように式を変えたらいいでしょうか？<form 7>",
+    ],
+    41: [
+      "では変更した式をおしえて下さい。<form 8>",
+    ],
+    42: [
+      "一緒に確認しましょう。(擬変数的確認かなあ)<skip 20>",
+    ],
+    43: [
+      "そうですね、4+3(n-1)だと正方形が3個の時も計算が合いますね。<skip 20>",
+    ],
+    //44使う
+
+
 
 
 
@@ -198,6 +223,21 @@ window.addEventListener('load', function () {
       switch (tagget_str[0]) {
         case 'stop':
           stop_flg = true;
+          break;
+        case 'root':
+          switch (rootId) {
+            case '0':
+              input = "<skip 44>";
+              split_chars = splitStr(input);
+              break;
+            case '1':
+              input = "<skip 30>";
+              split_chars = splitStr(input);
+
+              break;
+          }
+          main();
+          mess_box.click();
           break;
         case 'saveButton':
           $('.saveButton').addClass('visible');
@@ -745,6 +785,7 @@ window.addEventListener('load', function () {
       input = "<skip 35>";
       split_chars = splitStr(input);
       console.log(split_chars);
+      rootId = "1";
     } else {
       input = "<skip 100>";
       split_chars = splitStr(input);
@@ -784,8 +825,67 @@ window.addEventListener('load', function () {
     mess_box.click();
     document.querySelector('#userAnswer').value = '';
   });
+  //Q6の回答の分岐
+  document.getElementById('correctButton').addEventListener('click', () => {
+    input = "<skip 39>";
+    split_chars = splitStr(input);
+    console.log("式はただしい");
+    $('.formQ6').removeClass('visible');
+    main();
+    mess_box.click();
+  });
 
-  
+  document.getElementById('incorrectButton').addEventListener('click', () => {
+    input = "<skip 40>";
+    split_chars = splitStr(input);
+    console.log("式はただしくない");
+    $('.formQ6').removeClass('visible');
+    main();
+    mess_box.click();
+  });
+
+  //Q7の回答の分岐
+  document.getElementById('correctButton').addEventListener('click', () => {
+    input = "<skip 41>";
+    split_chars = splitStr(input);
+    console.log("わかった");
+    $('.formQ7').removeClass('visible');
+    main();
+    mess_box.click();
+  });
+
+  document.getElementById('incorrectButton').addEventListener('click', () => {
+    input = "<skip 42>";
+    split_chars = splitStr(input);
+    console.log("わからない");
+    $('.formQ7').removeClass('visible');
+    main();
+    mess_box.click();
+  });
+
+  //Q8の回答の分岐
+  document.querySelector('#Q4form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const userAnswer = document.querySelector('#userAnswer4').value; // ユーザーの回答を取得
+    $('.formQ4').removeClass('visible');
+
+    //回答鬼分岐！！！！
+    if (normalize(userAnswer) === '3(n-1)+4' || normalize(userAnswer) === '4+3(n-1)') {
+      input = "<skip 43>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    } else {
+      input = "<skip 42>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    }
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+  });
+
+
 
 
 
@@ -907,11 +1007,11 @@ window.addEventListener('load', function () {
       if (textResponse.includes("具体的な数を使う")) {
         console.log("具体的な数を使う");
         input = "<skip 36>";
-            split_chars = splitStr(input);
+        split_chars = splitStr(input);
       } else if (textResponse.includes("その他")) {
         console.log("その他");
         input = "<skip 37>";
-            split_chars = splitStr(input);
+        split_chars = splitStr(input);
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
       }
