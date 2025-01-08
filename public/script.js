@@ -236,7 +236,7 @@ window.addEventListener('load', function () {
     ],
     //30のグループワーク後
     57: [
-      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 10><apiform 10><showCanvaswithapi>",
+      "そうですね、4nからn-1個引いて4n-(n-1)という式が求められますね。",
     ],
 
 

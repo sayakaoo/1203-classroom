@@ -270,7 +270,7 @@ body{
     font-size: 14px;
     color: #367293; /* 文字色を指定 */
   }
-  .gwform,
+ 
   .fullcanvas {
     position: absolute; /* ページ内で位置を指定 */
     top: 1200px; /* 上から1500px */
@@ -280,6 +280,24 @@ body{
     padding: 20px;
     box-sizing: border-box; /* パディングを含む幅制御 */
     text-align: right; /* 内部のテキストや要素を右揃え */
+}
+
+.gwform{
+    position: absolute; /* ページ内で位置を指定 */
+    top: 900px; /* 上から1500px */
+    width: 100%;
+    max-width: 800px; /* 横幅制限 */
+    margin: 0 auto; /* 中央揃え */
+    padding: 20px;
+    box-sizing: border-box; /* パディングを含む幅制御 */
+    text-align: right; /* 内部のテキストや要素を右揃え */
+    border: 2px solid #3d81a5;
+    border-radius: 10px;
+    background-color: #d9dee5; /* 背景色を変更 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: "DotGothic16", sans-serif; /* ドットフォントを使用 */
+    font-size: 14px;
+    color: #367293; /* 文字色を指定 */
 }
 
 
