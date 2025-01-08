@@ -340,5 +340,41 @@ body {
 }
 
 
-
-
+/* chat用 */
+.chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  .message {
+    margin: 10px 0;
+  }
+  .user {
+    text-align: right;
+    color: #007bff;
+  }
+  .assistant {
+    text-align: left;
+    color: #555;
+  }
+  .input-container {
+    display: flex;
+    margin-top: 20px;
+  }
+  .input-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .input-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }

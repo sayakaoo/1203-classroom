@@ -1205,5 +1205,30 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
+
+  //chat用
+  const chatForm = document.getElementById("chatForm");
+const chatInput = document.getElementById("chatInput");
+const chatOutput = document.getElementById("chatOutput");
+
+chatForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const userMessage = chatInput.value;
+  chatOutput.innerHTML += `<p><strong>生徒：</strong> ${userMessage}</p>`;
+  chatInput.value = "";
+
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: userMessage }),
+  });
+
+  const data = await response.json();
+  chatOutput.innerHTML += `<p><strong>先生：</strong> ${data.response}</p>`;
+});
+
+
+
 })
 
