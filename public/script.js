@@ -130,7 +130,7 @@ window.addEventListener('load', function () {
       ""
     ],
     30: [
-      "次にCさんどのように考えたか教えてください。",
+      "<closeCanvas><colseapiform><closehint>次にCさんどのように考えたか教えてください。",
       "正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。",
       "たしかにそうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？・・・・",
       "・・・",
@@ -154,7 +154,7 @@ window.addEventListener('load', function () {
       "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 3><apiform 3>",
     ],
     34: [
-      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 3><apiform 4><showCanvaswithapi>",
+      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 4><apiform 4><showCanvaswithapi>",
     ],
     35: [
       "(4+3n)ありがとうございます。",
@@ -162,11 +162,11 @@ window.addEventListener('load', function () {
       ""
     ],
     36: [
-      "そうですね、具体的な数を入れてみましょう。",
+      "<colseapiform>そうですね、具体的な数を入れてみましょう。",
       "正方形が3個のときマッチ棒は10本だったからこれを当てはめてみましょう<skip 38>",
     ],
     37: [
-      "<charaOut 5><chara 5 3>最初に正方形が3個のときを考えたからそれを式に当てはめてみたらどうかな？",
+      "<colseapiform><charaOut 5><chara 5 3>最初に正方形が3個のときを考えたからそれを式に当てはめてみたらどうかな？",
       "<charaOut 5><chara 5 1>いいですね。正方形が3個のときマッチ棒は10本だったからこれを当てはめてみましょう<skip 38>",
     ],
     38: [
@@ -188,8 +188,52 @@ window.addEventListener('load', function () {
     43: [
       "そうですね、4+3(n-1)だと正方形が3個の時も計算が合いますね。<skip 45>",
     ],
-    //44。４５．４６使う
-
+    //44,45,46使う
+    47: [
+      "ではAさんどのような式を立てたか教えてください<skip 48>"
+    ],
+    48: [
+      "<charaOut 5><chara 5 3>4+3(n-1)という式をたてました。",
+      "<charaOut 5><chara 5 1>ありがとうございます。",
+      "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas 6>"
+    ],
+    49: [
+      "みなさん考えられましたか？",
+      "ではAさんどのように考えたか教えてください。",
+      "<charaOut 5><chara 5 3><item 5>図のように考えました．",
+      "赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn-1個だけあるから4+3(n-1)という式になりました",
+      "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の回答と見比べてみましょう。",
+      "<skip 50>"
+    ],
+    50: [
+      "<closeCanvas 6>では次に(学習者)さん1+3nという式を立てていたと思います。",
+      "(学習者)さんどのように1+3nという式を立てたか説明してください。<showCanvaswithapi><apiform 7><hint 1>"
+    ],
+    51: [
+      "<closeCanvas><closehint><colseapiform>ありがとうございます。",
+      "<skip 52>",
+    ],
+    52: [
+      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 8><apiform 8>",
+    ],
+    53: [
+      "<closeCanvas><colseapiform><closehint><item 4>ありがとうございます。赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn個だけあるので1+3nという式になりますね。<fadeOut_item 4><skip 30>",
+    ],
+    54: [
+      "<closeCanvas><colseapiform><closehint>図をもう一度書いてみましょう<showCanvas 9><hint 9>",
+      "",
+      ""
+    ],
+    55: [
+      "ありがとうございます。一緒に考えてみましょう",
+      "<item 4>Aさんの例と同じように考えると、このように考えられそうですね(分かりやすく動画で解説したいな)",
+      "もう一度解答を見直してみましょう",
+      "クリックで次の問題に進む",
+      "<closeCanvas><closehint><itemOut 4><skip 30>"
+    ],
+    56: [
+      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 10><apiform 10><showCanvaswithapi>",
+    ],
 
 
 
@@ -636,6 +680,32 @@ window.addEventListener('load', function () {
           //とりあえず21に飛ばしちゃう
         }
         break;
+      case "saveButton6":
+        if (highestPrediction.className === "3+4(n-1)") {
+          console.log("画像は3+4(n-1)");
+          input = "<skip 49>";
+          split_chars = splitStr(input);
+        } else {
+          console.log("画像間違い");
+          input = "<skip 49>";
+          split_chars = splitStr(input);
+          // ここに間違いを記録する処理を追加?
+          //とりあえず49に飛ばしちゃう
+        }
+        break;
+      case "saveButton9":
+        if (highestPrediction.className === "1+3n") {
+          console.log("画像は1+3n");
+          input = "<skip 53>";
+          split_chars = splitStr(input);
+        } else {
+          console.log("1+3n,2度目の画像間違い");
+          input = "<skip 55>";
+          split_chars = splitStr(input);
+          // ここに間違いを記録する処理を追加?
+          //とりあえず21に飛ばしちゃう
+        }
+        break;
       default:
         console.log(`未知のボタンIDが検出されました: ${buttonId}`);
         // 追加のデフォルト処理を実行
@@ -793,6 +863,11 @@ window.addEventListener('load', function () {
       split_chars = splitStr(input);
       console.log(split_chars);
       rootId = "1";
+    } else if (normalize(userAnswer) === '3n+4' || normalize(userAnswer) === '4+3n') {
+      input = "<skip 47>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+      rootId = "2";
     } else {
       input = "<skip 100>";
       split_chars = splitStr(input);
@@ -1022,17 +1097,84 @@ window.addEventListener('load', function () {
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
       }
+    } if (buttonId === 'saveButton7') {
+      if (textResponse.includes("不正解")) {
+        switch (highestPrediction.className) {
+          case "1+3n":
+            console.log("図〇、説明×");
+            input = "<skip 51>";
+            split_chars = splitStr(input);
+            break;
+          default:
+            console.log("図も説明も不正解");
+            input = "<skip 56>";
+            split_chars = splitStr(input);
+            break;
+        };
+      } else if (textResponse.includes("正解")) {
+        switch (highestPrediction.className) {
+          case "1+3n":
+            console.log("図も説明も正解");
+            input = "<skip 53>";
+            split_chars = splitStr(input);
+            break;
+          default:
+            console.log("説明〇図×");
+            input = "<skip 54>";
+            split_chars = splitStr(input);
+            break;
+        };
+      } else {
+        console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
+      }
+    } else if (buttonId === 'saveButton8') {
+      if (textResponse.includes("不正解")) {
+        input = "<skip 52>";
+        split_chars = splitStr(input);
+      } else if (textResponse.includes("正解")) {
+        input = "<skip 30>";
+        split_chars = splitStr(input);
+      } else {
+        console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
+      }
+    }else if (buttonId === 'saveButton10') {
+      if (textResponse.includes("不正解")) {
+        switch (highestPrediction.className) {
+          case "4+3(n-1)":
+            console.log("図〇、説明×");
+            input = "<skip 55>";
+            split_chars = splitStr(input);
+            break;
+          default:
+            console.log("図も説明も不正解");
+            input = "<skip 55>";
+            split_chars = splitStr(input);
+            break;
+        };
+      } else if (textResponse.includes("正解")) {
+        switch (highestPrediction.className) {
+          case "4+3(n-1)":
+            console.log("図も説明も正解");
+            input = "<skip 30>";
+            split_chars = splitStr(input);
+            break;
+          default:
+            console.log("説明〇図×");
+            input = "<skip 55>";
+            split_chars = splitStr(input);
+            break;
+        };
+      } else {
+        console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
+      }
     } else {
       console.log("未知のボタンID");
     }
-
     main();
     mess_box.click();
     canvasClearButtonClick();
 
   });
-
-
 
   //読み込みのための遅延のための関数
   function sleep(ms) {
@@ -1062,10 +1204,6 @@ window.addEventListener('load', function () {
     main();
     mess_box.click();
   });
-
-
-
-
 
 })
 
