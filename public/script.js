@@ -826,7 +826,7 @@ window.addEventListener('load', function () {
   });
   //Q6の回答の分岐
   document.getElementById('correctButton').addEventListener('click', () => {
-    input = "<skip 39>";
+    input = "<skip 40>";
     split_chars = splitStr(input);
     console.log("式はただしい");
     $('.formQ6').removeClass('visible');
@@ -835,7 +835,7 @@ window.addEventListener('load', function () {
   });
 
   document.getElementById('incorrectButton').addEventListener('click', () => {
-    input = "<skip 40>";
+    input = "<skip 39>";
     split_chars = splitStr(input);
     console.log("式はただしくない");
     $('.formQ6').removeClass('visible');
@@ -863,11 +863,11 @@ window.addEventListener('load', function () {
   });
 
   //Q8の回答の分岐
-  document.querySelector('#Q4form').addEventListener('submit', function (event) {
+  document.querySelector('#Q8form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
-    const userAnswer = document.querySelector('#userAnswer4').value; // ユーザーの回答を取得
-    $('.formQ4').removeClass('visible');
+    const userAnswer = document.querySelector('#userAnswer8').value; // ユーザーの回答を取得
+    $('.formQ8').removeClass('visible');
 
     //回答鬼分岐！！！！
     if (normalize(userAnswer) === '3(n-1)+4' || normalize(userAnswer) === '4+3(n-1)') {
