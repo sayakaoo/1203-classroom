@@ -1215,7 +1215,7 @@ sendButton.addEventListener("click", async (e) => {
   e.preventDefault();
 
   const userMessage = chatInput.value;
-  chatOutput.innerHTML += `<div class="message student"><strong>生徒：</strong> ${userMessage}</div>`;
+  chatOutput.innerHTML += `<div class="message student"><strong>（学習者）さん：</strong> ${userMessage}</div>`;
   chatInput.value = "";
 
   try {
@@ -1228,7 +1228,7 @@ sendButton.addEventListener("click", async (e) => {
     if (!response.ok) throw new Error("サーバーエラー");
 
     const data = await response.json();
-    chatOutput.innerHTML += `<div class="message assistant"><strong>先生：</strong> ${data.response}</div>`;
+    chatOutput.innerHTML += `<div class="message assistant"><strong>Aさん：</strong> ${data.response}</div>`;
   } catch (error) {
     chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
   }
