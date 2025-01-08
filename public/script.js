@@ -130,7 +130,7 @@ window.addEventListener('load', function () {
       ""
     ],
     30: [
-      "<closeCanvas><colseapiform><closehint>次にCさんどのように考えたか教えてください。",
+      "<closeCanvas><colseapiform><closehint><itemOut 4>次にCさんどのように考えたか教えてください。",
       "正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。",
       "たしかにそうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？・・・・",
       "・・・",
