@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 30><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<skip 59><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -236,9 +236,22 @@ window.addEventListener('load', function () {
     ],
     //30のグループワーク後
     57: [
-      "そうですね、4nからn-1個引いて4n-(n-1)という式が求められますね。",
+      "グループで結論を出すことが出来ましたか？Cさん出た答えを説明してください",
+      "<charaOut 5><chara 5 2><item 1>図だとこのように示すことが出来て、4nという式だと間のマッチ棒まで数えてしまってました。",
+      "なので、n-1この重複するマッチ棒の数を引いて、4n-(n-1)が正しい式です。",
+      "<charaOut 5><chara 5 1><itemOut>ありがとうございます。様々な方法で求めるkとができましたね。",
+      "今まで求めた式を計算してみましょう。計算して気付いたことを教えてください<<apiform 11>",
+    ],
+    58: [
+      "<colseapiform>全て同じ式になりましたね。",
     ],
 
+    59: [
+      "<colseapiform>それぞれの式を計算してみましょう。<form 9>",
+    ],
+    60: [
+      "それぞれ計算すると１+3nになりますね(二度間違いちゃんと説明しなきゃ)",
+    ],
 
 
 
@@ -958,7 +971,6 @@ window.addEventListener('load', function () {
     const userAnswer = document.querySelector('#userAnswer8').value; // ユーザーの回答を取得
     $('.formQ8').removeClass('visible');
 
-    //回答鬼分岐！！！！
     if (normalize(userAnswer) === '3(n-1)+4' || normalize(userAnswer) === '4+3(n-1)') {
       input = "<skip 43>";
       split_chars = splitStr(input);
@@ -973,6 +985,32 @@ window.addEventListener('load', function () {
     document.querySelector('#userAnswer').value = '';
   });
 
+  //Q8の回答の分岐
+  document.querySelector('#Q9form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const userAnswer1 = document.querySelector('#userAnswer1').value; // 解答1を取得
+  const userAnswer2 = document.querySelector('#userAnswer2').value; // 解答2を取得
+  
+  // ここで各解答を処理
+  console.log('解答1:', userAnswer1);
+  console.log('解答2:', userAnswer2);
+
+  // 例えば、回答に応じて分岐処理を行う
+  if (normalize(userAnswer1) === '1+3n' && normalize(userAnswer2) === '1+3n') {
+    input = "<skip 58>"; // 例として次の処理をスキップ
+    split_chars = splitStr(input);
+    console.log(split_chars);
+  } else {
+    input = "<skip 60>"; // 異なる処理
+    split_chars = splitStr(input);
+    console.log(split_chars);
+  }
+  $('.formQ9').removeClass('visible');
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+  });
 
 
 
@@ -1174,6 +1212,16 @@ window.addEventListener('load', function () {
         };
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
+      }
+    } else if (buttonId === 'saveButton11') {
+      if (textResponse.includes("不正解")) {
+        input = "<skip 59>";
+        split_chars = splitStr(input);
+      } else if (textResponse.includes("正解")) {
+        input = "<skip 58>";
+        split_chars = splitStr(input);
+      } else {
+        console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
       }
     } else {
       console.log("未知のボタンID");
