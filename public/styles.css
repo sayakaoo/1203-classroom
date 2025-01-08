@@ -272,7 +272,7 @@ body{
   }
   .fullcanvas {
     position: absolute; /* ページ内で位置を指定 */
-    top: 1500px; /* 上から1500px */
+    top: 1200px; /* 上から1500px */
     width: 100%;
     max-width: 400px; /* 横幅制限 */
     margin: 0 auto; /* 中央揃え */
