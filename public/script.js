@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 7><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<skip 50><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -132,9 +132,9 @@ window.addEventListener('load', function () {
     30: [
       "<closeCanvas><colseapiform><closehint><itemOut 4>次にCさんどのように考えたか教えてください。",
       "正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。",
-      "たしかにそうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？・・・・",
-      "・・・",
-      ""
+      "たしかにそうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？",
+      "話し合ってみましょう",
+      "<gwform>"
     ],
     31: [
       "ありがとうございます。一緒に考えてみましょう",
@@ -234,7 +234,10 @@ window.addEventListener('load', function () {
     56: [
       "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 10><apiform 10><showCanvaswithapi>",
     ],
-
+    //30のグループワーク後
+    57: [
+      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 10><apiform 10><showCanvaswithapi>",
+    ],
 
 
 
@@ -302,6 +305,9 @@ window.addEventListener('load', function () {
           console.log('ボタン表示');
           buttonId = 'saveButton' + tagget_str[1];
           break;
+          case 'gwform':
+            $('.gwform').removeClass('visible');
+            break;
         case 'form':
           const targetClass = 'formQ' + tagget_str[1];
           $('.' + targetClass).addClass('visible');
@@ -1201,6 +1207,18 @@ window.addEventListener('load', function () {
         break;
     }
     console.log('ひとつ前に戻るボタンがクリックされました');
+    main();
+    mess_box.click();
+  });
+
+  //グループワーク終了ボタンを押したときの処理
+  const endButton = document.querySelector('.endButton');
+  endButton.addEventListener('click', (event) => {
+    event.preventDefault(); 
+        input = "<skip 57>";
+        split_chars = splitStr(input);    
+    console.log('グループワークを終了しました');
+    $('.gwform').removeClass('visible');
     main();
     mess_box.click();
   });
