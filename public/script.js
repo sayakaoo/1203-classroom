@@ -32,7 +32,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 25><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<skip 35><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -107,7 +107,7 @@ window.addEventListener('load', function () {
     //22編集中
     22: [
       "(4+3(n-1))ありがとうございます。",
-      "(学習者)さんどのように求めたか説明してください。<showCanvaswithapi><apiform 1><hint 1>"
+      "(学習者)さんどのように4+3(n-1)という式を立てたか説明してください。<showCanvaswithapi><apiform 1><hint 1>"
     ],
     23: [
       "<closeCanvas><colseapiform><closehint>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5><skip 30>",
@@ -144,10 +144,15 @@ window.addEventListener('load', function () {
     34: [
       "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 3><apiform 4><showCanvaswithapi>",
     ],
-    25: [
+    35: [
       "(4+3n)ありがとうございます。",
-      "(学習者)さんどのように求めたか説明してください。<showCanvaswithapi><apiform 5><hint 1>",
-      "",
+      "4+3nという式が正しいか確かめることはできますか？また、どのような方法で確かめることが出来ますか？<apiform 5><backbutton 5>",
+      ""
+    ],
+    36: [
+      "ありがとうございます。",
+      "4+3nという式が正しいか確かめることはできますか？",
+      "どのような方法で確かめることが出来ますか？<form 9>",
       ""
     ],
 
@@ -196,6 +201,11 @@ window.addEventListener('load', function () {
           break;
         case 'saveButtonremove':
           $('.saveButton').removeClass('Buttonshow');
+          break;
+        case 'backButton':
+          $('.backButton').addClass('visible');
+          console.log('ボタン表示');
+          buttonId = 'saveButton' + tagget_str[1];
           break;
         case 'form':
           const targetClass = 'formQ' + tagget_str[1];
@@ -771,6 +781,8 @@ window.addEventListener('load', function () {
     document.querySelector('#userAnswer').value = '';
   });
 
+  
+
 
 
 
@@ -887,11 +899,21 @@ window.addEventListener('load', function () {
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
       }
+    } else if (buttonId === 'saveButton5') {
+      if (textResponse.includes("具体的な数を使う")) {
+        console.log("具体的な数を使う");
+        input = "<skip 31>";
+            split_chars = splitStr(input);
+      } else if (textResponse.includes("その他")) {
+        console.log("その他");
+        input = "<skip 31>";
+            split_chars = splitStr(input);
+      } else {
+        console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
+      }
     } else {
       console.log("未知のボタンID");
     }
-
-
 
     main();
     mess_box.click();
@@ -916,6 +938,19 @@ window.addEventListener('load', function () {
     }
   }
 
+  //ひとつ前に戻るボタンを押したときの処理
+  const backButton = document.querySelector('.backButton');
+  backButton.addEventListener('click', (event) => {
+    event.preventDefault(); switch (buttonId) {
+      case "saveButton5":
+        input = "<skip 7>";
+        split_chars = splitStr(input);
+        break;
+    }
+    console.log('ひとつ前に戻るボタンがクリックされました');
+    main();
+    mess_box.click();
+  });
 
 
 
