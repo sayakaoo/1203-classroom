@@ -22,7 +22,7 @@ window.addEventListener('load', function () {
   let userChar = "";
   let highestPrediction = "";
   let textResponse = "";
-  let buttonId= "";
+  let buttonId = "";
   const clearBtn = document.querySelector('#clear-button');
 
 
@@ -204,7 +204,7 @@ window.addEventListener('load', function () {
           break;
         case 'showCanvas':
           $('#saveButton').addClass('visible');    // 作成したクラス名を利用
-          buttonId ='saveButton' + tagget_str[1];
+          buttonId = 'saveButton' + tagget_str[1];
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
 
@@ -229,14 +229,13 @@ window.addEventListener('load', function () {
         case 'showCanvaswithapi':
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
-          buttonId ='saveButton' + tagget_str[1];
+          buttonId = 'saveButton' + tagget_str[1];
           break;
         case 'apiform':
-          const formapi = 'formapi' + tagget_str[1]; // 動的にクラス名を作成
-          $('.' + formapi).addClass('visible');
+          $('.formapi').addClass('visible');
           $('.submit-button').addClass('visible');
           console.log('フォーム表示');
-          buttonId ='saveButton' + tagget_str[1];
+          buttonId = 'saveButton' + tagget_str[1];
           break;
         case 'colseapiform':
           $('.formapi').removeClass('visible');
@@ -586,11 +585,11 @@ window.addEventListener('load', function () {
   }
 
   // ボタンのクリックイベントを設定
-document.getElementById('saveButton').addEventListener('click', () => {
-  predictCanvas(); // ボタンがクリックされたときに関数を実行
-  console.log("画像判断開始");
-});
- 
+  document.getElementById('saveButton').addEventListener('click', () => {
+    predictCanvas(); // ボタンがクリックされたときに関数を実行
+    console.log("画像判断開始");
+  });
+
 
   // 初期化
   loadModel();
@@ -728,7 +727,7 @@ document.getElementById('saveButton').addEventListener('click', () => {
       //input = "<skip 8>";
       split_chars = splitStr(input);
       console.log(split_chars);
-    }else if (normalize(userAnswer) === '3n+4' || normalize(userAnswer) === '4+3n') {
+    } else if (normalize(userAnswer) === '3n+4' || normalize(userAnswer) === '4+3n') {
       input = "<skip 35>";
       split_chars = splitStr(input);
       console.log(split_chars);
@@ -772,7 +771,7 @@ document.getElementById('saveButton').addEventListener('click', () => {
     document.querySelector('#userAnswer').value = '';
   });
 
- 
+
 
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
@@ -790,7 +789,7 @@ document.getElementById('saveButton').addEventListener('click', () => {
       console.log('画像を提出するボタンが見つかりません');
     }
   });
-  
+
 
   // フォーム送信処理を継続するようにsubmitイベントは保持
   const formapi = document.getElementById('answer-form');
@@ -858,7 +857,7 @@ document.getElementById('saveButton').addEventListener('click', () => {
       } else {
         console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
       }
-    }else if (buttonId === 'saveButton4') {
+    } else if (buttonId === 'saveButton4') {
       if (textResponse.includes("不正解")) {
         switch (highestPrediction.className) {
           case "4+3(n-1)":
