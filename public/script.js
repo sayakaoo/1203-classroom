@@ -32,7 +32,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 35><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<skip 20><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -146,15 +146,19 @@ window.addEventListener('load', function () {
     ],
     35: [
       "(4+3n)ありがとうございます。",
-      "4+3nという式が正しいか確かめることはできますか？また、どのような方法で確かめることが出来ますか？<apiform 5><backbutton 5>",
+      "4+3nという式が正しいか確かめることはできますか？また、どのような方法で確かめることが出来ますか？<apiform 5><backButton 5>",
       ""
     ],
     36: [
-      "ありがとうございます。",
-      "4+3nという式が正しいか確かめることはできますか？",
-      "どのような方法で確かめることが出来ますか？<form 9>",
-      ""
+      "そうですね、具体的な数を入れてみましょう。",
+      "正方形が3個のときマッチ棒は10本だったからこれを当てはめてみましょう",
+      "どうでしたか？",
+      "(式は正しい，正しくないで分岐させ，何が違うのかを考える)"
     ],
+    36: [
+      "<charaOut 5><chara 5 2>最初に正方形が3個のときを考えたからそれを式に当てはめてみたらどうかな？<skip 28>",
+    ],
+
 
 
 
@@ -902,11 +906,11 @@ window.addEventListener('load', function () {
     } else if (buttonId === 'saveButton5') {
       if (textResponse.includes("具体的な数を使う")) {
         console.log("具体的な数を使う");
-        input = "<skip 31>";
+        input = "<skip 36>";
             split_chars = splitStr(input);
       } else if (textResponse.includes("その他")) {
         console.log("その他");
-        input = "<skip 31>";
+        input = "<skip 37>";
             split_chars = splitStr(input);
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");

@@ -175,7 +175,7 @@ body{
 .showCanvasButton,
 .wrapper,
 .hint,
-.backButton
+.backButton,
 .formapi{
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
   pointer-events: none;/* これを設定しておくことでhiddenのとき下の要素が押せる */
