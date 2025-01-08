@@ -270,13 +270,17 @@ body{
     font-size: 14px;
     color: #367293; /* 文字色を指定 */
   }
-  .fullcanvas{
-    top: 0px;
+  .fullcanvas {
+    position: absolute; /* ページ内で位置を指定 */
+    top: 1500px; /* 上から1500px */
     width: 100%;
-    max-width: 400px;
-    margin: 20px auto;
+    max-width: 400px; /* 横幅制限 */
+    margin: 0 auto; /* 中央揃え */
     padding: 20px;
-  }
+    box-sizing: border-box; /* パディングを含む幅制御 */
+    text-align: right; /* 内部のテキストや要素を右揃え */
+}
+
 
 /*フォームのデザイン*/
 /* 全体のフォームスタイル */
