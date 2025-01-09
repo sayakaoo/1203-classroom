@@ -1087,7 +1087,7 @@ window.addEventListener('load', function () {
     const userAnswer = document.querySelector('#userAnswer10').value; // ユーザーの回答を取得
     $('.formQ10').removeClass('visible');
 
-    if (userAnswer === '1+3×4' && userAnswer === '1+4×3') {
+    if (userAnswer === '1+3×4' || userAnswer === '1+4×3') {
       input = "<skip 65>";
       split_chars = splitStr(input);
       console.log(split_chars);
