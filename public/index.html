@@ -54,6 +54,7 @@
       </div>
     </div>
   </div>
+  
 
   <form id="Q1form" class="formQ1 form">
     <label for="userAnswer1 userAnswer">マッチ棒は何本必要でしょうか？:</label><br>
@@ -84,6 +85,7 @@
     <input type="text" id="userAnswer4" placeholder="解答を入力してください" required>
     <button type="button" id="start-voice4">🎤 音声入力</button>
     <button id="Q4sbmitbutton">送信</button>
+    <button id="Q4nonsbmitbutton">式が思い浮かばない</button>
   </form>
 
   <form id="Q5form" class="formQ5 form">
@@ -119,6 +121,15 @@
     <p>3n+1</p><br><br> 
     <button type="submit" class="submitAnswersButton">送信</button>
   </form>
+
+  
+  <form id="Q10form" class="formQ10 form">
+    <label for="userAnswer10">同じ方法で考えると正方形が4個の時どのような式で表せますか？:</label><br>
+    <input type="text" id="userAnswer10" placeholder="解答を入力してください" required>
+    <button type="button" id="start-voice10">🎤 音声入力</button>
+    <button id="Q10sbmitbutton">送信</button>
+  </form>
+
 
   <button class="backButton">ひとつ前に戻る</button>
 
@@ -197,6 +208,12 @@
         <button id="sendButton">送信</button>
       </div>
       <button class="endButton">グループワークを終わる</button>
+    </div>
+
+    <div>
+      <p>いろんなところに飛べるボタン</p>
+      <button class="skip30Button">グループワークへ</button>
+      <button class="skip7Button">最初の立てた式をおしえるとこに</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>

@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 62><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "<chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -192,6 +192,10 @@ window.addEventListener('load', function () {
     47: [
       "ではAさんどのような式を立てたか教えてください<skip 48>"
     ],
+    67: [
+      "では次にAさんどのような式を立てたか教えてください<skip 48>"
+    ],
+
     48: [
       "<charaOut 5><chara 5 3>4+3(n-1)という式をたてました。",
       "<charaOut 5><chara 5 1>ありがとうございます。",
@@ -203,7 +207,7 @@ window.addEventListener('load', function () {
       "<charaOut 5><chara 5 3><item 5>図のように考えました．",
       "赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn-1個だけあるから4+3(n-1)という式になりました",
       "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の回答と見比べてみましょう。",
-      "<skip 50>"
+      "<rootId>"
     ],
     50: [
       "<closeCanvas 6>では次に(学習者)さん1+3nという式を立てていたと思います。",
@@ -268,8 +272,35 @@ window.addEventListener('load', function () {
       "<item 7>見つけた規則性を使うと、赤で囲んでいる最初の1本と、青で囲んでいるコの字型をしたグループに分けられそうですね。",
       "コの字型は3つあるので、<item 8>マッチ棒の本数は最初の1本と、コの字型×3で表すことが出来ます",
       "コの字型は3本のマッチ棒でできているので、式にすると、<item 9>1+3×3になります。",
-      "では、同じ方法で正方形が<item 15>4個の時も考えてみましょう。"
+      "では、同じ方法で正方形が<item 15>4個の時も考えてみましょう。",
+      "<skip 63>"
+
     ],
+    63: [
+      "同じ方法で考えると正方形が4個の時どのような式で表せますか？<form 10>"
+    ],
+    64: [
+      "正方形が3個のときと同じように考えてみましょう(変更する)",
+      "<skip 63>",
+    ],
+    65: [
+      "3個の時と同じように考えるとコの字型は4つあるので、マッチ棒の本数は最初の1本と、コの字型×4で表すことが出来ますね",
+      "つまり、式にすると、<item 10>1+3×4になります。",
+      "同じ方法で正方形が5個の時も考えると、<item 11>1+3×5になります。",
+      "では、正方形がn個の時も<item 12>考えてみましょう",
+      "まず、3個、4個、5個の時を振り返ってみましょう。",
+      "なにか気付いたことはありますか？(わんちゃん分岐)",
+      "<skip 66>"
+
+    ],
+    66: [
+      "正方形の数と式の最後の数<item 13>が一致していますね。",
+      "つまりこの式は1+3×(正方形の数)と表せそうです。(画像がない)",
+      "今回は正方形の数がn個の時を考えているので、正方形がn個の時必要なマッチ棒の本数は1+3×n本となります",
+      "<skip 67>"
+    ],
+    //67使う
+
 
 
     //経由用
@@ -319,6 +350,14 @@ window.addEventListener('load', function () {
               input = "<skip 30>";
               split_chars = splitStr(input);
               break;
+            case '2':
+              input = "<skip 50>";
+              split_chars = splitStr(input);
+              break;
+              case '3':
+                input = "<skip 30>";
+                split_chars = splitStr(input);
+                break;
           }
           main();
           mess_box.click();
@@ -914,6 +953,15 @@ window.addEventListener('load', function () {
     document.querySelector('#userAnswer').value = '';
   });
 
+  //式がわからないボタン
+  document.getElementById('Q4nonsbmitbutton').addEventListener('click', function(event) {
+    event.preventDefault(); // デフォルトの動作を防ぐ
+    input = "<skip 61>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+});
+
+
   //4+3(n-1)において様々な全角、半角など統一させるための関数
   //絶対もっといいのある
   function normalize(answer) {
@@ -1016,18 +1064,39 @@ window.addEventListener('load', function () {
 
     // 例えば、回答に応じて分岐処理を行う
     if (userAnswer1 === '1+3n' && userAnswer2 === '1+3n') {
-        input = "<skip 58>"; // 例として次の処理をスキップ
-        split_chars = splitStr(input);
-        console.log(split_chars);
+      input = "<skip 58>"; // 例として次の処理をスキップ
+      split_chars = splitStr(input);
+      console.log(split_chars);
     } else {
-        input = "<skip 60>"; // 異なる処理
-        split_chars = splitStr(input);
-        console.log(split_chars);
+      input = "<skip 60>"; // 異なる処理
+      split_chars = splitStr(input);
+      console.log(split_chars);
     }
     main();
-          mess_box.click();
-});
+    mess_box.click();
+  });
 
+  //Q10の回答の分岐
+  document.querySelector('#Q10form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+    rootId = "3";
+
+    const userAnswer = document.querySelector('#userAnswer10').value; // ユーザーの回答を取得
+    $('.formQ10').removeClass('visible');
+
+    if (userAnswer === '1+3×4' && userAnswer === '1+4×3') {
+      input = "<skip 65>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    } else {
+      input = "<skip 64>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+    }
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+  });
 
 
 
@@ -1318,7 +1387,27 @@ window.addEventListener('load', function () {
       chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
     }
   });
-
+  //いろいろなところに飛べるボタン、ほんとうはいらない
+  const skip30Button = document.querySelector('.skip30Button');
+  skip30Button.addEventListener('click', (event) => {
+    event.preventDefault(); 
+        input = "<skip 30>";
+        split_chars = splitStr(input);
+    
+    console.log('30に');
+    main();
+    mess_box.click();
+  });
+  const skip7Button = document.querySelector('.skip7Button');
+  skip7Button.addEventListener('click', (event) => {
+    event.preventDefault(); 
+        input = "<skip 7>";
+        split_chars = splitStr(input);
+    
+    console.log('30に');
+    main();
+    mess_box.click();
+  });
 
 
 
