@@ -310,6 +310,9 @@ form.form {
     top: 778px;
     left: 450px;
     width: 100%;
+    max-width: 400px;
+    left: 50%; /* 横方向の中央 */
+    transform: translateX(-50%); /* 中央揃え調整 */
     margin: 20px auto;
     padding: 20px;
     border: 2px solid #3d81a5;
