@@ -959,6 +959,9 @@ window.addEventListener('load', function () {
     input = "<skip 61>";
       split_chars = splitStr(input);
       console.log(split_chars);
+      $('.formQ4').removeClass('visible');
+      main();
+    mess_box.click();
 });
 
 
