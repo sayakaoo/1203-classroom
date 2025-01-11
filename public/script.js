@@ -1412,31 +1412,40 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
-  //voicebx用
-  document.getElementById('generateAudio').addEventListener('click', async () => {
-    const response = await fetch('/api/voicevox', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        text: 'こんにちは、これはVOICEVOXを使った音声合成です！',
-        speaker: 1,  // 使用する話者のID
-        speed: 1.0,  // 音声速度
-        pitch: 1.0,  // 音程
-        volume: 1.0, // 音量
-      }),
-    });
-  
-    if (response.ok) {
-      const audioUrl = await response.blob();
-      const audioPlayer = document.getElementById('audioPlayer');
-      audioPlayer.src = URL.createObjectURL(audioUrl);
-      audioPlayer.play();
-    } else {
-      console.error('音声生成に失敗しました');
+  //voicevox用
+  async function synthesizeSpeech() {
+    const text = document.getElementById('text').value;
+    const audioElement = document.getElementById('audio');
+
+    if (text.trim() === "") {
+        alert("テキストを入力してください！");
+        return;
     }
-  });
+
+    try {
+        // VercelのAPIエンドポイントを指定
+        const response = await fetch('/api/voicevox', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text })
+        });
+
+        // 音声生成に成功したかチェック
+        if (!response.ok) {
+            throw new Error(`音声生成に失敗しました: ${response.statusText}`);
+        }
+
+        // 音声データを受け取る
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        audioElement.src = audioUrl;
+    } catch (error) {
+        alert("音声生成に失敗しました：" + error.message);
+    }
+}
+
   
 
 

@@ -53,9 +53,11 @@
     </div>
   </div>
   
-  <h1>VOICEVOX 音声生成デモ</h1>
-  <button id="generateAudio">音声を生成</button>
-  <audio id="audioPlayer" controls></audio>
+  <h1>VOICEVOX 音声合成</h1>
+    <textarea id="text" rows="4" cols="50" placeholder="ここにテキストを入力してください"></textarea><br>
+    <button onclick="synthesizeSpeech()">音声合成</button>
+
+    <audio id="audio" controls></audio>
 
   <form id="Q1form" class="formQ1 form">
     <label for="userAnswer1 userAnswer">マッチ棒は何本必要でしょうか？:</label><br>
