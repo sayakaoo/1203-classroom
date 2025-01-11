@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const text = "こんにちは、VOICEVOXです！";
 
     try {
-      const voicevoxUrl = process.env.VOICEVOX_URL;
+      const voicevoxBaseUrl = process.env.VOICEVOX_URL;
       VOICEVOX_URL || 'https://1094-2400-4051-f81-3e00-ed37-3ce8-5d80-bdea.ngrok-free.app/api/voicevox';
 
       // ngrok で公開された Voicevox サーバーの URL
