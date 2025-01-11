@@ -296,7 +296,7 @@ window.addEventListener('load', function () {
     66: [
       "正方形の数と式の最後の数<item 13>が一致していますね。",
       "つまりこの式は1+3×(正方形の数)と表せそうです。(画像がない)",
-      "今回は正方形の数がn個の時を考えているので、正方形がn個の時必要なマッチ棒の本数は1+3×n本となります",
+      "今回は正方形の数がn個の時を考えているので、正方形がn個の時必要なマッチ棒の本数は1+3×n本<item 14ws>となります",
       "<skip 67>"
     ],
     //67使う
@@ -1412,6 +1412,31 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
+  //voicebx用
+  document.getElementById('playButton').addEventListener('click', async () => {
+    try {
+      const response = await fetch('/api/voicevox', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: "こんにちは、VOICEVOXです！" }) // 固定の文字列を送信
+      });
+
+      if (!response.ok) {
+        throw new Error('音声生成に失敗しました');
+      }
+
+      // 音声データを受け取り、再生する
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      audio.play();
+    } catch (error) {
+      console.error(error);
+      alert('エラーが発生しました。コンソールを確認してください。');
+    }
+  });
 
 
 })

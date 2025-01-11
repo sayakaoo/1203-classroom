@@ -1,11 +1,13 @@
 export default async function handler(req, res) {
   // POST リクエストを処理
   if (req.method === 'POST') {
-    const { text } = req.body;
+    // 固定のテキストを指定
+    const text = "こんにちは、VOICEVOXです！";
 
     try {
-      const voicevoxBaseUrl = process.env.VOICEVOX_URL || 'https://1094-2400-4051-f81-3e00-ed37-3ce8-5d80-bdea.ngrok-free.app/api/voicevox';
-      
+      const voicevoxUrl = process.env.VOICEVOX_URL;
+      VOICEVOX_URL || 'https://1094-2400-4051-f81-3e00-ed37-3ce8-5d80-bdea.ngrok-free.app/api/voicevox';
+
       // ngrok で公開された Voicevox サーバーの URL
       const response = await fetch(voicevoxBaseUrl, {
         method: 'POST',

@@ -3,7 +3,7 @@ html{
     overflow: auto;
 }
 body{
-    overflow-x: hidden;
+    overflow-x: hildden;
     margin: 0;
     padding: 0;
     font-family: serif;
