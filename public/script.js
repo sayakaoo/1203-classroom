@@ -1424,7 +1424,7 @@ window.addEventListener('load', function () {
 
     try {
         // Voicevox API のURLを適切に設定（/api/voicevoxをVercelのURLに変更）
-        const response = await fetch('/api/voievox', {
+        const response = await fetch('/api/voicevox', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
