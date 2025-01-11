@@ -1414,14 +1414,13 @@ window.addEventListener('load', function () {
 
   //voicevox用
   // ボタンがクリックされた時に音声合成を実行
-  document.getElementById('synthesizeButton').onclick = async function() {
-    const text = document.getElementById('text').value;
-    const audioElement = document.getElementById('audio');
-
-    if (text === '') {
-        alert('テキストを入力してください');
-        return;
-    }
+  document.getElementById('generateButton').addEventListener('click', async () => {
+    const text = "こんにちは、VOICEVOXです！"; // 音声生成するテキスト
+    const speaker = 1; // 使用する話者のID（例: 1番目の話者）
+    const speed = 1.0; // 音声の速度
+    const pitch = 1.0; // 音声の音程
+    const volume = 1.0; // 音声の音量
+  
 
     try {
         // Voicevox API のURLを適切に設定（/api/voicevoxをVercelのURLに変更）
@@ -1440,17 +1439,19 @@ window.addEventListener('load', function () {
         });
 
         if (!response.ok) {
-            throw new Error('音声生成に失敗しました');
+          throw new Error(`Voicevox request failed with status: ${response.status}`);
         }
-
-        const audioBlob = await response.blob();  // 音声データを取得
-        const audioUrl = URL.createObjectURL(audioBlob);  // URLを生成
-        audioElement.src = audioUrl;  // 音声を再生するための URL を設定
-    } catch (error) {
-        console.error('音声生成エラー:', error);
-        alert(error.message);
-    }
-};
+    
+        const audioData = await response.blob();
+        const audioUrl = URL.createObjectURL(audioData);
+        const audioPlayer = document.getElementById('audioPlayer');
+        audioPlayer.src = audioUrl;
+        audioPlayer.play();
+      } catch (error) {
+        console.error(error);
+        alert("音声生成に失敗しました");
+  }
+});
   
 
 
