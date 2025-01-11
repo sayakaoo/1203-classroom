@@ -1,4 +1,5 @@
-export default async function handler(req, res) {
+require('dotenv').config();
+module.exports = async (req, res) => {
   // POSTリクエストを処理
   if (req.method === 'POST') {
     const { text } = req.body;
