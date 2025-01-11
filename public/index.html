@@ -52,12 +52,12 @@
       </div>
     </div>
   </div>
-  
-  <h1>VOICEVOX 音声合成</h1>
-    <textarea id="text" rows="4" cols="50" placeholder="ここにテキストを入力してください"></textarea><br>
-    <button onclick="synthesizeSpeech()">音声合成</button>
 
-    <audio id="audio" controls></audio>
+  <h1>VOICEVOX 音声合成</h1>
+  <textarea id="text" rows="4" cols="50" placeholder="ここにテキストを入力してください"></textarea><br>
+  <button id="synthesizeButton">音声合成</button>
+
+  <audio id="audio" controls></audio>
 
   <form id="Q1form" class="formQ1 form">
     <label for="userAnswer1 userAnswer">マッチ棒は何本必要でしょうか？:</label><br>
@@ -121,11 +121,11 @@
     <input type="text" id="userAnswer91" class="answerInput" placeholder="" required><br><br>
     <label for="userAnswer92">4n-(n-1):</label>
     <input type="text" id="userAnswer92" class="answerInput" placeholder="" required><br><br>
-    <p>3n+1</p><br><br> 
+    <p>3n+1</p><br><br>
     <button type="submit" class="submitAnswersButton">送信</button>
   </form>
 
-  
+
   <form id="Q10form" class="formQ10 form">
     <label for="userAnswer10">同じ方法で考えると正方形が4個の時どのような式で表せますか？:</label><br>
     <input type="text" id="userAnswer10" placeholder="解答を入力してください" required>
@@ -177,53 +177,52 @@
     <img src="img/image3.jpg" alt="画像の説明" width="180" height="61">
     <p>Aさんの説明<br>「赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn-1個だけあるから4+3(n-1)という式になりました」</p>
   </div>
-   <!--キャンバス，黒板の要素の順番変えるとうまくいかないよ-->
-    <div class="fullcanvas">
-      <button id="show-canvas-button" class="showCanvasButton">ノートを表示する</button>
-      <!--画像のみを送信-->
-      <button id="saveButton" class="saveButton">画像を提出する</button>
-      <div class="wrapper">
-        <div class="canvasbutton">
-          <!-- 色選択 -->
-          <!-- <label for="color-picker"></label> -->
-          <select id="color-picker">
-            <option value="black">黒</option>
-            <option value="red">赤</option>
-            <option value="blue">青</option>
-          </select>
-          <!-- 消去ボタン -->
-          <button id="clear-button">消す</button>
-        </div>
-        <canvas class="canvas" id="drawing-area" width="1000" height="1050"></canvas>
+  <!--キャンバス，黒板の要素の順番変えるとうまくいかないよ-->
+  <div class="fullcanvas">
+    <button id="show-canvas-button" class="showCanvasButton">ノートを表示する</button>
+    <!--画像のみを送信-->
+    <button id="saveButton" class="saveButton">画像を提出する</button>
+    <div class="wrapper">
+      <div class="canvasbutton">
+        <!-- 色選択 -->
+        <!-- <label for="color-picker"></label> -->
+        <select id="color-picker">
+          <option value="black">黒</option>
+          <option value="red">赤</option>
+          <option value="blue">青</option>
+        </select>
+        <!-- 消去ボタン -->
+        <button id="clear-button">消す</button>
+      </div>
+      <canvas class="canvas" id="drawing-area" width="1000" height="1050"></canvas>
 
+    </div>
+  </div>
+
+  <!-- chat用 -->
+  <div class="gwform">
+    <div id="chatWindow">
+      <div class="message assistant">
+        Cさんの<br>「正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。」<br>この発言について考えよう。
       </div>
     </div>
-
-    <!-- chat用 -->
-    <div class="gwform">
-      <div id="chatWindow">
-        <div class="message assistant">
-          Cさんの<br>「正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。」<br>この発言について考えよう。
-        </div>
-      </div>
-      <div class="input-container">
-        <input type="text" id="userInput" placeholder="ここに入力してください">
-        <button id="sendButton">送信</button>
-      </div>
-      <button class="endButton">グループワークを終わる</button>
+    <div class="input-container">
+      <input type="text" id="userInput" placeholder="ここに入力してください">
+      <button id="sendButton">送信</button>
     </div>
+    <button class="endButton">グループワークを終わる</button>
+  </div>
 
-    <div>
-      <p>いろんなところに飛べるボタン</p>
-      <button class="skip30Button">グループワークへ</button>
-      <button class="skip7Button">最初の立てた式をおしえるとこに</button>
-    </div>
+  <div>
+    <p>いろんなところに飛べるボタン</p>
+    <button class="skip30Button">グループワークへ</button>
+    <button class="skip7Button">最初の立てた式をおしえるとこに</button>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
 
