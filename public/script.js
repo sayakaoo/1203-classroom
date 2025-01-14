@@ -1400,7 +1400,7 @@ window.addEventListener('load', function () {
     }
   
     try {
-      const response = await fetch("/api/textToSpeech", {
+      const response = await fetch('/api/textToSpeech', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
