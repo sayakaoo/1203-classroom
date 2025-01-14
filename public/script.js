@@ -1390,6 +1390,14 @@ window.addEventListener('load', function () {
   const audioElement = document.getElementById("audio");
   const textArea = document.getElementById("text");
   
+  const userInput = someElement.value;
+
+  if (userInput !== undefined && userInput !== null) {
+    const trimmedInput = userInput.trim();
+  } else {
+    console.error('入力が無効です');
+  }
+
   synthesizeButton.addEventListener("click", async () => {
     const text = textArea?.value.trim(); // `?` を使うと安全にアクセスできる
   
