@@ -1387,8 +1387,6 @@ window.addEventListener('load', function () {
 
 
 
-  const AWS = require('aws-sdk');
-
 // AWS Pollyの設定
 AWS.config.update({
   accessKeyId: 'YOUR_ACCESS_KEY_ID',  // IAMユーザーのアクセスキーID
