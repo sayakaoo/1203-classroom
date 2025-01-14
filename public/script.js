@@ -1384,6 +1384,48 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
+  const AWS = require('aws-sdk');
+
+// AWS Pollyの設定
+AWS.config.update({
+  accessKeyId: 'YOUR_ACCESS_KEY_ID',  // IAMユーザーのアクセスキーID
+  secretAccessKey: 'YOUR_SECRET_ACCESS_KEY',  // IAMユーザーのシークレットアクセスキー
+  region: 'us-east-1'  // 使用するリージョン
+});
+
+const polly = new AWS.Polly();
+
+function speakText() {
+  const text = document.getElementById('text-to-speak').value;
+  
+  if (text.trim() === '') {
+    alert('テキストを入力してください');
+    return;
+  }
+
+  const params = {
+    Text: text,
+    OutputFormat: 'mp3',  // 音声フォーマット
+    VoiceId: 'Mizuki'     // 使用する音声
+  };
+
+  polly.synthesizeSpeech(params, (err, data) => {
+    if (err) {
+      console.error('エラーが発生しました: ', err);
+    } else if (data.AudioStream instanceof Buffer) {
+      // AudioStreamをBlobに変換し、音声をブラウザで再生
+      const audioBlob = new Blob([data.AudioStream], { type: 'audio/mp3' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+
+      // オーディオプレイヤーに音声を設定
+      const audioPlayer = document.getElementById('audio-player');
+      audioPlayer.src = audioUrl;
+      audioPlayer.play();
+    }
+  });
+}
+
+
 
 })
 

@@ -53,7 +53,17 @@
     </div>
   </div>
 
- 
+  <h1>Amazon Polly で音声合成</h1>
+  
+  <!-- テキスト入力フォーム -->
+  <label for="text-to-speak">テキストを入力してください:</label>
+  <input type="text" id="text-to-speak" placeholder="ここにテキストを入力">
+  
+  <!-- 音声合成ボタン -->
+  <button onclick="speakText()">音声を生成</button>
+
+  <!-- 音声再生用のオーディオプレイヤー -->
+  <audio id="audio-player" controls></audio>
 
   
 
