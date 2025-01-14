@@ -1,19 +1,37 @@
 // /api/textspeech.js
 import { TextToSpeechClient } from '@google-cloud/text-to-speech';
+import fs from 'fs';
+import path from 'path';
 
-const client = new TextToSpeechClient();
+let client;
+
+// 認証処理
+function initializeClient() {
+  if (!client) {
+    const keyFileContent = process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON;
+    if (!keyFileContent) {
+      throw new Error('環境変数 GOOGLE_APPLICATION_CREDENTIALS_JSON が設定されていません');
+    }
+
+    const tempKeyFilePath = path.join('/tmp', 'google-credentials.json');
+    fs.writeFileSync(tempKeyFilePath, keyFileContent);
+
+    client = new TextToSpeechClient({ keyFile: tempKeyFilePath });
+  }
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).end('Method Not Allowed');
   }
 
-
   try {
+    initializeClient();
+
     const { text } = req.body;
 
     if (!text) {
-      return res.status(400).send({ error: "Text is required" });
+      return res.status(400).json({ error: "Text is required" });
     }
 
     const request = {
