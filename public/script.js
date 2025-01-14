@@ -1412,46 +1412,7 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
-  //voicevox用
-  // ボタンがクリックされた時に音声合成を実行
-  document.getElementById('generateButton').addEventListener('click', async () => {
-    const text = "こんにちは、VOICEVOXです！"; // 音声生成するテキスト
-    const speaker = 1; // 使用する話者のID（例: 1番目の話者）
-    const speed = 1.0; // 音声の速度
-    const pitch = 1.0; // 音声の音程
-    const volume = 1.0; // 音声の音量
   
-
-    try {
-        // Voicevox API のURLを適切に設定（/api/voicevoxをVercelのURLに変更）
-        const response = await fetch('/api/voicevox', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                text: text,    // 音声合成するテキスト
-                speaker: 1,    // 使用する話者のID（例: 1番目の話者）
-                speed: 1.0,    // 速度（1.0がデフォルト）
-                pitch: 1.0,    // 音程（1.0がデフォルト）
-                volume: 1.0,   // 音量（1.0がデフォルト）
-            }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`Voicevox request failed with status: ${response.status}`);
-        }
-    
-        const audioData = await response.blob();
-        const audioUrl = URL.createObjectURL(audioData);
-        const audioPlayer = document.getElementById('audioPlayer');
-        audioPlayer.src = audioUrl;
-        audioPlayer.play();
-      } catch (error) {
-        console.error(error);
-        alert("音声生成に失敗しました");
-  }
-});
   
 
 
