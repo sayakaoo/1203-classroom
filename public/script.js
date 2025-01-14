@@ -1386,58 +1386,45 @@ window.addEventListener('load', function () {
 
 
 
-
-// AWS Pollyの設定
-AWS.config.update({
-  accessKeyId: 'YOUR_ACCESS_KEY_ID',  // IAMユーザーのアクセスキーID
-  secretAccessKey: 'YOUR_SECRET_ACCESS_KEY',  // IAMユーザーのシークレットアクセスキー
-  region: 'us-east-1'  // 使用するリージョン
-});
-
-// AWS設定
-AWS.config.update({
-  accessKeyId: 'YOUR_ACCESS_KEY_ID', 
-  secretAccessKey: 'YOUR_SECRET_ACCESS_KEY', 
-  region: 'us-east-1'
-});
-
-// Pollyインスタンスの作成
-const polly = new AWS.Polly();
-
-// speakText関数
-function speakText() {
-  const text = document.getElementById('text-to-speak').value;
+  const synthesizeButton = document.getElementById("synthesize");
+  const audioElement = document.getElementById("audio");
+  const textArea = document.getElementById("text");
   
-  if (text.trim() === '') {
-    alert('テキストを入力してください');
-    return;
-  }
-
-  const params = {
-    Text: text,
-    OutputFormat: 'mp3',  // 音声フォーマット
-    VoiceId: 'Mizuki'     // 使用する音声
-  };
-
-  // Pollyで音声合成
-  polly.synthesizeSpeech(params, (err, data) => {
-    if (err) {
-      console.error('エラーが発生しました: ', err);
-    } else if (data.AudioStream instanceof Buffer) {
-      // AudioStreamをBlobに変換し、音声をブラウザで再生
-      const audioBlob = new Blob([data.AudioStream], { type: 'audio/mp3' });
-      const audioUrl = URL.createObjectURL(audioBlob);
-
-      // オーディオプレイヤーに音声を設定
-      const audioPlayer = document.getElementById('audio-player');
-      audioPlayer.src = audioUrl;
-      audioPlayer.play();
+  synthesizeButton.addEventListener("click", async () => {
+    const text = textArea.value.trim();
+  
+    if (!text) {
+      alert("Please enter some text!");
+      return;
+    }
+  
+    try {
+      const response = await fetch("/api/textToSpeech", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+  
+      const audioBuffer = await response.arrayBuffer();
+      const blob = new Blob([audioBuffer], { type: "audio/mp3" });
+      const url = URL.createObjectURL(blob);
+  
+      audioElement.src = url;
+      audioElement.style.display = "block";
+      audioElement.play();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to synthesize speech.");
     }
   });
-}
-
-// ボタンにイベントリスナーを設定
-document.getElementById('speak-button').addEventListener('click', speakText);
+  
+  
 
 
 
