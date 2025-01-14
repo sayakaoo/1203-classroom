@@ -13,8 +13,9 @@
   "routes": [
     { "src": "/api/evaluate", "dest": "api/evaluate.js" },
     { "src": "/api/chat", "dest": "api/chat.js" },
-    { "src": "/(.*)", "dest": "/public/$1" },
-    { "src": "/api/textspeech", "dest": "api/textspeech.js" }
+    
+    { "src": "/api/textspeech", "dest": "api/textspeech.js" },
+    { "src": "/(.*)", "dest": "/public/$1" }
   ]
 }
 

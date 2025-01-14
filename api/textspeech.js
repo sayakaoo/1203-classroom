@@ -1,30 +1,33 @@
-import { TextToSpeechClient } from "@google-cloud/text-to-speech";
+// /api/textspeech.js
+import { TextToSpeechClient } from '@google-cloud/text-to-speech';
 
-module.exports = async (req, res) => {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+const client = new TextToSpeechClient();
 
-  const { text } = req.body;
-
-  console.log("Received text: ", text);
-
-  if (!text) {
-    return res.status(400).json({ error: "Text is required" });
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).end('Method Not Allowed');
   }
 
   try {
-    const client = new TextToSpeechClient();
-    const [response] = await client.synthesizeSpeech({
-      input: { text },
-      voice: { languageCode: "en-US", ssmlGender: "NEUTRAL" },
-      audioConfig: { audioEncoding: "MP3" },
-    });
+    const { text } = req.body;
 
-    res.setHeader("Content-Type", "audio/mp3");
-    res.send(Buffer.from(response.audioContent));
+    if (!text) {
+      return res.status(400).send({ error: "Text is required" });
+    }
+
+    const request = {
+      input: { text },
+      voice: { languageCode: 'en-US', ssmlGender: 'NEUTRAL' },
+      audioConfig: { audioEncoding: 'MP3' },
+    };
+
+    const [response] = await client.synthesizeSpeech(request);
+
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.setHeader('Content-Disposition', 'attachment; filename="speech.mp3"');
+    res.status(200).send(Buffer.from(response.audioContent, 'base64'));
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to synthesize speech" });
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Something went wrong' });
   }
 }
