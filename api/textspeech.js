@@ -36,7 +36,7 @@ export default async function handler(req, res) {
 
     const request = {
       input: { text },
-      voice: { languageCode: 'en-US', ssmlGender: 'NEUTRAL' },
+      voice: { languageCode: 'ja-JP', ssmlGender: 'FEMALE' },
       audioConfig: { audioEncoding: 'MP3' },
     };
 
