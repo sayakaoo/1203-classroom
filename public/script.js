@@ -1402,7 +1402,7 @@ window.addEventListener('load', function () {
     console.log("Input text: ", text);
   
     try {
-      const response = await fetch('/api/textToSpeech', {
+      const response = await fetch('/api/textspeech', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
