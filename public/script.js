@@ -1409,6 +1409,8 @@ window.addEventListener('load', function () {
         },
         body: JSON.stringify({ text }),
       });
+
+      console.log("Response status:", response.status);  
   
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
