@@ -8,11 +8,6 @@ export default async function handler(req, res) {
     return res.status(405).end('Method Not Allowed');
   }
 
-  try {
-    const auth = new GoogleAuth({
-      credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS_JSON),
-      scopes: 'https://www.googleapis.com/auth/cloud-platform',
-    });
 
   try {
     const { text } = req.body;
