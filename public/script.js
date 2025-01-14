@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 65><chara 5 1>おはようございます。今日の授業を始めていきたいと思います。",
+      "こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -354,10 +354,10 @@ window.addEventListener('load', function () {
               input = "<skip 50>";
               split_chars = splitStr(input);
               break;
-              case '3':
-                input = "<skip 30>";
-                split_chars = splitStr(input);
-                break;
+            case '3':
+              input = "<skip 30>";
+              split_chars = splitStr(input);
+              break;
           }
           main();
           mess_box.click();
@@ -517,24 +517,23 @@ window.addEventListener('load', function () {
       if (!stop_flg) {
         line_cnt++; //次の文に行く
 
-        //         //読み上げを行う関数
-        //         //WebSpeechApiにて実行してる
-        //         let textDate = text[scene_cnt];
-        //         var textRead = textDate[line_cnt];
-        //         // コマンドを除去する正規表現
-        //         textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
-        //         var msg = new SpeechSynthesisUtterance();
-        // let voices = window.speechSynthesis.getVoices();
-        // msg.voice = voices.find(voice => voice.name.includes('Google 日本語')); // 好みの音声を選択
-        // msg.text = textRead;
-        // msg.lang = 'ja-JP';
-        // msg.rate = 1.0; // 適度な速度
-        // msg.pitch = 1.2; // 自然な声の高さ
+        //読み上げを行う関数
+        //WebSpeechApiにて実行してる
+        let textDate = text[scene_cnt];
+        var textRead = textDate[line_cnt];
+        // コマンドを除去する正規表現
+        textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
+        var msg = new SpeechSynthesisUtterance();
+        let voices = window.speechSynthesis.getVoices();
+        msg.voice = voices.find(voice => voice.name.includes('Google 日本語')); // 好みの音声を選択
+        msg.text = textRead;
+        msg.lang = 'ja-JP';
+        msg.rate = 1.0; // 適度な速度
+        msg.pitch = 1.2; // 自然な声の高さ
 
-        // window.speechSynthesis.speak(msg);
+        window.speechSynthesis.speak(msg);
 
-        // 非同期処理を呼び出す,voicebox
-        // readTextWithVoicevox();
+
 
         if (line_cnt >= text[scene_cnt].length) {
           line_cnt = 0;
@@ -549,33 +548,6 @@ window.addEventListener('load', function () {
     }
   }
   );
-
-  // // VOICEVOXを使用してテキストを読み上げる関数むずいできない泣泣
-
-  // async function readTextWithVoicevox(text) {
-  //   try {
-  //     const response = await fetch('https://1203-classroom.vercel.app/api/voicevox', {
-  //       method: 'POST',  // POST メソッドに変更
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ text: text }),
-  //     });
-
-  //     if (response.ok) {
-  //       const audioBlob = await response.blob();
-  //       const audioUrl = URL.createObjectURL(audioBlob);
-  //       const audio = new Audio(audioUrl);
-  //       audio.play();
-  //     } else {
-  //       console.error('音声合成リクエストに失敗しました');
-  //     }
-  //   } catch (error) {
-  //     console.error('音声生成エラー:', error);
-  //   }
-  // }
-
-
 
   function textClick() {
     $('#textbox').trigger('click');
@@ -954,15 +926,15 @@ window.addEventListener('load', function () {
   });
 
   //式がわからないボタン
-  document.getElementById('Q4nonsbmitbutton').addEventListener('click', function(event) {
+  document.getElementById('Q4nonsbmitbutton').addEventListener('click', function (event) {
     event.preventDefault(); // デフォルトの動作を防ぐ
     input = "<skip 61>";
-      split_chars = splitStr(input);
-      console.log(split_chars);
-      $('.formQ4').removeClass('visible');
-      main();
+    split_chars = splitStr(input);
+    console.log(split_chars);
+    $('.formQ4').removeClass('visible');
+    main();
     mess_box.click();
-});
+  });
 
 
   //4+3(n-1)において様々な全角、半角など統一させるための関数
@@ -1393,27 +1365,49 @@ window.addEventListener('load', function () {
   //いろいろなところに飛べるボタン、ほんとうはいらない
   const skip30Button = document.querySelector('.skip30Button');
   skip30Button.addEventListener('click', (event) => {
-    event.preventDefault(); 
-        input = "<skip 30>";
-        split_chars = splitStr(input);
-    
+    event.preventDefault();
+    input = "<skip 30>";
+    split_chars = splitStr(input);
+
     console.log('30に');
     main();
     mess_box.click();
   });
   const skip7Button = document.querySelector('.skip7Button');
   skip7Button.addEventListener('click', (event) => {
-    event.preventDefault(); 
-        input = "<skip 7>";
-        split_chars = splitStr(input);
-    
+    event.preventDefault();
+    input = "<skip 7>";
+    split_chars = splitStr(input);
+
     console.log('30に');
     main();
     mess_box.click();
   });
 
-  
-  
+  //voicevox用
+  document.getElementById('generateButton').addEventListener('click', async function () {
+    const text = document.getElementById('textInput').value;
+
+    if (text) {
+      // サーバーに音声生成のリクエストを送る
+      const response = await fetch(`/generate-audio?text=${encodeURIComponent(text)}`);
+      
+      if (response.ok) {
+        const audioBlob = await response.blob();
+        const audioURL = URL.createObjectURL(audioBlob);
+        
+        // 音声を再生
+        const audioPlayer = document.getElementById('audioPlayer');
+        audioPlayer.src = audioURL;
+        audioPlayer.play();
+      } else {
+        alert("音声生成に失敗しました");
+      } 
+    }else {
+      alert("テキストを入力してください");
+    }
+  });
+
 
 
 })
