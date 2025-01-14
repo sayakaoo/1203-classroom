@@ -12,7 +12,6 @@ function initializeClient() {
     if (!keyFileContent) {
       throw new Error('環境変数 GOOGLE_APPLICATION_CREDENTIALS_JSON が設定されていません');
     }
-
     const tempKeyFilePath = path.join('/tmp', 'google-credentials.json');
     fs.writeFileSync(tempKeyFilePath, keyFileContent);
 
