@@ -1384,31 +1384,6 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
-  //voicevox用
-  document.getElementById('generateButton').addEventListener('click', async function () {
-    const text = document.getElementById('textInput').value;
-
-    if (text) {
-      // サーバーに音声生成のリクエストを送る
-      const response = await fetch(`/generate-audio?text=${encodeURIComponent(text)}`);
-      
-      if (response.ok) {
-        const audioBlob = await response.blob();
-        const audioURL = URL.createObjectURL(audioBlob);
-        
-        // 音声を再生
-        const audioPlayer = document.getElementById('audioPlayer');
-        audioPlayer.src = audioURL;
-        audioPlayer.play();
-      } else {
-        alert("音声生成に失敗しました");
-      } 
-    }else {
-      alert("テキストを入力してください");
-    }
-  });
-
-
 
 })
 
