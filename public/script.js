@@ -1388,7 +1388,7 @@ window.addEventListener('load', function () {
 
   const synthesizeButton = document.getElementById("synthesize");
   const audioElement = document.getElementById("audio");
-  const textArea = document.getElementById("text");
+  const textArea = document.getElementById("text43");
   
 
   synthesizeButton.addEventListener("click", async () => {
