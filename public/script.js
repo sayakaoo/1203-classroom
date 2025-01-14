@@ -1389,9 +1389,13 @@ window.addEventListener('load', function () {
   const synthesizeButton = document.getElementById("synthesize");
   const audioElement = document.getElementById("audio");
   const textArea = document.getElementById("text");
+
+  if (!textArea) {
+    console.error("Textarea element with id 'text' was not found!");
+  }
   
   synthesizeButton.addEventListener("click", async () => {
-    const text = textArea.value.trim();
+    const text = textArea?.value.trim(); // `?` を使うと安全にアクセスできる
   
     if (!text) {
       alert("Please enter some text!");
