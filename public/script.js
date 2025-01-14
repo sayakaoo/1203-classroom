@@ -1384,6 +1384,9 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
+
+
+
   const AWS = require('aws-sdk');
 
 // AWS Pollyの設定
@@ -1393,8 +1396,17 @@ AWS.config.update({
   region: 'us-east-1'  // 使用するリージョン
 });
 
+// AWS設定
+AWS.config.update({
+  accessKeyId: 'YOUR_ACCESS_KEY_ID', 
+  secretAccessKey: 'YOUR_SECRET_ACCESS_KEY', 
+  region: 'us-east-1'
+});
+
+// Pollyインスタンスの作成
 const polly = new AWS.Polly();
 
+// speakText関数
 function speakText() {
   const text = document.getElementById('text-to-speak').value;
   
@@ -1409,6 +1421,7 @@ function speakText() {
     VoiceId: 'Mizuki'     // 使用する音声
   };
 
+  // Pollyで音声合成
   polly.synthesizeSpeech(params, (err, data) => {
     if (err) {
       console.error('エラーが発生しました: ', err);
@@ -1424,6 +1437,7 @@ function speakText() {
     }
   });
 }
+
 
 
 

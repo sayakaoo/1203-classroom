@@ -10,6 +10,8 @@
   <script src="https://docs.opencv.org/master/opencv.js" type="text/javascript"></script>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1542.0.min.js"></script>
+
   <link rel="icon" href="/favicon.ico" />
   <title>数学授業</title>
 </head>
@@ -53,16 +55,16 @@
     </div>
   </div>
 
+  
   <h1>Amazon Polly で音声合成</h1>
   
-  <!-- テキスト入力フォーム -->
   <label for="text-to-speak">テキストを入力してください:</label>
   <input type="text" id="text-to-speak" placeholder="ここにテキストを入力">
   
-  <!-- 音声合成ボタン -->
+  <!-- 音声生成ボタン -->
   <button onclick="speakText()">音声を生成</button>
-
-  <!-- 音声再生用のオーディオプレイヤー -->
+  
+  <!-- オーディオプレイヤー -->
   <audio id="audio-player" controls></audio>
 
   
