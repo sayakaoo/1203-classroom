@@ -1,6 +1,3 @@
-import { google } from "googleapis";
-
-import { Readable } from "stream";
 import { TextToSpeechClient } from "@google-cloud/text-to-speech";
 
 export default async function handler(req, res) {
@@ -9,6 +6,8 @@ export default async function handler(req, res) {
   }
 
   const { text } = req.body;
+
+  console.log("Received text: ", text);
 
   if (!text) {
     return res.status(400).json({ error: "Text is required" });
