@@ -1,6 +1,7 @@
 import { google } from "googleapis";
-import { TextToSpeechClient } from "@google-cloud/text-to-speech";
+
 import { Readable } from "stream";
+import { TextToSpeechClient } from "@google-cloud/text-to-speech";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {

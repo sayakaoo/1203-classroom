@@ -1398,6 +1398,8 @@ window.addEventListener('load', function () {
       alert("Please enter some text!");
       return;
     }
+
+    console.log("Input text: ", text);
   
     try {
       const response = await fetch('/api/textToSpeech', {
