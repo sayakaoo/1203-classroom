@@ -36,7 +36,11 @@ export default async function handler(req, res) {
 
     const request = {
       input: { text },
-      voice: { languageCode: 'ja-JP', ssmlGender: 'FEMALE' },
+      voice: { 
+        languageCode: 'ja-JP', 
+        name: 'ja-JP-Wavenet-B', // 試しにWavenetの女性声を指定
+        ssmlGender: 'FEMALE' 
+      },
       audioConfig: { audioEncoding: 'MP3' },
     };
 
