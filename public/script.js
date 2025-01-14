@@ -1438,6 +1438,10 @@ function speakText() {
   });
 }
 
+// ボタンにイベントリスナーを設定
+document.getElementById('speak-button').addEventListener('click', speakText);
+
+
 
 
 
