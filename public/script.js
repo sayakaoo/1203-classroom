@@ -535,11 +535,11 @@ window.addEventListener('load', function () {
         console.log(scene_cnt);
         //新しい読み上げ関数
         let textDate = text[scene_cnt];
-        var text = textDate[line_cnt];
-        text = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
-        console.log("Input text: ", text);
+        var textRead = textDate[line_cnt];
+        textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
+        console.log("Input text: ", textRead);
         //関数呼び出し、したのほうにあるよ
-        synthesizeSpeech(text);
+        synthesizeSpeech(textRead);
 
 
 
