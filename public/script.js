@@ -1081,6 +1081,31 @@ window.addEventListener('load', function () {
     document.querySelector('#userAnswer').value = '';
   });
 
+  //表フォームの動作用
+  // 音声入力ボタンの動作を登録
+for (let i = 1; i <= 5; i++) {
+  document.getElementById(`start-voiceSq${i}`).addEventListener("click", function () {
+    alert(`正方形${i}の音声入力を開始します！`);
+    // 音声入力の処理をここに追加
+  });
+}
+
+// フォーム送信ボタンの動作
+document.getElementById("QTableSubmitButton").addEventListener("click", function () {
+  const answers = [];
+  for (let i = 1; i <= 5; i++) {
+    const input = document.getElementById(`userAnswerSq${i}`).value;
+    if (input === "") {
+      alert(`正方形${i}のマッチ棒の数を入力してください！`);
+      return;
+    }
+    answers.push(input);
+  }
+  console.log("入力されたマッチ棒の数:", answers);
+  alert("送信が完了しました！");
+});
+
+
 
 
 

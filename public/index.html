@@ -141,17 +141,55 @@
     <button id="Q10sbmitbutton">送信</button>
   </form>
 
-  <form id="Q11form" class="formQ11 form">
-    <label for="userAnswer11-1">どのように考えたらいいだろうか？ (1つ目):</label><br>
-    <input type="text" id="userAnswer11-1" placeholder="1つ目の解答を入力してください" required>
-    <br><br>
-  
-    <label for="userAnswer11-2">どのように考えたらいいだろうか？ (2つ目):</label><br>
-    <input type="text" id="userAnswe11-2" placeholder="2つ目の解答を入力してください" required>
-    <br><br>
-  
-    <button id="Q2submitbutton">送信</button>
+  <form id="QSquareTableForm" class="formQTable form">
+    <table border="1" style="border-collapse: collapse; text-align: center;">
+      <thead>
+        <tr>
+          <th>正方形の数 (こ)</th>
+          <th>マッチ棒の数 (本)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>
+            <input type="text" id="userAnswerSq1" placeholder="入力してください" required>
+            <button type="button" id="start-voiceSq1">🎤 音声入力</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>
+            <input type="text" id="userAnswerSq2" placeholder="入力してください" required>
+            <button type="button" id="start-voiceSq2">🎤 音声入力</button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>
+            <input type="text" id="userAnswerSq3" placeholder="入力してください" required>
+            <button type="button" id="start-voiceSq3">🎤 音声入力</button>
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>
+            <input type="text" id="userAnswerSq4" placeholder="入力してください" required>
+            <button type="button" id="start-voiceSq4">🎤 音声入力</button>
+          </td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>
+            <input type="text" id="userAnswerSq5" placeholder="入力してください" required>
+            <button type="button" id="start-voiceSq5">🎤 音声入力</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button id="QTableSubmitButton">送信</button>
   </form>
+  
   
 
 
