@@ -517,21 +517,29 @@ window.addEventListener('load', function () {
       if (!stop_flg) {
         line_cnt++; //次の文に行く
 
-        //読み上げを行う関数
-        //WebSpeechApiにて実行してる
-        let textDate = text[scene_cnt];
-        var textRead = textDate[line_cnt];
-        // コマンドを除去する正規表現
-        textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
-        var msg = new SpeechSynthesisUtterance();
-        let voices = window.speechSynthesis.getVoices();
-        msg.voice = voices.find(voice => voice.name.includes('Google 日本語')); // 好みの音声を選択
-        msg.text = textRead;
-        msg.lang = 'ja-JP';
-        msg.rate = 1.0; // 適度な速度
-        msg.pitch = 1.2; // 自然な声の高さ
+        // //読み上げを行う関数
+        // //WebSpeechApiにて実行してる
+        // let textDate = text[scene_cnt];
+        // var textRead = textDate[line_cnt];
+        // // コマンドを除去する正規表現
+        // textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
+        // var msg = new SpeechSynthesisUtterance();
+        // let voices = window.speechSynthesis.getVoices();
+        // msg.voice = voices.find(voice => voice.name.includes('Google 日本語')); // 好みの音声を選択
+        // msg.text = textRead;
+        // msg.lang = 'ja-JP';
+        // msg.rate = 1.0; // 適度な速度
+        // msg.pitch = 1.2; // 自然な声の高さ
 
-        window.speechSynthesis.speak(msg);
+        // window.speechSynthesis.speak(msg);
+
+        //新しい読み上げ関数
+        let textDate = text[scene_cnt];
+        var text = textDate[line_cnt]
+        text = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
+        console.log("Input text: ", text);
+        //関数呼び出し、したのほうにあるよ
+        synthesizeSpeech(text);
 
 
 
@@ -1391,14 +1399,12 @@ window.addEventListener('load', function () {
   const textArea = document.getElementById("text43");
   
 
-  synthesizeButton.addEventListener("click", async () => {
-    const text = textArea?.value; // `?` を使うと安全にアクセスできる
-  
+  async function synthesizeSpeech(text) {
     if (!text) {
       alert("Please enter some text!");
       return;
     }
-
+  
     console.log("Input text: ", text);
   
     try {
@@ -1409,8 +1415,8 @@ window.addEventListener('load', function () {
         },
         body: JSON.stringify({ text }),
       });
-
-      console.log("Response status:", response.status);  
+  
+      console.log("Response status:", response.status);
   
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
@@ -1427,7 +1433,14 @@ window.addEventListener('load', function () {
       console.error(error);
       alert("Failed to synthesize speech.");
     }
-  });
+  }
+  
+  // // クリックイベントで関数を呼び出すようにする
+  // synthesizeButton.addEventListener("click", () => {
+  //   const text = textArea?.value; // `?` を使うと安全にアクセスできる
+  //   synthesizeSpeech(text); // 関数として呼び出し
+  // });
+  
   
 
 
