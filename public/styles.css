@@ -508,3 +508,6 @@ body {
     background-color: #45a049;
   }
   
+ .formQTable {
+    max-width: 600px;
+}
