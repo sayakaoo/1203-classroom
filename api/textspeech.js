@@ -41,7 +41,7 @@ export default async function handler(req, res) {
           "small-bluetooth-speaker-class-device"
         ],
         "pitch": 4,
-        "speakingRate": 1.26
+        "speakingRate": 1.5
       },
       "input": {text },
       "voice": {
