@@ -35,21 +35,19 @@ export default async function handler(req, res) {
     }
 
     const request = {
-      "audioConfig": {
-        "audioEncoding": "LINEAR16",
-        "effectsProfileId": [
-          "small-bluetooth-speaker-class-device"
-        ],
-        "pitch": 4,
-        "speakingRate": 1.5
+      input: { text },
+      voice: {
+        languageCode: 'ja-JP',
+        name: 'ja-JP-Neural2-B',
       },
-      "input": {text },
-      "voice": {
-        "languageCode": "ja-JP",
-        "name": "ja-JP-Neural2-B"
+      audioConfig: {
+        audioEncoding: 'MP3',
+        effectsProfileId: ['small-bluetooth-speaker-class-device'],
+        pitch: 4,
+        speakingRate: 1.5, // ここでスピードを指定
       },
-      audioConfig: { audioEncoding: 'MP3' },
     };
+    
 
     const [response] = await client.synthesizeSpeech(request);
 
