@@ -1410,7 +1410,8 @@ document.getElementById("QTableSubmitButton").addEventListener("click", function
   });
 
 
-
+  const textArea = document.getElementById("text43");
+  const synthesizeButton = document.getElementById("synthesize");
   let audioElement;
 
 window.onload = function() {
