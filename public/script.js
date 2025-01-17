@@ -1083,6 +1083,13 @@ window.addEventListener('load', function () {
 
   
 // Q11.表のやつフォーム送信ボタンの動作
+// 全角数字を半角に変換する関数
+function toHalfWidth(str) {
+  return str.replace(/[０-９]/g, function (s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+  });
+}
+
 document.getElementById('QTableSubmitButton').addEventListener('click', function() {
   // 正しい答え
   const correctAnswers = [4, 7, 10, 13, 16];
@@ -1099,7 +1106,9 @@ document.getElementById('QTableSubmitButton').addEventListener('click', function
   // 入力をチェック
   for (let i = 0; i < userAnswers.length; i++) {
     const inputElement = document.getElementById(`userAnswerSq${i + 1}`);
-    const userAnswer = parseInt(userAnswers[i], 10);
+    
+    // 全角数字を半角に変換
+    const userAnswer = parseInt(toHalfWidth(userAnswers[i]), 10);
     const correctAnswer = correctAnswers[i];
 
     // 入力が正しいかチェック
