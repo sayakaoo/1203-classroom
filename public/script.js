@@ -260,8 +260,8 @@ window.addEventListener('load', function () {
     //式が思い浮かばないときの分岐
     //かってに62に飛ばしてるだけで本とは違う
     61: [
-      "<chara 5 1>規則性を探してみましょう",
-      "(ここでフォーム分け)",
+      "<chara 5 1>では、式を考えるために規則性を探してみましょう",
+      "規則性を探すために表を書いてみましょう",
       "<skip 62>",
       ""
     ],
@@ -1443,6 +1443,45 @@ window.addEventListener('load', function () {
   
   
 
+
+
+//表を作って考える
+  const tableBody = document.getElementById("squareTable").querySelector("tbody");
+  const submitButton = document.getElementById("submitButton");
+  // 正方形の数を1から5に固定
+  const squareCounts = [1, 2, 3, 4, 5];
+  // 初期化: 表を生成
+  squareCounts.forEach((squareCount) => {
+    const row = document.createElement("tr");
+    // 正方形の数セル
+    const squareCell = document.createElement("td");
+    squareCell.textContent = squareCount;
+    // マッチ棒の数セル（入力フィールド）
+    const matchCell = document.createElement("td");
+    const matchInput = document.createElement("input");
+    matchInput.type = "number";
+    matchInput.dataset.squareCount = squareCount; // 対応する正方形の数を保存
+    matchCell.appendChild(matchInput);
+    // 行にセルを追加
+    row.appendChild(squareCell);
+    row.appendChild(matchCell);
+    // 表に行を追加
+    tableBody.appendChild(row);
+  });
+  // 確認ボタンのイベント
+  submitButton.addEventListener("click", () => {
+    const inputs = tableBody.querySelectorAll("input[type='number']");
+    const result = [];
+    // 各入力を取得
+    inputs.forEach((input) => {
+      const squareCount = input.dataset.squareCount;
+      const matchCount = input.value || "未入力";
+      result.push(`正方形 ${squareCount}個: マッチ棒 ${matchCount}本`);
+    });
+    // 結果をコンソールに出力
+    console.log("入力された結果:", result.join("\n"));
+    alert("入力された結果:\n" + result.join("\n"));
+  });
 
 
 
