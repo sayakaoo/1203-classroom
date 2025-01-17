@@ -438,7 +438,7 @@ body {
   /*表のデザイン */
 
   table {
-    width: 100%;
+    width: 1000px;
     border-collapse: collapse;
     margin: 20px 0;
   }
@@ -511,6 +511,3 @@ body {
     background-color: #45a049;
   }
   
- .formQTable {
-    width: 1000px;
-}
