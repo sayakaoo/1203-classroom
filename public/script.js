@@ -1410,19 +1410,9 @@ document.getElementById("QTableSubmitButton").addEventListener("click", function
   });
 
 
-  const textArea = document.getElementById("text43");
-  const synthesizeButton = document.getElementById("synthesize");
-  let audioElement;
+  
 
-window.onload = function() {
-  audioElement = document.getElementById("audio");
-
-  if (!audioElement) {
-    alert("Audio element not found!");
-    return;
-  }
-};
-
+// 音声合成用の Web Audio API を使った関数
 async function synthesizeSpeech(text) {
   if (!text) {
     alert("Please enter some text!");
@@ -1431,11 +1421,8 @@ async function synthesizeSpeech(text) {
 
   console.log("Input text: ", text);
 
-  if (!audioElement) {
-    console.error("Audio element is not initialized.");
-    alert("Audio element is not initialized.");
-    return;
-  }
+  // Web Audio API の AudioContext を作成
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
   try {
     const response = await fetch('/api/textspeech', {
@@ -1453,12 +1440,14 @@ async function synthesizeSpeech(text) {
     }
 
     const audioBuffer = await response.arrayBuffer();
-    const blob = new Blob([audioBuffer], { type: "audio/mp3" });
-    const url = URL.createObjectURL(blob);
+    const buffer = await audioContext.decodeAudioData(audioBuffer);
 
-    audioElement.src = url;
-    audioElement.style.display = "block";
-    audioElement.play();
+    // 音声を再生
+    const source = audioContext.createBufferSource();
+    source.buffer = buffer;
+    source.connect(audioContext.destination);
+    source.start();
+
   } catch (error) {
     console.error(error);
     alert("Failed to synthesize speech.");
@@ -1466,12 +1455,8 @@ async function synthesizeSpeech(text) {
 }
 
 
+
   
-  // クリックイベントで関数を呼び出すようにする
- synthesizeButton.addEventListener("click", () => {
-   const text = textArea?.value; // `?` を使うと安全にアクセスできる
-   synthesizeSpeech(text); // 関数として呼び出し
-   });
   
   
 
