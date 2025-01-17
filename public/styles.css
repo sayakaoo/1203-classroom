@@ -458,6 +458,9 @@ body {
     background-color: #f4f4f4;
     font-weight: bold;
   }
+  td {
+    width: 100px; /* 適切な幅を設定（必要に応じて調整） */
+  }
   
   input[type="text"] {
     width: 4ch; /* 全角2文字分の幅 */
