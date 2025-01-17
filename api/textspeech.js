@@ -35,11 +35,18 @@ export default async function handler(req, res) {
     }
 
     const request = {
-      input: { text },
-      voice: { 
-        languageCode: 'ja-JP', 
-        name: 'ja-JP-Wavenet-B', // 試しにWavenetの女性声を指定
-        ssmlGender: 'FEMALE' 
+      "audioConfig": {
+        "audioEncoding": "LINEAR16",
+        "effectsProfileId": [
+          "small-bluetooth-speaker-class-device"
+        ],
+        "pitch": 4,
+        "speakingRate": 1.26
+      },
+      "input": {text },
+      "voice": {
+        "languageCode": "ja-JP",
+        "name": "ja-JP-Neural2-B"
       },
       audioConfig: { audioEncoding: 'MP3' },
     };
