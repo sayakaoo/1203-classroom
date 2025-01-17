@@ -1431,6 +1431,12 @@ async function synthesizeSpeech(text) {
 
   console.log("Input text: ", text);
 
+  if (!audioElement) {
+    console.error("Audio element is not initialized.");
+    alert("Audio element is not initialized.");
+    return;
+  }
+
   try {
     const response = await fetch('/api/textspeech', {
       method: "POST",
