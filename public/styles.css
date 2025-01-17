@@ -184,6 +184,10 @@ body{
 
 }
 
+#audio {
+    display: none; /* 初期状態で非表示 */
+  }
+
 .visible{
   visibility: visible; 
   z-index: 10;
