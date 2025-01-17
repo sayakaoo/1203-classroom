@@ -460,11 +460,11 @@ body {
   }
   
   input[type="text"] {
-    width: 150%;
+    width: 4ch; /* 全角2文字分の幅 */
     height: 30px; /* 入力フィールドの高さを増やす */
-  padding: 5px;
-  margin-right: 5px;
-  text-align: center; /* 文字を中央に配置 */
+    padding: 5px;
+    margin-right: 5px;
+    text-align: center; /* 文字を中央に配置 */
   }
   
   button {
