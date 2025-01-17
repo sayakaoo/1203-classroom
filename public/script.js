@@ -1083,23 +1083,35 @@ window.addEventListener('load', function () {
 
   
 // Q11.表のやつフォーム送信ボタンの動作
-document.getElementById("QTableSubmitButton").addEventListener("click", function () {
-  const answers = [];
-  for (let i = 1; i <= 5; i++) {
-    const input = document.getElementById(`userAnswerSq${i}`).value;
-    if (input === "") {
-      alert(`正方形${i}のマッチ棒の数を入力してください！`);
-      return;
+document.getElementById('QTableSubmitButton').addEventListener('click', function() {
+  // 正しい答え
+  const correctAnswers = [4, 7, 10, 13, 16];
+  
+  // 入力値を取得
+  const userAnswers = [
+    document.getElementById('userAnswerSq1').value,
+    document.getElementById('userAnswerSq2').value,
+    document.getElementById('userAnswerSq3').value,
+    document.getElementById('userAnswerSq4').value,
+    document.getElementById('userAnswerSq5').value
+  ];
+  
+  // 入力をチェック
+  for (let i = 0; i < userAnswers.length; i++) {
+    const inputElement = document.getElementById(`userAnswerSq${i + 1}`);
+    const userAnswer = parseInt(userAnswers[i], 10);
+    const correctAnswer = correctAnswers[i];
+
+    // 入力が正しいかチェック
+    if (userAnswer !== correctAnswer) {
+      // 間違っていたら背景色を変更
+      inputElement.style.backgroundColor = 'lightcoral'; // 間違っている場合は赤っぽい色
+    } else {
+      // 正しい場合は背景色を元に戻す
+      inputElement.style.backgroundColor = ''; 
     }
-    answers.push(input);
   }
-  console.log("入力されたマッチ棒の数:", answers);
-  alert("送信が完了しました！");
 });
-
-
-
-
 
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
