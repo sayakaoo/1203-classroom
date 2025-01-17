@@ -193,7 +193,6 @@ body{
   z-index: 10;
   pointer-events: auto; /* クリックを有効にする */
 }
-.form
 
 
 
@@ -314,8 +313,8 @@ form.form {
     position: absolute;
     top: 778px;
     left: 450px;
-    width: 150%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 800px;
     left: 50%; /* 横方向の中央 */
     transform: translateX(-50%); /* 中央揃え調整 */
     margin: 20px auto;
