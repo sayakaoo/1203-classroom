@@ -1419,46 +1419,54 @@ document.getElementById("QTableSubmitButton").addEventListener("click", function
 
 
 
-  const synthesizeButton = document.getElementById("synthesize");
-  const audioElement = document.getElementById("audio");
-  const textArea = document.getElementById("text43");
-  
+  let audioElement;
 
-  async function synthesizeSpeech(text) {
-    if (!text) {
-      alert("Please enter some text!");
-      return;
-    }
-  
-    console.log("Input text: ", text);
-  
-    try {
-      const response = await fetch('/api/textspeech', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text }),
-      });
-  
-      console.log("Response status:", response.status);
-  
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
-      }
-  
-      const audioBuffer = await response.arrayBuffer();
-      const blob = new Blob([audioBuffer], { type: "audio/mp3" });
-      const url = URL.createObjectURL(blob);
-  
-      audioElement.src = url;
-      audioElement.style.display = "block";
-      audioElement.play();
-    } catch (error) {
-      console.error(error);
-      alert("Failed to synthesize speech.");
-    }
+window.onload = function() {
+  audioElement = document.getElementById("audio");
+
+  if (!audioElement) {
+    alert("Audio element not found!");
+    return;
   }
+};
+
+async function synthesizeSpeech(text) {
+  if (!text) {
+    alert("Please enter some text!");
+    return;
+  }
+
+  console.log("Input text: ", text);
+
+  try {
+    const response = await fetch('/api/textspeech', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text }),
+    });
+
+    console.log("Response status:", response.status);
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    const audioBuffer = await response.arrayBuffer();
+    const blob = new Blob([audioBuffer], { type: "audio/mp3" });
+    const url = URL.createObjectURL(blob);
+
+    audioElement.src = url;
+    audioElement.style.display = "block";
+    audioElement.play();
+  } catch (error) {
+    console.error(error);
+    alert("Failed to synthesize speech.");
+  }
+}
+
+
   
   // // クリックイベントで関数を呼び出すようにする
   // synthesizeButton.addEventListener("click", () => {
