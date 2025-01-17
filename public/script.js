@@ -535,7 +535,7 @@ window.addEventListener('load', function () {
 
         //新しい読み上げ関数
         let textDate = text[scene_cnt];
-        var text = textDate[line_cnt]
+        var text = textDate[line_cnt];
         text = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
         console.log("Input text: ", text);
         //関数呼び出し、したのほうにあるよ
