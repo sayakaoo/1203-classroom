@@ -460,7 +460,7 @@ body {
   }
   
   input[type="text"] {
-    width: 100%;
+    width: 150%;
     height: 30px; /* 入力フィールドの高さを増やす */
   padding: 5px;
   margin-right: 5px;
