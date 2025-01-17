@@ -532,7 +532,7 @@ window.addEventListener('load', function () {
         // msg.pitch = 1.2; // 自然な声の高さ
 
         // window.speechSynthesis.speak(msg);
-
+        console.log(scene_cnt);
         //新しい読み上げ関数
         let textDate = text[scene_cnt];
         var text = textDate[line_cnt];
