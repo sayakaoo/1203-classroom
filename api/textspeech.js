@@ -38,12 +38,12 @@ export default async function handler(req, res) {
       input: { text },
       voice: {
         languageCode: 'ja-JP',
-        name: 'ja-JP-Neural2-B',
+        name: 'ja-JP-Neural2-C',
       },
       audioConfig: {
         audioEncoding: 'MP3',
         effectsProfileId: ['small-bluetooth-speaker-class-device'],
-        pitch: 4,
+        pitch: 3,
         speakingRate: 1.3, // ここでスピードを指定
       },
     };
