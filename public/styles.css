@@ -442,6 +442,11 @@ body {
     border-collapse: collapse;
     margin: 20px 0;
   }
+
+  th:first-child {
+    width: 30%;  /* 一番目の列（正方形の数）の幅を広げる */
+  }
+  
   
   th, td {
     border: 1px solid #ddd;
