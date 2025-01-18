@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "こんにちは<skip 69>",
+      "こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -259,12 +259,22 @@ window.addEventListener('load', function () {
 
     //式が思い浮かばないときの分岐
     //かってに62に飛ばしてるだけで本とは違う
+    //本当は分岐させたいねえ
+    // 
+
+    // 61: [  "<chara 5 1>では、式を考えるために規則性を探してみましょう",
+    //   "規則性を探すために表を書いてみましょう",
+    //   "<form 11>",
+    //   ""
+    // 　],
+
+    //明日から頑張る
     61: [
-      "<chara 5 1>では、式を考えるために規則性を探してみましょう",
-      "規則性を探すために表を書いてみましょう",
-      "<form 11>",
+      "では一緒に正方形がn個のときのマッチ棒の数を考えてみましょう。",
+      "",
       ""
     ],
+
     62: [
       "最初に1本マッチ棒があってそこから3本ずつマッチ棒が増えているという規則性を見つけましたね。",
       "では、その規則性を使って具体的な数で考えてみましょう。",
@@ -300,7 +310,7 @@ window.addEventListener('load', function () {
       "<skip 67>"
     ],
     //67使う
-    //表を書いた後の分岐、いったん保留
+    //表を書いた後の分岐、いったん保留、むず過ぎ
     68: [
       "表がかけましたね",
       "この表から規則性を見つけてみましょう",
@@ -312,35 +322,9 @@ window.addEventListener('load', function () {
       "これを図で考えると、<item 18>増えているのはこの青で囲んだ部分とみれそうです",
       "式の表現を変えてみると、<item 19>このように考えることができそうです。<item 20>正方形が4個の時も同様です。",
       "赤で囲んでいる最初の4本と、青で囲んでいるコの字型をしたグループに分けられそうですね。",
-      "コの字型は3つあるので、<item 8>マッチ棒の本数は最初の1本と、コの字型×3で表すことが出来ます",
-      "コの字型は3本のマッチ棒でできているので、式にすると、<item 9>1+3×3になります。",
-      "では、同じ方法で正方形が<item 15>4個の時も考えてみましょう。",
-      "<skip 63>"
+      "…"
+    ],
 
-    ],
-    63: [
-      "同じ方法で考えると正方形が4個の時どのような式で表せますか？<form 10>"
-    ],
-    64: [
-      "正方形が3個のときと同じように考えてみましょう(変更する)",
-      "<skip 63>",
-    ],
-    65: [
-      "3個の時と同じように考えるとコの字型は4つあるので、マッチ棒の本数は最初の1本と、コの字型×4で表すことが出来ますね",
-      "つまり、式にすると、<item 10>1+3×4になります。",
-      "同じ方法で正方形が5個の時も考えると、<item 11>1+3×5になります。",
-      "では、正方形がn個の時も<item 12>考えてみましょう",
-      "まず、3個、4個、5個の時を振り返ってみましょう。",
-      "なにか気付いたことはありますか？(わんちゃん分岐)",
-      "<skip 66>"
-
-    ],
-    66: [
-      "正方形の数と式の最後の数<item 13>が一致していますね。",
-      "つまりこの式は1+3×(正方形の数)と表せそうです。(画像がない)",
-      "今回は正方形の数がn個の時を考えているので、正方形がn個の時必要なマッチ棒の本数は1+3×n本<item 14ws>となります",
-      "<skip 67>"
-    ],
 
 
 
@@ -1122,53 +1106,53 @@ window.addEventListener('load', function () {
     document.querySelector('#userAnswer').value = '';
   });
 
-  
-// Q11.表のやつフォーム送信ボタンの動作
-// 全角数字を半角に変換する関数
-function toHalfWidth(str) {
-  return str.replace(/[０-９]/g, function (s) {
-    return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-  });
-}
 
-document.getElementById('QTableSubmitButton').addEventListener('click', function() {
-  // 正しい答え
-  const correctAnswers = [4, 7, 10, 13, 16];
-  
-  // 入力値を取得
-  const userAnswers = [
-    document.getElementById('userAnswerSq1').value,
-    document.getElementById('userAnswerSq2').value,
-    document.getElementById('userAnswerSq3').value,
-    document.getElementById('userAnswerSq4').value,
-    document.getElementById('userAnswerSq5').value
-  ];
-  
-  // 入力をチェック
-  for (let i = 0; i < userAnswers.length; i++) {
-    const inputElement = document.getElementById(`userAnswerSq${i + 1}`);
-    
-    // 全角数字を半角に変換
-    const userAnswer = parseInt(toHalfWidth(userAnswers[i]), 10);
-    const correctAnswer = correctAnswers[i];
-
-    // 入力が正しいかチェック
-    if (userAnswer !== correctAnswer) {
-      // 間違っていたら背景色を変更
-      inputElement.style.backgroundColor = 'lightcoral'; // 間違っている場合は赤っぽい色
-    } else {
-      // 正しい場合は背景色を元に戻す
-      inputElement.style.backgroundColor = '';
-      console.log("すべて一致");
-      input = "<skip 68>";
-      split_chars = splitStr(input);
-      console.log(split_chars);
-      main();
-    mess_box.click();
-
-    }
+  // Q11.表のやつフォーム送信ボタンの動作
+  // 全角数字を半角に変換する関数
+  function toHalfWidth(str) {
+    return str.replace(/[０-９]/g, function (s) {
+      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    });
   }
-});
+
+  document.getElementById('QTableSubmitButton').addEventListener('click', function () {
+    // 正しい答え
+    const correctAnswers = [4, 7, 10, 13, 16];
+
+    // 入力値を取得
+    const userAnswers = [
+      document.getElementById('userAnswerSq1').value,
+      document.getElementById('userAnswerSq2').value,
+      document.getElementById('userAnswerSq3').value,
+      document.getElementById('userAnswerSq4').value,
+      document.getElementById('userAnswerSq5').value
+    ];
+
+    // 入力をチェック
+    for (let i = 0; i < userAnswers.length; i++) {
+      const inputElement = document.getElementById(`userAnswerSq${i + 1}`);
+
+      // 全角数字を半角に変換
+      const userAnswer = parseInt(toHalfWidth(userAnswers[i]), 10);
+      const correctAnswer = correctAnswers[i];
+
+      // 入力が正しいかチェック
+      if (userAnswer !== correctAnswer) {
+        // 間違っていたら背景色を変更
+        inputElement.style.backgroundColor = 'lightcoral'; // 間違っている場合は赤っぽい色
+      } else {
+        // 正しい場合は背景色を元に戻す
+        inputElement.style.backgroundColor = '';
+        console.log("すべて一致");
+        input = "<skip 68>";
+        split_chars = splitStr(input);
+        console.log(split_chars);
+        main();
+        mess_box.click();
+
+      }
+    }
+  });
 
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
@@ -1378,7 +1362,7 @@ document.getElementById('QTableSubmitButton').addEventListener('click', function
       } else {
         console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
       }
-    }else if (buttonId === 'saveButton12') {
+    } else if (buttonId === 'saveButton12') {
       if (textResponse.includes("横に見る")) {
         input = "<skip 69>";
         split_chars = splitStr(input);
@@ -1489,55 +1473,55 @@ document.getElementById('QTableSubmitButton').addEventListener('click', function
   });
 
 
-  
 
-// 音声合成用の Web Audio API を使った関数
-async function synthesizeSpeech(text) {
-  if (!text) {
-    alert("Please enter some text!");
-    return;
-  }
 
-  console.log("Input text: ", text);
-
-  // Web Audio API の AudioContext を作成
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-  try {
-    const response = await fetch('/api/textspeech', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text }),
-    });
-
-    console.log("Response status:", response.status);
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.statusText}`);
+  // 音声合成用の Web Audio API を使った関数
+  async function synthesizeSpeech(text) {
+    if (!text) {
+      alert("Please enter some text!");
+      return;
     }
 
-    const audioBuffer = await response.arrayBuffer();
-    const buffer = await audioContext.decodeAudioData(audioBuffer);
+    console.log("Input text: ", text);
 
-    // 音声を再生
-    const source = audioContext.createBufferSource();
-    source.buffer = buffer;
-    source.connect(audioContext.destination);
-    source.start();
+    // Web Audio API の AudioContext を作成
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-  } catch (error) {
-    console.error(error);
-    alert("Failed to synthesize speech.");
+    try {
+      const response = await fetch('/api/textspeech', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
+
+      console.log("Response status:", response.status);
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const audioBuffer = await response.arrayBuffer();
+      const buffer = await audioContext.decodeAudioData(audioBuffer);
+
+      // 音声を再生
+      const source = audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(audioContext.destination);
+      source.start();
+
+    } catch (error) {
+      console.error(error);
+      alert("Failed to synthesize speech.");
+    }
   }
-}
 
 
 
-  
-  
-  
+
+
+
 
 
 
