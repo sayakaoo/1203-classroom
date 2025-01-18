@@ -598,6 +598,8 @@ window.addEventListener('load', function () {
   const colorPicker = document.querySelector('#color-picker'); // 色選択用
   const wrapper = document.querySelector('.wrapper');
 
+  const eraserButton = document.getElementById('eraser-button');
+
   let x;
   let y;
   let mousePressed = false;
