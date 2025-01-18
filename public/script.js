@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "こんにちは",
+      "<chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -602,6 +602,7 @@ window.addEventListener('load', function () {
   let y;
   let mousePressed = false;
   let selectedColor = 'black'; // デフォルトの色を黒に設定
+  let isEraserMode = false; // 消しゴムモードのフラグ
 
   // 初期状態で画像を表示する
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -638,10 +639,17 @@ window.addEventListener('load', function () {
     ctx.moveTo(x, y);
     ctx.lineTo(xPos, yPos);
     ctx.lineWidth = 5;  // 線の太さを設定
+    ctx.strokeStyle = isEraserMode ? 'white' : currentColor; // 消しゴムモードなら白で描画
     ctx.stroke();
     x = xPos;
     y = yPos;
   }
+  // 消しゴムモードの切り替え
+  eraserButton.addEventListener('click', () => {
+    isEraserMode = !isEraserMode;
+    eraserButton.textContent = isEraserMode ? 'ペンに戻す' : '消しゴム';
+  });
+
 
   // マウスイベント
   canvas.addEventListener('mousedown', (e) => startDrawing(e.offsetX, e.offsetY));
@@ -843,7 +851,7 @@ window.addEventListener('load', function () {
     const userAnswer = document.querySelector('#userAnswer1').value; // ユーザーの回答を取得
     $('.formQ1').removeClass('visible');
 
-    if (userAnswer === '10') {
+    if (toHalfWidth(userAnswer).includes('10')) {
       input = "<skip 1>";
       split_chars = splitStr(input);
       console.log(split_chars);
