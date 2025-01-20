@@ -510,3 +510,9 @@ body {
     background-color: #45a049;
   }
   
+  /* ノート用 */
+  canvas.note {
+    border: 1px solid #ddd; /* キャンバスを見やすくするための枠線 */
+    background-color: white; /* 背景色を白に設定 */
+  }
+  
