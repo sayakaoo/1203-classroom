@@ -1491,6 +1491,9 @@ window.addEventListener('load', function () {
       return;
     }
 
+     // フラグでリクエストの有効・無効を制御
+  const ENABLE_API = false; // APIを無効化する場合は false、有効化する場合は true に変更
+
     console.log("Input text: ", text);
 
     // Web Audio API の AudioContext を作成
