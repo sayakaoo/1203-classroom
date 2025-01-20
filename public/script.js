@@ -641,7 +641,6 @@ window.addEventListener('load', function () {
     ctx.moveTo(x, y);
     ctx.lineTo(xPos, yPos);
     ctx.lineWidth = 5;  // 線の太さを設定
-    ctx.strokeStyle = isEraserMode ? 'white' : currentColor; // 消しゴムモードなら白で描画
     ctx.stroke();
     x = xPos;
     y = yPos;
