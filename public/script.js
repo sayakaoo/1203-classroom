@@ -685,6 +685,69 @@ window.addEventListener('load', function () {
     };
   });
 
+  //ノート用の関数
+  const note = document.querySelector('#notedrawing-area');
+  const notectx = canvas.getContext('2d');
+  const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
+  const noteeraserButton = document.getElementById('noteeraser-button');
+
+  // クリアボタンの処理
+  clearBtn.addEventListener('click', () => {
+    notectx.clearRect(0, 0, canvas.width, canvas.height);  // キャンバスをクリア
+  });
+
+  // 色を選択する
+  notecolorPicker.addEventListener('change', (e) => {
+    selectedColor = e.target.value;
+    notectx.strokeStyle = selectedColor; // 選択した色に設定
+  });
+
+  //描画を開始する
+  function startDrawing(xPos, yPos) {
+    mousePressed = true;
+    x = xPos;
+    y = yPos;
+  }
+
+  //線を描画する
+  function draw(xPos, yPos) {
+    if (!mousePressed) return;
+    notectx.beginPath();
+    notectx.moveTo(x, y);
+    notectx.lineTo(xPos, yPos);
+    notectx.lineWidth = 5;  // 線の太さを設定
+    notectx.stroke();
+    x = xPos;
+    y = yPos;
+  }
+  // 消しゴムモードの切り替え
+  noteeraserButton.addEventListener('click', () => {
+    isEraserMode = !isEraserMode;
+    eraserButton.textContent = isEraserMode ? 'ペンに戻す' : '消しゴム';
+  });
+
+
+  // マウスイベント
+  note.addEventListener('mousedown', (e) => startDrawing(e.offsetX, e.offsetY));
+  note.addEventListener('mousemove', (e) => draw(e.offsetX, e.offsetY));
+  window.addEventListener('mouseup', () => mousePressed = false);
+
+  // タッチイベント
+  note.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    startDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
+  });
+
+  note.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    draw(touch.clientX - rect.left, touch.clientY - rect.top);
+    e.preventDefault();  // スクロールなどのデフォルト動作を無効化
+  });
+  window.addEventListener('touchend', () => mousePressed = false);
+
+
 
   // Teachable MachineでエクスポートしたモデルのURL
   const modelURL = "https://teachablemachine.withgoogle.com/models/xbPaKLXkL/";
