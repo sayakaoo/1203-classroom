@@ -593,7 +593,7 @@ window.addEventListener('load', function () {
   }
 
   //キャンバス用の関数
-  const canvas = document.querySelectorAll('#drawing-area');
+  const canvas = document.querySelector('#drawing-area');
   const ctx = canvas.getContext('2d');
   const colorPicker = document.querySelector('#color-picker'); // 色選択用
   const wrapper = document.querySelector('.wrapper');
