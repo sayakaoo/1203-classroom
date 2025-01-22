@@ -679,100 +679,103 @@ window.addEventListener('load', function () {
 
 
 
-  //ノート用の関数
-  const note = document.querySelector('#notedrawing-area');
-  const notectx = note.getContext('2d');
-  const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
-  let isNoteEraserMode = false; // 消しゴムモードフラグ
-  const eraserSize = 20; // 消しゴムのサイズ
+  // ノート用の関数
+const note = document.querySelector('#notedrawing-area');
+const notectx = note.getContext('2d');
+const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
+let isNoteEraserMode = false; // 消しゴムモードフラグ
+const eraserSize = 20; // 消しゴムのサイズ
 
-  // 背景と罫線を描画する関数
-  function drawBackground() {
-    const bgColor = "white"; // 背景色
-    const lineColor = "#e0e0e0"; // 罫線の色
-    const lineSpacing = 40; // 罫線の間隔
-  
-    // 背景を塗りつぶす
-    notectx.fillStyle = bgColor;
-    notectx.fillRect(0, 0, note.width, note.height); // 修正: notecanvas を note に
-  
-    // 罫線を描画
-    notectx.strokeStyle = lineColor;
-    notectx.lineWidth = 1;
-    for (let y = 0; y < note.height; y += lineSpacing) { // 修正: notecanvas を note に
-      notectx.beginPath();
-      notectx.moveTo(0, y);
-      notectx.lineTo(note.width, y); // 修正: notecanvas を note に
-      notectx.stroke();
-    }
+// 背景と罫線を描画する関数
+function drawBackground() {
+  const bgColor = "white"; // 背景色
+  const lineColor = "#e0e0e0"; // 罫線の色
+  const lineSpacing = 40; // 罫線の間隔
+
+  // 背景を塗りつぶす
+  notectx.fillStyle = bgColor;
+  notectx.fillRect(0, 0, note.width, note.height);
+
+  // 罫線を描画
+  notectx.strokeStyle = lineColor;
+  notectx.lineWidth = 1;
+  for (let y = 0; y < note.height; y += lineSpacing) {
+    notectx.beginPath();
+    notectx.moveTo(0, y);
+    notectx.lineTo(note.width, y);
+    notectx.stroke();
   }
-  
+}
+
 // 初期化時に背景を描画
 drawBackground();
 
-  // クリアボタンの処理
-  clearBtn.addEventListener('click', () => {
-    notectx.clearRect(0, 0, canvas.width, canvas.height);  // キャンバスをクリア
-  });
+// クリアボタンの処理
+clearBtn.addEventListener('click', () => {
+  notectx.clearRect(0, 0, note.width, note.height);  // キャンバスをクリア
+  drawBackground(); // 背景を再描画
+});
 
-  // 色を選択する
-  notecolorPicker.addEventListener('change', (e) => {
-    selectedColor = e.target.value;
-    notectx.strokeStyle = selectedColor; // 選択した色に設定
-  });
+// 色を選択する
+notecolorPicker.addEventListener('change', (e) => {
+  selectedColor = e.target.value;
+  notectx.strokeStyle = selectedColor; // 選択した色に設定
+});
 
-  //描画を開始する
-  function notestartDrawing(xPos, yPos) {
-    mousePressed = true;
-    x = xPos;
-    y = yPos;
-  }
+// 描画を開始する
+function notestartDrawing(xPos, yPos) {
+  mousePressed = true;
+  x = xPos;
+  y = yPos;
+}
 
-  //線を描画する
-  function notedraw(xPos, yPos) {
-    if (!mousePressed) return;
-    
-    if (isNoteEraserMode) {
-      // 消しゴムモード: 背景を再描画
-      const eraseX = xPos - eraserSize / 2;
-      const eraseY = yPos - eraserSize / 2;
-      notectx.clearRect(eraseX, eraseY, eraserSize, eraserSize);
-    } else {
-      notectx.beginPath();
+// 線を描画する
+function notedraw(xPos, yPos) {
+  if (!mousePressed) return;
+
+  if (isNoteEraserMode) {
+    // 消しゴムモード: 背景を再描画
+    const eraseX = xPos - eraserSize / 2;
+    const eraseY = yPos - eraserSize / 2;
+    notectx.clearRect(eraseX, eraseY, eraserSize, eraserSize);
+    drawBackground(); // 背景を保持しつつ罫線を再描画
+  } else {
+    notectx.beginPath();
     notectx.moveTo(x, y);
     notectx.lineTo(xPos, yPos);
     notectx.lineWidth = 3;  // 線の太さを設定
     notectx.stroke();
-    }
-  
-    x = xPos;
-    y = yPos;
   }
 
-  // マウスイベント
-  note.addEventListener('mousedown', (e) => notestartDrawing(e.offsetX, e.offsetY));
-  note.addEventListener('mousemove', (e) => notedraw(e.offsetX, e.offsetY));
-  window.addEventListener('mouseup', () => mousePressed = false);
+  x = xPos;
+  y = yPos;
+}
 
-  // タッチイベント
-  note.addEventListener('touchstart', (e) => {
-    const touch = e.touches[0];
-    const rect = canvas.getBoundingClientRect();
-    notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
-  });
-  // 消しゴムボタン
+// マウスイベント
+note.addEventListener('mousedown', (e) => notestartDrawing(e.offsetX, e.offsetY));
+note.addEventListener('mousemove', (e) => notedraw(e.offsetX, e.offsetY));
+window.addEventListener('mouseup', () => mousePressed = false);
+
+// タッチイベント
+note.addEventListener('touchstart', (e) => {
+  const touch = e.touches[0];
+  const rect = note.getBoundingClientRect();
+  notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
+});
+
+// 消しゴムボタン
 document.getElementById("noteeraser-button").addEventListener("click", () => {
   isNoteEraserMode = !isNoteEraserMode;
 });
 
-  note.addEventListener('touchmove', (e) => {
-    const touch = e.touches[0];
-    const rect = canvas.getBoundingClientRect();
-    notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
-    e.preventDefault();  // スクロールなどのデフォルト動作を無効化
-  });
-  window.addEventListener('touchend', () => mousePressed = false);
+note.addEventListener('touchmove', (e) => {
+  const touch = e.touches[0];
+  const rect = note.getBoundingClientRect();
+  notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
+  e.preventDefault();  // スクロールなどのデフォルト動作を無効化
+});
 
+window.addEventListener('touchend', () => mousePressed = false);
 
 
   // Teachable MachineでエクスポートしたモデルのURL
