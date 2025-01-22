@@ -593,7 +593,7 @@ window.addEventListener('load', function () {
   }
 
   //キャンバス用の関数
-  const canvas = document.querySelector('#drawing-area');
+  const canvas = document.querySelectorAll('#drawing-area');
   const ctx = canvas.getContext('2d');
   const colorPicker = document.querySelector('#color-picker'); // 色選択用
   const wrapper = document.querySelector('.wrapper');
@@ -1493,6 +1493,9 @@ window.addEventListener('load', function () {
 
      // フラグでリクエストの有効・無効を制御
   const ENABLE_API = false; // APIを無効化する場合は false、有効化する場合は true に変更
+  if (!ENABLE_API) {
+    return;
+  }
 
     console.log("Input text: ", text);
 
