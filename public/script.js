@@ -680,6 +680,7 @@ window.addEventListener('load', function () {
     };
   });
 
+
   //ノート用の関数
   const note = document.querySelector('#notedrawing-area');
   const notectx = canvas.getContext('2d');
@@ -698,14 +699,14 @@ window.addEventListener('load', function () {
   });
 
   //描画を開始する
-  function startDrawing(xPos, yPos) {
+  function notestartDrawing(xPos, yPos) {
     mousePressed = true;
     x = xPos;
     y = yPos;
   }
 
   //線を描画する
-  function draw(xPos, yPos) {
+  function notedraw(xPos, yPos) {
     if (!mousePressed) return;
     notectx.beginPath();
     notectx.moveTo(x, y);
@@ -723,21 +724,21 @@ window.addEventListener('load', function () {
 
 
   // マウスイベント
-  note.addEventListener('mousedown', (e) => startDrawing(e.offsetX, e.offsetY));
-  note.addEventListener('mousemove', (e) => draw(e.offsetX, e.offsetY));
+  note.addEventListener('mousedown', (e) => notestartDrawing(e.offsetX, e.offsetY));
+  note.addEventListener('mousemove', (e) => notedraw(e.offsetX, e.offsetY));
   window.addEventListener('mouseup', () => mousePressed = false);
 
   // タッチイベント
   note.addEventListener('touchstart', (e) => {
     const touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
-    startDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
+    notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
   });
 
   note.addEventListener('touchmove', (e) => {
     const touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
-    draw(touch.clientX - rect.left, touch.clientY - rect.top);
+    notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
     e.preventDefault();  // スクロールなどのデフォルト動作を無効化
   });
   window.addEventListener('touchend', () => mousePressed = false);
