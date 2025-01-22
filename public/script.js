@@ -604,7 +604,6 @@ window.addEventListener('load', function () {
   let y;
   let mousePressed = false;
   let selectedColor = 'black'; // デフォルトの色を黒に設定
-  let isEraserMode = false; // 消しゴムモードのフラグ
 
   // 初期状態で画像を表示する
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -658,16 +657,13 @@ window.addEventListener('load', function () {
     const rect = canvas.getBoundingClientRect();
     startDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
   });
-
   canvas.addEventListener('touchmove', (e) => {
     const touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
     draw(touch.clientX - rect.left, touch.clientY - rect.top);
     e.preventDefault();  // スクロールなどのデフォルト動作を無効化
   });
-
   window.addEventListener('touchend', () => mousePressed = false);
-
   ///消去ボタンクリックで全消去
   clearBtn.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -681,11 +677,36 @@ window.addEventListener('load', function () {
   });
 
 
+
+
   //ノート用の関数
   const note = document.querySelector('#notedrawing-area');
   const notectx = note.getContext('2d');
   const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
   const noteeraserButton = document.getElementById('noteeraser-button');
+  let isNoteEraserMode = false; // 消しゴムモードフラグ
+  const eraserSize = 20; // 消しゴムのサイズ
+
+  // 背景と罫線を描画する関数
+function drawBackground() {
+  const bgColor = "white"; // 背景色
+  const lineColor = "#e0e0e0"; // 罫線の色
+  const lineSpacing = 40; // 罫線の間隔
+
+  // 背景を塗りつぶす
+  notectx.fillStyle = bgColor;
+  notectx.fillRect(0, 0, notecanvas.width, notecanvas.height);
+
+  // 罫線を描画
+  notectx.strokeStyle = lineColor;
+  notectx.lineWidth = 1;
+  for (let y = 0; y < notecanvas.height; y += lineSpacing) {
+    notectx.beginPath();
+    notectx.moveTo(0, y);
+    notectx.lineTo(notecanvas.width, y);
+    notectx.stroke();
+  }
+}
 
   // クリアボタンの処理
   clearBtn.addEventListener('click', () => {
@@ -708,19 +729,25 @@ window.addEventListener('load', function () {
   //線を描画する
   function notedraw(xPos, yPos) {
     if (!mousePressed) return;
-    notectx.beginPath();
+    
+    if (isNoteEraserMode) {
+      // 消しゴムモード: 背景を再描画
+      const eraseX = xPos - eraserSize / 2;
+      const eraseY = yPos - eraserSize / 2;
+      notectx.clearRect(eraseX, eraseY, eraserSize, eraserSize);
+      drawBackground(); // 背景を保持しつつ罫線を再描画
+    } else {
+      notectx.beginPath();
     notectx.moveTo(x, y);
     notectx.lineTo(xPos, yPos);
-    notectx.lineWidth = 5;  // 線の太さを設定
+    notectx.lineWidth = 3;  // 線の太さを設定
     notectx.stroke();
+    }
+  
     x = xPos;
     y = yPos;
   }
-  // 消しゴムモードの切り替え
-  noteeraserButton.addEventListener('click', () => {
-    isEraserMode = !isEraserMode;
-    eraserButton.textContent = isEraserMode ? 'ペンに戻す' : '消しゴム';
-  });
+});
 
 
   // マウスイベント
@@ -734,6 +761,10 @@ window.addEventListener('load', function () {
     const rect = canvas.getBoundingClientRect();
     notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
   });
+  // 消しゴムボタン
+document.getElementById("noteeraser-button").addEventListener("click", () => {
+  isNoteEraserMode = !isNoteEraserMode;
+});
 
   note.addEventListener('touchmove', (e) => {
     const touch = e.touches[0];
