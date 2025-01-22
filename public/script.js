@@ -678,6 +678,8 @@ window.addEventListener('load', function () {
 
 
 
+// 初期化時に背景を描画
+drawBackground();
 
   //ノート用の関数
   const note = document.querySelector('#notedrawing-area');
@@ -735,7 +737,6 @@ window.addEventListener('load', function () {
       const eraseX = xPos - eraserSize / 2;
       const eraseY = yPos - eraserSize / 2;
       notectx.clearRect(eraseX, eraseY, eraserSize, eraserSize);
-      drawBackground(); // 背景を保持しつつ罫線を再描画
     } else {
       notectx.beginPath();
     notectx.moveTo(x, y);
@@ -747,8 +748,6 @@ window.addEventListener('load', function () {
     x = xPos;
     y = yPos;
   }
-
-
 
   // マウスイベント
   note.addEventListener('mousedown', (e) => notestartDrawing(e.offsetX, e.offsetY));
