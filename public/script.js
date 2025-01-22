@@ -683,7 +683,7 @@ window.addEventListener('load', function () {
 
   //ノート用の関数
   const note = document.querySelector('#notedrawing-area');
-  const notectx = canvas.getContext('2d');
+  const notectx = note.getContext('2d');
   const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
   const noteeraserButton = document.getElementById('noteeraser-button');
 
