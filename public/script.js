@@ -747,7 +747,7 @@ function drawBackground() {
     x = xPos;
     y = yPos;
   }
-});
+
 
 
   // マウスイベント
