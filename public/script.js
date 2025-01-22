@@ -678,8 +678,6 @@ window.addEventListener('load', function () {
 
 
 
-// 初期化時に背景を描画
-drawBackground();
 
   //ノート用の関数
   const note = document.querySelector('#notedrawing-area');
@@ -709,6 +707,8 @@ drawBackground();
     }
   }
   
+// 初期化時に背景を描画
+drawBackground();
 
   // クリアボタンの処理
   clearBtn.addEventListener('click', () => {
