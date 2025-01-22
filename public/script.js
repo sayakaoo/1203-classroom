@@ -679,7 +679,7 @@ window.addEventListener('load', function () {
 
 
 
-  // ノート用の関数
+ // ノート用の関数
 const note = document.querySelector('#notedrawing-area');
 const notectx = note.getContext('2d');
 const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
@@ -734,11 +734,10 @@ function notedraw(xPos, yPos) {
   if (!mousePressed) return;
 
   if (isNoteEraserMode) {
-    // 消しゴムモード: 背景を再描画
+    // 消しゴムモード: 背景を再描画しないように修正
     const eraseX = xPos - eraserSize / 2;
     const eraseY = yPos - eraserSize / 2;
     notectx.clearRect(eraseX, eraseY, eraserSize, eraserSize);
-    drawBackground(); // 背景を保持しつつ罫線を再描画
   } else {
     notectx.beginPath();
     notectx.moveTo(x, y);
@@ -776,6 +775,7 @@ note.addEventListener('touchmove', (e) => {
 });
 
 window.addEventListener('touchend', () => mousePressed = false);
+
 
 
   // Teachable MachineでエクスポートしたモデルのURL
