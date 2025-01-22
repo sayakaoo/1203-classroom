@@ -645,11 +645,6 @@ window.addEventListener('load', function () {
     x = xPos;
     y = yPos;
   }
-  // 消しゴムモードの切り替え
-  eraserButton.addEventListener('click', () => {
-    isEraserMode = !isEraserMode;
-    eraserButton.textContent = isEraserMode ? 'ペンに戻す' : '消しゴム';
-  });
 
 
   // マウスイベント
