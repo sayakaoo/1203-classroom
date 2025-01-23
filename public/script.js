@@ -271,8 +271,8 @@ window.addEventListener('load', function () {
     //明日から頑張る
     61: [
       "では一緒に正方形がn個のときのマッチ棒の数を考えてみましょう。",
-      "まずは具体的な数を考えてみましょう",
-      "正方形が1つ、2つの時を考えてみましょう。",
+      "n個のときは数えることが出来ないので何か規則性をみつけられると考えられそうです。",
+      "まずは具体的な数つまり、正方形が1つ、2つの時を考えてみましょう。",
       "表を使って比較しやすくしましょう。<form 11>"
     ],
 
@@ -560,8 +560,7 @@ window.addEventListener('load', function () {
         //新しい読み上げ関数
         let textDate = text[scene_cnt];
         var textRead = textDate[line_cnt];
-        //textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
-        //エラーがうるさいのでいったんコメント
+        textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
         console.log("Input text: ", textRead);
         //関数呼び出し、したのほうにあるよ
         synthesizeSpeech(textRead);
@@ -1620,21 +1619,8 @@ window.addEventListener('touchend', () => mousePressed = false);
 
     } catch (error) {
       console.error(error);
-      alert("Failed to synthesize speech.");
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 })
