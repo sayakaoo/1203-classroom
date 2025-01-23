@@ -73,7 +73,7 @@ window.addEventListener('load', function () {
     //今は8~12は使っていない
     8: [
       "(1+3n)ありがとうございます。",
-      "(学習者)さんどのように求めたか説明してください。<showCanvas><apiform1>",
+      "(学習者)さんどのように求めたか説明してください。<showCanvas><apiform 1>",
 
     ],
     9: [
@@ -562,6 +562,7 @@ window.addEventListener('load', function () {
         let textDate = text[scene_cnt];
         var textRead = textDate[line_cnt];
         //textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
+        //エラーがうるさいのでいったんコメント
         console.log("Input text: ", textRead);
         //関数呼び出し、したのほうにあるよ
         synthesizeSpeech(textRead);
