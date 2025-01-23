@@ -272,7 +272,8 @@ window.addEventListener('load', function () {
     61: [
       "では一緒に正方形がn個のときのマッチ棒の数を考えてみましょう。",
       "まずは具体的な数を考えてみましょう",
-      "<form 11>"
+      "正方形が1つ、2つの時を考えてみましょう。",
+      "表を使って比較しやすくしましょう。<form 11>"
     ],
 
     62: [
@@ -1583,7 +1584,7 @@ window.addEventListener('touchend', () => mousePressed = false);
     }
 
      // フラグでリクエストの有効・無効を制御
-  const ENABLE_API = false; // APIを無効化する場合は false、有効化する場合は true に変更
+  const ENABLE_API = true; // APIを無効化する場合は false、有効化する場合は true に変更
   if (!ENABLE_API) {
     return;
   }
