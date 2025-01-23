@@ -561,7 +561,6 @@ window.addEventListener('load', function () {
         let textDate = text[scene_cnt];
         var textRead = textDate[line_cnt];
         textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
-        console.log("Input text: ", textRead);
         //関数呼び出し、したのほうにあるよ
         synthesizeSpeech(textRead);
 
@@ -1216,6 +1215,7 @@ window.addEventListener('touchend', () => mousePressed = false);
   }
 
   document.getElementById('QTableSubmitButton').addEventListener('click', function () {
+    e.preventDefault();
     // 正しい答え
     const correctAnswers = [4, 7, 10, 13, 16];
 
@@ -1249,7 +1249,6 @@ window.addEventListener('touchend', () => mousePressed = false);
         console.log(split_chars);
         main();
         mess_box.click();
-
       }
     }
   });
