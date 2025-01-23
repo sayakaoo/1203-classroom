@@ -1214,7 +1214,7 @@ window.addEventListener('touchend', () => mousePressed = false);
     });
   }
 
-  document.getElementById('QTableSubmitButton').addEventListener('click', function () {
+  document.getElementById('QTableSubmitButton').addEventListener('click', (e) => {
     e.preventDefault();
     // 正しい答え
     const correctAnswers = [4, 7, 10, 13, 16];
