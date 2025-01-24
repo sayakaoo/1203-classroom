@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 61><chara 5 1>こんにちは",
+      "<chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -313,8 +313,7 @@ window.addEventListener('load', function () {
     68: [
       "表がかけましたね",
       "この表から規則性を見つけてみましょう",
-      "どんな規則性がありますか？<apiform 12>",
-      ""
+      "どんな規則性がみつけられますか？<apiform 12>"
     ],
     69: [
       "正方形がひとつ増えるごと<item 17>にマッチ棒が3本ずつ増えるという規則性を見つけましたね。<item 16>",
@@ -1466,7 +1465,8 @@ window.addEventListener('touchend', () => mousePressed = false);
         input = "<skip 69>";
         split_chars = splitStr(input);
       } else if (textResponse.includes("縦に見る")) {
-        input = "<skip 58>";
+        //一旦適当
+        input = "<skip 68>";
         split_chars = splitStr(input);
       } else {
         console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
