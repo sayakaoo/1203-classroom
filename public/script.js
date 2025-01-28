@@ -63,12 +63,10 @@ window.addEventListener('load', function () {
     6: [
       "では正方形がn個あるとき、マッチ棒は何本必要ですか。",
       "どのように考えられるでしょうか。まずは5分個人で考えてみてください",
-      "(5分タイマー)<skip 7>",
-
+      "(5分タイマー)表や図を使って説明できるようにしましょう。<skip 7>",
     ],
     7: [
-      "立てた式を1つおしえてください<form 4>",
-      ""
+      "<form 4>",
     ],
     //今は8~12は使っていない
     8: [
@@ -1024,6 +1022,10 @@ window.addEventListener('touchend', () => mousePressed = false);
   //Q4の回答の分岐
   document.querySelector('#Q4form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
+    
+    const form4Answer = document.getElementById('userAnswer4').value;
+    // form5の回答欄にセット
+    document.getElementById('userAnswer5').value = form4Answer;
 
     const userAnswer = document.querySelector('#userAnswer4').value; // ユーザーの回答を取得
     $('.formQ4').removeClass('visible');
@@ -1032,8 +1034,6 @@ window.addEventListener('touchend', () => mousePressed = false);
     if (normalize(userAnswer) === '3(n-1)+4' || normalize(userAnswer) === '4+3(n-1)') {
       //さきにAさんのパターン
       input = "<skip 46>";
-      //最初にユーザーの発表なら8に進む
-      //input = "<skip 8>";
       split_chars = splitStr(input);
       console.log(split_chars);
     } else if (normalize(userAnswer) === '3n+4' || normalize(userAnswer) === '4+3n') {
@@ -1380,7 +1380,7 @@ window.addEventListener('touchend', () => mousePressed = false);
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
       }
-    } if (buttonId === 'saveButton7') {
+    } else if (buttonId === 'saveButton7') {
       if (textResponse.includes("不正解")) {
         switch (highestPrediction.className) {
           case "1+3n":
@@ -1600,8 +1600,6 @@ window.addEventListener('touchend', () => mousePressed = false);
         },
         body: JSON.stringify({ text }),
       });
-
-      console.log("Response status:", response.status);
 
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
