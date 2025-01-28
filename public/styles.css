@@ -516,3 +516,9 @@ body {
     background-color: white; /* 背景色を白に設定 */
   }
   
+  .formQ11{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 4;
+  }

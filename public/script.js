@@ -1022,7 +1022,7 @@ window.addEventListener('touchend', () => mousePressed = false);
   //Q4の回答の分岐
   document.querySelector('#Q4form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
-    
+
     const form4Answer = document.getElementById('userAnswer4').value;
     // form5の回答欄にセット
     document.getElementById('userAnswer5').value = form4Answer;
@@ -1239,6 +1239,7 @@ window.addEventListener('touchend', () => mousePressed = false);
       if (userAnswer !== correctAnswer) {
         // 間違っていたら背景色を変更
         inputElement.style.backgroundColor = 'lightcoral'; // 間違っている場合は赤っぽい色
+        return;
       } else {
         // 正しい場合は背景色を元に戻す
         inputElement.style.backgroundColor = '';
@@ -1582,7 +1583,7 @@ window.addEventListener('touchend', () => mousePressed = false);
     }
 
      // フラグでリクエストの有効・無効を制御
-  const ENABLE_API = true; // APIを無効化する場合は false、有効化する場合は true に変更
+  const ENABLE_API = false; // APIを無効化する場合は false、有効化する場合は true に変更
   if (!ENABLE_API) {
     return;
   }
