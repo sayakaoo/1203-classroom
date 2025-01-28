@@ -311,12 +311,11 @@ body{
 /* 全体のフォームスタイル */
 form.form {
     position: absolute;
-    top: 778px;
-    left: 450px;
-    width: 100%;
-    max-width: 800px;
-    left: 50%; /* 横方向の中央 */
-    transform: translateX(-50%); /* 中央揃え調整 */
+    top: 540px;
+    width: 1300px;
+    height: 200px;
+    left: 0px;
+    right: 0px;
     margin: 20px auto;
     padding: 20px;
     border: 2px solid #3d81a5;
@@ -360,13 +359,14 @@ form input[type="text"]:focus {
 
 /* ボタンのスタイル */
 form button {
-    padding: 10px 15px;
+    padding: 0px 5px;
     font-size: 14px;
     color: #fff;
     background-color: #3d81a5;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    height: 40px;
     margin-right: 10px;
     transition: background-color 0.3s ease;
     font-family: "DotGothic16", sans-serif; /* ドットフォント */

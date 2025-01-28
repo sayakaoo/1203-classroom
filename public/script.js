@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 7><chara 5 1>こんにちは",
+      "<form 1><chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -1215,9 +1215,10 @@ window.addEventListener('touchend', () => mousePressed = false);
 
   document.getElementById('QTableSubmitButton').addEventListener('click', (e) => {
     e.preventDefault();
+  
     // 正しい答え
     const correctAnswers = [4, 7, 10, 13, 16];
-
+  
     // 入力値を取得
     const userAnswers = [
       document.getElementById('userAnswerSq1').value,
@@ -1226,33 +1227,38 @@ window.addEventListener('touchend', () => mousePressed = false);
       document.getElementById('userAnswerSq4').value,
       document.getElementById('userAnswerSq5').value
     ];
-
+  
+    let allCorrect = true; // 全て正しいかどうかのフラグ
+  
     // 入力をチェック
     for (let i = 0; i < userAnswers.length; i++) {
       const inputElement = document.getElementById(`userAnswerSq${i + 1}`);
-
+  
       // 全角数字を半角に変換
       const userAnswer = parseInt(toHalfWidth(userAnswers[i]), 10);
       const correctAnswer = correctAnswers[i];
-
-      // 入力が正しいかチェック
+  
       if (userAnswer !== correctAnswer) {
         // 間違っていたら背景色を変更
         inputElement.style.backgroundColor = 'lightcoral'; // 間違っている場合は赤っぽい色
-        return;
+        allCorrect = false; // 全て正しいわけではない
       } else {
         // 正しい場合は背景色を元に戻す
         inputElement.style.backgroundColor = '';
-        console.log("すべて一致");
-        input = "<skip 68>";
-        split_chars = splitStr(input);
-        console.log(split_chars);
-        main();
-        mess_box.click();
       }
     }
-  });
-
+  
+    // 全て正しい場合のみ後続の処理を実行
+    if (allCorrect) {
+      $('.formQ11').removeClass('visible');
+      console.log("すべて一致");
+      input = "<skip 68>";
+      split_chars = splitStr(input);
+      console.log(split_chars);
+      main();
+      mess_box.click();
+    }
+  });  
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
   function splitStr(str) {
