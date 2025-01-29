@@ -839,54 +839,46 @@ window.addEventListener('load', function () {
     imageElement.onload = () => predictImage(imageElement);
 }
 
-  // 画像を予測
-  async function predictImage(imageElement) {
-    if (!model) {
-      console.error("モデルがロードされていません");
-      return;
+    // 画像を予測
+    async function predictImage(imageElement) {
+      if (!model) {
+        console.error("モデルがロードされていません");
+        return;
+      }
+  
+      try {
+        const predictions = await model.predict(imageElement);
+        highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
+        console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
+      } catch (error) {
+        console.error("予測中にエラーが発生しました: ", error);
+      }
+      handlePrediction();
+      downloadCanvasImage();
+  
+  
     }
-
-    try {
-      const predictions = await model.predict(imageElement);
-      highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
-      console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
-    } catch (error) {
-      console.error("予測中にエラーが発生しました: ", error);
+    // キャンバス画像をダウンロードする
+    function downloadCanvasImage() {
+      const resizedCanvas = document.createElement("canvas");
+      resizedCanvas.width = 224;
+      resizedCanvas.height = 224;
+      const resizedCtx = resizedCanvas.getContext("2d");
+      const originalCanvas = document.getElementById("drawing-area");
+    
+      // 224x224 にリサイズ
+      resizedCtx.drawImage(originalCanvas, 0, 0, 224, 224);
+    
+      // 画像を保存
+      const imageUrl = resizedCanvas.toDataURL();
+      const a = document.createElement("a");
+      a.href = imageUrl;
+      a.download = "resized-canvas-image.png";
+      a.click();
+  
+      console.log(canvas.width, canvas.height);
+  
     }
-    handlePrediction();
-    downloadCanvasImage();
-
-
-  }
- 
-  // キャンバス画像をダウンロードする
-  function downloadCanvasImage() {
-    const resizedCanvas = document.createElement("canvas");
-    resizedCanvas.width = 224;
-    resizedCanvas.height = 224;
-    const resizedCtx = resizedCanvas.getContext("2d");
-    const originalCanvas = document.getElementById("drawing-area");
-  
-    // アスペクト比を維持したままリサイズ
-    const scale = 224 / 500; // 500px を 224px に縮小
-    const newWidth = 1000 * scale; // 1000px を縮小後のサイズ
-    const newHeight = 500 * scale; // 500px を縮小後のサイズ
-  
-    // 中央を切り取るためのオフセット
-    const offsetX = (newWidth - 224) / 2;
-  
-    resizedCtx.drawImage(originalCanvas, -offsetX, 0, newWidth, newHeight);
-    // 画像を保存
-    const imageUrl = resizedCanvas.toDataURL();
-    const a = document.createElement("a");
-    a.href = imageUrl;
-    a.download = "resized-canvas-image.png";
-    a.click();
-
-    console.log(canvas.width, canvas.height);
-
-  }
-  
 
   // canvasの画像判定後の分岐処理
   //画像だけの時はこの関数の中かも
