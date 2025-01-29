@@ -861,15 +861,24 @@ window.addEventListener('load', function () {
 
   }
   // キャンバス画像をダウンロードする
-function downloadCanvasImage() {
-  const canvas = document.getElementById("drawing-area");
-  const imageUrl = canvas.toDataURL(); // キャンバスの内容をデータURLとして取得
-  const a = document.createElement('a');
-  a.href = imageUrl;
-  a.download = 'canvas-image.png'; // 保存するファイル名
-  a.click();
-}
-
+  function downloadCanvasImage() {
+    const resizedCanvas = document.createElement("canvas");
+    resizedCanvas.width = 224;
+    resizedCanvas.height = 224;
+    const resizedCtx = resizedCanvas.getContext("2d");
+    const originalCanvas = document.getElementById("drawing-area");
+  
+    // 224x224 にリサイズ
+    resizedCtx.drawImage(originalCanvas, 0, 0, 224, 224);
+  
+    // 画像を保存
+    const imageUrl = resizedCanvas.toDataURL();
+    const a = document.createElement("a");
+    a.href = imageUrl;
+    a.download = "resized-canvas-image.png";
+    a.click();
+  }
+  
 
   // canvasの画像判定後の分岐処理
   //画像だけの時はこの関数の中かも
