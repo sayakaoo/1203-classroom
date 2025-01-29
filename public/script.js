@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 69><chara 5 1>こんにちは",
+      "<skip 50><chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
@@ -330,7 +330,7 @@ window.addEventListener('load', function () {
       "つまり、n個の時黄色の部分に入る数はn-1となります。",
       "<item 37>よってn個のときの式は4×3(n-1)と表せます。<skip 45>"
     ],
-    
+
 
 
 
