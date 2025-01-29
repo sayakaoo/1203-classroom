@@ -839,8 +839,6 @@ window.addEventListener('load', function () {
     imageElement.onload = () => predictImage(imageElement);
 }
 
-
-
   // 画像を予測
   async function predictImage(imageElement) {
     if (!model) {
@@ -860,6 +858,7 @@ window.addEventListener('load', function () {
 
 
   }
+ 
   // キャンバス画像をダウンロードする
   function downloadCanvasImage() {
     const resizedCanvas = document.createElement("canvas");
@@ -868,9 +867,15 @@ window.addEventListener('load', function () {
     const resizedCtx = resizedCanvas.getContext("2d");
     const originalCanvas = document.getElementById("drawing-area");
   
-    // 224x224 にリサイズ
-    resizedCtx.drawImage(originalCanvas, 0, 0, 224, 224);
+    // アスペクト比を維持したままリサイズ
+    const scale = 224 / 500; // 500px を 224px に縮小
+    const newWidth = 1000 * scale; // 1000px を縮小後のサイズ
+    const newHeight = 500 * scale; // 500px を縮小後のサイズ
   
+    // 中央を切り取るためのオフセット
+    const offsetX = (newWidth - 224) / 2;
+  
+    resizedCtx.drawImage(originalCanvas, -offsetX, 0, newWidth, newHeight);
     // 画像を保存
     const imageUrl = resizedCanvas.toDataURL();
     const a = document.createElement("a");
