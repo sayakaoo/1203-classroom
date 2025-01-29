@@ -877,6 +877,9 @@ window.addEventListener('load', function () {
     a.href = imageUrl;
     a.download = "resized-canvas-image.png";
     a.click();
+
+    console.log(canvas.width, canvas.height);
+
   }
   
 
