@@ -313,6 +313,7 @@ window.addEventListener('load', function () {
       "この表から規則性を見つけてみましょう",
       "どんな規則性がみつけられますか？<apiform 12>"
     ],
+    //ちないみわからん
     69: [
       "<colseapiform><item 22>表から正方形がひとつ増えるごとにマッチ棒が3本ずつ増えるという規則性を見つけましたね。",
       "これを<item 24>図で考えてみましょう。正方形の数が<item 25>増えるたびにコの字の<item 26>グループが１つ追加されている<item 27>ようですね。<item 28>",
@@ -325,10 +326,11 @@ window.addEventListener('load', function () {
       "<item 36>ではこの黄色の部分の数字は正方形の数とどんな規則性があるでしょうか？<apiform 13>"
     ],
     70: [
-      "正方形の数より1小さい数が黄色の部分の数字と一致していますね。",
+      "<colseapiform>正方形の数より1小さい数が黄色の部分の数字と一致していますね。",
       "つまり、n個の時黄色の部分に入る数はn-1となります。",
-      "<item 37>よってn個のときの式は4×3(n-1)と表せます。"
+      "<item 37>よってn個のときの式は4×3(n-1)と表せます。<skip 45>"
     ],
+    
 
 
 
@@ -1502,11 +1504,15 @@ window.addEventListener('load', function () {
       }
     } else if (buttonId === 'saveButton13') {
       if (textResponse.includes("不正解")) {
-        input = "<skip 59>";
+        input = "<skip 71>";
         split_chars = splitStr(input);
+        rootId = "3";
+
       } else if (textResponse.includes("正解")) {
         input = "<skip 70>";
         split_chars = splitStr(input);
+        rootId = "3";
+
       } else {
         console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
       }
