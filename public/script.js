@@ -816,14 +816,29 @@ window.addEventListener('load', function () {
   async function predictCanvas() {
     const canvas = document.getElementById("drawing-area");
     canvas.willReadFrequently = true; // パフォーマンス向上のため
-    const context = canvas.getContext("2d");
     console.log("画像予測中 ");
 
-    // キャンバスを画像に変換
+    // **1. リサイズ用のオフスクリーンキャンバスを作る**
+    const resizedCanvas = document.createElement("canvas");
+    resizedCanvas.width = 224;
+    resizedCanvas.height = 224;
+    const resizedCtx = resizedCanvas.getContext("2d");
+
+    // **2. 224x224 にリサイズして描画**
+    resizedCtx.drawImage(canvas, 0, 0, 224, 224);
+
+    // **3. リサイズ後の画像を確認するために `<img>` にセット**
+    const previewImage = document.createElement("img");
+    previewImage.src = resizedCanvas.toDataURL();
+    previewImage.style.border = "1px solid red"; // 見やすくする
+    document.body.appendChild(previewImage); // ページに追加して確認
+
+    // **4. そのリサイズ画像をモデルに渡す**
     const imageElement = new Image();
-    imageElement.src = canvas.toDataURL();
+    imageElement.src = resizedCanvas.toDataURL();
     imageElement.onload = () => predictImage(imageElement);
-  }
+}
+
 
 
   // 画像を予測
