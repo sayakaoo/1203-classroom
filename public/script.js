@@ -841,8 +841,20 @@ window.addEventListener('load', function () {
       console.error("予測中にエラーが発生しました: ", error);
     }
     handlePrediction();
+    downloadCanvasImage();
+
 
   }
+  // キャンバス画像をダウンロードする
+function downloadCanvasImage() {
+  const canvas = document.getElementById("drawing-area");
+  const imageUrl = canvas.toDataURL(); // キャンバスの内容をデータURLとして取得
+  const a = document.createElement('a');
+  a.href = imageUrl;
+  a.download = 'canvas-image.png'; // 保存するファイル名
+  a.click();
+}
+
 
   // canvasの画像判定後の分岐処理
   //画像だけの時はこの関数の中かも
