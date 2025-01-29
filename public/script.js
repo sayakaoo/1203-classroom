@@ -315,7 +315,14 @@ window.addEventListener('load', function () {
     ],
     69: [
       "<colseapiform><item 22>表から正方形がひとつ増えるごとにマッチ棒が3本ずつ増えるという規則性を見つけましたね。",
+      "これを<item 24>図で考えてみましょう。正方形の数が<item 25>増えるたびにコの字の<item 26>グループが１つ追加されている<item 27>ようですね。<item 28>",
+      "表を埋めた時の数え方を思い出してみましょう。",
+      "正方形が1つのときは4本、<item 29>正方形が２つのときはコの字のグループが<item 30>１つ追加されます。よって、4+3×1という式が立てられます。<item 31>",
+      "3個、4個の時も同じように考えてみましょう。",
+      "",
+      "これを図で考えると、<item 18>増えているのはこの青で囲んだ部分とみれそうです",
       "正方形がひとつ増えるごと<item 17>にマッチ棒が3本ずつ増えるという規則性を見つけましたね。<item 16>",
+      "これを図で考えると、<item 18>増えているのはこの青で囲んだ部分とみれそうです",
       "これを図で考えると、<item 18>増えているのはこの青で囲んだ部分とみれそうです",
       "式の表現を変えてみると、<item 19>このように考えることができそうです。<item 20>正方形が4個の時も同様です。",
       "赤で囲んでいる最初の4本と、青で囲んでいるコの字型をしたグループに分けられそうですね。",
@@ -675,102 +682,102 @@ window.addEventListener('load', function () {
 
 
 
- // ノート用の関数
-const note = document.querySelector('#notedrawing-area');
-const notectx = note.getContext('2d');
-const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
-let isNoteEraserMode = false; // 消しゴムモードフラグ
-const eraserSize = 20; // 消しゴムのサイズ
+  // ノート用の関数
+  const note = document.querySelector('#notedrawing-area');
+  const notectx = note.getContext('2d');
+  const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
+  let isNoteEraserMode = false; // 消しゴムモードフラグ
+  const eraserSize = 20; // 消しゴムのサイズ
 
-// 背景と罫線を描画する関数
-function drawBackground() {
-  const bgColor = "white"; // 背景色
-  const lineColor = "#e0e0e0"; // 罫線の色
-  const lineSpacing = 40; // 罫線の間隔
+  // 背景と罫線を描画する関数
+  function drawBackground() {
+    const bgColor = "white"; // 背景色
+    const lineColor = "#e0e0e0"; // 罫線の色
+    const lineSpacing = 40; // 罫線の間隔
 
-  // 背景を塗りつぶす
-  notectx.fillStyle = bgColor;
-  notectx.fillRect(0, 0, note.width, note.height);
+    // 背景を塗りつぶす
+    notectx.fillStyle = bgColor;
+    notectx.fillRect(0, 0, note.width, note.height);
 
-  // 罫線を描画
-  notectx.strokeStyle = lineColor;
-  notectx.lineWidth = 1;
-  for (let y = 0; y < note.height; y += lineSpacing) {
-    notectx.beginPath();
-    notectx.moveTo(0, y);
-    notectx.lineTo(note.width, y);
-    notectx.stroke();
-  }
-}
-
-// 初期化時に背景を描画
-drawBackground();
-
-// クリアボタンの処理
-clearBtn.addEventListener('click', () => {
-  notectx.clearRect(0, 0, note.width, note.height);  // キャンバスをクリア
-  drawBackground(); // 背景を再描画
-});
-
-// 色を選択する
-notecolorPicker.addEventListener('change', (e) => {
-  selectedColor = e.target.value;
-  notectx.strokeStyle = selectedColor; // 選択した色に設定
-});
-
-// 描画を開始する
-function notestartDrawing(xPos, yPos) {
-  mousePressed = true;
-  x = xPos;
-  y = yPos;
-}
-
-// 線を描画する
-function notedraw(xPos, yPos) {
-  if (!mousePressed) return;
-
-  if (isNoteEraserMode) {
-    // 消しゴムモード: 背景を再描画しないように修正
-    const eraseX = xPos - eraserSize / 2;
-    const eraseY = yPos - eraserSize / 2;
-    notectx.clearRect(eraseX, eraseY, eraserSize, eraserSize);
-  } else {
-    notectx.beginPath();
-    notectx.moveTo(x, y);
-    notectx.lineTo(xPos, yPos);
-    notectx.lineWidth = 3;  // 線の太さを設定
-    notectx.stroke();
+    // 罫線を描画
+    notectx.strokeStyle = lineColor;
+    notectx.lineWidth = 1;
+    for (let y = 0; y < note.height; y += lineSpacing) {
+      notectx.beginPath();
+      notectx.moveTo(0, y);
+      notectx.lineTo(note.width, y);
+      notectx.stroke();
+    }
   }
 
-  x = xPos;
-  y = yPos;
-}
+  // 初期化時に背景を描画
+  drawBackground();
 
-// マウスイベント
-note.addEventListener('mousedown', (e) => notestartDrawing(e.offsetX, e.offsetY));
-note.addEventListener('mousemove', (e) => notedraw(e.offsetX, e.offsetY));
-window.addEventListener('mouseup', () => mousePressed = false);
+  // クリアボタンの処理
+  clearBtn.addEventListener('click', () => {
+    notectx.clearRect(0, 0, note.width, note.height);  // キャンバスをクリア
+    drawBackground(); // 背景を再描画
+  });
 
-// タッチイベント
-note.addEventListener('touchstart', (e) => {
-  const touch = e.touches[0];
-  const rect = note.getBoundingClientRect();
-  notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
-});
+  // 色を選択する
+  notecolorPicker.addEventListener('change', (e) => {
+    selectedColor = e.target.value;
+    notectx.strokeStyle = selectedColor; // 選択した色に設定
+  });
 
-// 消しゴムボタン
-document.getElementById("noteeraser-button").addEventListener("click", () => {
-  isNoteEraserMode = !isNoteEraserMode;
-});
+  // 描画を開始する
+  function notestartDrawing(xPos, yPos) {
+    mousePressed = true;
+    x = xPos;
+    y = yPos;
+  }
 
-note.addEventListener('touchmove', (e) => {
-  const touch = e.touches[0];
-  const rect = note.getBoundingClientRect();
-  notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
-  e.preventDefault();  // スクロールなどのデフォルト動作を無効化
-});
+  // 線を描画する
+  function notedraw(xPos, yPos) {
+    if (!mousePressed) return;
 
-window.addEventListener('touchend', () => mousePressed = false);
+    if (isNoteEraserMode) {
+      // 消しゴムモード: 背景を再描画しないように修正
+      const eraseX = xPos - eraserSize / 2;
+      const eraseY = yPos - eraserSize / 2;
+      notectx.clearRect(eraseX, eraseY, eraserSize, eraserSize);
+    } else {
+      notectx.beginPath();
+      notectx.moveTo(x, y);
+      notectx.lineTo(xPos, yPos);
+      notectx.lineWidth = 3;  // 線の太さを設定
+      notectx.stroke();
+    }
+
+    x = xPos;
+    y = yPos;
+  }
+
+  // マウスイベント
+  note.addEventListener('mousedown', (e) => notestartDrawing(e.offsetX, e.offsetY));
+  note.addEventListener('mousemove', (e) => notedraw(e.offsetX, e.offsetY));
+  window.addEventListener('mouseup', () => mousePressed = false);
+
+  // タッチイベント
+  note.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    const rect = note.getBoundingClientRect();
+    notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
+  });
+
+  // 消しゴムボタン
+  document.getElementById("noteeraser-button").addEventListener("click", () => {
+    isNoteEraserMode = !isNoteEraserMode;
+  });
+
+  note.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    const rect = note.getBoundingClientRect();
+    notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
+    e.preventDefault();  // スクロールなどのデフォルト動作を無効化
+  });
+
+  window.addEventListener('touchend', () => mousePressed = false);
 
 
 
@@ -1216,10 +1223,10 @@ window.addEventListener('touchend', () => mousePressed = false);
 
   document.getElementById('QTableSubmitButton').addEventListener('click', (e) => {
     e.preventDefault();
-  
+
     // 正しい答え
     const correctAnswers = [4, 7, 10, 13, 16];
-  
+
     // 入力値を取得
     const userAnswers = [
       document.getElementById('userAnswerSq1').value,
@@ -1228,17 +1235,17 @@ window.addEventListener('touchend', () => mousePressed = false);
       document.getElementById('userAnswerSq4').value,
       document.getElementById('userAnswerSq5').value
     ];
-  
+
     let allCorrect = true; // 全て正しいかどうかのフラグ
-  
+
     // 入力をチェック
     for (let i = 0; i < userAnswers.length; i++) {
       const inputElement = document.getElementById(`userAnswerSq${i + 1}`);
-  
+
       // 全角数字を半角に変換
       const userAnswer = parseInt(toHalfWidth(userAnswers[i]), 10);
       const correctAnswer = correctAnswers[i];
-  
+
       if (userAnswer !== correctAnswer) {
         // 間違っていたら背景色を変更
         inputElement.style.backgroundColor = 'lightcoral'; // 間違っている場合は赤っぽい色
@@ -1248,7 +1255,7 @@ window.addEventListener('touchend', () => mousePressed = false);
         inputElement.style.backgroundColor = '';
       }
     }
-  
+
     // 全て正しい場合のみ後続の処理を実行
     if (allCorrect) {
       $('.formQ11').removeClass('visible');
@@ -1259,7 +1266,7 @@ window.addEventListener('touchend', () => mousePressed = false);
       main();
       mess_box.click();
     }
-  });  
+  });
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
   function splitStr(str) {
@@ -1589,11 +1596,11 @@ window.addEventListener('touchend', () => mousePressed = false);
       return;
     }
 
-     // フラグでリクエストの有効・無効を制御
-  const ENABLE_API = false; // APIを無効化する場合は false、有効化する場合は true に変更
-  if (!ENABLE_API) {
-    return;
-  }
+    // フラグでリクエストの有効・無効を制御
+    const ENABLE_API = false; // APIを無効化する場合は false、有効化する場合は true に変更
+    if (!ENABLE_API) {
+      return;
+    }
 
     console.log("Input text: ", text);
 
