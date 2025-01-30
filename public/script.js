@@ -831,6 +831,27 @@ window.addEventListener('load', function () {
     const note = getCurrentCanvas();
     const notectx = note.getContext('2d');
     drawBackground();  // 新しいページの背景を再描画
+     // ここで新しいキャンバスのイベントリスナーを再設定
+  note.addEventListener('mousedown', (e) => {
+    notestartDrawing(e.offsetX, e.offsetY);
+  });
+  
+  note.addEventListener('mousemove', (e) => {
+    notedraw(e.offsetX, e.offsetY);
+  });
+
+  note.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    const rect = note.getBoundingClientRect();
+    notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
+  });
+
+  note.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    const rect = note.getBoundingClientRect();
+    notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
+    e.preventDefault();  // スクロールなどのデフォルト動作を無効化
+  });
   });
   
 
