@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<chara 5 1>こんにちは",
+      "<skip 30><chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "正方形を3個作るとき、マッチ棒は何本必要でしょうか？<form 1>"
     ],
@@ -430,8 +430,11 @@ window.addEventListener('load', function () {
           break;
         case 'form':
           const targetClass = 'formQ' + tagget_str[1];
-          $('.' + targetClass).addClass('visible');
-          console.log('フォーム表示: ' + targetClass); // 確認用のログ
+          // 2秒待ってから addClass を実行
+  setTimeout(() => {
+    $('.' + targetClass).addClass('visible');
+    console.log('フォーム表示: ' + targetClass); // 確認用のログ
+  }, 1500); // 1500ms = 2秒
           break;
         case 'showCanvas':
           $('#saveButton').addClass('visible');    // 作成したクラス名を利用
