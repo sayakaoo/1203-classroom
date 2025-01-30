@@ -700,6 +700,7 @@ window.addEventListener('load', function () {
 
 
   // ノート用の関数
+  let currentPage = 1;  // 現在表示しているページ
   const note = getCurrentCanvas(); // ここを常に呼び出してcanvasを取得
   const notectx = note.getContext('2d');
   const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
@@ -752,6 +753,7 @@ window.addEventListener('load', function () {
   // 描画を開始する
   function notestartDrawing(xPos, yPos) {
     mousePressed = true;
+    const note = getCurrentCanvas();
     x = xPos;
     y = yPos;
   }
@@ -760,6 +762,7 @@ window.addEventListener('load', function () {
   function notedraw(xPos, yPos) {
     if (!mousePressed) return;
 
+    const note = getCurrentCanvas();
     if (isNoteEraserMode) {
       // 消しゴムモード: 背景を再描画しないように修正
       const eraseX = xPos - eraserSize / 2;
@@ -778,8 +781,16 @@ window.addEventListener('load', function () {
   }
 
   // マウスイベント
-  note.addEventListener('mousedown', (e) => notestartDrawing(e.offsetX, e.offsetY));
-  note.addEventListener('mousemove', (e) => notedraw(e.offsetX, e.offsetY));
+  note.addEventListener('mousedown', (e) => {
+    console.log("mousedown", e.offsetX, e.offsetY);  // 座標確認
+    notestartDrawing(e.offsetX, e.offsetY);
+  });
+  
+  note.addEventListener('mousemove', (e) => {
+    console.log("mousemove", e.offsetX, e.offsetY);  // 座標確認
+    notedraw(e.offsetX, e.offsetY);
+  });
+  
   window.addEventListener('mouseup', () => mousePressed = false);
 
   // タッチイベント
@@ -802,8 +813,6 @@ window.addEventListener('load', function () {
   });
 
   window.addEventListener('touchend', () => mousePressed = false);
-
-  let currentPage = 1;  // 現在表示しているページ
 
   // 次のページに切り替える処理
   document.getElementById('nextpage-button').addEventListener('click', () => {
