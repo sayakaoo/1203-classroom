@@ -411,7 +411,7 @@ window.addEventListener('load', function () {
           $('.timer').addClass('visible');
           console.log('タイマー表示');
           document.getElementById("startButton").click();
-
+          console.log($('.timer'))
           break;
         case 'saveButton':
           $('.saveButton').addClass('visible');
