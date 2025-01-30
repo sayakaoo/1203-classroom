@@ -1738,33 +1738,39 @@ window.addEventListener('load', function () {
 
 
   //タイマー用
-  let timeLeft = 240; // 4分（300秒）
-  let timer;
-  const timerDisplay = document.getElementById('timer');
-  const startButton = document.getElementById('startButton');
+  let timeLeft = 10; // 4分（240秒）
+let timer;
+const timerDisplay = document.getElementById('timer');
+const startButton = document.getElementById('startButton');
+const messbox = document.getElementById('messbox');
 
-  function updateTimer() {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    timerDisplay.textContent = `残り時間: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+function updateTimer() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  timerDisplay.textContent = `残り時間: ${minutes}:${seconds.toString().padStart(2, '0')}`;
 
-    if (timeLeft > 0) {
-      timeLeft--;
-    } else {
-      clearInterval(timer);
-      timerDisplay.textContent = "時間終了！";
-      alert("時間終了！");
-    }
+  if (timeLeft > 0) {
+    timeLeft--;
+  } else {
+    clearInterval(timer);
+    timerDisplay.textContent = "時間終了！";
+    
+    $('.timer').removeClass('visible');
+    console.log('タイマー終了');
+    messbox.style.pointerEvents = 'auto'; // タイマー終了後にクリックできるようにする
+    messbox.click(); // クリック処理
   }
+}
 
-  function startTimer() {
-    if (!timer) { // 二重に開始しないようにする
-      timer = setInterval(updateTimer, 1000);
-      updateTimer(); // すぐに1回目を表示
-    }
+function startTimer() {
+  if (!timer) { // 二重に開始しないようにする
+    messbox.style.pointerEvents = 'none'; // タイマー中はクリックできないようにする
+    timer = setInterval(updateTimer, 1000);
+    updateTimer(); // すぐに1回目を表示
   }
+}
 
-  startButton.addEventListener('click', startTimer);
+startButton.addEventListener('click', startTimer);
 
 
 

@@ -180,7 +180,7 @@ body{
 .formapi,
 .textTospeech,
 #startButton,
-#timer{
+.timer{
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
   pointer-events: none;/* これを設定しておくことでhiddenのとき下の要素が押せる */
 
@@ -550,7 +550,7 @@ body {
     width: 250px;
     margin: 20px auto;
     position: absolute;
-    top: 50px;
+    top: 320px;
     left:60px;
     z-index: 400;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
