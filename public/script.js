@@ -798,7 +798,7 @@ window.addEventListener('load', function () {
 
 
   // Teachable MachineでエクスポートしたモデルのURL
-  const modelURL = "https://teachablemachine.withgoogle.com/models/xbPaKLXkL/";
+  const modelURL = "https://teachablemachine.withgoogle.com/models/CAyIdTCPn/";
 
   // モデルのロード
   let model;
