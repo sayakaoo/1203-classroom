@@ -174,7 +174,7 @@
     <!--発言終了ボタンはいつかつくろう-->
     <!--<button id="apistop-voice1" type="button" disabled>発言を終了する</button>-->
     <div id="response"></div>
-    <button type="submit" class="submit-button " value="button">送信1</button>
+    <button type="submit" class="submit-button " value="button">送信</button>
   </form>
 
   <div class="hint hint1">
@@ -241,8 +241,14 @@
         </select>
         <!-- 消しゴムボタン -->
         <button id="noteeraser-button">消しゴム</button>
+        <button id="nextpage-button">次のページ</button>
       </div>
-      <canvas class="note" id="notedrawing-area" width="1000" height="1050"></canvas>
+      <div id="pages-container">
+        <canvas class="note" id="notedrawing-area-1" width="1000" height="1050"></canvas>
+        <canvas class="note" id="notedrawing-area-2" width="1000" height="1050" style="display:none;"></canvas>
+        <canvas class="note" id="notedrawing-area-3" width="1000" height="1050" style="display:none;"></canvas>
+        <!-- 必要に応じてページ数を追加 -->
+      </div>
     </div>
   </div>
 

@@ -432,8 +432,6 @@ window.addEventListener('load', function () {
           buttonId = 'saveButton' + tagget_str[1];
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
-          let fullcanvasHeight = $('.fullcanvas').outerHeight(); // fullcanvasの高さを取得
-          $('.note1').css('top', 1200 + fullcanvasHeight + 'px'); // fullcanvasの高さ分ずらす
           break;
         case 'closeCanvas':
           $('.saveButton').removeClass('visible');    // 作成したクラス名を利用
@@ -441,8 +439,7 @@ window.addEventListener('load', function () {
           $('.wrapper').removeClass('visible');
           $('.hint1').removeClass('visible');
           console.log('フォーム表示');
-          fullcanvasHeight = $('.fullcanvas').outerHeight(); // fullcanvasの高さを取得
-          $('.note1').css('top', 1200 - fullcanvasHeight + 'px'); // fullcanvasの高さ分ずらす
+          
           break;
         case 'hint':
           const hint = 'hint' + tagget_str[1]; // 動的にクラス名を作成
@@ -458,8 +455,7 @@ window.addEventListener('load', function () {
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
           buttonId = 'saveButton' + tagget_str[1];
-          fullcanvasHeight = $('.fullcanvas').outerHeight(); // fullcanvasの高さを取得
-          $('.note1').css('top', 1200 + fullcanvasHeight + 'px'); // fullcanvasの高さ分ずらす
+          
           break;
         case 'apiform':
           $('.formapi').addClass('visible');
@@ -472,8 +468,7 @@ window.addEventListener('load', function () {
           $('.submit-button').removeClass('visible');
           console.log('フォーム表示');
           break;
-          fullcanvasHeight = $('.fullcanvas').outerHeight(); // fullcanvasの高さを取得
-          $('.note1').css('top', 1200 - fullcanvasHeight + 'px'); // fullcanvasの高さ分ずらす
+         
         case 'selectBox':
           $('.selectBox').addClass('show');
           break;
@@ -800,6 +795,20 @@ window.addEventListener('load', function () {
   });
 
   window.addEventListener('touchend', () => mousePressed = false);
+
+  let currentPage = 1;  // 現在表示しているページ
+
+  // 次のページに切り替える処理
+  document.getElementById('nextpage-button').addEventListener('click', () => {
+    // 現在のページを非表示にする
+    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
+    // 次のページがあれば表示
+    currentPage++;
+    if (currentPage > 3) {  // ページ数に応じて調整
+      currentPage = 1;  // ページが最後なら最初に戻る
+    }
+    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
+  });
 
 
 
