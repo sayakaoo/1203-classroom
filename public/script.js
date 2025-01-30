@@ -432,7 +432,8 @@ window.addEventListener('load', function () {
           buttonId = 'saveButton' + tagget_str[1];
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
-
+          let fullcanvasHeight = $('.fullcanvas').outerHeight(); // fullcanvasの高さを取得
+          $('.note1').css('top', 1200 + fullcanvasHeight + 'px'); // fullcanvasの高さ分ずらす
           break;
         case 'closeCanvas':
           $('.saveButton').removeClass('visible');    // 作成したクラス名を利用
@@ -440,6 +441,8 @@ window.addEventListener('load', function () {
           $('.wrapper').removeClass('visible');
           $('.hint1').removeClass('visible');
           console.log('フォーム表示');
+          fullcanvasHeight = $('.fullcanvas').outerHeight(); // fullcanvasの高さを取得
+          $('.note1').css('top', 1200 - fullcanvasHeight + 'px'); // fullcanvasの高さ分ずらす
           break;
         case 'hint':
           const hint = 'hint' + tagget_str[1]; // 動的にクラス名を作成
@@ -455,6 +458,8 @@ window.addEventListener('load', function () {
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
           buttonId = 'saveButton' + tagget_str[1];
+          fullcanvasHeight = $('.fullcanvas').outerHeight(); // fullcanvasの高さを取得
+          $('.note1').css('top', 1200 + fullcanvasHeight + 'px'); // fullcanvasの高さ分ずらす
           break;
         case 'apiform':
           $('.formapi').addClass('visible');
@@ -467,6 +472,8 @@ window.addEventListener('load', function () {
           $('.submit-button').removeClass('visible');
           console.log('フォーム表示');
           break;
+          fullcanvasHeight = $('.fullcanvas').outerHeight(); // fullcanvasの高さを取得
+          $('.note1').css('top', 1200 - fullcanvasHeight + 'px'); // fullcanvasの高さ分ずらす
         case 'selectBox':
           $('.selectBox').addClass('show');
           break;
@@ -577,7 +584,6 @@ window.addEventListener('load', function () {
         // msg.pitch = 1.2; // 自然な声の高さ
 
         // window.speechSynthesis.speak(msg);
-        console.log(scene_cnt);
         //新しい読み上げ関数
         let textDate = text[scene_cnt];
         var textRead = textDate[line_cnt];
@@ -853,30 +859,7 @@ window.addEventListener('load', function () {
       } catch (error) {
         console.error("予測中にエラーが発生しました: ", error);
       }
-      handlePrediction();
-      downloadCanvasImage();
-  
-  
-    }
-    // キャンバス画像をダウンロードする
-    function downloadCanvasImage() {
-      const resizedCanvas = document.createElement("canvas");
-      resizedCanvas.width = 224;
-      resizedCanvas.height = 224;
-      const resizedCtx = resizedCanvas.getContext("2d");
-      const originalCanvas = document.getElementById("drawing-area");
-    
-      // 224x224 にリサイズ
-      resizedCtx.drawImage(originalCanvas, 0, 0, 224, 224);
-    
-      // 画像を保存
-      const imageUrl = resizedCanvas.toDataURL();
-      const a = document.createElement("a");
-      a.href = imageUrl;
-      a.download = "resized-canvas-image.png";
-      a.click();
-  
-      console.log(canvas.width, canvas.height);
+      handlePrediction(); 
   
     }
 

@@ -515,6 +515,17 @@ body {
     border: 1px solid #ddd; /* キャンバスを見やすくするための枠線 */
     background-color: white; /* 背景色を白に設定 */
   }
+
+  .note1 {
+    position: absolute; /* ページ内で位置を指定 */
+    top: 1200px;
+    transition: top 0.3s ease; 
+
+  }
+  /*両方できたときに移動*/
+  .fullcanvas.visible ~ .note1 {
+    top: 2000px; /* fullcanvas の高さに応じて下に移動 */
+}
   
   .formQ11{
     position: absolute;
