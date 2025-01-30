@@ -538,7 +538,7 @@ body {
     left: 15px;
     z-index: 4;
   }
-  #timer {
+  .timer {
     font-family: "DotGothic16", sans-serif;
     font-size: 32px; /* 数字を大きめに */
     color: #367293; /* 文字色 */
