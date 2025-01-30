@@ -724,7 +724,7 @@ window.addEventListener('load', function () {
 
     notectx.strokeStyle = lineColor;
     notectx.lineWidth = 1;
-    for (let y = 0; y < note.height; y += lineSpacing) {
+    for (let y = 0; y <= note.height; y += lineSpacing) {  // <= に変更
       notectx.beginPath();
       notectx.moveTo(0, y);
       notectx.lineTo(note.width, y);
@@ -854,9 +854,6 @@ window.addEventListener('load', function () {
   });
   });
   
-
-
-
   // Teachable MachineでエクスポートしたモデルのURL
   const modelURL = "https://teachablemachine.withgoogle.com/models/CAyIdTCPn/";
 
@@ -870,7 +867,6 @@ window.addEventListener('load', function () {
       console.error("モデルの読み込み中にエラーが発生しました: ", error);
     }
   }
-
 
   // キャンバスの内容を予測
   async function predictCanvas() {
@@ -994,11 +990,8 @@ window.addEventListener('load', function () {
     console.log("画像判断開始");
   });
 
-
   // 初期化
   loadModel();
-
-
 
   // 音声入力の処理
   // 音声入力の処理を共通関数で管理
