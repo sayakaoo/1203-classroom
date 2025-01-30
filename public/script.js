@@ -408,7 +408,7 @@ window.addEventListener('load', function () {
           mess_box.click();
           break;
         case 'timer':
-          $('#timer').addClass('visible');
+          $('.timer').addClass('visible');
           console.log('タイマー表示');
           document.getElementById("startButton").click();
 
