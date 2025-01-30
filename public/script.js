@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 62><chara 5 1>こんにちは",
+      "<chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "正方形を3個作るとき、マッチ棒は何本必要でしょうか？<form 1>"
     ],
@@ -1693,10 +1693,7 @@ window.addEventListener('load', function () {
 
   // 音声合成用の Web Audio API を使った関数
   async function synthesizeSpeech(text) {
-    if (!text) {
-      alert("Please enter some text!");
-      return;
-    }
+   
 
     // フラグでリクエストの有効・無効を制御
     const ENABLE_API = false; // APIを無効化する場合は false、有効化する場合は true に変更
