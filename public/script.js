@@ -748,6 +748,8 @@ window.addEventListener('load', function () {
 
   function getCurrentCanvas() {
     return document.getElementById(`notedrawing-area-${currentPage}`);
+    console.log(note);  // ここでログを確認して、正しいキャンバスが返されているか確認
+  return note;
   }
 
   // 描画を開始する
@@ -815,16 +817,19 @@ window.addEventListener('load', function () {
   window.addEventListener('touchend', () => mousePressed = false);
 
   // 次のページに切り替える処理
-  document.getElementById('nextpage-button').addEventListener('click', () => {
-    // 現在のページを非表示にする
-    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
-    // 次のページがあれば表示
-    currentPage++;
-    if (currentPage > 3) {  // ページ数に応じて調整
-      currentPage = 1;  // ページが最後なら最初に戻る
-    }
-    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
-  });
+document.getElementById('nextpage-button').addEventListener('click', () => {
+  // 現在のページを非表示にする
+  document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
+
+  // 次のページに切り替える
+  currentPage++;
+  if (currentPage > 3) {  // ページ数に応じて調整
+    currentPage = 1;  // 最後のページから最初に戻る
+  }
+
+  // 新しいページを表示
+  document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
+});
 
 
 
