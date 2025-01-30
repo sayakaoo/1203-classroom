@@ -747,10 +747,11 @@ window.addEventListener('load', function () {
   });
 
   function getCurrentCanvas() {
-    return document.getElementById(`notedrawing-area-${currentPage}`);
+    const note = document.getElementById(`notedrawing-area-${currentPage}`);
     console.log(note);  // ここでログを確認して、正しいキャンバスが返されているか確認
-  return note;
+    return note;
   }
+  
 
   // 描画を開始する
   function notestartDrawing(xPos, yPos) {
@@ -765,6 +766,7 @@ window.addEventListener('load', function () {
     if (!mousePressed) return;
 
     const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
     if (isNoteEraserMode) {
       // 消しゴムモード: 背景を再描画しないように修正
       const eraseX = xPos - eraserSize / 2;
@@ -784,12 +786,10 @@ window.addEventListener('load', function () {
 
   // マウスイベント
   note.addEventListener('mousedown', (e) => {
-    console.log("mousedown", e.offsetX, e.offsetY);  // 座標確認
     notestartDrawing(e.offsetX, e.offsetY);
   });
   
   note.addEventListener('mousemove', (e) => {
-    console.log("mousemove", e.offsetX, e.offsetY);  // 座標確認
     notedraw(e.offsetX, e.offsetY);
   });
   
