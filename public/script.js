@@ -33,9 +33,9 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<chara 5 1>こんにちは",
-      "<timer><item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
-      "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
+      "<skip 62><chara 5 1>こんにちは",
+      "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
+      "正方形を3個作るとき、マッチ棒は何本必要でしょうか？<form 1>"
     ],
     1: [
       "そうですね、数えてみると10本ですね",
@@ -62,8 +62,8 @@ window.addEventListener('load', function () {
     ],
     6: [
       "では正方形がn個あるとき、マッチ棒は何本必要ですか。",
-      "どのように考えられるでしょうか。まずは5分個人で考えてみてください",
-      "(5分タイマー)表や図を使って説明できるようにしましょう。<skip 7>",
+      "どのように考えられるでしょうか。まずは4分個人で考えてみてください",
+      "<timer>表や図を使って説明できるようにしましょう。<skip 7>",
     ],
     7: [
       "<form 4>",
@@ -1742,8 +1742,6 @@ window.addEventListener('load', function () {
 let timer;
 const timerDisplay = document.getElementById('timer');
 const startButton = document.getElementById('startButton');
-const messbox = document.getElementById('messbox');
-
 function updateTimer() {
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
@@ -1758,7 +1756,7 @@ function updateTimer() {
     $('.timer').removeClass('visible');
     console.log('タイマー終了');
     messbox.style.pointerEvents = 'auto'; // タイマー終了後にクリックできるようにする
-    messbox.click(); // クリック処理
+      mess_box.click(); // messboxクリッ
   }
 }
 
