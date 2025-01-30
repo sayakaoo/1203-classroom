@@ -700,23 +700,24 @@ window.addEventListener('load', function () {
 
 
   // ノート用の関数
-  const note = document.querySelector('#notedrawing-area');
+  const note = getCurrentCanvas(); // ここを常に呼び出してcanvasを取得
   const notectx = note.getContext('2d');
   const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
   let isNoteEraserMode = false; // 消しゴムモードフラグ
   const eraserSize = 20; // 消しゴムのサイズ
 
+
   // 背景と罫線を描画する関数
   function drawBackground() {
-    const bgColor = "white"; // 背景色
-    const lineColor = "#e0e0e0"; // 罫線の色
-    const lineSpacing = 40; // 罫線の間隔
+    const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
+    const bgColor = "white";
+    const lineColor = "#e0e0e0";
+    const lineSpacing = 40;
 
-    // 背景を塗りつぶす
     notectx.fillStyle = bgColor;
     notectx.fillRect(0, 0, note.width, note.height);
 
-    // 罫線を描画
     notectx.strokeStyle = lineColor;
     notectx.lineWidth = 1;
     for (let y = 0; y < note.height; y += lineSpacing) {
@@ -739,8 +740,14 @@ window.addEventListener('load', function () {
   // 色を選択する
   notecolorPicker.addEventListener('change', (e) => {
     selectedColor = e.target.value;
-    notectx.strokeStyle = selectedColor; // 選択した色に設定
+    const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
+    notectx.strokeStyle = selectedColor;
   });
+
+  function getCurrentCanvas() {
+    return document.getElementById(`notedrawing-area-${currentPage}`);
+  }
 
   // 描画を開始する
   function notestartDrawing(xPos, yPos) {
