@@ -700,7 +700,10 @@ window.addEventListener('load', function () {
 
 
   // ノート用の関数
-  let currentPage = 1;  // 現在表示しているページ
+  let currentPage = 1;  // 現在表示しているペー
+  function getCurrentCanvas() {
+    return document.getElementById(`notedrawing-area-${currentPage}`);
+  }
   const note = getCurrentCanvas(); // ここを常に呼び出してcanvasを取得
   const notectx = note.getContext('2d');
   const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
@@ -745,12 +748,6 @@ window.addEventListener('load', function () {
     const notectx = note.getContext('2d');
     notectx.strokeStyle = selectedColor;
   });
-
-  function getCurrentCanvas() {
-    const note = document.getElementById(`notedrawing-area-${currentPage}`);
-    console.log(note);  // ここでログを確認して、正しいキャンバスが返されているか確認
-    return note;
-  }
   
 
   // 描画を開始する
@@ -817,19 +814,25 @@ window.addEventListener('load', function () {
   window.addEventListener('touchend', () => mousePressed = false);
 
   // 次のページに切り替える処理
-document.getElementById('nextpage-button').addEventListener('click', () => {
-  // 現在のページを非表示にする
-  document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
-
-  // 次のページに切り替える
-  currentPage++;
-  if (currentPage > 3) {  // ページ数に応じて調整
-    currentPage = 1;  // 最後のページから最初に戻る
-  }
-
-  // 新しいページを表示
-  document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
-});
+  document.getElementById('nextpage-button').addEventListener('click', () => {
+    // 現在のページを非表示にする
+    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
+  
+    // 次のページに切り替える
+    currentPage++;
+    if (currentPage > 3) {  // ページ数に応じて調整
+      currentPage = 1;  // 最後のページから最初に戻る
+    }
+  
+    // 新しいページを表示
+    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
+  
+    // 新しいページのキャンバスを取得
+    const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
+    drawBackground();  // 新しいページの背景を再描画
+  });
+  
 
 
 
