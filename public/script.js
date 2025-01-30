@@ -1731,5 +1731,27 @@ window.addEventListener('load', function () {
   }
 
 
+  //タイマー用
+  let timeLeft = 300; // 5分（300秒）
+const timerDisplay = document.getElementById('timer');
+
+function updateTimer() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  timerDisplay.textContent = `残り時間: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+  if (timeLeft > 0) {
+    timeLeft--;
+  } else {
+    clearInterval(timer);
+    timerDisplay.textContent = "時間終了！";
+    alert("時間終了！");
+  }
+}
+
+const timer = setInterval(updateTimer, 1000);
+updateTimer();
+
+
 })
 
