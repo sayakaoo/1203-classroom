@@ -178,7 +178,9 @@ body{
 .backButton,
 .gwform,
 .formapi,
-.textTospeech{
+.textTospeech,
+#startButton,
+#timer{
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
   pointer-events: none;/* これを設定しておくことでhiddenのとき下の要素が押せる */
 
@@ -535,4 +537,21 @@ body {
     top: 15px;
     left: 15px;
     z-index: 4;
+  }
+  #timer {
+    font-family: "DotGothic16", sans-serif;
+    font-size: 32px; /* 数字を大きめに */
+    color: #367293; /* 文字色 */
+    background-color: #d9dee5; /* 背景色 */
+    padding: 20px;
+    border: 2px solid #3d81a5;
+    border-radius: 10px;
+    text-align: center;
+    width: 250px;
+    margin: 20px auto;
+    position: absolute;
+    top: 50px;
+    left:60px;
+    z-index: 400;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }

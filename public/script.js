@@ -34,7 +34,7 @@ window.addEventListener('load', function () {
     0: [
       "",
       "<chara 5 1>こんにちは",
-      "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
+      "<timer><item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "<form 1>正方形を3個作るとき、マッチ棒は何本必要でしょうか？"
     ],
     1: [
@@ -407,6 +407,12 @@ window.addEventListener('load', function () {
           main();
           mess_box.click();
           break;
+        case 'timer':
+          $('#timer').addClass('visible');
+          console.log('タイマー表示');
+          document.getElementById("startButton").click();
+
+          break;
         case 'saveButton':
           $('.saveButton').addClass('visible');
           console.log('ボタン表示');
@@ -439,7 +445,7 @@ window.addEventListener('load', function () {
           $('.wrapper').removeClass('visible');
           $('.hint1').removeClass('visible');
           console.log('フォーム表示');
-          
+
           break;
         case 'hint':
           const hint = 'hint' + tagget_str[1]; // 動的にクラス名を作成
@@ -455,7 +461,7 @@ window.addEventListener('load', function () {
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
           buttonId = 'saveButton' + tagget_str[1];
-          
+
           break;
         case 'apiform':
           $('.formapi').addClass('visible');
@@ -468,7 +474,7 @@ window.addEventListener('load', function () {
           $('.submit-button').removeClass('visible');
           console.log('フォーム表示');
           break;
-         
+
         case 'selectBox':
           $('.selectBox').addClass('show');
           break;
@@ -748,7 +754,7 @@ window.addEventListener('load', function () {
     const notectx = note.getContext('2d');
     notectx.strokeStyle = selectedColor;
   });
-  
+
 
   // 描画を開始する
   function notestartDrawing(xPos, yPos) {
@@ -785,11 +791,11 @@ window.addEventListener('load', function () {
   note.addEventListener('mousedown', (e) => {
     notestartDrawing(e.offsetX, e.offsetY);
   });
-  
+
   note.addEventListener('mousemove', (e) => {
     notedraw(e.offsetX, e.offsetY);
   });
-  
+
   window.addEventListener('mouseup', () => mousePressed = false);
 
   // タッチイベント
@@ -817,43 +823,43 @@ window.addEventListener('load', function () {
   document.getElementById('nextpage-button').addEventListener('click', () => {
     // 現在のページを非表示にする
     document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
-  
+
     // 次のページに切り替える
     currentPage++;
     if (currentPage > 3) {  // ページ数に応じて調整
       currentPage = 1;  // 最後のページから最初に戻る
     }
-  
+
     // 新しいページを表示
     document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
-  
+
     // 新しいページのキャンバスを取得
     const note = getCurrentCanvas();
     const notectx = note.getContext('2d');
     drawBackground();  // 新しいページの背景を再描画
-     // ここで新しいキャンバスのイベントリスナーを再設定
-  note.addEventListener('mousedown', (e) => {
-    notestartDrawing(e.offsetX, e.offsetY);
-  });
-  
-  note.addEventListener('mousemove', (e) => {
-    notedraw(e.offsetX, e.offsetY);
+    // ここで新しいキャンバスのイベントリスナーを再設定
+    note.addEventListener('mousedown', (e) => {
+      notestartDrawing(e.offsetX, e.offsetY);
+    });
+
+    note.addEventListener('mousemove', (e) => {
+      notedraw(e.offsetX, e.offsetY);
+    });
+
+    note.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      const rect = note.getBoundingClientRect();
+      notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
+    });
+
+    note.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const rect = note.getBoundingClientRect();
+      notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
+      e.preventDefault();  // スクロールなどのデフォルト動作を無効化
+    });
   });
 
-  note.addEventListener('touchstart', (e) => {
-    const touch = e.touches[0];
-    const rect = note.getBoundingClientRect();
-    notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
-  });
-
-  note.addEventListener('touchmove', (e) => {
-    const touch = e.touches[0];
-    const rect = note.getBoundingClientRect();
-    notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
-    e.preventDefault();  // スクロールなどのデフォルト動作を無効化
-  });
-  });
-  
   // Teachable MachineでエクスポートしたモデルのURL
   const modelURL = "https://teachablemachine.withgoogle.com/models/CAyIdTCPn/";
 
@@ -893,25 +899,25 @@ window.addEventListener('load', function () {
     const imageElement = new Image();
     imageElement.src = resizedCanvas.toDataURL();
     imageElement.onload = () => predictImage(imageElement);
-}
+  }
 
-    // 画像を予測
-    async function predictImage(imageElement) {
-      if (!model) {
-        console.error("モデルがロードされていません");
-        return;
-      }
-  
-      try {
-        const predictions = await model.predict(imageElement);
-        highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
-        console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
-      } catch (error) {
-        console.error("予測中にエラーが発生しました: ", error);
-      }
-      handlePrediction(); 
-  
+  // 画像を予測
+  async function predictImage(imageElement) {
+    if (!model) {
+      console.error("モデルがロードされていません");
+      return;
     }
+
+    try {
+      const predictions = await model.predict(imageElement);
+      highestPrediction = predictions.sort((a, b) => b.probability - a.probability)[0];
+      console.log(`予測結果: ${highestPrediction.className}（確率: ${(highestPrediction.probability * 100).toFixed(2)}%）`);
+    } catch (error) {
+      console.error("予測中にエラーが発生しました: ", error);
+    }
+    handlePrediction();
+
+  }
 
   // canvasの画像判定後の分岐処理
   //画像だけの時はこの関数の中かも
@@ -1732,33 +1738,33 @@ window.addEventListener('load', function () {
 
 
   //タイマー用
-  let timeLeft = 300; // 5分（300秒）
-let timer;
-const timerDisplay = document.getElementById('timer');
-const startButton = document.getElementById('startButton');
+  let timeLeft = 240; // 4分（300秒）
+  let timer;
+  const timerDisplay = document.getElementById('timer');
+  const startButton = document.getElementById('startButton');
 
-function updateTimer() {
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
-  timerDisplay.textContent = `残り時間: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+  function updateTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    timerDisplay.textContent = `残り時間: ${minutes}:${seconds.toString().padStart(2, '0')}`;
 
-  if (timeLeft > 0) {
-    timeLeft--;
-  } else {
-    clearInterval(timer);
-    timerDisplay.textContent = "時間終了！";
-    alert("時間終了！");
+    if (timeLeft > 0) {
+      timeLeft--;
+    } else {
+      clearInterval(timer);
+      timerDisplay.textContent = "時間終了！";
+      alert("時間終了！");
+    }
   }
-}
 
-function startTimer() {
-  if (!timer) { // 二重に開始しないようにする
-    timer = setInterval(updateTimer, 1000);
-    updateTimer(); // すぐに1回目を表示
+  function startTimer() {
+    if (!timer) { // 二重に開始しないようにする
+      timer = setInterval(updateTimer, 1000);
+      updateTimer(); // すぐに1回目を表示
+    }
   }
-}
 
-startButton.addEventListener('click', startTimer);
+  startButton.addEventListener('click', startTimer);
 
 
 
