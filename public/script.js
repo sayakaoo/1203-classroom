@@ -1733,7 +1733,9 @@ window.addEventListener('load', function () {
 
   //タイマー用
   let timeLeft = 300; // 5分（300秒）
+let timer;
 const timerDisplay = document.getElementById('timer');
+const startButton = document.getElementById('startButton');
 
 function updateTimer() {
   const minutes = Math.floor(timeLeft / 60);
@@ -1749,8 +1751,15 @@ function updateTimer() {
   }
 }
 
-const timer = setInterval(updateTimer, 1000);
-updateTimer();
+function startTimer() {
+  if (!timer) { // 二重に開始しないようにする
+    timer = setInterval(updateTimer, 1000);
+    updateTimer(); // すぐに1回目を表示
+  }
+}
+
+startButton.addEventListener('click', startTimer);
+
 
 
 })
