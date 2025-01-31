@@ -823,14 +823,6 @@ window.addEventListener('load', function () {
     // 新しいページを表示
     document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
 
-    // 新しいページのキャンバスを取得
-    const note = getCurrentCanvas();
-    const notectx = note.getContext('2d');
-    drawBackground();  // 新しいページの背景を再描画
-    // ここで新しいキャンバスのイベントリスナーを再設定
-    note.addEventListener('mousedown', (e) => {
-      notestartDrawing(e.offsetX, e.offsetY);
-    });
 
     note.addEventListener('mousemove', (e) => {
       notedraw(e.offsetX, e.offsetY);
