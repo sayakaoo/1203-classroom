@@ -787,6 +787,11 @@ window.addEventListener('load', function () {
     if (currentPage > 3) {  // ページ数に応じて調整
       currentPage = 1;  // 最後のページから最初に戻る
     }
+     // 前のページに切り替える
+  currentPage--;
+  if (currentPage < 1) {  // 1ページ目なら最後のページに戻る
+    currentPage = 3;  
+  }
 
     // 新しいページを表示
     document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';

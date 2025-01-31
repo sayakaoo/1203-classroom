@@ -526,7 +526,14 @@ body {
     top: 1050px;
     transition: top 0.3s ease; 
     z-index: 1;
+left: 50%;
+transform: translateX(-50%);
 
+
+  }
+  .noteall{
+    border: 2px solid #3d81a5; /* 枠線の色と太さ */
+    border-radius: 10px; /* 角を丸く */
   }
   /*両方できたときに移動*/
   .fullcanvas.visible ~ .note1 {
