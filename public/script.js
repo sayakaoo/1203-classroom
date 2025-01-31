@@ -7,15 +7,6 @@ window.addEventListener('load', function () {
   var scene_cnt = 0;
   var line_cnt = 0;
   const interval = 20;
-  var select_num1 = 0;
-  var select_num2 = 0;
-  var select_num3 = 0;
-  var select1 = document.getElementById('select1');
-  var select2 = document.getElementById('select2');
-  var select3 = document.getElementById('select3');
-  var select_text1 = document.getElementById('selectText1');
-  var select_text2 = document.getElementById('selectText2');
-  var select_text3 = document.getElementById('selectText3');
   let split_chars;
 
   let input = "";
@@ -25,9 +16,6 @@ window.addEventListener('load', function () {
   let buttonId = "";
   let rootId = "0";
   const clearBtn = document.querySelector('#clear-button');
-
-
-
 
   const text = {
     //配列0のは時短のためのスキップ
@@ -95,7 +83,6 @@ window.addEventListener('load', function () {
     46: [
       "ではAさんどのような式を立てたか教えてください<skip 20>",
     ],
-
 
     20: [
       "<charaOut 5><chara 5 3>1+3nという式をたてました。",
@@ -242,7 +229,7 @@ window.addEventListener('load', function () {
       "<charaOut 5><chara 5 2><item 38>図だとこのように示すことが出来て、4nという式だと間のマッチ棒まで数えてしまってました。",
       "なので、この重複するマッチ棒の数を引いて、4n-(n-1)が正しい式です。",
       "<charaOut 5><chara 5 1><itemOut>ありがとうございます。様々な方法で求めることができましたね。",
-      "今まで求めた式を計算してみましょう。(ここの画像も作らなきゃ)計算して気付いたことを教えてください<apiform 11>",
+      "<item 44>今まで求めた式を計算してみましょう。計算して気付いたことを教えてください<apiform 11>",
     ],
     58: [
       "<colseapiform>全て同じ式になりましたね。",
@@ -268,7 +255,7 @@ window.addEventListener('load', function () {
     //   ""
     // ],
 
-    //明日から頑張る
+    //formは68に飛ぶ
     61: [
       "では一緒に正方形がn個のときのマッチ棒の数を考えてみましょう。",
       "n個のときは数えることが出来ないので何か規則性をみつけられると考えられそうです。",
@@ -278,39 +265,20 @@ window.addEventListener('load', function () {
 
 
     62: [
-      "最初に1本マッチ棒があってそこから3本ずつマッチ棒が増えているという規則性を見つけましたね。",
-      "では、その規則性を使って具体的な数で考えてみましょう。",
-      "<item 6>まず、3個のときを考えてみましょう。",
-      "<item 7>見つけた規則性を使うと、赤で囲んでいる最初の1本と、青で囲んでいるコの字型をしたグループに分けられそうですね。",
+      "<root3>では一緒に考えてみましょう。",
+      "正方形が3個のとき、<item 7>赤で囲んでいる最初のマッチ棒1本と青で囲んでいる他のコの字型のグループに分けて考えてみましょう。",
       "コの字型は3つあるので、<item 8>マッチ棒の本数は最初の1本と、コの字型×3で表すことが出来ます",
       "コの字型は3本のマッチ棒でできているので、式にすると、<item 9>1+3×3になります。",
-      "では、同じ方法で正方形が<item 15>4個の時も考えてみましょう。",
-      "<skip 63>"
-    ],
-    63: [
-      "同じ方法で考えると正方形が4個の時どのような式で表せますか？<form 10>"
-    ],
-    64: [
-      "正方形が3個のときと同じように考えてみましょう(変更する)",
-      "<skip 63>"
-    ],
-    65: [
-      "3個の時と同じように考えるとコの字型は4つあるので、マッチ棒の本数は最初の1本と、コの字型×4で表すことが出来ますね",
+      "正方形が 4個のときも<item 15>3個の時と同じように考えるとコの字型は4つあるので、マッチ棒の本数は最初の1本と、コの字型×4で表すことが出来ますね",
       "つまり、式にすると、<item 10>1+3×4になります。",
       "同じ方法で正方形が5個の時も考えると、<item 11>1+3×5になります。",
-      "では、正方形がn個の時も<item 12>考えてみましょう",
-      "まず、3個、4個、5個の時を振り返ってみましょう。",
-      "なにか気付いたことはありますか？(わんちゃん分岐)",
-      "<skip 66>"
-    ],
-    66: [
-      "正方形の数と式の最後の数<item 13>が一致していますね。",
-      "つまりこの式は1+3×(正方形の数)と表せそうです。(画像がない)",
+      "<item 13>3,4,5個のときを振り返ると、正方形の数と式の最後の数が一致していますね。",
+      "つまり<item 43>この式は1+3×(正方形の数)と表せそうです。",
       "今回は正方形の数がn個の時を考えているので、正方形がn個の時必要なマッチ棒の本数は1+3×n本<item 14>となります",
       "<skip 67>"
     ],
+
     //67使う
-    //表を書いた後の分岐、いったん保留、むず過ぎ
     68: [
       "<item 21>表がかけましたね",
       "この表から規則性を見つけてみましょう",
@@ -340,7 +308,7 @@ window.addEventListener('load', function () {
       "<snsbtn>また，問題が作れたら「みんなの問題掲示板」に投稿してみましょう！",
     ],
     72: [
-      "表を縦に見ると、<item 39>マッチ棒の本数は正方形の数を3倍して1足した数になっているという規則性を見つけましたね。",
+      "<root3>表を縦に見ると、<item 39>マッチ棒の本数は正方形の数を3倍して1足した数になっているという規則性を見つけましたね。",
       "つまり<item 40>（マッチ棒の数）＝（正方形の数）×3+1という式が成り立ちます。",
       "今回は正方形がn個のときの、マッチ棒の本数を求めたいので、正方形の数をnとして、3×n+1と表せます。<item 41>",
       "似たような考えで図を使って考えることもできます。",
@@ -351,7 +319,7 @@ window.addEventListener('load', function () {
       "つまり、式にすると、<item 10>1+3×4になります。",
       "同じ方法で正方形が5個の時も考えると、<item 11>1+3×5になります。",
       "<item 13>3,4,5個のときを振り返ると、正方形の数と式の最後の数が一致していますね。",
-      "つまり<item 43>この式は1+3×(正方形の数)と表せそうです。(画像がない)",
+      "つまり<item 43>この式は1+3×(正方形の数)と表せそうです。",
       "今回は正方形の数がn個の時を考えているので、正方形がn個の時必要なマッチ棒の本数は1+3×n本<item 14>となります",
       "<skip 67>"
     ],
@@ -429,6 +397,9 @@ window.addEventListener('load', function () {
           }
           main();
           mess_box.click();
+          break;
+        case 'root3':
+          rootId = "3";
           break;
         case 'timer':
           $('.timer').addClass('visible');
@@ -582,15 +553,6 @@ window.addEventListener('load', function () {
   }
   );
 
-  function textClick() {
-    $('#textbox').trigger('click');
-
-    function selectNoneRemove() {
-      $('#select1').removeClass('none');
-      $('#select2').removeClass('none');
-      $('#select3').removeClass('none');
-    }
-  }
 
   //キャンバス用の関数
   const canvas = document.querySelector('#drawing-area');
