@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 57><chara 5 1>こんにちは",
+      "<skip 71><chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "正方形を3個作るとき、マッチ棒は何本必要でしょうか？<form 1>"
     ],
@@ -242,10 +242,12 @@ window.addEventListener('load', function () {
       "<charaOut 5><chara 5 2><item 38>図だとこのように示すことが出来て、4nという式だと間のマッチ棒まで数えてしまってました。",
       "なので、この重複するマッチ棒の数を引いて、4n-(n-1)が正しい式です。",
       "<charaOut 5><chara 5 1><itemOut>ありがとうございます。様々な方法で求めることができましたね。",
-      "今まで求めた式を計算してみましょう。計算して気付いたことを教えてください<apiform 11>",
+      "今まで求めた式を計算してみましょう。(ここの画像も作らなきゃ)計算して気付いたことを教えてください<apiform 11>",
     ],
     58: [
       "<colseapiform>全て同じ式になりましたね。",
+      "様々な求め方をできますが、その答えは一つになることがわかりました！",
+      "では今日の感想を書いてみましょう<form 12>",
     ],
 
     59: [
@@ -330,7 +332,12 @@ window.addEventListener('load', function () {
       "つまり、n個の時黄色の部分に入る数はn-1となります。",
       "<item 37>よってn個のときの式は4×3(n-1)と表せます。<skip 45>"
     ],
-
+    71: [
+      "最後に今回の問題に似ている問題を作ってみましょう",
+      "<item 38>今回の問題は「正方形をn個作るとき、マッチ棒は何本必要か」という問題でした。",
+      "この問題をもとにして、同じような問題を作りましょう。",
+      "<snsbtn>また，問題が作れたら「みんなの問題掲示板」に投稿してみましょう！",
+    ],
 
 
 
@@ -431,10 +438,10 @@ window.addEventListener('load', function () {
         case 'form':
           const targetClass = 'formQ' + tagget_str[1];
           // 2秒待ってから addClass を実行
-  setTimeout(() => {
-    $('.' + targetClass).addClass('visible');
-    console.log('フォーム表示: ' + targetClass); // 確認用のログ
-  }, 1500); // 1500ms = 2秒
+          setTimeout(() => {
+            $('.' + targetClass).addClass('visible');
+            console.log('フォーム表示: ' + targetClass); // 確認用のログ
+          }, 1500); // 1500ms = 2秒
           break;
         case 'showCanvas':
           $('#saveButton').addClass('visible');    // 作成したクラス名を利用
@@ -464,7 +471,6 @@ window.addEventListener('load', function () {
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
           buttonId = 'saveButton' + tagget_str[1];
-
           break;
         case 'apiform':
           $('.formapi').addClass('visible');
@@ -477,60 +483,9 @@ window.addEventListener('load', function () {
           $('.submit-button').removeClass('visible');
           console.log('フォーム表示');
           break;
-
-        case 'selectBox':
-          $('.selectBox').addClass('show');
-          break;
-        case 'text1':
-          select_text1.innerHTML = tagget_str[1];
-          break;
-        case 'text2':
-          select_text2.innerHTML = tagget_str[1];
-          break;
-        case 'text3':
-          select_text3.innerHTML = tagget_str[1];
-          break;
-        case 'select1':
-          if (tagget_str[1] === "none") {
-            $('#select1').addClass('none');
-          } else {
-            select_num1 = tagget_str[1];
-            select1.addEventListener('click', function () {
-              scene_cnt = select_num1;
-              line_cnt = -1;
-              $('.selectBox').removeClass('show');
-              selectNoneRemove();
-              textClick();
-            });
-          }
-          break;
-        case 'select2':
-          if (tagget_str[1] === "none") {
-            $('#select2').addClass('none');
-          } else {
-            select_num2 = tagget_str[1];
-            select2.addEventListener('click', function () {
-              scene_cnt = select_num2;
-              line_cnt = -1;
-              $('.selectBox').removeClass('show');
-              selectNoneRemove();
-              textClick();
-            });
-          }
-          break;
-        case 'select3':
-          if (tagget_str[1] === "none") {
-            $('#select3').addClass('none');
-          } else {
-            select_num3 = tagget_str[1];
-            select3.addEventListener('click', function () {
-              scene_cnt = select_num3;
-              line_cnt = -1;
-              $('.selectBox').removeClass('show');
-              selectNoneRemove();
-              textClick();
-            });
-          }
+          case 'snsbtn':
+            $('.snsbtn').addClass('visible');
+          
           break;
         case 'break':
           mess_text.innerHTML += '<br>';
@@ -1312,6 +1267,21 @@ window.addEventListener('load', function () {
     });
   }
 
+  //Q12の回答の分岐
+  document.querySelector('#Q12form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+    rootId = "3";
+
+    const userAnswer = document.querySelector('#userAnswer12').value; // ユーザーの回答を取得
+    $('.formQ12').removeClass('visible');
+    input = "<skip 71>";
+    split_chars = splitStr(input);
+    console.log(split_chars);
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+  });
+
   document.getElementById('QTableSubmitButton').addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -1642,6 +1612,12 @@ window.addEventListener('load', function () {
   });
 
 
+  //「みんなの問題掲示板」に移動するボタン
+  document.getElementById('redirectButton').addEventListener('click', function() {
+    window.location.href = 'https://questsite.vercel.app/'; // 遷移したいURLに変更
+  });
+
+
   //chat用
   const chatInput = document.getElementById("userInput");
   const sendButton = document.getElementById("sendButton");
@@ -1696,7 +1672,7 @@ window.addEventListener('load', function () {
 
   // 音声合成用の Web Audio API を使った関数
   async function synthesizeSpeech(text) {
-   
+
 
     // フラグでリクエストの有効・無効を制御
     const ENABLE_API = false; // APIを無効化する場合は false、有効化する場合は true に変更
@@ -1739,36 +1715,36 @@ window.addEventListener('load', function () {
 
   //タイマー用
   let timeLeft = 10; // 4分（240秒）
-let timer;
-const timerDisplay = document.getElementById('timer');
-const startButton = document.getElementById('startButton');
-function updateTimer() {
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
-  timerDisplay.textContent = `残り時間: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+  let timer;
+  const timerDisplay = document.getElementById('timer');
+  const startButton = document.getElementById('startButton');
+  function updateTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    timerDisplay.textContent = `残り時間: ${minutes}:${seconds.toString().padStart(2, '0')}`;
 
-  if (timeLeft > 0) {
-    timeLeft--;
-  } else {
-    clearInterval(timer);
-    timerDisplay.textContent = "時間終了！";
-    
-    $('.timer').removeClass('visible');
-    console.log('タイマー終了');
-    messbox.style.pointerEvents = 'auto'; // タイマー終了後にクリックできるようにする
+    if (timeLeft > 0) {
+      timeLeft--;
+    } else {
+      clearInterval(timer);
+      timerDisplay.textContent = "時間終了！";
+
+      $('.timer').removeClass('visible');
+      console.log('タイマー終了');
+      messbox.style.pointerEvents = 'auto'; // タイマー終了後にクリックできるようにする
       mess_box.click(); // messboxクリッ
+    }
   }
-}
 
-function startTimer() {
-  if (!timer) { // 二重に開始しないようにする
-    messbox.style.pointerEvents = 'none'; // タイマー中はクリックできないようにする
-    timer = setInterval(updateTimer, 1000);
-    updateTimer(); // すぐに1回目を表示
+  function startTimer() {
+    if (!timer) { // 二重に開始しないようにする
+      messbox.style.pointerEvents = 'none'; // タイマー中はクリックできないようにする
+      timer = setInterval(updateTimer, 1000);
+      updateTimer(); // すぐに1回目を表示
+    }
   }
-}
 
-startButton.addEventListener('click', startTimer);
+  startButton.addEventListener('click', startTimer);
 
 
 

@@ -180,7 +180,8 @@ body{
 .formapi,
 .textTospeech,
 #startButton,
-.timer{
+.timer,
+.snsbtn{
   visibility: hidden;/* なんかdisplay: none;だとうまくいかない */
   pointer-events: none;/* これを設定しておくことでhiddenのとき下の要素が押せる */
 
@@ -554,4 +555,29 @@ body {
     left:60px;
     z-index: 400;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .snsbtn {
+    font-family: "DotGothic16", sans-serif;
+    font-size: 24px;
+    color: #367293;
+    background-color: #d9dee5;
+    padding: 25px 5px;
+    border: 2px solid #3d81a5;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    width: 300px;
+    margin: 20px auto;
+    position: absolute;
+    top: 320px; /* タイマーより下に配置 */
+    left: 60px;
+    z-index: 400;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+  }
+
+  .snsbtn:hover {
+    background-color: #c5d4e0;
   }
