@@ -33,7 +33,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 71><chara 5 1>こんにちは",
+      "<skip 72><chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "正方形を3個作るとき、マッチ棒は何本必要でしょうか？<form 1>"
     ],
@@ -276,6 +276,7 @@ window.addEventListener('load', function () {
       "表を使って比較しやすくしましょう。<item 23><form 11>"
     ],
 
+
     62: [
       "最初に1本マッチ棒があってそこから3本ずつマッチ棒が増えているという規則性を見つけましたね。",
       "では、その規則性を使って具体的な数で考えてみましょう。",
@@ -318,9 +319,9 @@ window.addEventListener('load', function () {
     //ちないみわからん
     69: [
       "<colseapiform><item 22>表から正方形がひとつ増えるごとにマッチ棒が3本ずつ増えるという規則性を見つけましたね。",
-      "これを<item 24>図で考えてみましょう。正方形の数が<item 25>増えるたびにコの字の<item 26>グループが１つ追加されている<item 27>ようですね。<item 28>",
+      "これを<item 24>図で考えてみましょう。正方形の数が<item 25>増えるたびにコの字の<item 26>グループが1つ追加されている<item 27>ようですね。<item 28>",
       "表を埋めた時の数え方を思い出してみましょう。",
-      "正方形が1つのときは4本、<item 29>正方形が２つのときはコの字のグループが<item 30>１つ追加されます。よって、4+3×1という式が立てられます。<item 31>",
+      "正方形が1つのときは4本、<item 29>正方形が２つのときはコの字のグループが<item 30>1つ追加されます。よって、4+3×1という式が立てられます。<item 31>",
       "3個、4個の時も同じように考えてみましょう。",
       "3個のときはコの字のグループが<item 32> 2つ追加されるので、4+3×2という式が立てられます。4個、<item 33> 5個のときも同様に立てられます。",
       "このように考えると<item 34>正方形が１つの時はコの字型のグループが0個と考えることができそうです。",
@@ -338,7 +339,22 @@ window.addEventListener('load', function () {
       "この問題をもとにして、同じような問題を作りましょう。",
       "<snsbtn>また，問題が作れたら「みんなの問題掲示板」に投稿してみましょう！",
     ],
-
+    72: [
+      "表を縦に見ると、<item 39>マッチ棒の本数は正方形の数を3倍して1足した数になっているという規則性を見つけましたね。",
+      "つまり<item 40>（マッチ棒の数）＝（正方形の数）×3+1という式が成り立ちます。",
+      "今回は正方形がn個のときの、マッチ棒の本数を求めたいので、正方形の数をnとして、3×n+1と表せます。<item 41>",
+      "似たような考えで図を使って考えることもできます。",
+      "正方形が3個のとき、<item 7>赤で囲んでいる最初のマッチ棒1本と青で囲んでいる他のコの字型のグループに分けて考えてみましょう。",
+      "コの字型は3つあるので、<item 8>マッチ棒の本数は最初の1本と、コの字型×3で表すことが出来ます",
+      "コの字型は3本のマッチ棒でできているので、式にすると、<item 9>1+3×3になります。",
+      "3個の時と同じように考えるとコの字型は4つあるので、マッチ棒の本数は最初の1本と、コの字型×4で表すことが出来ますね",
+      "つまり、式にすると、<item 10>1+3×4になります。",
+      "同じ方法で正方形が5個の時も考えると、<item 11>1+3×5になります。",
+      "3,4,5個のときを振り返ると、正方形の数と式の最後の数が一致していますね。",
+      "つまりこの式は1+3×(正方形の数)と表せそうです。(画像がない)",
+      "今回は正方形の数がn個の時を考えているので、正方形がn個の時必要なマッチ棒の本数は1+3×n本<item 14>となります",
+      "<skip 67>"
+    ],
 
 
 
@@ -483,9 +499,9 @@ window.addEventListener('load', function () {
           $('.submit-button').removeClass('visible');
           console.log('フォーム表示');
           break;
-          case 'snsbtn':
-            $('.snsbtn').addClass('visible');
-          
+        case 'snsbtn':
+          $('.snsbtn').addClass('visible');
+
           break;
         case 'break':
           mess_text.innerHTML += '<br>';
@@ -665,237 +681,237 @@ window.addEventListener('load', function () {
 
   // ノート用の関数
   // ノート用の関数
-let currentPage = 1;  // 現在表示しているページ
-function getCurrentCanvas() {
-  return document.getElementById(`notedrawing-area-${currentPage}`);
-}
-const note = getCurrentCanvas(); // ここを常に呼び出してcanvasを取得
-const notectx = note.getContext('2d');
-const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
-let isNoteEraserMode = false; // 消しゴムモードフラグ
-const eraserSize = 20; // 消しゴムのサイズ
-
-
-// 背景と罫線を描画する関数
-function drawBackground() {
-  const note = getCurrentCanvas();
-  const notectx = note.getContext('2d');
-  const bgColor = "white";
-  const lineColor = "#e0e0e0";
-  const lineSpacing = 40;
-
-  notectx.fillStyle = bgColor;
-  notectx.fillRect(0, 0, note.width, note.height);
-
-  notectx.strokeStyle = lineColor;
-  notectx.lineWidth = 1;
-  for (let y = 0; y <= note.height; y += lineSpacing) {  // <= に変更
-    notectx.beginPath();
-    notectx.moveTo(0, y);
-    notectx.lineTo(note.width, y);
-    notectx.stroke();
+  let currentPage = 1;  // 現在表示しているページ
+  function getCurrentCanvas() {
+    return document.getElementById(`notedrawing-area-${currentPage}`);
   }
-}
-
-// 初期化時に背景を描画
-drawBackground();
-
-// クリアボタンの処理
-clearBtn.addEventListener('click', () => {
-  const note = getCurrentCanvas();
+  const note = getCurrentCanvas(); // ここを常に呼び出してcanvasを取得
   const notectx = note.getContext('2d');
-  notectx.clearRect(0, 0, note.width, note.height);  // キャンバスをクリア
-  drawBackground(); // 背景を再描画
-});
+  const notecolorPicker = document.querySelector('#notecolor-picker'); // 色選択用
+  let isNoteEraserMode = false; // 消しゴムモードフラグ
+  const eraserSize = 20; // 消しゴムのサイズ
 
-// 色を選択する
-notecolorPicker.addEventListener('change', (e) => {
-  selectedColor = e.target.value;
-  const note = getCurrentCanvas();
-  const notectx = note.getContext('2d');
-  notectx.strokeStyle = selectedColor;
-});
 
-// 描画状態を保存するためのオブジェクト
-let canvasStates = {
-  1: null,
-  2: null,
-  3: null
-};
+  // 背景と罫線を描画する関数
+  function drawBackground() {
+    const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
+    const bgColor = "white";
+    const lineColor = "#e0e0e0";
+    const lineSpacing = 40;
 
-// 背景と描画状態を復元する関数
-function drawBackgroundAndRestore(page) {
-  const note = getCurrentCanvas();
-  const notectx = note.getContext('2d');
-  const bgColor = "white";
-  const lineColor = "#e0e0e0";
-  const lineSpacing = 40;
+    notectx.fillStyle = bgColor;
+    notectx.fillRect(0, 0, note.width, note.height);
 
-  notectx.fillStyle = bgColor;
-  notectx.fillRect(0, 0, note.width, note.height);
-
-  notectx.strokeStyle = lineColor;
-  notectx.lineWidth = 1;
-  for (let y = 0; y <= note.height; y += lineSpacing) {
-    notectx.beginPath();
-    notectx.moveTo(0, y);
-    notectx.lineTo(note.width, y);
-    notectx.stroke();
+    notectx.strokeStyle = lineColor;
+    notectx.lineWidth = 1;
+    for (let y = 0; y <= note.height; y += lineSpacing) {  // <= に変更
+      notectx.beginPath();
+      notectx.moveTo(0, y);
+      notectx.lineTo(note.width, y);
+      notectx.stroke();
+    }
   }
 
-  // 保存されている描画状態を復元
-  if (canvasStates[page]) {
-    const image = new Image();
-    image.src = canvasStates[page];
-    image.onload = function () {
-      notectx.drawImage(image, 0, 0);
-    };
-  }
-}
+  // 初期化時に背景を描画
+  drawBackground();
 
-// 描画を開始する
-function notestartDrawing(xPos, yPos) {
-  mousePressed = true;
-  const note = getCurrentCanvas();
-  x = xPos;
-  y = yPos;
-}
+  // クリアボタンの処理
+  clearBtn.addEventListener('click', () => {
+    const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
+    notectx.clearRect(0, 0, note.width, note.height);  // キャンバスをクリア
+    drawBackground(); // 背景を再描画
+  });
 
-// 線を描画する
-function notedraw(xPos, yPos) {
-  if (!mousePressed) return;
+  // 色を選択する
+  notecolorPicker.addEventListener('change', (e) => {
+    selectedColor = e.target.value;
+    const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
+    notectx.strokeStyle = selectedColor;
+  });
 
-  const note = getCurrentCanvas();
-  const notectx = note.getContext('2d');
-  if (isNoteEraserMode) {
-    // 消しゴムモード: 背景を再描画しないように修正
-    const eraseX = xPos - eraserSize / 2;
-    const eraseY = yPos - eraserSize / 2;
-    notectx.clearRect(eraseX, eraseY, eraserSize, eraserSize);
-  } else {
-    notectx.beginPath();
-    notectx.moveTo(x, y);
-    notectx.lineTo(xPos, yPos);
-    notectx.lineWidth = 3;  // 線の太さを設定
-    notectx.stroke();
-  }
+  // 描画状態を保存するためのオブジェクト
+  let canvasStates = {
+    1: null,
+    2: null,
+    3: null
+  };
 
-  x = xPos;
-  y = yPos;
-}
+  // 背景と描画状態を復元する関数
+  function drawBackgroundAndRestore(page) {
+    const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
+    const bgColor = "white";
+    const lineColor = "#e0e0e0";
+    const lineSpacing = 40;
 
-// マウスイベント
-note.addEventListener('mousedown', (e) => {
-  notestartDrawing(e.offsetX, e.offsetY);
-});
+    notectx.fillStyle = bgColor;
+    notectx.fillRect(0, 0, note.width, note.height);
 
-note.addEventListener('mousemove', (e) => {
-  notedraw(e.offsetX, e.offsetY);
-});
+    notectx.strokeStyle = lineColor;
+    notectx.lineWidth = 1;
+    for (let y = 0; y <= note.height; y += lineSpacing) {
+      notectx.beginPath();
+      notectx.moveTo(0, y);
+      notectx.lineTo(note.width, y);
+      notectx.stroke();
+    }
 
-window.addEventListener('mouseup', () => mousePressed = false);
-
-// タッチイベント
-note.addEventListener('touchstart', (e) => {
-  const touch = e.touches[0];
-  const rect = note.getBoundingClientRect();
-  notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
-});
-
-// 消しゴムボタン
-document.getElementById("noteeraser-button").addEventListener("click", () => {
-  isNoteEraserMode = !isNoteEraserMode;
-});
-
-note.addEventListener('touchmove', (e) => {
-  const touch = e.touches[0];
-  const rect = note.getBoundingClientRect();
-  notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
-  e.preventDefault();  // スクロールなどのデフォルト動作を無効化
-});
-
-window.addEventListener('touchend', () => mousePressed = false);
-
-// 前ページに戻る処理
-// 前のページに戻る処理
-document.getElementById('prevpage-button').addEventListener('click', () => {
-  // 現在のページの描画内容を保存
-  const note = getCurrentCanvas();
-  const notectx = note.getContext('2d');
-  canvasStates[currentPage] = note.toDataURL();  // 現在の描画を画像として保存
-
-  // 現在のページを非表示
-  document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
-
-  // 前のページに切り替え
-  currentPage--;
-  if (currentPage < 1) {
-    currentPage = 3;
+    // 保存されている描画状態を復元
+    if (canvasStates[page]) {
+      const image = new Image();
+      image.src = canvasStates[page];
+      image.onload = function () {
+        notectx.drawImage(image, 0, 0);
+      };
+    }
   }
 
-  // 新しいページを表示
-  document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
+  // 描画を開始する
+  function notestartDrawing(xPos, yPos) {
+    mousePressed = true;
+    const note = getCurrentCanvas();
+    x = xPos;
+    y = yPos;
+  }
 
-  // 新しいページで背景と描画状態を復元
-  drawBackgroundAndRestore(currentPage);
+  // 線を描画する
+  function notedraw(xPos, yPos) {
+    if (!mousePressed) return;
 
-  // 新しいページのキャンバスイベントリスナーを再設定
-  const noteCanvas = getCurrentCanvas();
-  noteCanvas.addEventListener('mousedown', (e) => notestartDrawing(e.offsetX, e.offsetY));
-  noteCanvas.addEventListener('mousemove', (e) => notedraw(e.offsetX, e.offsetY));
-  noteCanvas.addEventListener('touchstart', (e) => {
+    const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
+    if (isNoteEraserMode) {
+      // 消しゴムモード: 背景を再描画しないように修正
+      const eraseX = xPos - eraserSize / 2;
+      const eraseY = yPos - eraserSize / 2;
+      notectx.clearRect(eraseX, eraseY, eraserSize, eraserSize);
+    } else {
+      notectx.beginPath();
+      notectx.moveTo(x, y);
+      notectx.lineTo(xPos, yPos);
+      notectx.lineWidth = 3;  // 線の太さを設定
+      notectx.stroke();
+    }
+
+    x = xPos;
+    y = yPos;
+  }
+
+  // マウスイベント
+  note.addEventListener('mousedown', (e) => {
+    notestartDrawing(e.offsetX, e.offsetY);
+  });
+
+  note.addEventListener('mousemove', (e) => {
+    notedraw(e.offsetX, e.offsetY);
+  });
+
+  window.addEventListener('mouseup', () => mousePressed = false);
+
+  // タッチイベント
+  note.addEventListener('touchstart', (e) => {
     const touch = e.touches[0];
-    const rect = noteCanvas.getBoundingClientRect();
+    const rect = note.getBoundingClientRect();
     notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
   });
-  noteCanvas.addEventListener('touchmove', (e) => {
+
+  // 消しゴムボタン
+  document.getElementById("noteeraser-button").addEventListener("click", () => {
+    isNoteEraserMode = !isNoteEraserMode;
+  });
+
+  note.addEventListener('touchmove', (e) => {
     const touch = e.touches[0];
-    const rect = noteCanvas.getBoundingClientRect();
+    const rect = note.getBoundingClientRect();
     notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
     e.preventDefault();  // スクロールなどのデフォルト動作を無効化
   });
-});
 
+  window.addEventListener('touchend', () => mousePressed = false);
 
+  // 前ページに戻る処理
+  // 前のページに戻る処理
+  document.getElementById('prevpage-button').addEventListener('click', () => {
+    // 現在のページの描画内容を保存
+    const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
+    canvasStates[currentPage] = note.toDataURL();  // 現在の描画を画像として保存
 
-// 次のページに切り替える処理
-document.getElementById('nextpage-button').addEventListener('click', () => {
-  // 現在のページの描画内容を保存
-  const note = getCurrentCanvas();
-  const notectx = note.getContext('2d');
-  canvasStates[currentPage] = note.toDataURL();  // 現在の描画を画像として保存
+    // 現在のページを非表示
+    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
 
-  // 現在のページを非表示
-  document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
+    // 前のページに切り替え
+    currentPage--;
+    if (currentPage < 1) {
+      currentPage = 3;
+    }
 
-  // 次のページに切り替え
-  currentPage++;
-  if (currentPage > 3) {
-    currentPage = 1;
-  }
+    // 新しいページを表示
+    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
 
-  // 新しいページを表示
-  document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
+    // 新しいページで背景と描画状態を復元
+    drawBackgroundAndRestore(currentPage);
 
-  // 新しいページで背景と描画状態を復元
-  drawBackgroundAndRestore(currentPage);
-
-  // 新しいページのキャンバスイベントリスナーを再設定
-  const noteCanvas = getCurrentCanvas();
-  noteCanvas.addEventListener('mousedown', (e) => notestartDrawing(e.offsetX, e.offsetY));
-  noteCanvas.addEventListener('mousemove', (e) => notedraw(e.offsetX, e.offsetY));
-  noteCanvas.addEventListener('touchstart', (e) => {
-    const touch = e.touches[0];
-    const rect = noteCanvas.getBoundingClientRect();
-    notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
+    // 新しいページのキャンバスイベントリスナーを再設定
+    const noteCanvas = getCurrentCanvas();
+    noteCanvas.addEventListener('mousedown', (e) => notestartDrawing(e.offsetX, e.offsetY));
+    noteCanvas.addEventListener('mousemove', (e) => notedraw(e.offsetX, e.offsetY));
+    noteCanvas.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      const rect = noteCanvas.getBoundingClientRect();
+      notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
+    });
+    noteCanvas.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const rect = noteCanvas.getBoundingClientRect();
+      notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
+      e.preventDefault();  // スクロールなどのデフォルト動作を無効化
+    });
   });
-  noteCanvas.addEventListener('touchmove', (e) => {
-    const touch = e.touches[0];
-    const rect = noteCanvas.getBoundingClientRect();
-    notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
-    e.preventDefault();  // スクロールなどのデフォルト動作を無効化
+
+
+
+  // 次のページに切り替える処理
+  document.getElementById('nextpage-button').addEventListener('click', () => {
+    // 現在のページの描画内容を保存
+    const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
+    canvasStates[currentPage] = note.toDataURL();  // 現在の描画を画像として保存
+
+    // 現在のページを非表示
+    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
+
+    // 次のページに切り替え
+    currentPage++;
+    if (currentPage > 3) {
+      currentPage = 1;
+    }
+
+    // 新しいページを表示
+    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
+
+    // 新しいページで背景と描画状態を復元
+    drawBackgroundAndRestore(currentPage);
+
+    // 新しいページのキャンバスイベントリスナーを再設定
+    const noteCanvas = getCurrentCanvas();
+    noteCanvas.addEventListener('mousedown', (e) => notestartDrawing(e.offsetX, e.offsetY));
+    noteCanvas.addEventListener('mousemove', (e) => notedraw(e.offsetX, e.offsetY));
+    noteCanvas.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      const rect = noteCanvas.getBoundingClientRect();
+      notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
+    });
+    noteCanvas.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const rect = noteCanvas.getBoundingClientRect();
+      notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
+      e.preventDefault();  // スクロールなどのデフォルト動作を無効化
+    });
   });
-});
 
 
 
@@ -1339,30 +1355,7 @@ document.getElementById('nextpage-button').addEventListener('click', () => {
     document.querySelector('#userAnswer').value = '';
   });
 
-
-  // Q11.表のやつフォーム送信ボタンの動作
-  // 全角数字を半角に変換する関数
-  function toHalfWidth(str) {
-    return str.replace(/[０-９]/g, function (s) {
-      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-    });
-  }
-
-  //Q12の回答の分岐
-  document.querySelector('#Q12form').addEventListener('submit', function (event) {
-    event.preventDefault(); // フォームのデフォルト送信を防ぐ
-    rootId = "3";
-
-    const userAnswer = document.querySelector('#userAnswer12').value; // ユーザーの回答を取得
-    $('.formQ12').removeClass('visible');
-    input = "<skip 71>";
-    split_chars = splitStr(input);
-    console.log(split_chars);
-    main();
-    mess_box.click();
-    document.querySelector('#userAnswer').value = '';
-  });
-
+  //Q11の回答の分岐
   document.getElementById('QTableSubmitButton').addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -1409,6 +1402,31 @@ document.getElementById('nextpage-button').addEventListener('click', () => {
       mess_box.click();
     }
   });
+
+  // Q11.表のやつフォーム送信ボタンの動作
+  // 全角数字を半角に変換する関数
+  function toHalfWidth(str) {
+    return str.replace(/[０-９]/g, function (s) {
+      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    });
+  }
+
+  //Q12の回答の分岐
+  document.querySelector('#Q12form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+    rootId = "3";
+
+    const userAnswer = document.querySelector('#userAnswer12').value; // ユーザーの回答を取得
+    $('.formQ12').removeClass('visible');
+    input = "<skip 71>";
+    split_chars = splitStr(input);
+    console.log(split_chars);
+    main();
+    mess_box.click();
+    document.querySelector('#userAnswer').value = '';
+  });
+
+
 
   //['<', 's', 'k', 'i', 'p', ' ', '2', '>']これにしてくれる関数
   function splitStr(str) {
@@ -1622,11 +1640,12 @@ document.getElementById('nextpage-button').addEventListener('click', () => {
         input = "<skip 69>";
         split_chars = splitStr(input);
       } else if (textResponse.includes("縦に見る")) {
-        //一旦適当
-        input = "<skip 68>";
+        input = "<skip 72>";
         split_chars = splitStr(input);
       } else {
-        console.log("ボタン2: レスポンスに「正解」も「不正解」も含まれていません");
+        //なんもわからん！ってときに62いきましょう
+        input = "<skip 62>";
+        split_chars = splitStr(input);
       }
     } else if (buttonId === 'saveButton13') {
       if (textResponse.includes("不正解")) {
@@ -1694,7 +1713,7 @@ document.getElementById('nextpage-button').addEventListener('click', () => {
 
 
   //「みんなの問題掲示板」に移動するボタン
-  document.getElementById('redirectButton').addEventListener('click', function() {
+  document.getElementById('redirectButton').addEventListener('click', function () {
     window.location.href = 'https://questsite.vercel.app/'; // 遷移したいURLに変更
   });
 
