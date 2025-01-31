@@ -777,70 +777,12 @@ window.addEventListener('load', function () {
 
   window.addEventListener('touchend', () => mousePressed = false);
 
-  //前ページに戻る処理
-  document.getElementById('prevpage-button').addEventListener('click', () => {
-    // 現在のページを非表示にする
-    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
-  
-    // 前のページに切り替える
-    currentPage--;
-    if (currentPage < 1) {  // 1ページ目なら最後のページに戻る
-      currentPage = 3;  
-    }
-  
-    // 新しいページを表示
-    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
+  const canvases = document.querySelectorAll('.noteall');  // キャンバス要素の配列
+  // 次のページ
+  document.getElementById('nextpage-button').addEventListener('click', () => changePage(1));
 
-    note.addEventListener('mousemove', (e) => {
-      notedraw(e.offsetX, e.offsetY);
-    });
-
-    note.addEventListener('touchstart', (e) => {
-      const touch = e.touches[0];
-      const rect = note.getBoundingClientRect();
-      notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
-    });
-
-    note.addEventListener('touchmove', (e) => {
-      const touch = e.touches[0];
-      const rect = note.getBoundingClientRect();
-      notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
-      e.preventDefault();  // スクロールなどのデフォルト動作を無効化
-    });
-  });
-  
-  // 次のページに切り替える処理
-  document.getElementById('nextpage-button').addEventListener('click', () => {
-    // 現在のページを非表示にする
-    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'none';
-
-    // 次のページに切り替える
-    currentPage++;
-    if (currentPage > 3) {  // ページ数に応じて調整
-      currentPage = 1;  // 最後のページから最初に戻る
-    }
-
-    // 新しいページを表示
-    document.getElementById(`notedrawing-area-${currentPage}`).style.display = 'block';
-
-
-    note.addEventListener('mousemove', (e) => {
-      notedraw(e.offsetX, e.offsetY);
-    });
-
-    note.addEventListener('touchstart', (e) => {
-      const touch = e.touches[0];
-      const rect = note.getBoundingClientRect();
-      notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
-    });
-
-    note.addEventListener('touchmove', (e) => {
-      const touch = e.touches[0];
-      const rect = note.getBoundingClientRect();
-      notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
-      e.preventDefault();  // スクロールなどのデフォルト動作を無効化
-    });
-  });
+  // 前のページ
+  document.getElementById('prevpage-button').addEventListener('click', () => changePage(-1));
 
   // Teachable MachineでエクスポートしたモデルのURL
   const modelURL = "https://teachablemachine.withgoogle.com/models/CAyIdTCPn/";
