@@ -778,6 +778,52 @@ window.addEventListener('load', function () {
   window.addEventListener('touchend', () => mousePressed = false);
 
   const canvases = document.querySelectorAll('.noteall');  // キャンバス要素の配列
+
+  // キャンバスを取得する関数
+  function getCurrentCanvas() {
+    return canvases[currentPage - 1];
+  }
+
+  // ページ切り替え関数
+  function changePage(next) {
+    // 現在のページを非表示にする
+    canvases[currentPage - 1].style.display = 'none';
+
+    // ページ番号を更新
+    currentPage += next;
+    if (currentPage > canvases.length) currentPage = 1;
+    if (currentPage < 1) currentPage = canvases.length;
+
+    // 新しいページを表示
+    canvases[currentPage - 1].style.display = 'block';
+
+    // 新しいページのキャンバスを取得
+    const note = getCurrentCanvas();
+    const notectx = note.getContext('2d');
+    
+    // 新しいキャンバスのイベントリスナーを再設定
+    note.addEventListener('mousedown', (e) => {
+      notestartDrawing(e.offsetX, e.offsetY);
+    });
+
+    note.addEventListener('mousemove', (e) => {
+      notedraw(e.offsetX, e.offsetY);
+    });
+
+    note.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      const rect = note.getBoundingClientRect();
+      notestartDrawing(touch.clientX - rect.left, touch.clientY - rect.top);
+    });
+
+    note.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const rect = note.getBoundingClientRect();
+      notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
+      e.preventDefault();  // スクロールなどのデフォルト動作を無効化
+    });
+  }
+
   // 次のページ
   document.getElementById('nextpage-button').addEventListener('click', () => changePage(1));
 
