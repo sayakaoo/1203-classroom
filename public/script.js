@@ -801,10 +801,11 @@ window.addEventListener('load', function () {
     const note = getCurrentCanvas();
     const notectx = note.getContext('2d');
     
-    // 新しいキャンバスのイベントリスナーを再設定
+    // ここで新しいキャンバスのイベントリスナーを再設定
     note.addEventListener('mousedown', (e) => {
       notestartDrawing(e.offsetX, e.offsetY);
     });
+
 
     note.addEventListener('mousemove', (e) => {
       notedraw(e.offsetX, e.offsetY);
@@ -821,8 +822,9 @@ window.addEventListener('load', function () {
       const rect = note.getBoundingClientRect();
       notedraw(touch.clientX - rect.left, touch.clientY - rect.top);
       e.preventDefault();  // スクロールなどのデフォルト動作を無効化
-    });
-  }
+
+  });
+}
 
   // 次のページ
   document.getElementById('nextpage-button').addEventListener('click', () => changePage(1));
