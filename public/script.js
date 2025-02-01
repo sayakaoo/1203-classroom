@@ -81,10 +81,10 @@ window.addEventListener('load', function () {
 
     //間に何個か入れよう
     45: [
-      "では次にAさんどのような式を立てたか教えてください<skip 20>",
+      "では次にまいさんどのような式を立てたか教えてください<skip 20>",
     ],
     46: [
-      "ではAさんどのような式を立てたか教えてください<skip 20><charav 3>",
+      "ではまいさんどのような式を立てたか教えてください<skip 20><charav 3>",
     ],
 
     20: [
@@ -94,7 +94,7 @@ window.addEventListener('load', function () {
     ],
     21: [
       "<saveButtonremove>みなさん考えられましたか？",
-      "ではAさんどのように考えたか教えてください。<charav 3>",
+      "ではまいさんどのように考えたか教えてください。<charav 3>",
       "<charaOut 5><chara 5 3><item 4>図のように考えました．",
       "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました<charav 1>",
       "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の解答と見比べてみましょう。",
@@ -118,15 +118,15 @@ window.addEventListener('load', function () {
       ""
     ],
     30: [
-      "<closeCanvas><colseapiform><closehint><itemOut >次にCさんどのように考えたか教えてください。<charav 2>",
+      "<closeCanvas><colseapiform><closehint><itemOut >次にたくみさんどのように考えたか教えてください。<charav 2>",
       "<charaOut 5><chara 5 2>正方形はマッチ棒4本でできているから、4nという式をたてたけど、正方形が3個のときマッチ棒が12本必要ってことになっちゃって間違っている気がします。<charav 1>",
-      "<charaOut 5><chara 5 1たしかにそうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？",
+      "<charaOut 5><chara 5 1>たしかにそうですね。4nだと数えすぎてしまっているようです。どのように考えたらいいでしょうか？",
       "話し合ってみましょう",
       "<gwform><charav 3>"
     ],
     31: [
       "ありがとうございます。一緒に考えてみましょう",
-      "<item 5>Aさんの例と同じように考えると、赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
+      "<item 5>まいさんの例と同じように考えると、赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
       "もう一度解答を見直してみましょう",
       "クリックで次の問題に進む",
       "<closeCanvas><closehint><itemOut 5><skip 30>"
@@ -138,10 +138,10 @@ window.addEventListener('load', function () {
       ""
     ],
     33: [
-      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 3><apiform 3>",
+      "<closeCanvas><closehint><colseapiform>先ほどのまいさんの説明を参考にもう一度説明してみましょう<hint 3><apiform 3>",
     ],
     34: [
-      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にしましょう",
+      "<closeCanvas><closehint><colseapiform>先ほどのまいさんの説明を参考にしましょう",
       "もう一度説明してみましょう。<hint 4><apiform 4><showCanvaswithapi>",
     ],
     35: [
@@ -178,10 +178,10 @@ window.addEventListener('load', function () {
     ],
     //44,45,46使う
     47: [
-      "ではAさんどのような式を立てたか教えてください<skip 48>"
+      "ではまいさんどのような式を立てたか教えてください<skip 48>"
     ],
     67: [
-      "では次にAさんどのような式を立てたか教えてください<skip 48>"
+      "では次にまいさんどのような式を立てたか教えてください<skip 48>"
     ],
 
     48: [
@@ -191,7 +191,7 @@ window.addEventListener('load', function () {
     ],
     49: [
       "みなさん考えられましたか？",
-      "ではAさんどのように考えたか教えてください。<charav 3>",
+      "ではまいさんどのように考えたか教えてください。<charav 3>",
       "<charaOut 5><chara 5 3><item 5>図のように考えました．",
       "赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn-1個だけあるから4+3(n-1)という式になりました<charav 1>",
       "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の解答と見比べてみましょう。",
@@ -208,7 +208,7 @@ window.addEventListener('load', function () {
       "<skip 52>",
     ],
     52: [
-      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 8><apiform 8>",
+      "<closeCanvas><closehint><colseapiform>先ほどのまいさんの説明を参考にもう一度説明してみましょう<hint 8><apiform 8>",
     ],
     53: [
       "<closeCanvas><colseapiform><closehint><item 4>ありがとうございます。赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn個だけあるので1+3nという式になりますね。<fadeOut_item 4><skip 30>",
@@ -220,17 +220,17 @@ window.addEventListener('load', function () {
     ],
     55: [
       "ありがとうございます。一緒に考えてみましょう",
-      "<item 4>Aさんの例と同じように考えると、このように考えられそうですね(分かりやすく動画で解説したいな)",
+      "<item 4>まいさんの例と同じように考えると、このように考えられそうですね(分かりやすく動画で解説したいな)",
       "もう一度解答を見直してみましょう",
       "クリックで次の問題に進む",
       "<closeCanvas><closehint><itemOut 4><skip 30>"
     ],
     56: [
-      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 10><apiform 10><showCanvaswithapi>",
+      "<closeCanvas><closehint><colseapiform>先ほどのまいさんの説明を参考にもう一度説明してみましょう<hint 10><apiform 10><showCanvaswithapi>",
     ],
     //30のグループワーク後
     57: [
-      "グループで結論を出すことが出来ましたか？Cさん出た答えを説明してください<charav 2>",
+      "グループで結論を出すことが出来ましたか？たくみさん出た答えを説明してください<charav 2>",
       "<charaOut 5><chara 5 2><item 46>図だとこのように示すことが出来て、4nという式だと青で囲んでいる間のマッチ棒まで数えてしまってました。",
       "なので、この重複するマッチ棒の数を引いて、4n-(n-1)が正しい式です。<charav 1>",
       "<charaOut 5><chara 5 1><itemOut>ありがとうございます。様々な方法で求めることができましたね。",
@@ -333,7 +333,7 @@ window.addEventListener('load', function () {
       "(学習者)さんどのように4n-(n-1)という式を立てたか説明してください。<showCanvaswithapi><apiform 14><hint 1>"
     ],
     74: [
-      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 4><apiform 15><showCanvaswithapi>",
+      "<closeCanvas><closehint><colseapiform>先ほどのまいさんの説明を参考にもう一度説明してみましょう<hint 4><apiform 15><showCanvaswithapi>",
     ],
     75: [
       "<closeCanvas><colseapiform><closehint>ありがとうございます。4本のマッチ棒を赤で囲んだ部分がn個あり、重なって数えている青で囲んだ部分がn-1個あるので、4n-(n-1)という式になりますね。","<fadeOut_item 5><skip 76>",
@@ -1318,7 +1318,7 @@ window.addEventListener('load', function () {
 
     //解答鬼分岐！！！！
     if (normalize(userAnswer) === '3(n-1)+4' || normalize(userAnswer) === '4+3(n-1)') {
-      //さきにAさんのパターン
+      //さきにまいさんのパターン
       input = "<skip 46>";
       split_chars = splitStr(input);
       console.log(split_chars);
@@ -1328,7 +1328,7 @@ window.addEventListener('load', function () {
       console.log(split_chars);
       rootId = "1";
     } else if (normalize(userAnswer) === '4n-(n-1)' || normalize(userAnswer) === '4n-n+1') {
-      //Aさんが3n+1のパターン
+      //まいさんが3n+1のパターン
       input = "<skip 46>";
       split_chars = splitStr(input);
       console.log(split_chars);
@@ -1982,7 +1982,7 @@ sendButton.addEventListener("click", async (e) => {
     if (!response.ok) throw new Error("サーバーエラー");
 
     const data = await response.json();
-    chatOutput.innerHTML += `<div class="message assistant"><strong>Aさん：</strong> ${data.response}</div>`;
+    chatOutput.innerHTML += `<div class="message assistant"><strong>まいさん：</strong> ${data.response}</div>`;
 
     // 音声合成で返答を読み上げる
     await synthesizeSpeech(data.response); // 音声合成を呼び出す
