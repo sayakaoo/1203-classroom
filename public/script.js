@@ -486,7 +486,6 @@ window.addEventListener('load', function () {
         case 'showCanvaswithapi':
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
-          buttonId = 'saveButton' + tagget_str[1];
           break;
         case 'apiform':
           $('.formapi').addClass('visible');
