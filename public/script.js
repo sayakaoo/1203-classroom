@@ -354,6 +354,18 @@ window.addEventListener('load', function () {
       "(表)(4+3(n-1))ありがとうございます。",
       "どのように4+3(n-1)という式を立てたか説明してください。<showtable><apiform 16><hint 1>"
     ],
+    80: [
+      "不正解の未作成",
+      "",
+      "",
+      ""
+    ],
+    81: [
+      "せいかい未作成",
+      "",
+      "",
+      ""
+    ],
 
 
 
@@ -1797,6 +1809,19 @@ window.addEventListener('load', function () {
             split_chars = splitStr(input);
             break;
         };
+      } else {
+        console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
+      }
+    }else if (buttonId === 'saveButton4') {
+      if (textResponse.includes("不正解")) {
+        
+            input = "<skip 80>";
+            split_chars = splitStr(input);
+      } else if (textResponse.includes("正解")) {
+       
+            input = "<skip 81>";
+            split_chars = splitStr(input);
+           
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
       }

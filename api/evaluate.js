@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
   let prompt = ""; // 初期化
 
-// 最初を赤で囲んだ場合の分岐
+  // 最初を赤で囲んだ場合の分岐
   if (buttonId === "saveButton1") {
     prompt = `ユーザーは三重引用符で囲んだテキストを提供します。これは「正方形をn番目までつくる場合マッチ棒は何本必要か？」というマッチ棒の規則性問題の回答です。ユーザーは4+3(n-1)という回答の説明をしています。次のステップで手順を実行してください。
 
@@ -87,7 +87,7 @@ module.exports = async (req, res) => {
       "result": "<具体的な数を使うまたはその他>"
     }
     `;
-  }else if (buttonId === "saveButton7") {
+  } else if (buttonId === "saveButton7") {
     prompt = `ユーザーは三重引用符で囲んだテキストを提供します。これは「正方形をn番目までつくる場合マッチ棒は何本必要か？」というマッチ棒の規則性問題の回答です。ユーザーは1+3nという回答の説明をしています。次のステップで手順を実行してください。
 
 """${apiUserAnswer}"""
@@ -104,7 +104,7 @@ module.exports = async (req, res) => {
   "buttonId": "<buttonId>"
 }
 `;
-  }else if (buttonId === "saveButton8") {
+  } else if (buttonId === "saveButton8") {
     prompt = `ユーザーは三重引用符で囲んだテキストを提供します。これは「正方形をn番目までつくる場合マッチ棒は何本必要か？」というマッチ棒の規則性問題の回答です。ユーザーは1+3nという回答の説明をしています。次のステップで手順を実行してください。
 
 """${apiUserAnswer}"""
@@ -121,7 +121,7 @@ module.exports = async (req, res) => {
   "buttonId": "<buttonId>"
 }
 `;
-  }else if (buttonId === "saveButton10") {
+  } else if (buttonId === "saveButton10") {
     prompt = `ユーザーは三重引用符で囲んだテキストを提供します。これは「正方形をn番目までつくる場合マッチ棒は何本必要か？」というマッチ棒の規則性問題の回答です。ユーザーは1+3nという回答の説明をしています。次のステップで手順を実行してください。
 
 """${apiUserAnswer}"""
@@ -138,7 +138,7 @@ module.exports = async (req, res) => {
   "buttonId": "<buttonId>"
 }
 `;
-  }else if (buttonId === "saveButton11") {
+  } else if (buttonId === "saveButton11") {
     prompt = `ユーザーは三重引用符で囲んだテキストを提供します。これはユーザーが表から見つけた規則性です。次のステップで手順を実行してください。
 
     """${apiUserAnswer}""""
@@ -154,7 +154,7 @@ module.exports = async (req, res) => {
       "buttonId": "<buttonId>"
     }
     `;
-  }else if (buttonId === "saveButton12") {
+  } else if (buttonId === "saveButton12") {
     prompt = `ユーザーは三重引用符で囲んだテキストを提供します。これは三つの式を計算した結果、ユーザーが気づいたことです。次のステップで手順を実行してください。
 
     """${apiUserAnswer}"""
@@ -172,7 +172,7 @@ module.exports = async (req, res) => {
       "buttonId": "<buttonId>"
     }
     `;
-  }else if (buttonId === "saveButton13") {
+  } else if (buttonId === "saveButton13") {
     prompt = `ユーザーは三重引用符で囲んだテキストを提供します。これはユーザーが表から見つけた規則性です。次のステップで手順を実行してください。
 
     """${apiUserAnswer}""""
@@ -205,7 +205,24 @@ module.exports = async (req, res) => {
       "buttonId": "<buttonId>"
     }
     `;
-  } else {
+  }else if (buttonId === "saveButton16") {
+    prompt = `ユーザーは三重引用符で囲んだテキストを提供します。これは「正方形をn番目までつくる場合マッチ棒は何本必要か？」というマッチ棒の規則性問題の回答です。ユーザーは4+3(n-1)という回答の説明をしています。次のステップで手順を実行してください。
+
+    """${apiUserAnswer}"""
+    
+    ステップ 1: ユーザーの回答「${apiUserAnswer}」を解析し、4+3(n-1)になる理由を適切に説明しているかを判断してください。
+    ステップ 2: ステップ 1の判断に基づき、次のいずれかを出力してください。
+    - ユーザーの回答が正解の場合: {"result": "正解", "reason": "<理由の簡潔な要約>"}
+    - ユーザーの回答が不正解の場合: {"result": "不正解", "reason": "4+3(n-1)の式になる理由が正確に説明されていません。"}
+    
+    出力形式：
+    {
+      "result": "<正解または不正解>",
+      "reason": "<理由>",
+      "buttonId": "<buttonId>"
+    }
+    `;
+  }  else {
     res.send("プロンプトが指定されていません");
   }
 
