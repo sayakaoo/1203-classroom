@@ -351,8 +351,8 @@ window.addEventListener('load', function () {
       "<closeCanvas><colseapiform><closehint>ありがとうございます。正しい図が書けています。一緒に確認すると、4本のマッチ棒を赤で囲んだ部分がn個あり、重なって数えている青で囲んだ部分がn-1個あるので、4n-(n-1)という式になりますね。<fadeOut_item 5><skip 76>",
     ],
     79: [
-      "(4+3(n-1))ありがとうございます。",
-      "どのように4+3(n-1)という式を立てたか説明してください。<showCanvaswithapi><apiform 1><hint 1>"
+      "(表)(4+3(n-1))ありがとうございます。",
+      "どのように4+3(n-1)という式を立てたか説明してください。<showtable><apiform 16><hint 1>"
     ],
 
 
@@ -465,6 +465,10 @@ window.addEventListener('load', function () {
             console.log('フォーム表示: ' + targetClass); // 確認用のログ
           }, 1500); // 1500ms = 2秒
           break;
+          case 'showtable':
+            $('.fullcanvas-alt').addClass('visible');   
+            break;
+          
         case 'showCanvas':
           $('.saveButton').addClass('visible');    // 作成したクラス名を利用
           buttonId = 'saveButton' + tagget_str[1];
@@ -605,20 +609,13 @@ window.addEventListener('load', function () {
 
   // 初期状態で画像を表示する
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (rootIdch !== 2) {  // rootIdch が 2 でない場合のみ描画
     const chara = new Image();
     chara.src = "./img/item3.png";  // 画像のURLを指定
     chara.onload = () => {
       const scaleWidth = 800;  // 画像の幅を800pxに設定
       const scaleHeight = 800; // 画像の高さを800pxに設定
       ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
-    };
-  }else {
-    // 画像を消す
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const chara = new Image();
-    chara.src = ""; // 画像の参照を削除
-}
+    }
 
   // クリアボタンの処理
   clearBtn.addEventListener('click', () => {
@@ -681,6 +678,67 @@ window.addEventListener('load', function () {
     };
   });
 
+  //表用
+  const sketchCanvas = document.querySelector('#sketch-area');
+  const sketchCtx = sketchCanvas.getContext('2d');
+  const colorSelector = document.querySelector('#color-selector');
+
+  let startX;
+  let startY;
+  let isDrawing = false;
+  let currentColor = 'black';
+
+  sketchCtx.clearRect(0, 0, sketchCanvas.width, sketchCanvas.height);
+
+  document.getElementById('erase-button').addEventListener('click', () => {
+    sketchCtx.clearRect(0, 0, sketchCanvas.width, sketchCanvas.height);
+    const bgImage = new Image();
+    bgImage.src = "./img/item3.png";
+    bgImage.onload = () => {
+      sketchCtx.drawImage(bgImage, 0, 0, 800, 800);
+    };
+  });
+
+  colorSelector.addEventListener('change', (e) => {
+    currentColor = e.target.value;
+    sketchCtx.strokeStyle = currentColor;
+  });
+
+  function beginSketch(x, y) {
+    isDrawing = true;
+    startX = x;
+    startY = y;
+  }
+
+  function sketch(x, y) {
+    if (!isDrawing) return;
+    sketchCtx.beginPath();
+    sketchCtx.moveTo(startX, startY);
+    sketchCtx.lineTo(x, y);
+    sketchCtx.lineWidth = 5;
+    sketchCtx.stroke();
+    startX = x;
+    startY = y;
+  }
+
+  sketchCanvas.addEventListener('mousedown', (e) => beginSketch(e.offsetX, e.offsetY));
+  sketchCanvas.addEventListener('mousemove', (e) => sketch(e.offsetX, e.offsetY));
+  window.addEventListener('mouseup', () => isDrawing = false);
+
+  sketchCanvas.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    const rect = sketchCanvas.getBoundingClientRect();
+    beginSketch(touch.clientX - rect.left, touch.clientY - rect.top);
+  });
+
+  sketchCanvas.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    const rect = sketchCanvas.getBoundingClientRect();
+    sketch(touch.clientX - rect.left, touch.clientY - rect.top);
+    e.preventDefault();
+  });
+
+  window.addEventListener('touchend', () => isDrawing = false);
 
 
 
