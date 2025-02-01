@@ -1316,7 +1316,7 @@ window.addEventListener('load', function () {
 
     if (normalize(userAnswer) === '4+3(n-1)' || normalize(userAnswer) === '3(n-1)+4') {
       console.log(`ボタンID ${rootId1 }`);
-      if (rootId1 = "2") {
+      if (rootId1 === "2") {
         input = "<skip 79>";
         split_chars = splitStr(input);
         console.log(split_chars);
