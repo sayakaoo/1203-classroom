@@ -576,6 +576,9 @@ window.addEventListener('load', function () {
         case 'chara':
           document.getElementById('chara' + tagget_str[1]).src = 'img/chara' + tagget_str[2] + '.png';
           charaId = 'saveButton' + tagget_str[2];
+          console.log(`キャラID ${charaId}`);
+          break;
+
           break;
         case 'charaOut':
           document.getElementById('chara' + tagget_str[1]).src = '';
