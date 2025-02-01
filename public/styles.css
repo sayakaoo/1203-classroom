@@ -566,14 +566,15 @@ body {
   
   /* ノート用 */
   .wrappernote {
-    text-align: left; /* .notebuttonを左揃えに */
+    text-align: right; /* .notebuttonを右揃えに */
   }
   
   .notebutton {
     display: flex;
-    justify-content: flex-start; /* ボタンを左揃えにする */
+    justify-content: flex-end; /* ボタンを右揃えにする */
     gap: 10px; /* ボタン間のスペース */
   }
+  
   
   
   canvas.note {
