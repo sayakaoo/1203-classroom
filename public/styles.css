@@ -204,7 +204,8 @@ body{
 
 
 /*これはキャンバス(お絵かき用のCSS)*/
-.wrapper{
+.wrapper,
+.wrapper-alt{
     position: relative;
     width: 100%;
     height: 100%;
@@ -270,7 +271,8 @@ body{
     z-index: 10; /* 大きい値にする */
   }
  
-  .fullcanvas {
+  .fullcanvas,
+  .fullcanvas-alt {
     position: absolute; /* ページ内で位置を指定 */
     top: 950px; /* 上から1500px */
     width: 100%;
