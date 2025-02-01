@@ -565,11 +565,16 @@ body {
   }
   
   /* ノート用 */
-  .notebutton {
-    display: block;
-    margin-right: 0; /* 左に寄せる */
-    margin-left: auto; /* 右は自動で余白を調整 */
+  .wrappernote {
+    text-align: left; /* .notebuttonを左揃えに */
   }
+  
+  .notebutton {
+    display: flex;
+    justify-content: flex-start; /* ボタンを左揃えにする */
+    gap: 10px; /* ボタン間のスペース */
+  }
+  
   
   canvas.note {
     border: 1px solid #ddd; /* キャンバスを見やすくするための枠線 */
