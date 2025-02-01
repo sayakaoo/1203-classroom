@@ -561,7 +561,7 @@ window.addEventListener('load', function () {
         // window.speechSynthesis.speak(msg);
         //新しい読み上げ関数
         let textDate = text[scene_cnt];
-        var textRead = textDate[line_cnt];
+        let textRead = textDate ? textDate[line_cnt] || '' : ''; // undefinedの場合は空文字にする
         textRead = textRead.replace(/<[^>]*>/g, ''); // <...> の形式のテキストを削除
         //関数呼び出し、したのほうにあるよ
         synthesizeSpeech(textRead);
@@ -822,7 +822,7 @@ window.addEventListener('load', function () {
   });
 
   window.addEventListener('touchend', () => mousePressed = false);
-
+  console.log(`ボタンID ${buttonId}`);
   // 前ページに戻る処理
   // 前のページに戻る処理
   document.getElementById('prevpage-button').addEventListener('click', () => {
@@ -922,7 +922,7 @@ window.addEventListener('load', function () {
 
   // キャンバスの内容を予測
   async function predictCanvas() {
-    console.log(`ボタンID ${buttonId}`);
+    
     const canvas = document.getElementById("drawing-area");
     canvas.willReadFrequently = true; // パフォーマンス向上のため
     console.log("画像予測中 ");
