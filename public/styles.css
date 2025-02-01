@@ -246,12 +246,12 @@ body{
     z-index: 20;
   }
 .hints{
-  background: #000;
   width:400px ;
-  height: 400px;
+  height: 200px;
   position: relative;
-  top: -70px;
-  left: 350px;
+  top: -60px;
+  left: 550px;
+  z-index: 80;
 }
 .saveButton{
   font-family: "DotGothic16", sans-serif;
@@ -293,7 +293,6 @@ body{
     left: 0px;
     width: 100%;
     max-width: 400px;
-    margin: 20px ;
     padding: 20px;
     border: 2px solid #3d81a5;
     border-radius: 10px;
@@ -308,7 +307,7 @@ body{
  
   .fullcanvas {
     position: absolute; /* ページ内で位置を指定 */
-    top: 1100px; /* 上から1500px */
+    top: 950px; /* 上から1500px */
     width: 100%;
     max-width: 400px; /* 横幅制限 */
     margin: 0 auto; /* 中央揃え */
