@@ -492,6 +492,7 @@ window.addEventListener('load', function () {
           $('.submit-button').addClass('visible');
           console.log('フォーム表示');
           buttonId = 'saveButton' + tagget_str[1];
+          console.log(`ボタンID ${buttonId}`);
           break;
         case 'colseapiform':
           $('.formapi').removeClass('visible');
