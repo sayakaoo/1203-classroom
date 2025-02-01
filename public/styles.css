@@ -558,12 +558,19 @@ body {
     border-radius: 5px;
     font-size: 16px;
   }
+
   
   #QTableSubmitButton:hover {
     background-color: #45a049;
   }
   
   /* ノート用 */
+  .notebutton {
+    display: block;
+    margin-left: 0; /* 左に寄せる */
+    margin-right: auto; /* 右は自動で余白を調整 */
+  }
+  
   canvas.note {
     border: 1px solid #ddd; /* キャンバスを見やすくするための枠線 */
     background-color: white; /* 背景色を白に設定 */
