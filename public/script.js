@@ -38,8 +38,8 @@ window.addEventListener('load', function () {
     ],
     3: [
       "<itemOut 1>では正方形の数を増やしてみましょう",
-      "正方形が50個、100個のとき、マッチ棒はそれぞれ何本必要でしょうか？",
-      "<charaOut 5><chara 5 2>描くのにも時間かかっちゃうよ、、",
+      "正方形が50個、100個のとき、マッチ棒はそれぞれ何本必要でしょうか？<charav 2>",
+      "<charaOut 5><chara 5 2>描くのにも時間かかっちゃうよ、、<charav 1>",
       "<charaOut 5><chara 5 1>正方形の数が多い時数えるのは大変ですね<skip 6>",
     ],
     //"どのようにしたら考えられるでしょうか<form 2>",3の最後にこの一文あると４．５へ
@@ -84,19 +84,19 @@ window.addEventListener('load', function () {
       "では次にAさんどのような式を立てたか教えてください<skip 20>",
     ],
     46: [
-      "ではAさんどのような式を立てたか教えてください<skip 20>",
+      "ではAさんどのような式を立てたか教えてください<skip 20><charav 3>",
     ],
 
     20: [
-      "<charaOut 5><chara 5 3>1+3nという式をたてました。",
+      "<charaOut 5><chara 5 3>1+3nという式をたてました。<charav 1>",
       "<charaOut 5><chara 5 1>ありがとうございます。",
       "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas 0><saveButton>"
     ],
     21: [
       "<saveButtonremove>みなさん考えられましたか？",
-      "ではAさんどのように考えたか教えてください。",
+      "ではAさんどのように考えたか教えてください。<charav 3>",
       "<charaOut 5><chara 5 3><item 4>図のように考えました．",
-      "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
+      "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました<charav 1>",
       "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の解答と見比べてみましょう。",
       "<root>"
     ],
@@ -154,7 +154,7 @@ window.addEventListener('load', function () {
       "正方形が3個のときマッチ棒は10本だったからこれを当てはめてみましょう<skip 38>",
     ],
     37: [
-      "<colseapiform><charaOut 5><chara 5 3>最初に正方形が3個のときを考えたからそれを式に当てはめてみたらどうかな？",
+      "<colseapiform><charaOut 5><chara 5 3>最初に正方形が3個のときを考えたからそれを式に当てはめてみたらどうかな？<charav 1>",
       "<charaOut 5><chara 5 1>いいですね。正方形が3個のときマッチ棒は10本だったからこれを当てはめてみましょう<skip 38>",
     ],
     38: [
@@ -185,15 +185,15 @@ window.addEventListener('load', function () {
     ],
 
     48: [
-      "<charaOut 5><chara 5 3>4+3(n-1)という式をたてました。",
+      "<charaOut 5><chara 5 3>4+3(n-1)という式をたてました。<charav 1>",
       "<charaOut 5><chara 5 1>ありがとうございます。",
       "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas 6>"
     ],
     49: [
       "みなさん考えられましたか？",
-      "ではAさんどのように考えたか教えてください。",
+      "ではAさんどのように考えたか教えてください。<charav 3>",
       "<charaOut 5><chara 5 3><item 5>図のように考えました．",
-      "赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn-1個だけあるから4+3(n-1)という式になりました",
+      "赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn-1個だけあるから4+3(n-1)という式になりました<charav 1>",
       "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の解答と見比べてみましょう。",
       "<root>"
     ],
@@ -230,9 +230,9 @@ window.addEventListener('load', function () {
     ],
     //30のグループワーク後
     57: [
-      "グループで結論を出すことが出来ましたか？Cさん出た答えを説明してください",
+      "グループで結論を出すことが出来ましたか？Cさん出た答えを説明してください<charav 2>",
       "<charaOut 5><chara 5 2><item 46>図だとこのように示すことが出来て、4nという式だと青で囲んでいる間のマッチ棒まで数えてしまってました。",
-      "なので、この重複するマッチ棒の数を引いて、4n-(n-1)が正しい式です。",
+      "なので、この重複するマッチ棒の数を引いて、4n-(n-1)が正しい式です。<charav 1>",
       "<charaOut 5><chara 5 1><itemOut>ありがとうございます。様々な方法で求めることができましたね。",
       "<item 44>今まで求めた式を計算してみましょう。計算して気付いたことを教えてください<apiform 11>",
     ],
@@ -575,11 +575,11 @@ window.addEventListener('load', function () {
           break;
         case 'chara':
           document.getElementById('chara' + tagget_str[1]).src = 'img/chara' + tagget_str[2] + '.png';
-          charaId = tagget_str[2];
-          console.log(`キャラID ${charaId}`);
           break;
-
-          break;
+          case 'charav':
+            charaId = tagget_str[1];
+            console.log(`キャラID ${charaId}`);
+            break; 
         case 'charaOut':
           document.getElementById('chara' + tagget_str[1]).src = '';
           break;
