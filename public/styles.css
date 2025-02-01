@@ -475,6 +475,7 @@ body {
   
   .submit-button {
     cursor: pointer;
+    z-index: 40;
   }
   
   #QTableSubmitButton {
