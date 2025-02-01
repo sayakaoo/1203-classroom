@@ -492,6 +492,7 @@ window.addEventListener('load', function () {
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
           rootIdch=rootId1;
+          console.log(`ボタンID ${rootIdch}`);
           break;
         case 'apiform':
           $('.formapi').addClass('visible');
