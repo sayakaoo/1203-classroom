@@ -194,11 +194,13 @@ window.addEventListener('load', function () {
       "<charaOut 5><chara 5 3><item 5>図のように考えました．",
       "赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn-1個だけあるから4+3(n-1)という式になりました",
       "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の回答と見比べてみましょう。",
-      "<rootId>"
+      "<root>"
     ],
     50: [
       "<closeCanvas 6>では次に(学習者)さん1+3nという式を立てていたと思います。",
-      "(学習者)さんどのように1+3nという式を立てたか説明してください。<showCanvaswithapi><apiform 7><hint 1>"
+      "<roottable>",
+    ],
+    82: ["(学習者)さんどのように1+3nという式を立てたか説明してください。<showCanvaswithapi><apiform 7><hint 1>"
     ],
     51: [
       "<closeCanvas><closehint><colseapiform>ありがとうございます。",
@@ -360,12 +362,25 @@ window.addEventListener('load', function () {
       "<skip 30>",
     ],
     81: [
-      "<closetable><colseapiform><closehint>ありがとうございます。",
-      "<skip 30>",
+      "<closetable><colseapiform><closehint>説明ありがとうございます。",
+      "表を用いた分かりやすい説明でした<skip 30>",
       "",
       ""
     ],
-
+    //82つかう
+    83: ["(表)どのように1+3nという式を立てたか説明してください。<showtable><apiform 17>"
+    ],
+    84: [
+      "<closetable><colseapiform><closehint>ありがとうございます。一緒に確認しましょう。",
+      "<item 39>このように縦に見ると、マッチ棒の本数は正方形の数を3倍して1足した数になっていることがわかるので、1+3nとなります。",
+      "<skip 30>",
+    ],
+    85: [
+      "<closetable><colseapiform><closehint>説明ありがとうございます。",
+      "表を用いた分かりやすい説明でした<skip 30>",
+      "",
+      ""
+    ],
 
 
     //経由用
@@ -419,6 +434,7 @@ window.addEventListener('load', function () {
           stop_flg = true;
           break;
         case 'root':
+        
           switch (rootId) {
             case '0':
               input = "<skip 44>";
@@ -444,6 +460,22 @@ window.addEventListener('load', function () {
           main();
           mess_box.click();
           break;
+          case 'roottable':
+            switch (rootId1) {
+              case '1':
+                input = "<skip 82>";
+                split_chars = splitStr(input);
+                break;
+              case '2':
+                input = "<skip 83>";
+                split_chars = splitStr(input);
+                break;
+             
+            }
+            main();
+            mess_box.click();
+            break;
+          
         case 'root3':
           rootId = "3";
           break;
@@ -480,10 +512,10 @@ window.addEventListener('load', function () {
           $('.fullcanvas-alt').addClass('visible');
           console.log("表表示");
           break;
-          case 'closetable':
-            $('.fullcanvas-alt').removeClass('visible');
-            console.log("表表示");
-            break;
+        case 'closetable':
+          $('.fullcanvas-alt').removeClass('visible');
+          console.log("表表示");
+          break;
         case 'showCanvas':
           $('.saveButton').addClass('visible');    // 作成したクラス名を利用
           buttonId = 'saveButton' + tagget_str[1];
@@ -1315,7 +1347,7 @@ window.addEventListener('load', function () {
     $('.formQ5').removeClass('visible');
 
     if (normalize(userAnswer) === '4+3(n-1)' || normalize(userAnswer) === '3(n-1)+4') {
-      console.log(`ボタンID ${rootId1 }`);
+      console.log(`ボタンID ${rootId1}`);
       if (rootId1 === "2") {
         input = "<skip 79>";
         split_chars = splitStr(input);
@@ -1828,6 +1860,19 @@ window.addEventListener('load', function () {
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
       }
+    } else if (buttonId === 'saveButton16') {
+      if (textResponse.includes("不正解")) {
+
+        input = "<skip 84>";
+        split_chars = splitStr(input);
+      } else if (textResponse.includes("正解")) {
+
+        input = "<skip 85>";
+        split_chars = splitStr(input);
+
+      } else {
+        console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
+      }
     } else {
       console.log("未知のボタンID");
     }
@@ -2025,11 +2070,11 @@ window.addEventListener('load', function () {
       if (this.id === "explain-table") {
         console.log("表で説明するボタンが押された");
         rootId1 = "2";
-        console.log(`ボタンID ${rootId1 }`);
+        console.log(`ボタンID ${rootId1}`);
       } else if (this.id === "explain-image") {
         console.log("図で説明するボタンが押された");
         rootId1 = "1";
-        console.log(`ボタンID ${rootId1 }`);
+        console.log(`ボタンID ${rootId1}`);
       }
     });
   });
