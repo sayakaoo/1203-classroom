@@ -1960,51 +1960,71 @@ window.addEventListener('load', function () {
   });
 
 
-  //chat用
-  const chatInput = document.getElementById("userInput");
-  const sendButton = document.getElementById("sendButton");
-  const chatOutput = document.getElementById("chatWindow");
+ // chat用
+const chatInput = document.getElementById("userInput");
+const sendButton = document.getElementById("sendButton");
+const chatOutput = document.getElementById("chatWindow");
 
-  sendButton.addEventListener("click", async (e) => {
-    e.preventDefault();
+sendButton.addEventListener("click", async (e) => {
+  e.preventDefault();
 
-    const userMessage = chatInput.value;
-    chatOutput.innerHTML += `<div class="message student"><strong>あなた：</strong> ${userMessage}</div>`;
-    chatInput.value = "";
+  const userMessage = chatInput.value;
+  chatOutput.innerHTML += `<div class="message student"><strong>あなた：</strong> ${userMessage}</div>`;
+  chatInput.value = "";
 
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage }),
-      });
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userMessage }),
+    });
 
-      if (!response.ok) throw new Error("サーバーエラー");
+    if (!response.ok) throw new Error("サーバーエラー");
 
-      const data = await response.json();
-      chatOutput.innerHTML += `<div class="message assistant"><strong>Aさん：</strong> ${data.response}</div>`;
-    } catch (error) {
-      chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
+    const data = await response.json();
+    chatOutput.innerHTML += `<div class="message assistant"><strong>Aさん：</strong> ${data.response}</div>`;
+
+    // 音声合成で返答を読み上げる
+    await synthesizeSpeech(data.response); // 音声合成を呼び出す
+  } catch (error) {
+    chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
+  }
+});
+
+// 音声合成用の関数
+async function synthesizeSpeech(text) {
+  const ENABLE_API = true; // APIを有効にする場合はtrue
+
+  if (!ENABLE_API) {
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/textspeech', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
     }
-    //音声合成
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage }),
-      });
-  
-      if (!response.ok) throw new Error("サーバーエラー");
-  
-      const data = await response.json();
-      chatOutput.innerHTML += `<div class="message assistant"><strong>Aさん：</strong> ${data.response}</div>`;
-  
-      // 音声合成で返答を読み上げる
-      await synthesizeSpeech(data.response); // 音声合成を呼び出す
-    } catch (error) {
-      chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
-    }
-  });
+
+    const audioBuffer = await response.arrayBuffer();
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const buffer = await audioContext.decodeAudioData(audioBuffer);
+
+    const source = audioContext.createBufferSource();
+    source.buffer = buffer;
+    source.connect(audioContext.destination);
+    source.start();
+  } catch (error) {
+    console.error("音声合成エラー:", error);
+  }
+}
+
   //いろいろなところに飛べるボタン、ほんとうはいらない
   const skip30Button = document.querySelector('.skip30Button');
   skip30Button.addEventListener('click', (event) => {
