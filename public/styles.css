@@ -245,6 +245,14 @@ body{
     height: 100%;
     z-index: 20;
   }
+.hints{
+  background: #000;
+  width:400px ;
+  height: 400px;
+  position: relative;
+  top: -70px;
+  left: 350px;
+}
 .saveButton{
   font-family: "DotGothic16", sans-serif;
     font-size: 32px; /* 数字を大きめに */
@@ -256,7 +264,7 @@ body{
     text-align: center;
     width: 250px;
     margin: 20px auto;
-    position: absolute;
+    position: relative;
     top: -250px;
     left:60px;
     z-index: 400;
@@ -282,7 +290,7 @@ body{
 
   .hint{
     top: 0px;
-    left: 300px;
+    left: 0px;
     width: 100%;
     max-width: 400px;
     margin: 20px ;
@@ -294,7 +302,7 @@ body{
     font-family: "DotGothic16", sans-serif; /* ドットフォントを使用 */
     font-size: 14px;
     color: #367293; /* 文字色を指定 */
-    position: relative; /* または absolute */
+    position: absolute; /* または absolute */
     z-index: 10; /* 大きい値にする */
   }
  
