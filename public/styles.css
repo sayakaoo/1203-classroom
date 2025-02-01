@@ -253,7 +253,7 @@ body{
   }
 
   .hint{
-    top: 0px;
+    top: 30px;
     left: 0px;
     width: 100%;
     max-width: 400px;
@@ -481,9 +481,21 @@ body {
   }
   #apistart-voice1{
     position: absolute;
+  
     cursor: pointer;
     z-index: 80;
   }
+  .submit-button, 
+  #apistart-voice1 {
+    position: relative; /* 位置指定を相対的に変更 */
+    display: inline-block; /* 横並びにする */
+    cursor: pointer;
+    z-index: 80;
+  }
+  #apistart-voice1 {
+    margin-right: 10px; /* ボタン間にスペースを確保 */
+  }
+  
 
   #QTableSubmitButton {
     margin-top: 20px;
@@ -588,4 +600,8 @@ transform: translateX(-50%);
 
   .snsbtn:hover {
     background-color: #c5d4e0;
+  }
+  #answer-form{
+    height: 150px;
+    width: 1000px;
   }
