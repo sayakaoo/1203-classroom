@@ -466,7 +466,8 @@ window.addEventListener('load', function () {
           }, 1500); // 1500ms = 2秒
           break;
           case 'showtable':
-            $('.fullcanvas-alt').addClass('visible');   
+            $('.fullcanvas-alt').addClass('visible'); 
+            console.log("表表示");  
             break;
           
         case 'showCanvas':
