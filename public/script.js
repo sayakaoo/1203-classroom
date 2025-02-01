@@ -378,8 +378,6 @@ window.addEventListener('load', function () {
     85: [
       "<closetable><colseapiform><closehint>説明ありがとうございます。",
       "表を用いた分かりやすい説明でした<skip 30>",
-      "",
-      ""
     ],
 
 
@@ -1023,6 +1021,30 @@ window.addEventListener('load', function () {
     });
   });
 
+
+//ノート保存用
+  document.getElementById('notesavebutton').addEventListener('click', () => {
+    const canvas1 = document.getElementById('notedrawing-area-1');
+    const canvas2 = document.getElementById('notedrawing-area-2');
+    const canvas3 = document.getElementById('notedrawing-area-3');
+    const combinedCanvas = document.createElement('canvas');
+    const combinedCtx = combinedCanvas.getContext('2d');
+
+    combinedCanvas.width = canvas1.width;
+    combinedCanvas.height = canvas1.height * 3;
+
+    // 3つのキャンバスを1つに合成
+    combinedCtx.drawImage(canvas1, 0, 0);
+    combinedCtx.drawImage(canvas2, 0, canvas1.height);
+    combinedCtx.drawImage(canvas3, 0, canvas1.height * 2);
+
+    // 画像として保存
+    const dataURL = combinedCanvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'combined_notebook.png';
+    link.click();
+  });
 
 
   // Teachable MachineでエクスポートしたモデルのURL
