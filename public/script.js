@@ -922,6 +922,7 @@ window.addEventListener('load', function () {
 
   // キャンバスの内容を予測
   async function predictCanvas() {
+    console.log(`ボタンID ${buttonId}`);
     const canvas = document.getElementById("drawing-area");
     canvas.willReadFrequently = true; // パフォーマンス向上のため
     console.log("画像予測中 ");
