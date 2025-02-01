@@ -2147,7 +2147,12 @@ async function synthesizeSpeech(text) {
     });
   });
 
+  const button = document.getElementById("toggleButton");
+  const imageContainer = document.getElementById("imageContainer");
 
+  button.addEventListener("click", () => {
+    imageContainer.classList.toggle("show"); // クラスを切り替えてスライド
+  });
 
 
 })

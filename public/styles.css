@@ -686,4 +686,43 @@ transform: translateX(-50%);
   .roopbtn button {
     margin: 5px; /* ボタン間の間隔 */
   }
-  
+
+  /* ボタンのスタイル */
+  #toggleButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+
+  #toggleButton:hover {
+    background-color: #0056b3;
+  }
+
+  /* 画像コンテナ */
+  #imageContainer {
+    position: fixed;
+    top: 50px;
+    right: -300px; /* 最初は画面外に隠しておく */
+    width: 250px;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    transition: right 0.3s ease-in-out; /* ぴょこっと動くアニメーション */
+  }
+
+  #imageContainer img {
+    width: 100%;
+  }
+
+  /* 表示時のスタイル */
+  #imageContainer.show {
+    right: 10px; /* ぴょこっと表示 */
+  }
