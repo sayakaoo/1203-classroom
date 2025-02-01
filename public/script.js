@@ -1986,6 +1986,24 @@ window.addEventListener('load', function () {
     } catch (error) {
       chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
     }
+    //音声合成
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage }),
+      });
+  
+      if (!response.ok) throw new Error("サーバーエラー");
+  
+      const data = await response.json();
+      chatOutput.innerHTML += `<div class="message assistant"><strong>Aさん：</strong> ${data.response}</div>`;
+  
+      // 音声合成で返答を読み上げる
+      await synthesizeSpeech(data.response); // 音声合成を呼び出す
+    } catch (error) {
+      chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
+    }
   });
   //いろいろなところに飛べるボタン、ほんとうはいらない
   const skip30Button = document.querySelector('.skip30Button');
