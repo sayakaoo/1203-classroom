@@ -229,7 +229,7 @@ body{
     width: 250px;
     margin: 20px auto;
     position: relative;
-    top: -250px;
+    top: -100px;
     left:60px;
     z-index: 400;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -308,7 +308,7 @@ form.form {
     position: absolute;
     top: 540px;
     width: 1300px;
-    height: 200px;
+    height: auto;
     left: 0px;
     right: 0px;
     margin: 20px auto;
@@ -369,6 +369,37 @@ form button {
 
 form button:hover {
     background-color: #367293;
+}
+
+/* 選択肢ボタン */
+.option-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* 選択肢ボタンの通常状態 */
+.option-buttons button {
+  flex: 1;
+  text-align: center;
+  background-color: #3d81a5;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* ホバー時 */
+.option-buttons button:hover {
+  background-color: #367293;
+}
+
+/* 選択されたボタン（アクティブ） */
+.option-buttons button.active {
+  background-color: #1f1c70;
 }
 
 form button#start-voice1 {

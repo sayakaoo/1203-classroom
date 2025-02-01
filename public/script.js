@@ -14,6 +14,8 @@ window.addEventListener('load', function () {
   let highestPrediction = "";
   let textResponse = "";
   let buttonId = "";
+  let rootId1 = "0";
+  let rootIdch="";
   let rootId = "0";
   const clearBtn = document.querySelector('#clear-button');
 
@@ -21,7 +23,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 22><chara 5 1>こんにちは",
+      "<skip 7><chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "正方形を3個作るとき、マッチ棒は何本必要でしょうか？<form 1>"
     ],
@@ -98,13 +100,13 @@ window.addEventListener('load', function () {
       "<root>"
     ],
     44: [
-      "<closeCanvas 0>では次に(学習者)さんどのように考えたか式を教えてください。<form 5>"
+      "<closeCanvas 0>では次にどのように考えたか式を教えてください。<form 5>"
     ],
 
     //22編集中
     22: [
       "(4+3(n-1))ありがとうございます。",
-      "(学習者)さんどのように4+3(n-1)という式を立てたか説明してください。<showCanvaswithapi><apiform 1><hint 1>"
+      "どのように4+3(n-1)という式を立てたか説明してください。<showCanvaswithapi><apiform 1><hint 1>"
     ],
     23: [
       "<closeCanvas><colseapiform><closehint>ありがとうございます。赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青で囲ったコの字型の部分がn-1個だけあるので4+3(n-1)という式になりますね。<fadeOut_item 5><skip 30>",
@@ -123,7 +125,7 @@ window.addEventListener('load', function () {
     ],
     31: [
       "ありがとうございます。一緒に考えてみましょう",
-      "<item 5>Aさんの例と同じように考えると、このように考えられそうですね(分かりやすく動画で解説したいな)",
+      "<item 5>Aさんの例と同じように考えると、赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
       "もう一度解答を見直してみましょう",
       "クリックで次の問題に進む",
       "<closeCanvas><closehint><itemOut 5><skip 30>"
@@ -348,7 +350,10 @@ window.addEventListener('load', function () {
     78: [
       "<closeCanvas><colseapiform><closehint>ありがとうございます。正しい図が書けています。一緒に確認すると、4本のマッチ棒を赤で囲んだ部分がn個あり、重なって数えている青で囲んだ部分がn-1個あるので、4n-(n-1)という式になりますね。<fadeOut_item 5><skip 76>",
     ],
-
+    79: [
+      "(4+3(n-1))ありがとうございます。",
+      "どのように4+3(n-1)という式を立てたか説明してください。<showCanvaswithapi><apiform 1><hint 1>"
+    ],
 
 
 
@@ -486,6 +491,7 @@ window.addEventListener('load', function () {
         case 'showCanvaswithapi':
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
+          rootIdch=rootId1;
           break;
         case 'apiform':
           $('.formapi').addClass('visible');
@@ -598,12 +604,14 @@ window.addEventListener('load', function () {
 
   // 初期状態で画像を表示する
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const chara = new Image();
-  chara.src = "./img/item3.png";  // 画像のURLを指定
-  chara.onload = () => {
-    const scaleWidth = 800;  // 画像の幅を200pxに設定
-    const scaleHeight = 800; // 画像の高さを200pxに設定
-    ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
+  if (rootIdch !== 2) {  // rootIdch が 2 でない場合のみ描画
+    const chara = new Image();
+    chara.src = "./img/item3.png";  // 画像のURLを指定
+    chara.onload = () => {
+      const scaleWidth = 800;  // 画像の幅を800pxに設定
+      const scaleHeight = 800; // 画像の高さを800pxに設定
+      ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
+    };
   }
 
   // クリアボタンの処理
@@ -1228,9 +1236,16 @@ window.addEventListener('load', function () {
     $('.formQ5').removeClass('visible');
 
     if (normalize(userAnswer) === '4+3(n-1)' || normalize(userAnswer) === '3(n-1)+4') {
-      input = "<skip 22>";
-      split_chars = splitStr(input);
-      console.log(split_chars);
+      if(rootId1="2"){
+        input = "<skip 79>";
+        split_chars = splitStr(input);
+        console.log(split_chars);
+      }else{
+        input = "<skip 22>";
+        split_chars = splitStr(input);
+        console.log(split_chars);
+      }
+      
     } else if (userAnswer === '4+3n') {
       input = "<skip 25>";
       split_chars = splitStr(input);
@@ -1904,6 +1919,26 @@ window.addEventListener('load', function () {
   }
 
   startButton.addEventListener('click', startTimer);
+
+  const optionButtons = document.querySelectorAll(".option-buttons button");
+
+optionButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+        // 他のボタンの active クラスを外す
+        optionButtons.forEach((btn) => btn.classList.remove("active"));
+
+        // クリックされたボタンに active クラスを追加
+        this.classList.add("active");
+        if (this.id === "explain-table") {
+          console.log("表で説明するボタンが押された");
+          rootId1="2";
+      } else if (this.id === "explain-image") {
+          console.log("図で説明するボタンが押された");
+          rootId1="1";
+      }
+    });
+});
+
 
 
 
