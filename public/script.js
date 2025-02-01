@@ -613,7 +613,10 @@ window.addEventListener('load', function () {
       const scaleHeight = 800; // 画像の高さを800pxに設定
       ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
     };
-  }
+  }else {
+    // 画像を消す
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
 
   // クリアボタンの処理
   clearBtn.addEventListener('click', () => {
