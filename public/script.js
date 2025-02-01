@@ -21,7 +21,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 20><chara 5 1>こんにちは",
+      "<skip 22><chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "正方形を3個作るとき、マッチ棒は何本必要でしょうか？<form 1>"
     ],
@@ -90,7 +90,7 @@ window.addEventListener('load', function () {
       "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas 0><saveButton>"
     ],
     21: [
-      "みなさん考えられましたか？",
+      "<saveButtonremove>みなさん考えられましたか？",
       "ではAさんどのように考えたか教えてください。",
       "<charaOut 5><chara 5 3><item 4>図のように考えました．",
       "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
@@ -925,22 +925,16 @@ window.addEventListener('load', function () {
     canvas.willReadFrequently = true; // パフォーマンス向上のため
     console.log("画像予測中 ");
 
-    // **1. リサイズ用のオフスクリーンキャンバスを作る**
+    // 1. リサイズ用のオフスクリーンキャンバスを作る
     const resizedCanvas = document.createElement("canvas");
     resizedCanvas.width = 224;
     resizedCanvas.height = 224;
     const resizedCtx = resizedCanvas.getContext("2d");
 
-    // **2. 224x224 にリサイズして描画**
+    // 2. 224x224 にリサイズして描画
     resizedCtx.drawImage(canvas, 0, 0, 224, 224);
 
-    // **3. リサイズ後の画像を確認するために `<img>` にセット**
-    const previewImage = document.createElement("img");
-    previewImage.src = resizedCanvas.toDataURL();
-    previewImage.style.border = "1px solid red"; // 見やすくする
-    document.body.appendChild(previewImage); // ページに追加して確認
-
-    // **4. そのリサイズ画像をモデルに渡す**
+    // 4. そのリサイズ画像をモデルに渡す
     const imageElement = new Image();
     imageElement.src = resizedCanvas.toDataURL();
     imageElement.onload = () => predictImage(imageElement);
@@ -1231,7 +1225,7 @@ window.addEventListener('load', function () {
     const userAnswer = document.querySelector('#userAnswer5').value; // ユーザーの回答を取得
     $('.formQ5').removeClass('visible');
 
-    if (userAnswer === '4+3(n-1)') {
+    if (normalize(userAnswer) === '4+3(n-1)' || normalize(userAnswer) === '3(n-1)+4') {
       input = "<skip 22>";
       split_chars = splitStr(input);
       console.log(split_chars);
