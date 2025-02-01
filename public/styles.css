@@ -130,42 +130,6 @@ body{
     line-height: 1.2; /* ドット文字らしい行間を調整 */
 
 }
-.selectBox{
-    position: absolute;
-    width: 330px;
-    height: auto;
-    top: 15px;
-    right: 15px;
-    z-index: 4;
-    background-color: #fff;
-    display: none;
-}
-.select{
-    position: absolute;
-    width: 300px;
-    height: 60px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    background-color: #fff;
-    border: solid 5px #000;
-    box-shadow:0px 0px 4px 4px rgba(0,0,0,.5);
-}
-#select1{
-    top: 40px;
-}
-#select2{
-    top: 165px;
-}
-#select3{
-    top: 290px;
-}
-.selectText{
-    margin: 15px auto;
-    text-align: center;
-    color: #000;
-    font-size: 1.3rem;
-}
 
 /*1204編集中*/
 .saveButton,
@@ -507,6 +471,10 @@ body {
   
   button:hover {
     background-color: #e0e0e0;
+  }
+  
+  .submit-button {
+    cursor: pointer;
   }
   
   #QTableSubmitButton {
