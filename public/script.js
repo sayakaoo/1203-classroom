@@ -2024,9 +2024,11 @@ window.addEventListener('load', function () {
       if (this.id === "explain-table") {
         console.log("表で説明するボタンが押された");
         rootId1 = "2";
+        console.log(`ボタンID ${rootId1 }`);
       } else if (this.id === "explain-image") {
         console.log("図で説明するボタンが押された");
         rootId1 = "1";
+        console.log(`ボタンID ${rootId1 }`);
       }
     });
   });
