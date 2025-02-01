@@ -706,23 +706,24 @@ transform: translateX(-50%);
   }
 
   /* 画像コンテナ */
-  #imageContainer {
-    position: fixed;
-    top: 50px;
-    right: -300px; /* 最初は画面外に隠しておく */
-    width: 250px;
-    background: white;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    padding: 10px;
-    transition: right 0.3s ease-in-out; /* ぴょこっと動くアニメーション */
-  }
+#imageContainer {
+  position: fixed;
+  top: 50px;
+  right: -1000px; /* 最初は画面外 */
+  width: 1000px; /* 1000pxに拡大 */
+  background: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+  transition: right 0.3s ease-in-out;
+}
 
-  #imageContainer img {
-    width: 100%;
-  }
+#imageContainer img {
+  width: 100%; /* 画像をコンテナの幅いっぱいに */
+  height: auto; /* アスペクト比を維持 */
+}
 
-  /* 表示時のスタイル */
-  #imageContainer.show {
-    right: 10px; /* ぴょこっと表示 */
-  }
+/* 表示時 */
+#imageContainer.show {
+  right: 10px; /* ぴょこっと表示 */
+}
