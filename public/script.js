@@ -17,13 +17,14 @@ window.addEventListener('load', function () {
   let rootId1 = "0";
   let rootIdch = "";
   let rootId = "0";
+  let charaId = "0";
   const clearBtn = document.querySelector('#clear-button');
 
   const text = {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 71><chara 5 1>こんにちは",
+      "<skip 3><chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "正方形を3個作るとき、マッチ棒は何本必要でしょうか？<form 1>"
     ],
@@ -96,7 +97,7 @@ window.addEventListener('load', function () {
       "ではAさんどのように考えたか教えてください。",
       "<charaOut 5><chara 5 3><item 4>図のように考えました．",
       "赤で囲んだ部分に1本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn個だけあるから1+3nという式になりました",
-      "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の回答と見比べてみましょう。",
+      "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の解答と見比べてみましょう。",
       "<root>"
     ],
     44: [
@@ -193,7 +194,7 @@ window.addEventListener('load', function () {
       "ではAさんどのように考えたか教えてください。",
       "<charaOut 5><chara 5 3><item 5>図のように考えました．",
       "赤で囲んだ部分に4本のマッチ棒があって、3本のマッチ棒でできる青のコの字型の部分がn-1個だけあるから4+3(n-1)という式になりました",
-      "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の回答と見比べてみましょう。",
+      "<charaOut 5><itemOut 4><chara 5 1>ありがとうございます。自分の解答と見比べてみましょう。",
       "<root>"
     ],
     50: [
@@ -230,7 +231,7 @@ window.addEventListener('load', function () {
     //30のグループワーク後
     57: [
       "グループで結論を出すことが出来ましたか？Cさん出た答えを説明してください",
-      "<charaOut 5><chara 5 2><item 38>図だとこのように示すことが出来て、4nという式だと間のマッチ棒まで数えてしまってました。",
+      "<charaOut 5><chara 5 2><item 46>図だとこのように示すことが出来て、4nという式だと青で囲んでいる間のマッチ棒まで数えてしまってました。",
       "なので、この重複するマッチ棒の数を引いて、4n-(n-1)が正しい式です。",
       "<charaOut 5><chara 5 1><itemOut>ありがとうございます。様々な方法で求めることができましたね。",
       "<item 44>今まで求めた式を計算してみましょう。計算して気付いたことを教えてください<apiform 11>",
@@ -574,6 +575,7 @@ window.addEventListener('load', function () {
           break;
         case 'chara':
           document.getElementById('chara' + tagget_str[1]).src = 'img/chara' + tagget_str[2] + '.png';
+          charaId = 'saveButton' + tagget_str[2];
           break;
         case 'charaOut':
           document.getElementById('chara' + tagget_str[1]).src = '';
@@ -1213,11 +1215,11 @@ window.addEventListener('load', function () {
 
 
 
-  //Q1の回答の分岐
+  //Q1の解答の分岐
   document.querySelector('#Q1form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
-    const userAnswer = document.querySelector('#userAnswer1').value; // ユーザーの回答を取得
+    const userAnswer = document.querySelector('#userAnswer1').value; // ユーザーの解答を取得
     $('.formQ1').removeClass('visible');
 
     if (toHalfWidth(userAnswer).includes('10')) {
@@ -1235,7 +1237,7 @@ window.addEventListener('load', function () {
     document.querySelector('#userAnswer').value = '';
   });
 
-  //Q2の回答の分岐
+  //Q2の解答の分岐
   document.querySelector('#Q2form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
@@ -1261,11 +1263,11 @@ window.addEventListener('load', function () {
   });
 
 
-  //Q3の回答の分岐
+  //Q3の解答の分岐
   document.querySelector('#Q3form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
-    // ユーザーの回答と文字を取得
+    // ユーザーの解答と文字を取得
     const userAnswer = document.querySelector('#userAnswer3').value.trim();
     userChar = document.querySelector('#userVariable').value.trim();
 
@@ -1281,11 +1283,11 @@ window.addEventListener('load', function () {
     if (/(正方形|せいほうけい|しかく|四角)/i.test(userAnswer)) {
       input = "<skip 6>";
       split_chars = splitStr(input);
-      console.log("正しい回答:", split_chars);
+      console.log("正しい解答:", split_chars);
     } else {
       input = "<skip 5>";
       split_chars = splitStr(input);
-      console.log("間違った回答:", split_chars);
+      console.log("間違った解答:", split_chars);
     }
 
     // 任意の文字を保存・利用
@@ -1300,18 +1302,18 @@ window.addEventListener('load', function () {
     document.querySelector('#userVariable').value = '';
   });
 
-  //Q4の回答の分岐
+  //Q4の解答の分岐
   document.querySelector('#Q4form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
     const form4Answer = document.getElementById('userAnswer4').value;
-    // form5の回答欄にセット
+    // form5の解答欄にセット
     document.getElementById('userAnswer5').value = form4Answer;
 
-    const userAnswer = document.querySelector('#userAnswer4').value; // ユーザーの回答を取得
+    const userAnswer = document.querySelector('#userAnswer4').value; // ユーザーの解答を取得
     $('.formQ4').removeClass('visible');
 
-    //回答鬼分岐！！！！
+    //解答鬼分岐！！！！
     if (normalize(userAnswer) === '3(n-1)+4' || normalize(userAnswer) === '4+3(n-1)') {
       //さきにAさんのパターン
       input = "<skip 46>";
@@ -1364,11 +1366,11 @@ window.addEventListener('load', function () {
       .replace(/N/g, 'n'); // 大文字のNを小文字のnに変換
   }
 
-  //Q5の回答の分岐
+  //Q5の解答の分岐
   document.querySelector('#Q5form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
-    const userAnswer = document.querySelector('#userAnswer5').value; // ユーザーの回答を取得
+    const userAnswer = document.querySelector('#userAnswer5').value; // ユーザーの解答を取得
     $('.formQ5').removeClass('visible');
 
     if (normalize(userAnswer) === '4+3(n-1)' || normalize(userAnswer) === '3(n-1)+4') {
@@ -1397,7 +1399,7 @@ window.addEventListener('load', function () {
     mess_box.click();
     document.querySelector('#userAnswer').value = '';
   });
-  //Q6の回答の分岐
+  //Q6の解答の分岐
   document.getElementById('correctButton').addEventListener('click', () => {
     input = "<skip 40>";
     split_chars = splitStr(input);
@@ -1416,7 +1418,7 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
-  //Q7の回答の分岐
+  //Q7の解答の分岐
   document.getElementById('correctButton7').addEventListener('click', () => {
     input = "<skip 41>";
     split_chars = splitStr(input);
@@ -1435,11 +1437,11 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
-  //Q8の回答の分岐
+  //Q8の解答の分岐
   document.querySelector('#Q8form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
-    const userAnswer = document.querySelector('#userAnswer8').value; // ユーザーの回答を取得
+    const userAnswer = document.querySelector('#userAnswer8').value; // ユーザーの解答を取得
     $('.formQ8').removeClass('visible');
 
     if (normalize(userAnswer) === '3(n-1)+4' || normalize(userAnswer) === '4+3(n-1)') {
@@ -1456,7 +1458,7 @@ window.addEventListener('load', function () {
     document.querySelector('#userAnswer').value = '';
   });
 
-  //Q9の回答の分岐
+  //Q9の解答の分岐
   document.querySelector('#Q9form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
@@ -1468,7 +1470,7 @@ window.addEventListener('load', function () {
     console.log('解答1:', userAnswer1);
     console.log('解答2:', userAnswer2);
 
-    // 例えば、回答に応じて分岐処理を行う
+    // 例えば、解答に応じて分岐処理を行う
     if (userAnswer1 === '1+3n' && userAnswer2 === '1+3n') {
       input = "<skip 58>"; // 例として次の処理をスキップ
       split_chars = splitStr(input);
@@ -1482,12 +1484,12 @@ window.addEventListener('load', function () {
     mess_box.click();
   });
 
-  //Q10の回答の分岐
+  //Q10の解答の分岐
   document.querySelector('#Q10form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
     rootId = "3";
 
-    const userAnswer = document.querySelector('#userAnswer10').value; // ユーザーの回答を取得
+    const userAnswer = document.querySelector('#userAnswer10').value; // ユーザーの解答を取得
     $('.formQ10').removeClass('visible');
 
     if (userAnswer === '1+3×4' || userAnswer === '1+4×3') {
@@ -1504,7 +1506,7 @@ window.addEventListener('load', function () {
     document.querySelector('#userAnswer').value = '';
   });
 
-  //Q11の回答の分岐
+  //Q11の解答の分岐
   document.getElementById('QTableSubmitButton').addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -1560,12 +1562,12 @@ window.addEventListener('load', function () {
     });
   }
 
-  //Q12の回答の分岐
+  //Q12の解答の分岐
   document.querySelector('#Q12form').addEventListener('submit', function (event) {
     event.preventDefault(); // フォームのデフォルト送信を防ぐ
     rootId = "3";
 
-    const userAnswer = document.querySelector('#userAnswer12').value; // ユーザーの回答を取得
+    const userAnswer = document.querySelector('#userAnswer12').value; // ユーザーの解答を取得
     $('.formQ12').removeClass('visible');
     input = "<skip 71>";
     split_chars = splitStr(input);
@@ -1964,7 +1966,7 @@ window.addEventListener('load', function () {
     e.preventDefault();
 
     const userMessage = chatInput.value;
-    chatOutput.innerHTML += `<div class="message student"><strong>（学習者）さん：</strong> ${userMessage}</div>`;
+    chatOutput.innerHTML += `<div class="message student"><strong>あなた：</strong> ${userMessage}</div>`;
     chatInput.value = "";
 
     try {
@@ -2012,7 +2014,7 @@ window.addEventListener('load', function () {
 
 
     // フラグでリクエストの有効・無効を制御
-    const ENABLE_API = false; // APIを無効化する場合は false、有効化する場合は true に変更
+    const ENABLE_API = true; // APIを無効化する場合は false、有効化する場合は true に変更
     if (!ENABLE_API) {
       return;
     }
@@ -2028,7 +2030,7 @@ window.addEventListener('load', function () {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ text, charaId  }),
       });
 
       if (!response.ok) {

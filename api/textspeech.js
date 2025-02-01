@@ -28,17 +28,24 @@ export default async function handler(req, res) {
   try {
     initializeClient();
 
-    const { text } = req.body;
+    const{ text, charaId } = req.body;
 
     if (!text) {
       return res.status(400).json({ error: "Text is required" });
+    }
+    // charaIdに基づいて声を変更
+    let voiceName = 'ja-JP-Neural2-C'; // デフォルト
+    if (charaId === "1") {
+      voiceName = 'ja-JP-Neural2-C'; // charaIdが"1"の場合、別の声を使用
+    } else if (charaId === "2") {
+      voiceName = 'ja-JP-Wavenet-D'; // charaIdが"2"の場合、さらに別の声を使用
     }
 
     const request = {
       input: { text },
       voice: {
         languageCode: 'ja-JP',
-        name: 'ja-JP-Neural2-C',
+        name: voiceName, 
       },
       audioConfig: {
         audioEncoding: 'MP3',
