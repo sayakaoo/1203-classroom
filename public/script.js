@@ -1436,6 +1436,8 @@ window.addEventListener('load', function () {
     if (saveButton) {
       saveButton.click(); // ボタンのクリックイベントを発火
       console.log('画像を提出するボタンをクリックしました');
+      console.log(`ボタンID ${buttonId}`);
+
     } else {
       console.log('画像を提出するボタンが見つかりません');
     }
