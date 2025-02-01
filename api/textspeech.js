@@ -34,11 +34,11 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Text is required" });
     }
     // charaIdに基づいて声を変更
-    let voiceName = 'ja-JP-Neural2-C'; // デフォルト
+    let voiceName ='ja-JP-Wavenet-D';
     if (charaId === "1") {
-      voiceName = 'ja-JP-Neural2-C'; // charaIdが"1"の場合、別の声を使用
+      voiceName = 'ja-JP-Wavenet-D'; // charaIdが"1"の場合、別の声を使用
     } else if (charaId === "2") {
-      voiceName = 'ja-JP-Wavenet-B'; // charaIdが"2"の場合、さらに別の声を使用
+      voiceName = 'ja-JP-Wavenet-C'; // charaIdが"2"の場合、さらに別の声を使用
     }else if (charaId === "3") {
       voiceName = 'ja-JP-Wavenet-A'; // charaIdが"2"の場合、さらに別の声を使用
     }
