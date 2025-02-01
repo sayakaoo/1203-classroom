@@ -21,7 +21,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<chara 5 1>こんにちは",
+      "<skip 7><chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "正方形を3個作るとき、マッチ棒は何本必要でしょうか？<form 1>"
     ],
@@ -460,7 +460,7 @@ window.addEventListener('load', function () {
           }, 1500); // 1500ms = 2秒
           break;
         case 'showCanvas':
-          $('#saveButton').addClass('visible');    // 作成したクラス名を利用
+          $('.saveButton').addClass('visible');    // 作成したクラス名を利用
           buttonId = 'saveButton' + tagget_str[1];
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
