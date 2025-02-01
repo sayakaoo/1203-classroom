@@ -278,6 +278,7 @@ body{
     padding: 20px;
     box-sizing: border-box; /* パディングを含む幅制御 */
     text-align: right; /* 内部のテキストや要素を右揃え */
+    z-index: 40; /* 背景より前に表示 */
 }
 
 .gwform {
@@ -474,10 +475,16 @@ body {
   }
   
   .submit-button {
+    position: absolute;
     cursor: pointer;
-    z-index: 40;
+    z-index: 80;
   }
-  
+  #apistart-voice1{
+    position: absolute;
+    cursor: pointer;
+    z-index: 80;
+  }
+
   #QTableSubmitButton {
     margin-top: 20px;
     display: block;
