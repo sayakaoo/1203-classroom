@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     if (charaId === "1") {
       voiceName = 'ja-JP-Neural2-C'; // charaIdが"1"の場合、別の声を使用
     } else if (charaId === "2") {
-      voiceName = 'ja-JP-Wavenet-D'; // charaIdが"2"の場合、さらに別の声を使用
+      voiceName = 'ja-JP-Wavenet-B'; // charaIdが"2"の場合、さらに別の声を使用
     }else if (charaId === "3") {
       voiceName = 'ja-JP-Wavenet-A'; // charaIdが"2"の場合、さらに別の声を使用
     }
