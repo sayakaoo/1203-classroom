@@ -616,6 +616,8 @@ window.addEventListener('load', function () {
   }else {
     // 画像を消す
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const chara = new Image();
+    chara.src = ""; // 画像の参照を削除
 }
 
   // クリアボタンの処理
