@@ -138,7 +138,8 @@ window.addEventListener('load', function () {
       "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 3><apiform 3>",
     ],
     34: [
-      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にもう一度説明してみましょう<hint 4><apiform 4><showCanvaswithapi>",
+      "<closeCanvas><closehint><colseapiform>先ほどのAさんの説明を参考にしましょう",
+      "もう一度説明してみましょう。<hint 4><apiform 4><showCanvaswithapi>",
     ],
     35: [
       "(4+3n)ありがとうございます。",
