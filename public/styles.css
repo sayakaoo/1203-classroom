@@ -567,8 +567,8 @@ body {
   /* ノート用 */
   .notebutton {
     display: block;
-    margin-left: 0; /* 左に寄せる */
-    margin-right: auto; /* 右は自動で余白を調整 */
+    margin-right: 0; /* 左に寄せる */
+    margin-left: auto; /* 右は自動で余白を調整 */
   }
   
   canvas.note {
