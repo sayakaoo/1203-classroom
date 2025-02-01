@@ -640,8 +640,8 @@ transform: translateX(-50%);
   width: 300px;
   margin: 20px auto;
   position: absolute;
-  top: 320px; /* タイマーより下に配置 */
-  left: 410px;
+  top: 340px; /* タイマーより下に配置 */
+  left: 390px;
   z-index: 400;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s;
