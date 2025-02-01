@@ -675,3 +675,15 @@ transform: translateX(-50%);
     height: 150px;
     width: 1000px;
   }
+  .roopbtn {
+    position: fixed;
+    right: 10px; /* 右端に配置 */
+    bottom: 10px; /* 下端に配置 */
+    text-align: center; /* ボタンのテキストを中央に */
+    z-index: 1000; /* 他の要素の上に表示されるように */
+  }
+  
+  .roopbtn button {
+    margin: 5px; /* ボタン間の間隔 */
+  }
+  
