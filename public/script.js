@@ -23,7 +23,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 7><chara 5 1>こんにちは",
+      "<skip 71><chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "正方形を3個作るとき、マッチ棒は何本必要でしょうか？<form 1>"
     ],
@@ -309,7 +309,7 @@ window.addEventListener('load', function () {
       "最後に今回の問題に似ている問題を作ってみましょう",
       "<item 38>今回の問題は「正方形をn個作るとき、マッチ棒は何本必要か」という問題でした。",
       "この問題をもとにして、同じような問題を作りましょう。",
-      "<snsbtn>また，問題が作れたら「みんなの問題掲示板」に投稿してみましょう！",
+      "<snsbtn><notesavebutton>また，問題が作れたら「みんなの問題掲示板」に投稿してみましょう！",
     ],
     72: [
       "<root3>表を縦に見ると、<item 39>マッチ棒の本数は正方形の数を3倍して1足した数になっているという規則性を見つけましたね。",
@@ -557,6 +557,10 @@ window.addEventListener('load', function () {
           break;
         case 'snsbtn':
           $('.snsbtn').addClass('visible');
+
+          break;
+          case 'notesavebutton':
+          $('.notesavebutton').addClass('visible');
 
           break;
         case 'break':
