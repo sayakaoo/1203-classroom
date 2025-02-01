@@ -15,7 +15,7 @@ window.addEventListener('load', function () {
   let textResponse = "";
   let buttonId = "";
   let rootId1 = "0";
-  let rootIdch="";
+  let rootIdch = "";
   let rootId = "0";
   const clearBtn = document.querySelector('#clear-button');
 
@@ -355,14 +355,13 @@ window.addEventListener('load', function () {
       "どのように4+3(n-1)という式を立てたか説明してください。<showtable><apiform 16><hint 1>"
     ],
     80: [
-      "不正解の未作成",
-      "",
-      "",
-      ""
+      "<closetable><colseapiform><closehint>ありがとうございます。一緒に確認しましょう。",
+      "<item 45>このように横に見ると、正方形の数が1つ増えたとき、マッチ棒が3本ずつ増えると見ることができるので、4+3(n-1)となります。",
+      "<skip 30>",
     ],
     81: [
-      "せいかい未作成",
-      "",
+      "<closetable><colseapiform><closehint>ありがとうございます。",
+      "<skip 30>",
       "",
       ""
     ],
@@ -477,11 +476,14 @@ window.addEventListener('load', function () {
             console.log('フォーム表示: ' + targetClass); // 確認用のログ
           }, 1500); // 1500ms = 2秒
           break;
-          case 'showtable':
-            $('.fullcanvas-alt').addClass('visible'); 
-            console.log("表表示");  
+        case 'showtable':
+          $('.fullcanvas-alt').addClass('visible');
+          console.log("表表示");
+          break;
+          case 'closetable':
+            $('.fullcanvas-alt').removeClass('visible');
+            console.log("表表示");
             break;
-          
         case 'showCanvas':
           $('.saveButton').addClass('visible');    // 作成したクラス名を利用
           buttonId = 'saveButton' + tagget_str[1];
@@ -508,7 +510,7 @@ window.addEventListener('load', function () {
         case 'showCanvaswithapi':
           $('.wrapper').addClass('visible');
           $('.hint1').addClass('visible');
-          rootIdch=rootId1;
+          rootIdch = rootId1;
           console.log(`ボタンID ${rootIdch}`);
           break;
         case 'apiform':
@@ -622,13 +624,13 @@ window.addEventListener('load', function () {
 
   // 初期状態で画像を表示する
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const chara = new Image();
-    chara.src = "./img/item3.png";  // 画像のURLを指定
-    chara.onload = () => {
-      const scaleWidth = 800;  // 画像の幅を800pxに設定
-      const scaleHeight = 800; // 画像の高さを800pxに設定
-      ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
-    }
+  const chara = new Image();
+  chara.src = "./img/item3.png";  // 画像のURLを指定
+  chara.onload = () => {
+    const scaleWidth = 800;  // 画像の幅を800pxに設定
+    const scaleHeight = 800; // 画像の高さを800pxに設定
+    ctx.drawImage(chara, 0, 0, scaleWidth, scaleHeight);
+  }
 
   // クリアボタンの処理
   clearBtn.addEventListener('click', () => {
@@ -1007,7 +1009,7 @@ window.addEventListener('load', function () {
 
   // キャンバスの内容を予測
   async function predictCanvas() {
-    
+
     const canvas = document.getElementById("drawing-area");
     canvas.willReadFrequently = true; // パフォーマンス向上のため
     console.log("画像予測中 ");
@@ -1313,16 +1315,16 @@ window.addEventListener('load', function () {
     $('.formQ5').removeClass('visible');
 
     if (normalize(userAnswer) === '4+3(n-1)' || normalize(userAnswer) === '3(n-1)+4') {
-      if(rootId1="2"){
+      if (rootId1 = "2") {
         input = "<skip 79>";
         split_chars = splitStr(input);
         console.log(split_chars);
-      }else{
+      } else {
         input = "<skip 22>";
         split_chars = splitStr(input);
         console.log(split_chars);
       }
-      
+
     } else if (userAnswer === '4+3n') {
       input = "<skip 25>";
       split_chars = splitStr(input);
@@ -1812,20 +1814,20 @@ window.addEventListener('load', function () {
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
       }
-    }else if (buttonId === 'saveButton4') {
+    } else if (buttonId === 'saveButton16') {
       if (textResponse.includes("不正解")) {
-        
-            input = "<skip 80>";
-            split_chars = splitStr(input);
+
+        input = "<skip 80>";
+        split_chars = splitStr(input);
       } else if (textResponse.includes("正解")) {
-       
-            input = "<skip 81>";
-            split_chars = splitStr(input);
-           
+
+        input = "<skip 81>";
+        split_chars = splitStr(input);
+
       } else {
         console.log("ボタン1: レスポンスに「正解」も「不正解」も含まれていません");
       }
-    }else {
+    } else {
       console.log("未知のボタンID");
     }
     main();
@@ -2012,22 +2014,22 @@ window.addEventListener('load', function () {
 
   const optionButtons = document.querySelectorAll(".option-buttons button");
 
-optionButtons.forEach((button) => {
+  optionButtons.forEach((button) => {
     button.addEventListener("click", function () {
-        // 他のボタンの active クラスを外す
-        optionButtons.forEach((btn) => btn.classList.remove("active"));
+      // 他のボタンの active クラスを外す
+      optionButtons.forEach((btn) => btn.classList.remove("active"));
 
-        // クリックされたボタンに active クラスを追加
-        this.classList.add("active");
-        if (this.id === "explain-table") {
-          console.log("表で説明するボタンが押された");
-          rootId1="2";
+      // クリックされたボタンに active クラスを追加
+      this.classList.add("active");
+      if (this.id === "explain-table") {
+        console.log("表で説明するボタンが押された");
+        rootId1 = "2";
       } else if (this.id === "explain-image") {
-          console.log("図で説明するボタンが押された");
-          rootId1="1";
+        console.log("図で説明するボタンが押された");
+        rootId1 = "1";
       }
     });
-});
+  });
 
 
 
