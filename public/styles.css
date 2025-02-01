@@ -309,7 +309,13 @@ body{
     font-size: 14px;
     color: #367293; /* 文字色を指定 */
 }
-
+.saveButton{
+  position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    z-index: 20;
+}
 
 
 /*フォームのデザイン*/

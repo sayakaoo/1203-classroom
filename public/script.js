@@ -87,7 +87,7 @@ window.addEventListener('load', function () {
     20: [
       "<charaOut 5><chara 5 3>1+3nという式をたてました。",
       "<charaOut 5><chara 5 1>ありがとうございます。",
-      "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas 0>"
+      "これはどのような図に表せるでしょうか？考えてみましょう。<showCanvas 0><saveButton>"
     ],
     21: [
       "みなさん考えられましたか？",
@@ -462,7 +462,6 @@ window.addEventListener('load', function () {
         case 'showCanvas':
           $('.saveButton').addClass('visible');    // 作成したクラス名を利用
           buttonId = 'saveButton' + tagget_str[1];
-          $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
           break;
         case 'closeCanvas':
