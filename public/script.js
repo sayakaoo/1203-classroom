@@ -957,7 +957,7 @@ window.addEventListener('load', function () {
       console.error("予測中にエラーが発生しました: ", error);
     }
     handlePrediction();
-
+    console.log(`ボタンID ${buttonId}`);
   }
 
   // canvasの画像判定後の分岐処理
