@@ -460,7 +460,7 @@ window.addEventListener('load', function () {
           }, 1500); // 1500ms = 2秒
           break;
         case 'showCanvas':
-          $('#saveButton').addClass('visible');    // 作成したクラス名を利用
+          $('.saveButton').addClass('visible');    // 作成したクラス名を利用
           buttonId = 'saveButton' + tagget_str[1];
           $('.showCanvasButton').addClass('visible');
           $('.wrapper').addClass('visible');
