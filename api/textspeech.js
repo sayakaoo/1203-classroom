@@ -53,7 +53,7 @@ export default async function handler(req, res) {
         audioEncoding: 'MP3',
         effectsProfileId: ['small-bluetooth-speaker-class-device'],
         pitch: 3,
-        speakingRate: 1.4, // ここでスピードを指定
+        speakingRate: 1.3, // ここでスピードを指定
       },
     };
     

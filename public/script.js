@@ -314,7 +314,7 @@ window.addEventListener('load', function () {
       "<item 36>ではこの黄色の部分の数字は正方形の数とどんな規則性があるでしょうか？<apiform 13>"
     ],
     70: [
-      "<colseapiform>正方形の数より1小さい数が黄色の部分の数字と一致していますね。",
+      "<colseapiform><item 36>正方形の数より1小さい数が黄色の部分の数字と一致していますね。",
       "つまり、n個の時黄色の部分に入る数はn-1となります。",
       "<item 37>よってn個のときの式は4×3(n-1)と表せます。<skip 45>"
     ],
@@ -1484,6 +1484,8 @@ window.addEventListener('load', function () {
     // ここで各解答を処理
     console.log('解答1:', userAnswer1);
     console.log('解答2:', userAnswer2);
+    
+    $('.formQ9').removeClass('visible');
 
     // 例えば、解答に応じて分岐処理を行う
     if (userAnswer1 === '1+3n' && userAnswer2 === '1+3n') {
