@@ -24,7 +24,7 @@ window.addEventListener('load', function () {
     //配列0のは時短のためのスキップ
     0: [
       "",
-      "<skip 40><chara 5 1>こんにちは",
+      "<chara 5 1>こんにちは",
       "<item 1>図のようにマッチ棒を並べて、正方形を横につないだ形を作ります。",
       "正方形を3個作るとき、マッチ棒は何本必要でしょうか？<form 1>"
     ],
@@ -174,9 +174,16 @@ window.addEventListener('load', function () {
       "では変更した式をおしえて下さい。<form 8>",
     ],
     42: [
-      "一緒に確認しましょう。<item 49>正方形が3個のときマッチ棒は10本必要でした。",
-      "<item 50>「4+3n」に当てはめてみましょう",
-      "<item 51><skip 40>",
+      "一緒に確認しましょう。。",
+      "<item 52>このようなグループ分けをしてみましょう。",
+      "このようにみると、赤で囲まれた4本のマッチ棒と青で囲まれた3本のマッチ棒のグループに分けることができます。",
+      "<item 53>2個のときは赤のグループ１つと青のグループ１つ、といったように考えることができます。",
+      "赤のグループはマッチ棒4本、青のグループはマッチ棒3本からなることを考えると、<item 54>青で囲んだ部分の式を作れます。",
+      "<item 55>黄色の部分の数を比べてみましょう。",
+      "正方形の数から1を引いた数が、右の黄色の式に当てはまる数になりそうです。",
+      "つまり、4+3×((正方形の数)-1)という式で表せそうです。",
+      "<item 56>よって、正方形がn個のときマッチ棒の本数を求める式は4+3×(n-1)となります。",
+      "<skip 43>",
     ],
     43: [
       "そうですね、4+3(n-1)だと正方形が3個の時も計算が合いますね。<skip 45>",
@@ -341,7 +348,7 @@ window.addEventListener('load', function () {
       "<closeCanvas><closehint><colseapiform>先ほどのまいさんの説明を参考にもう一度説明してみましょう<hint 4><apiform 15><showCanvaswithapi>",
     ],
     75: [
-      "<closeCanvas><colseapiform><closehint>ありがとうございます。4本のマッチ棒を赤で囲んだ部分がn個あり、重なって数えている青で囲んだ部分がn-1個あるので、4n-(n-1)という式になりますね。","<fadeOut_item 5><skip 76>",
+      "<closeCanvas><colseapiform><closehint>ありがとうございます。4本のマッチ棒を赤で囲んだ部分がn個あり、重なって数えている青で囲んだ部分がn-1個あるので、4n-(n-1)という式になりますね。", "<fadeOut_item 5><skip 76>",
     ],
     76: [
       "<skip 30>",
@@ -352,7 +359,7 @@ window.addEventListener('load', function () {
     77: [
       "ありがとうございます。一緒に考えてみましょう",
       "<item 46>正方形ごとに赤で囲むと、青で囲んでいる部分を余分に数え過ぎてしまうので、赤で囲んだ部分の本数から、青の数を引くと求められそうです",
-      "つまり、4本のマッチ棒を赤で囲んだ部分がn個あり、重なって数えている青で囲んだ部分がn-1個あるので、4n-(n-1)という式になりますね。","<fadeOut_item 5><skip 76>",
+      "つまり、4本のマッチ棒を赤で囲んだ部分がn個あり、重なって数えている青で囲んだ部分がn-1個あるので、4n-(n-1)という式になりますね。", "<fadeOut_item 5><skip 76>",
     ],
     78: [
       "<closeCanvas><colseapiform><closehint>ありがとうございます。正しい図が書けています。一緒に確認すると、4本のマッチ棒を赤で囲んだ部分がn個あり、重なって数えている青で囲んだ部分がn-1個あるので、4n-(n-1)という式になりますね。<fadeOut_item 5><skip 76>",
@@ -437,7 +444,7 @@ window.addEventListener('load', function () {
           stop_flg = true;
           break;
         case 'root':
-        
+
           switch (rootId) {
             case '0':
               input = "<skip 44>";
@@ -463,22 +470,22 @@ window.addEventListener('load', function () {
           main();
           mess_box.click();
           break;
-          case 'roottable':
-            switch (rootId1) {
-              case '1':
-                input = "<skip 82>";
-                split_chars = splitStr(input);
-                break;
-              case '2':
-                input = "<skip 83>";
-                split_chars = splitStr(input);
-                break;
-             
-            }
-            main();
-            mess_box.click();
-            break;
-          
+        case 'roottable':
+          switch (rootId1) {
+            case '1':
+              input = "<skip 82>";
+              split_chars = splitStr(input);
+              break;
+            case '2':
+              input = "<skip 83>";
+              split_chars = splitStr(input);
+              break;
+
+          }
+          main();
+          mess_box.click();
+          break;
+
         case 'root3':
           rootId = "3";
           break;
@@ -564,7 +571,7 @@ window.addEventListener('load', function () {
           $('.snsbtn').addClass('visible');
 
           break;
-          case 'notesavebutton':
+        case 'notesavebutton':
           $('.notesavebutton').addClass('visible');
 
           break;
@@ -581,10 +588,10 @@ window.addEventListener('load', function () {
         case 'chara':
           document.getElementById('chara' + tagget_str[1]).src = 'img/chara' + tagget_str[2] + '.png';
           break;
-          case 'charav':
-            charaId = tagget_str[1];
-            console.log(`キャラID ${charaId}`);
-            break; 
+        case 'charav':
+          charaId = tagget_str[1];
+          console.log(`キャラID ${charaId}`);
+          break;
         case 'charaOut':
           document.getElementById('chara' + tagget_str[1]).src = '';
           break;
@@ -1035,7 +1042,7 @@ window.addEventListener('load', function () {
   });
 
 
-//ノート保存用
+  //ノート保存用
   document.getElementById('notesavebutton').addEventListener('click', () => {
     const canvas1 = document.getElementById('notedrawing-area-1');
     const canvas2 = document.getElementById('notedrawing-area-2');
@@ -1061,7 +1068,7 @@ window.addEventListener('load', function () {
 
 
   // Teachable MachineでエクスポートしたモデルのURL
-  const modelURL = "https://teachablemachine.withgoogle.com/models/CAyIdTCPn/";
+  const modelURL = "https://teachablemachine.withgoogle.com/models/1B6XhalzO/";
 
   // モデルのロード
   let model;
@@ -1965,70 +1972,70 @@ window.addEventListener('load', function () {
   });
 
 
- // chat用
-const chatInput = document.getElementById("userInput");
-const sendButton = document.getElementById("sendButton");
-const chatOutput = document.getElementById("chatWindow");
+  // chat用
+  const chatInput = document.getElementById("userInput");
+  const sendButton = document.getElementById("sendButton");
+  const chatOutput = document.getElementById("chatWindow");
 
-sendButton.addEventListener("click", async (e) => {
-  e.preventDefault();
+  sendButton.addEventListener("click", async (e) => {
+    e.preventDefault();
 
-  const userMessage = chatInput.value;
-  chatOutput.innerHTML += `<div class="message student"><strong>あなた：</strong> ${userMessage}</div>`;
-  chatInput.value = "";
+    const userMessage = chatInput.value;
+    chatOutput.innerHTML += `<div class="message student"><strong>あなた：</strong> ${userMessage}</div>`;
+    chatInput.value = "";
 
-  try {
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: userMessage }),
-    });
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage }),
+      });
 
-    if (!response.ok) throw new Error("サーバーエラー");
+      if (!response.ok) throw new Error("サーバーエラー");
 
-    const data = await response.json();
-    chatOutput.innerHTML += `<div class="message assistant"><strong>まいさん：</strong> ${data.response}</div>`;
+      const data = await response.json();
+      chatOutput.innerHTML += `<div class="message assistant"><strong>まいさん：</strong> ${data.response}</div>`;
 
-    // 音声合成で返答を読み上げる
-    await synthesizeSpeech(data.response); // 音声合成を呼び出す
-  } catch (error) {
-    chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
-  }
-});
+      // 音声合成で返答を読み上げる
+      await synthesizeSpeech(data.response); // 音声合成を呼び出す
+    } catch (error) {
+      chatOutput.innerHTML += `<div class="message error"><strong>エラー：</strong> ${error.message}</div>`;
+    }
+  });
 
-// 音声合成用の関数
-async function synthesizeSpeech(text) {
-  const ENABLE_API = true; // APIを有効にする場合はtrue
+  // 音声合成用の関数
+  async function synthesizeSpeech(text) {
+    const ENABLE_API = true; // APIを有効にする場合はtrue
 
-  if (!ENABLE_API) {
-    return;
-  }
-
-  try {
-    const response = await fetch('/api/textspeech', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.statusText}`);
+    if (!ENABLE_API) {
+      return;
     }
 
-    const audioBuffer = await response.arrayBuffer();
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const buffer = await audioContext.decodeAudioData(audioBuffer);
+    try {
+      const response = await fetch('/api/textspeech', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
 
-    const source = audioContext.createBufferSource();
-    source.buffer = buffer;
-    source.connect(audioContext.destination);
-    source.start();
-  } catch (error) {
-    console.error("音声合成エラー:", error);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const audioBuffer = await response.arrayBuffer();
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const buffer = await audioContext.decodeAudioData(audioBuffer);
+
+      const source = audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(audioContext.destination);
+      source.start();
+    } catch (error) {
+      console.error("音声合成エラー:", error);
+    }
   }
-}
 
   //いろいろなところに飛べるボタン、ほんとうはいらない
   const skip30Button = document.querySelector('.skip30Button');
@@ -2076,7 +2083,7 @@ async function synthesizeSpeech(text) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text, charaId  }),
+        body: JSON.stringify({ text, charaId }),
       });
 
       if (!response.ok) {
