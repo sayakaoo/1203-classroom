@@ -1328,7 +1328,7 @@ window.addEventListener('load', function () {
     const userAnswer = document.querySelector('#userAnswer4').value; // ユーザーの解答を取得
     $('.formQ4').removeClass('visible');
 
-    //解答鬼分岐！！！！
+    //解答分岐
     if (normalize(userAnswer) === '3(n-1)+4' || normalize(userAnswer) === '4+3(n-1)') {
       //さきにまいさんのパターン
       input = "<skip 46>";
@@ -2055,6 +2055,26 @@ window.addEventListener('load', function () {
     split_chars = splitStr(input);
 
     console.log('30に');
+    main();
+    mess_box.click();
+  });
+  const skip71Button = document.querySelector('.skip71Button');
+  skip71Button.addEventListener('click', (event) => {
+    event.preventDefault();
+    input = "<skip 71>";
+    split_chars = splitStr(input);
+
+    console.log('71に');
+    main();
+    mess_box.click();
+  });
+  const skip44Button = document.querySelector('.skip44Button');
+  skip44Button.addEventListener('click', (event) => {
+    event.preventDefault();
+    input = "<skip 44>";
+    split_chars = splitStr(input);
+
+    console.log('443453 21  に');
     main();
     mess_box.click();
   });
